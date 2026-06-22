@@ -1,16 +1,17 @@
 /**
  * CÚSPIDES — Motor Frontend Sincronizado
- * Rediseño con Secciones de Navegación, Efecto Scroll, Micro-Parallax e Ícono de Usuario Ajustado.
+ * Rediseño con Efecto de Scroll en Header, Enlaces Activos y Animación de Interacción en Hero.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Inicialización de submotores interactivos
   initReadingProgressBar();
   initStarCanvasBackground();
   initIntersectionObserverReveal();
   initNumericalCounterEngine();
-  initEditorialSlider();
-  initHeaderScrollAndNavigation();
-  initHeroParallaxInteraction();
+  initEditorialSlider(); // Slider automático integrado
+  initHeaderScrollAndNavigation(); // Nuevo submotor de composición y comportamiento del Header
+  initHeroParallaxInteraction(); // Nuevo efecto dinámico para la imagen Hero
 });
 
 function initReadingProgressBar() {
@@ -130,6 +131,9 @@ function initNumericalCounterEngine() {
   activeCounters.forEach(counter => counterObserver.observe(counter));
 }
 
+/**
+ * MOTOR DE ANIMACIÓN: Slider cíclico cada 5 segundos hacia la izquierda
+ */
 function initEditorialSlider() {
   const slides = document.querySelectorAll('.slide-img');
   if (slides.length === 0) return;
@@ -154,6 +158,10 @@ function initEditorialSlider() {
   }, 5000);
 }
 
+/**
+ * NUEVO MOTOR: Control de composición del Header al hacer scroll y enlaces activos dinámicos,
+ * además de gestionar el menú colapsable (hamburguesa) en dispositivos móviles.
+ */
 function initHeaderScrollAndNavigation() {
   const mainNav = document.getElementById('main-nav');
   const sections = document.querySelectorAll('section');
@@ -161,6 +169,7 @@ function initHeaderScrollAndNavigation() {
   const menuToggle = document.getElementById('menuToggle');
   const navMenu = document.getElementById('navMenu');
 
+  // Control del fondo del header basado en scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
       mainNav.classList.add('scrolled');
@@ -168,6 +177,7 @@ function initHeaderScrollAndNavigation() {
       mainNav.classList.remove('scrolled');
     }
 
+    // Identificar sección activa y añadir clase .active en el header correspondientemente
     let currentSectionId = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
@@ -184,6 +194,7 @@ function initHeaderScrollAndNavigation() {
     });
   });
 
+  // Toggle del menú móvil
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('open');
@@ -192,6 +203,7 @@ function initHeaderScrollAndNavigation() {
       menuToggle.setAttribute('aria-expanded', expanded);
     });
 
+    // Cerrar menú al hacer clic en un enlace
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         menuToggle.classList.remove('open');
@@ -202,6 +214,10 @@ function initHeaderScrollAndNavigation() {
   }
 }
 
+/**
+ * NUEVO MOTOR: Efecto de micro-parallax interactivo para la imagen del Hero.
+ * Sigue sutilmente el movimiento del cursor para añadir profundidad cinemática tridimensional.
+ */
 function initHeroParallaxInteraction() {
   const heroSection = document.getElementById('hero');
   const heroImg = document.getElementById('heroZoomImg');
@@ -213,13 +229,16 @@ function initHeroParallaxInteraction() {
     const mouseX = e.clientX - (heroSection.offsetLeft + width / 2);
     const mouseY = e.clientY - (heroSection.offsetTop + height / 2);
 
+    // Mapeo de sutil movimiento coordinado de desplazamiento (máximo 12px de desfase)
     const moveX = (mouseX / (width / 2)) * 12;
     const moveY = (mouseY / (height / 2)) * 12;
 
+    // Se mezcla el zoom base infinito de CSS con la posición sutil del cursor mediante JS
     heroImg.style.transform = `scale(1.08) translate(${moveX}px, ${moveY}px)`;
-    heroImg.classList.remove('standard-zoom');
+    heroImg.classList.remove('standard-zoom'); // Pausa la animación pura CSS durante la interacción directa
   });
 
+  // Restaurar suavidad y animación cíclica estándar al retirar el cursor del área del Hero
   heroSection.addEventListener('mouseleave', () => {
     heroImg.style.transform = '';
     heroImg.classList.add('standard-zoom');

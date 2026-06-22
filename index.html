@@ -1,217 +1,447 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cúspides — Formación de élite en escalada nocturna y astrofotografía en la Patagonia. Superá tus límites." />
-  <title>Cúspides — Escalada Nocturna de Alta Dificultad</title>
-  
-  <!-- FUENTES REQUERIDAS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CÚSPIDES | Exploración Astronómica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--sky: #7ca5c1;
+--night:#0b2137;
+--mountain:#183f6f;
+--deep: #2a0032;
+--violet:#7c0083;
+--light: #ecedeb;
+}
+*{
+margin: 0;
+padding: 0;
+box-sizing:border-box;
+}
+html{
+scroll-behavior: smooth;
+}
+body {
+font-family: 'Inter', sans-serif;
+background: var(--night);
+color:white;
+overflow-x:hidden;
+position: relative;
+}
+h1,h2,h3{
+font-family: 'Titillium Web', sans-serif;
+font-weight:900;
+text-transform:uppercase;
+line-height:.9;
+letter-spacing:-0.04em;
+}
 
-  <!-- Vínculo al archivo de estilos CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+/* ==========================================
+   MISCELÁNEAS ASTRONÓMICAS & DE ORIENTACIÓN
+   ========================================== */
+.editorial {
+position: relative;
+overflow: hidden;
+}
+
+/* Línea sutil de coordenadas de fondo (Eje vertical de diseño) */
+.editorial::before {
+content: "";
+position: absolute;
+top: 0;
+left: 8vw;
+width: 1px;
+height: 100%;
+background: linear-gradient(to bottom, rgba(124, 165, 193, 0.2) 0%, rgba(124, 165, 193, 0) 100%);
+pointer-events: none;
+z-index: 1;
+}
+
+/* Pequeñas cruces de cuadrícula (+), simulando mapas cartográficos astronómicos */
+.miscellany-cross {
+position: absolute;
+font-family: 'Titillium Web';
+font-weight: 400;
+color: var(--sky);
+opacity: 0.25;
+font-size: 14px;
+pointer-events: none;
+user-select: none;
+}
+
+.light .miscellany-cross {
+color: var(--night);
+opacity: 0.15;
+}
+
+/* ==========================================
+   BOTONES E INTEGRACIÓN DE DESTELLOS
+   ========================================== */
+.btn {
+display:inline-block;
+margin-top:40px;
+padding: 16px 28px;
+border: 1px solid white;
+text-decoration:none;
+color:white;
+font-size:.85rem;
+letter-spacing:.15em;
+position: relative; /* Necesario para contener los destellos */
+overflow: hidden;   /* Evita que los destellos se salgan del borde */
+background: transparent;
+z-index: 2;
+transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Efecto hover base suave para mantener la legibilidad */
+.btn:hover {
+background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(2px);
+}
+
+.btn.dark {
+border-color: var(--night);
+color: var(--night);
+}
+
+.btn.dark:hover {
+background: rgba(11, 33, 55, 0.08);
+}
+
+/* El destello/estrella generado por JS */
+.star-flash {
+position: absolute;
+width: 4px;
+height: 4px;
+background: white;
+border-radius: 50%;
+box-shadow: 0 0 4px #fff, 0 0 8px #fff;
+pointer-events: none;
+animation: flashOut 0.7s ease-out forwards;
+opacity: 0;
+z-index: 1;
+}
+
+/* Ajuste de color del destello para botones oscuros */
+.btn.dark .star-flash {
+background: var(--night);
+box-shadow: 0 0 4px var(--night), 0 0 6px var(--sky);
+}
+
+/* Animación de la pequeña estrella/destello */
+@keyframes flashOut {
+0% {
+transform: translate(-50%, -50%) scale(0);
+opacity: 0;
+}
+30% {
+opacity: 0.8;
+/* Genera las cuatro puntas de una pequeña estrella usando box-shadow */
+box-shadow: 
+0 0 4px white,
+0 -6px 2px -1px rgba(255,255,255,0.7), 
+0 6px 2px -1px rgba(255,255,255,0.7),
+-6px 0 2px -1px rgba(255,255,255,0.7), 
+6px 0 2px -1px rgba(255,255,255,0.7);
+}
+100% {
+transform: translate(-50%, -50%) scale(1.5);
+opacity: 0;
+}
+}
+
+/* Resto de la estructura del Layout original */
+.hero{
+min-height: 100vh;
+background: linear-gradient(rgba(11,33,55,.55), rgba(11,33,55,.90)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop');
+background-size: cover;
+background-position:center;
+display: flex;
+flex-direction:column;
+justify-content: space-between;
+padding: 40px 7vw;
+}
+nav {
+display: flex;
+justify-content: space-between;
+align-items:center;
+}
+.logo{
+font-family: 'Titillium Web', sans-serif;
+font-weight:900;
+font-size:1.4rem;
+letter-spacing:.15em;
+}
+.nav-links{
+display: flex;
+gap: 25px;
+}
+.nav-links a{
+color:white;
+text-decoration:none;
+font-size:.95rem;
+}
+.hero-content{
+max-width: 900px;
+margin-bottom:60px;
+}
+.hero h1{
+font-size:clamp(4rem,10vw, 9rem);
+}
+.secondary-title{
+margin-top: 15px;
+opacity:.85;
+}
+.editorial{
+min-height:100vh;
+padding: 120px 8vw;
+display: flex;
+flex-direction:column;
+justify-content:center;
+}
+.section-number {
+font-family: 'Titillium Web';
+font-weight:900;
+font-size:1.2rem;
+color:var(--sky);
+margin-bottom:20px;
+position: relative;
+z-index: 2;
+}
+.section-number::after {
+content: " // 41.1308° S, 71.3061° W"; /* Coordenadas de Bariloche como miscelánea */
+font-size: 0.8rem;
+font-weight: 400;
+opacity: 0.5;
+letter-spacing: 0.1em;
+margin-left: 10px;
+}
+.editorial h2, .editorial h3, .editorial p, .editorial .quote {
+position: relative;
+z-index: 2;
+}
+.editorial h2{
+font-size:clamp(3rem,8vw,7rem);
+margin-bottom: 25px;
+}
+.editorial h3{
+font-size:clamp(2rem,4vw,4rem);
+max-width:700px;
+margin-bottom:30px;
+}
+.editorial p{
+max-width: 620px;
+font-size:1.05rem;
+line-height:1.9;
+}
+.quote{
+margin-top:60px;
+font-family: 'Titillium Web';
+font-size:clamp(2rem,5vw,4rem);
+font-weight:900;
+line-height:1;
+}
+.light{
+background: var(--light);
+color:var(--night);
+}
+.learning-list{
+display:grid;
+gap: 20px;
+margin-top:50px;
+position: relative;
+z-index: 2;
+}
+.learning-list div{
+padding: 25px;
+border-left:3px solid var(--sky);
+font-size:1.1rem;
+background: rgba(255,255,255,0.03);
+}
+.light .learning-list div {
+background: rgba(0,0,0,0.02);
+}
+.price{
+font-family: 'Titillium Web';
+font-size:clamp(4rem,10vw, 8rem);
+margin: 30px 0;
+position: relative;
+z-index: 2;
+}
+.timeline{
+display:grid;
+gap: 30px;
+margin:60px 0;
+position: relative;
+z-index: 2;
+}
+.timeline div{
+padding-bottom: 20px;
+border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.timeline span{
+display:block;
+font-family: 'Titillium Web';
+font-size:2rem;
+font-weight:900;
+}
+.timeline small{
+display:block;
+margin-top:10px;
+}
+footer {
+padding: 50px;
+text-align:center;
+background:black;
+}
+footer p{
+margin: 10px 0;
+}
+@media(max-width: 900px) {
+nav{
+flex-direction:column;
+gap:20px;
+}
+.nav-links{
+flex-wrap:wrap;
+justify-content:center;
+}
+.hero{
+padding:30px;
+}
+.editorial{
+padding: 90px 30px;
+}
+.hero h1{
+font-size:4rem;
+}
+}
+</style>
 </head>
 <body>
 
-  <!-- INDICADOR DE LECTURA DEGRADADO -->
-  <div id="scroll-progress" aria-hidden="true"></div>
+<header class="hero">
+<nav>
+<div class="logo">CÚSPIDES</div>
+<div class="nav-links">
+<a href="#nosotros">Nosotros</a>
+<a href="#filosofia">Filosofía</a>
+<a href="#programa">Programa</a>
+<a href="#contacto">Contacto</a>
+</div>
+</nav>
+<div class="hero-content">
+<h1>LA MONTAÑA<br>TE LLEVA</h1>
+<h1 class="secondary-title">EL UNIVERSO<br>TE ESPERA</h1>
+<a href="#nosotros" class="btn">CONOCÉ MÁS</a>
+</div>
+</header>
 
-  <!-- NAV DE CONVERSIÓN CON COMPOSICIÓN DINÁMICA (EFECTO BLUR, BORDE ACTIVO Y MENÚ HAMBURGUESA INTEGRADO) -->
-  <nav id="main-nav" role="navigation" aria-label="Navegación principal">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo-container">
-        <!-- image2.png como logo corporativo alineado a la izquierda -->
-        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
-      </a>
-      
-      <!-- Menú de enlaces de navegación fluidos inspirados en estructuras modernas -->
-      <div class="nav-menu" id="navMenu">
-        <a href="#hero" class="nav-link active">Inicio</a>
-        <a href="#manifiesto" class="nav-link">Manifiesto</a>
-        <a href="#programa" class="nav-link">Programa</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
-      </div>
+<section id="nosotros" class="editorial">
+<!-- Cruz de mapa astronómico de fondo -->
+<div class="miscellany-cross" style="top: 20%; right: 15%;">+</div>
+<span class="section-number">01</span>
+<h2>NOSOTROS</h2>
+<h3>DONDE LA AVENTURA SE CONVIERTE EN EXPERIENCIA</h3>
+<p>
+Cúspides es una escuela de exploración astronómica ubicada en Bariloche.
+Combinamos montaña, orientación, fotografía nocturna y observación del cielo
+para formar exploradores capaces de desenvolverse en entornos reales.
+</p>
+<div class="quote">
+Viví la montaña.<br>
+Aprendé de ella.<br>
+Recordala para siempre.
+</div>
+</section>
 
-      <div class="nav-coords" aria-hidden="true">
-        <span>MÁXIMA ALTITUD</span>
-        <span class="star-separator"></span>
-        <span>BARILOCHE</span>
-      </div>
-      
-      <div class="nav-actions">
-        <button class="nav-cta" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-        <!-- Hamburguesa para móviles -->
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
-    </div>
-  </nav>
+<section id="filosofia" class="editorial light">
+<div class="miscellany-cross" style="bottom: 15%; right: 25%;">+</div>
+<span class="section-number">02</span>
+<p>Creemos que la montaña es un espacio para descubrir, aprender y crecer.</p>
+<h2>MÁS QUE UN CURSO</h2>
+<p>Cada experiencia está diseñada para desarrollar habilidades reales mientras explorás algunos de los paisajes más extraordinarios de la Patagonia.</p>
+<a href="#programa" class="btn dark">VER PROGRAMA</a>
+</section>
 
-  <!-- 01. HERO PRINCIPAL CINEMATOGRÁFICO CON ZOOM INFINITO / PARALLAX INTERACTIVO -->
-  <section id="hero" class="section-hero">
-    <!-- Canvas interactivo para el titileo de estrellas -->
-    <canvas id="star-canvas" aria-hidden="true"></canvas>
-    
-    <div class="hero-bg-parallax" aria-hidden="true">
-      <!-- Fondo configurado con image1.png con animación de escala/zoom suave e interactivo -->
-      <img src="assets/image1.png" alt="Pared vertical de roca en la Patagonia" class="hero-img standard-zoom" id="heroZoomImg" />
-      <div class="hero-overlay"></div>
-    </div>
+<section class="editorial">
+<div class="miscellany-cross" style="top: 10%; right: 40%;">+</div>
+<span class="section-number">03</span>
+<h2>LO QUE APRENDERÁS</h2>
+<div class="learning-list">
+<div>Identificar constelaciones australes</div>
+<div>Fotografiar la Vía Láctea</div>
+<div>Orientarte con mapas y brújula</div>
+<div>Planificar expediciones</div>
+<div>Montar campamentos</div>
+<div>Desenvolverte con autonomía</div>
+</div>
+</section>
 
-    <div class="hero-content">
-      <div class="hero-eyebrow" data-reveal>
-        <span class="eyebrow-line"></span>
-        <span>El Siguiente Nivel de Dificultad</span>
-        <span class="eyebrow-line"></span>
-      </div>
-      
-      <h1 class="hero-title" data-reveal>
-        <span class="title-line">ESCALADA NOCTURNA</span>
-        <span class="title-line title-accent">DOMINÁ EL ABISMO</span>
-      </h1>
-      
-      <p class="hero-subtitle" data-reveal>
-        Diseñado exclusivamente para expertos en trekking y escalada clásica. Cuatro módulos de rendimiento físico avanzado, astrofotografía y ascensos verticales en roca bajo la oscuridad absoluta de la Patagonia.
-      </p>
-      
-      <div class="hero-actions" data-reveal>
-        <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-        <a href="#programa" class="btn-ghost">VER PROGRAMA DE ÉLITE</a>
-      </div>
-      
-      <!-- CONTADORES DE RENDIMIENTO -->
-      <div class="hero-data" data-reveal>
-        <div class="data-item">
-          <span class="data-value" data-count="4">0</span>
-          <span class="data-label">Módulos Técnicos</span>
-        </div>
-        <div class="data-divider" aria-hidden="true"></div>
-        <div class="data-item">
-          <span class="data-value" data-count="3">0</span>
-          <span class="data-label">Noches de Expedición Vertical</span>
-        </div>
-        <div class="data-divider" aria-hidden="true"></div>
-        <div class="data-item">
-          <span class="data-value">MÁXIMA</span>
-          <span class="data-label">Dificultad Técnica</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="programa" class="editorial light">
+<div class="miscellany-cross" style="top: 40%; right: 10%;">+</div>
+<span class="section-number">04</span>
+<h2>PROGRAMA INTEGRAL</h2>
+<div class="price">USD 500</div>
+<p>Incluye los tres cursos y la expedición final.</p>
+<div class="timeline">
+<div><span>01</span>Astronomía de Campo<small>4 semanas</small></div>
+<div><span>02</span>Astrofotografía<small>4 semanas</small></div>
+<div><span>03</span>Exploración y Supervivencia<small>9 semanas</small></div>
+<div><span>04</span>Expedición Astronómica Invernal<small>3 días</small></div>
+</div>
+<a href="#contacto" class="btn dark">SOLICITAR INFORMACIÓN</a>
+</section>
 
-  <!-- 02. PROPUESTA DE VALOR CON CARRUSEL INTEGRADO -->
-  <section id="manifiesto" class="section-editorial">
-    <div class="editorial-grid">
-      <div class="editorial-body">
-        <span class="section-tag" data-reveal>SANGRE · ROCA · COSMOS</span>
-        <h2 class="editorial-title" data-reveal>Donde termina el sendero convencional, comienza tu vertical.</h2>
-        <div class="editorial-columns">
-          <p class="editorial-p" data-reveal>
-            Ya dominás la roca de día. Conocés el equipo, tenés la técnica y sabés gestionar el riesgo. Cúspides no es una escuela introductoria de montaña; es un laboratorio de superación para expertos. Unimos la escalada en paredes desplomadas nocturnas con la ciencia de la fotografía astronómica avanzada.
-          </p>
-          <p class="editorial-p" data-reveal>
-            Vas a aprender a leer la mecánica del cielo nocturno y a dominar las configuraciones ópticas de tu cámara mientras estás suspendido en un arnés a cientos de metros de altura. Una experiencia técnica y física sin precedentes en la cordillera.
-          </p>
-        </div>
-      </div>
-      
-      <!-- Contenedor del Slider Dinámico -->
-      <div class="editorial-image-col" data-reveal>
-        <div class="slider-wrapper">
-          <img src="assets/image3.png" alt="Escalador experto en pared" class="editorial-img slide-img active" />
-          <img src="assets/image4.png" alt="Observación técnica del firmamento" class="editorial-img slide-img" />
-          <img src="assets/image6.png" alt="Navegación táctica nocturna" class="editorial-img slide-img" />
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="contacto" class="editorial">
+<span class="section-number">05</span>
+<h2>TU EXPEDICIÓN EMPIEZA<br>ANTES DEL PRIMER PASO</h2>
+<p>Contactanos para recibir información sobre fechas, requisitos y disponibilidad.</p>
+<!-- Agregada clase .btn ausente en el diseño original para heredar comportamiento -->
+<a href="#" class="btn">SOLICITAR INFORMACIÓN</a>
+</section>
 
-  <!-- 03. PROGRAMA DE 4 CURSOS -->
-  <section id="programa" class="section-dark section-program">
-    <div class="program-inner">
-      <span class="section-tag tag-light" data-reveal>RIDGE PROGRAM 2026</span>
-      <h2 class="program-title" data-reveal>La ruta hacia la cumbre oscura.<br>Cuatro fases de dificultad.</h2>
-      
-      <div class="timeline">
-        <!-- CURSO 1 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 01</span>
-            <h3 class="t-title">Formación Física Avanzada y Resistencia</h3>
-            <p class="t-desc">Acondicionamiento de alta exigencia muscular. Gestión del ácido láctico en climas bajo cero, técnicas de agarre a ciegas y optimización del equilibrio estático en condiciones de privación sensorial.</p>
-            <div class="t-image-holder"><img src="assets/image3.png" alt="Entrenamiento estricto"></div>
-          </div>
-        </div>
+<footer>
+<p>Instagram @cuspides</p>
+<p>info@cuspides.com</p>
+</footer>
+
+<script>
+// LÓGICA DE DESTELLOS SUTILES AL PASAR EL CURSOR SOBRE LOS BOTONES
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('mousemove', (e) => {
+        // Controlar la frecuencia de generación de las pequeñas estrellas
+        if (Math.random() > 0.15) return; 
+
+        const rect = button.getBoundingClientRect();
+        // Calcular posición exacta del cursor relativa al botón
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Crear elemento estrella
+        const star = document.createElement('span');
+        star.classList.add('star-flash');
         
-        <!-- CURSO 2 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 02</span>
-            <h3 class="t-title">Introducción a la Astronomía de Campo</h3>
-            <p class="t-desc">Orientación sideral pura sin asistencia GPS. Reconocimiento técnico de constelaciones australes, movimiento aparente del cosmos y ventanas de visibilidad óptima.</p>
-            <div class="t-image-holder"><img src="assets/image4.png" alt="Observación técnica"></div>
-          </div>
-        </div>
+        // Asignar coordenadas del mouse
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
 
-        <!-- CURSO 3 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 03</span>
-            <h3 class="t-title">Fotografía Nocturna y Astronómica</h3>
-            <p class="t-desc">Control técnico de cámaras fotográficas en la verticalidad. Configuración de exposición prolongada, balance de blancos para espacio profundo y anclajes especiales.</p>
-            <div class="t-image-holder"><img src="assets/image5.png" alt="Fotografía de larga exposición"></div>
-          </div>
-        </div>
+        // Variación de tamaño aleatoria pero muy pequeña para mantener legibilidad
+        const size = Math.random() * 3 + 2; // Entre 2px y 5px
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
 
-        <!-- CURSO 4 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot t-dot--highlight"></div></div>
-          <div class="timeline-content">
-            <span class="t-number highlight">FASE FINAL</span>
-            <h3 class="t-title">Expedición Vertical: 3 Noches en Pared</h3>
-            <p class="t-desc">Tres noches consecutivas de vivac en portaledge y escalada técnica real en Bariloche, aplicando las técnicas de captura fotográfica mientras dominás el vacío.</p>
-            <div class="t-image-holder"><img src="assets/image1.png" alt="Campamento de pared"></div>
-          </div>
-        </div>
-      </div>
+        button.appendChild(star);
 
-      <div class="program-pack" data-reveal>
-        <div class="pack-inner">
-          <div class="pack-left">
-            <span class="pack-badge">PROCESO DE SELECCIÓN EXCLUSIVO</span>
-            <h3 class="pack-title">Habilitación de Cupos Técnicos</h3>
-            <p class="pack-text">Debido a la alta complejidad de la expedición, las vacantes se asignan bajo estricta entrevista previa de experiencia en escalada e historial técnico de montaña.</p>
-          </div>
-          <div class="pack-right">
-            <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04. CONTACTO -->
-  <section id="contacto" class="section-contact section-dark">
-    <div class="contact-inner">
-      <span class="section-tag tag-light" data-reveal>ÚLTIMA CONVOCATORIA</span>
-      <h2 class="contact-title" data-reveal>Aceptá el desafío vertical.</h2>
-      <p class="contact-sub" data-reveal>Iniciá tu proceso de validación de experiencia. Las plazas para la expedición de 3 noches son estrictamente limitadas por cuestiones de seguridad en pared.</p>
-      <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
-        <span>CONSULTAR CURSOS POR WHATSAPP</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- Vínculo al archivo de scripts JS -->
-  <script src="js/script.js"></script>
+        // Limpiar elemento tras terminar la animación
+        setTimeout(() => {
+            star.remove();
+        }, 700);
+    });
+});
+</script>
 </body>
 </html>
