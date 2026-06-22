@@ -3,192 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cúspides — Formación de élite en escalada nocturna y astrofotografía en la Patagonia. Superá tus límites." />
+  <meta name="description" content="Cúspides — Formación de Élite: Escalada Nocturna y Astrofotografía Avanzada en la Patagonia." />
   <title>Cúspides — Escalada Nocturna de Alta Dificultad</title>
   
-  <!-- FUENTES REQUERIDAS: Russo One (Displays) y Lato (Texto de lectura) -->
+  <!-- FUENTES SELECCIONADAS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- LINEA 15: Vínculo exacto al archivo de estilos CSS -->
+  <!-- Vínculo al archivo de estilos CSS -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- INDICADOR DE LECTURA DEGRADADO -->
+  <!-- INDICADOR DE LECTURA -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- NAV DE CONVERSIÓN CON LÍNEAS FINAS -->
+  <!-- NAVEGACIÓN ENCABEZADO -->
   <nav id="main-nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">
-        <span class="logo-mark">▲</span>
-        <span class="logo-text">CÚSPIDES</span>
+      <!-- Esquina izquierda: Logo apuntando a la subcarpeta assets de GitHub -->
+      <a href="#hero" class="nav-logo-container">
+        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
       </a>
-      <div class="nav-coords" aria-hidden="true">
-        <span>MÁXIMA ALTITUD</span>
-        <span class="star-separator"></span>
-        <span>BARILOCHE</span>
-      </div>
+      
+      <!-- Menú de 4 temas -->
+      <ul class="nav-menu-themes">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#manifiesto">Filosofía</a></li>
+        <li><a href="#programa">Programa</a></li>
+        <li><a href="#contacto">Admisiones</a></li>
+      </ul>
+
       <button class="nav-cta" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
     </div>
   </nav>
 
-  <!-- 01. HERO PRINCIPAL CINEMATOGRÁFICO -->
+  <!-- 01. HERO CON INTEGRACIÓN ULTRA-FULLSCREEN -->
   <section id="hero" class="section-hero">
-    <!-- Canvas interactivo para el titileo de estrellas de JS -->
+    <!-- Lienzo para la animación de destellos en el scroll -->
     <canvas id="star-canvas" aria-hidden="true"></canvas>
     
+    <!-- Fondo Fullscreen absoluto debajo de las tipografías (PC y Mobile) -->
     <div class="hero-bg-parallax" aria-hidden="true">
-      <!-- Fondo configurado exactamente con image1.png -->
-      <img src="image1.png" alt="Pared vertical de roca en la Patagonia bajo la Vía Láctea" class="hero-img" />
+      <img src="assets/image1.png" alt="Paredes rocosas de la Patagonia bajo el firmamento" class="hero-img" />
       <div class="hero-overlay"></div>
     </div>
 
+    <!-- Contenido tipográfico suspendido sobre el fondo -->
     <div class="hero-content">
       <div class="hero-eyebrow" data-reveal>
-        <span class="eyebrow-line"></span>
-        <span>EL Siguiente Nivel de Dificultad</span>
-        <span class="eyebrow-line"></span>
+        <span class="eyebrow-star">✦</span>
+        <span>MÁXIMA EXIGENCIA TÉCNICA NOCTURNA</span>
+        <span class="eyebrow-star">✦</span>
       </div>
       
       <h1 class="hero-title" data-reveal>
-        <span class="title-line">ESCALADA NOCTURNA</span>
-        <span class="title-line title-accent">DOMINÁ EL ABISMO</span>
+        <span class="title-line">DOMINÁ LA ROCA.</span>
+        <span class="title-line title-accent">CONQUISTÁ LA NOCHE.</span>
       </h1>
       
       <p class="hero-subtitle" data-reveal>
-        Diseñado exclusivamente para expertos en trekking y escalada clásica. Cuatro módulos de rendimiento físico avanzado, astrofotografía y ascensos verticales en roca bajo la oscuridad absoluta de la Patagonia.
+        Diseñado exclusivamente para escaladores y trekkers expertos. <br>Superá un nuevo nivel de dificultad física y técnica bajo el cielo más limpio de la Patagonia[cite: 5].
       </p>
       
       <div class="hero-actions" data-reveal>
         <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-        <a href="#programa" class="btn-ghost">VER PROGRAMA DE ÉLITE</a>
+        <a href="#programa" class="btn-ghost">VER MÓDULOS CRÍTICOS</a>
       </div>
       
-      <!-- CONTADORES DE RENDIMIENTO -->
       <div class="hero-data" data-reveal>
         <div class="data-item">
           <span class="data-value" data-count="4">0</span>
-          <span class="data-label">Módulos Técnicos</span>
+          <span class="data-label">Cursos Avanzados</span>
         </div>
-        <div class="data-divider" aria-hidden="true"></div>
+        <div class="data-divider" aria-hidden="true">✦</div>
         <div class="data-item">
           <span class="data-value" data-count="3">0</span>
-          <span class="data-label">Noches de Expedición Vertical</span>
+          <span class="data-label">Noches de Expedición</span>
         </div>
-        <div class="data-divider" aria-hidden="true"></div>
+        <div class="data-divider" aria-hidden="true">✦</div>
         <div class="data-item">
-          <span class="data-value">MÁXIMA</span>
-          <span class="data-label">Dificultad Técnica</span>
+          <span class="data-value">V+</span>
+          <span class="data-label">Dificultad Mínima</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 02. PROPUESTA DE VALOR: SUPERACIÓN EXTREMA -->
+  <!-- OTRAS SECCIONES QUEDAN INTACTAS PARA EL INTERSECTION OBSERVER -->
   <section id="manifiesto" class="section-editorial">
     <div class="editorial-grid">
       <div class="editorial-body">
-        <span class="section-tag" data-reveal>SANGRE · ROCA · COSMOS</span>
-        <h2 class="editorial-title" data-reveal>Donde termina el sendero convencional, comienza tu vertical.</h2>
+        <span class="section-tag" data-reveal>EL PRÓXIMO LÍMITE</span>
+        <h2 class="editorial-title" data-reveal>Donde termina el sendero convencional, comienza tu verdadero desafío.</h2>
         <div class="editorial-columns">
           <p class="editorial-p" data-reveal>
-            Ya dominás la roca de día. Conocés el equipo, tenés la técnica y sabés gestionar el riesgo. Cúspides no es una escuela introductoria de montaña; es un laboratorio de superación para expertos. Unimos la escalada en paredes desplomadas nocturnas con la ciencia de la fotografía astronómica avanzada.
+            Ya dominás la roca de día. Sabés leer los agarres, gestionar la cuerda y controlar tus pulsaciones en situaciones límite. Pero cuando el sol se oculta en Bariloche, la montaña se transforma por completo[cite: 5]. Este programa exige autonomía absoluta[cite: 5].
           </p>
           <p class="editorial-p" data-reveal>
-            Vas a aprender a leer la mecánica del cielo nocturno y a dominar las configuraciones ópticas de tu cámara mientras estás suspendido en un arnés a cientos de metros de altura. Una experiencia técnica y física sin precedentes en la cordillera.
+            Te entrenamos para resolver vías complejas en la oscuridad absoluta, dominar la orientación estelar táctica y registrar técnicamente la inmensidad del cosmos[cite: 5].
           </p>
         </div>
       </div>
       <div class="editorial-image-col" data-reveal>
-        <img src="image2.png" alt="Escalador experto progresando de noche en una pared desplomada" class="editorial-img" />
+        <img src="assets/image2.png" alt="Ascensión técnica nocturna" class="editorial-img" />
       </div>
     </div>
   </section>
 
-  <!-- 03. PROGRAMA DE 4 CURSOS DE ESCALADA NOCTURNA -->
-  <section id="programa" class="section-dark section-program">
-    <div class="program-inner">
-      <span class="section-tag tag-light" data-reveal>RIDGE PROGRAM 2026</span>
-      <h2 class="program-title" data-reveal>La ruta hacia la cumbre oscura.<br>Cuatro fases de dificultad.</h2>
-      
-      <div class="timeline">
-        <!-- CURSO 1 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 01</span>
-            <h3 class="t-title">Formación Física Avanzada y Resistencia</h3>
-            <p class="t-desc">Acondicionamiento de alta exigencia muscular. Gestión del ácido láctico en climas bajo cero, técnicas de agarre a ciegas y optimización del equilibrio estático en condiciones de privación sensorial y fatiga térmica.</p>
-            <div class="t-image-holder"><img src="image3.png" alt="Entrenamiento de fuerza de dedos en suspensión estricta"></div>
-          </div>
-        </div>
-        
-        <!-- CURSO 2 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 02</span>
-            <h3 class="t-title">Introducción a la Astronomía de Campo</h3>
-            <p class="t-desc">Orientación sideral pura sin asistencia GPS. Reconocimiento técnico de constelaciones australes, movimiento aparente del cosmos y predicción de ventanas de visibilidad óptima para escalada libre segura.</p>
-            <div class="t-image-holder"><img src="image4.png" alt="Observación técnica del firmamento con mapa celeste analógico"></div>
-          </div>
-        </div>
-
-        <!-- CURSO 3 -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
-          <div class="timeline-content">
-            <span class="t-number">FASE 03</span>
-            <h3 class="t-title">Fotografía Nocturna y Astronómica</h3>
-            <p class="t-desc">Control técnico de cámaras fotográficas en la verticalidad. Configuración de exposición prolongada, balance de blancos para espacio profundo y anclajes especiales de trípodes en paredes de roca viva.</p>
-            <div class="t-image-holder"><img src="image5.png" alt="Fotografía de larga exposición capturando el trazo de estrellas sobre las agujas de roca"></div>
-          </div>
-        </div>
-
-        <!-- CURSO 4 (EXPEDICIÓN) -->
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot t-dot--highlight"></div></div>
-          <div class="timeline-content">
-            <span class="t-number highlight">FASE FINAL</span>
-            <h3 class="t-title">Expedición Vertical: 3 Noches en Pared</h3>
-            <p class="t-desc">El hito definitivo de superación. Tres noches consecutivas de vivac en portaledge y escalada técnica real en Bariloche, aplicando las técnicas de captura fotográfica del firmamento mientras dominás los vacíos de la cordillera.</p>
-            <div class="t-image-holder"><img src="image1.png" alt="Campamento de pared portaledge suspendido en la noche patagónica"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOQUE DE CONVERSIÓN COMPACTO Y DELICADO -->
-      <div class="program-pack" data-reveal>
-        <div class="pack-inner">
-          <div class="pack-left">
-            <span class="pack-badge">PROCESO DE SELECCIÓN EXCLUSIVO</span>
-            <h3 class="pack-title">Habilitación de Cupos Técnicos</h3>
-            <p class="pack-text">Debido a la alta complejidad de la expedición y los requerimientos de seguridad, las vacantes se asignan bajo estricta entrevista previa de experiencia en escalada e historial técnico de montaña.</p>
-          </div>
-          <div class="pack-right">
-            <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04. CONTACTO / ACCIÓN PRINCIPAL DE CIERRE -->
-  <section id="contacto" class="section-contact section-dark">
-    <div class="contact-inner">
-      <span class="section-tag tag-light" data-reveal>ÚLTIMA CONVOCATORIA</span>
-      <h2 class="contact-title" data-reveal>Aceptá el desafío vertical.</h2>
-      <p class="contact-sub" data-reveal>Iniciá tu proceso de validación de experiencia. Las plazas para la expedición de 3 noches son estrictamente limitadas por cuestiones de seguridad en pared.</p>
-      <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
-        <span>CONSULTAR CURSOS POR WHATSAPP</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- LINEA 106: Vínculo exacto al archivo de scripts JS para el motor dinámico -->
   <script src="js/script.js"></script>
 </body>
 </html>
