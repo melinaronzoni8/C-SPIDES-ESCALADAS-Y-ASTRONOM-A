@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VARIABLES Y CONFIGURACIÓN PREMIUM
+   00. VARIABLES, PALETA DE COLOR PREMIUM Y RESET FINO
    ========================================================================== */
 :root {
   --color-bg-main: #020120;       
@@ -19,17 +19,23 @@
   padding: 0;
 }
 
-html, body {
-  min-height: 100vh;
+html {
+  scroll-behavior: smooth;
   background-color: var(--color-bg-main);
   color: var(--color-text-display);
   font-family: var(--font-body);
+  font-size: 16px;
   overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================================
-   HEADER Y ESTRUCTURA DE COMPONENTES
+   HEADER / NAVEGACIÓN CORPORATIVA MIGRADA A PC
    ========================================================================== */
 #scroll-progress {
   position: fixed;
@@ -39,6 +45,7 @@ html, body {
   height: 2px;
   background: linear-gradient(90deg, var(--color-btn-base), var(--color-accent-light));
   z-index: 9999;
+  transition: width 0.1s linear;
 }
 
 #main-nav {
@@ -46,9 +53,9 @@ html, body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: linear-gradient(to bottom, rgba(2, 1, 32, 0.9) 0%, rgba(2, 1, 32, 0) 100%);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(178, 183, 201, 0.1);
+  background: linear-gradient(to bottom, rgba(2, 1, 32, 0.95) 0%, rgba(2, 1, 32, 0) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(178, 183, 201, 0.15);
 }
 
 .nav-inner {
@@ -60,11 +67,11 @@ html, body {
   align-items: center;
 }
 
-/* Imagen del logo controlada perfectamente */
+/* Esquina superior izquierda: Logo corporativo assets/image2.png */
 .nav-logo-container {
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 45px;
 }
 
 .nav-brand-img {
@@ -73,6 +80,7 @@ html, body {
   object-fit: contain;
 }
 
+/* Menú de los 4 temas principales */
 .nav-menu-themes {
   display: flex;
   gap: 2.5rem;
@@ -82,6 +90,7 @@ html, body {
 .nav-menu-themes a {
   text-decoration: none;
   color: var(--color-muted-grey);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -100,15 +109,16 @@ html, body {
   padding: 0.6rem 1.4rem;
   font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-cta:hover, .btn-ghost:hover {
   background-color: var(--color-text-display);
   color: var(--color-bg-main);
+  border-color: var(--color-text-display);
 }
 
 .btn-primary {
@@ -116,60 +126,68 @@ html, body {
   color: var(--color-text-display);
   border: none;
   padding: 1rem 2.2rem;
+  font-family: var(--font-body);
   font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
-  letter-spacing: 1px;
   box-shadow: 0 4px 15px rgba(117, 78, 140, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(232, 210, 245, 0.4);
 }
 
 /* ==========================================================================
-   MODIFICACIÓN COMPLETA HERO: FULL INTERFACE (PC Y MOBILE)
+   SISTEMA DE REVELADO DE ELEMENTOS (SCROLL INTERSECTION)
+   ========================================================================== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ==========================================================================
+   ESTILOS DE SECCIONES INTERNAS
+   ========================================================================== */
+section {
+  position: relative;
+  padding: 8rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.section-dark { background-color: var(--color-bg-dark); }
+
+.section-tag {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: var(--color-accent-light);
+  display: block;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   ESTILOS HERO ADAPTADOS CON PARALLAX VERTICAL DE TU REQUERIMIENTO
    ========================================================================== */
 .section-hero {
-  position: relative;
-  min-height: 100vh; /* Ocupa la pantalla completa */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 8rem 2rem 4rem 2rem;
-  overflow: hidden;
   background-color: var(--color-bg-main);
-}
-
-/* Capa contenedora absoluta de fondo */
-.hero-bg-parallax {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Por debajo de la tipografía */
-}
-
-/* La imagen abarca absolutamente toda la superficie */
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Evita deformaciones */
-  object-position: center;
-}
-
-/* Capa oscura superior para garantizar legibilidad de textos blancos */
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(2, 1, 32, 0.8) 0%,
-    rgba(2, 1, 32, 0.4) 50%,
-    rgba(2, 1, 32, 0.95) 100%
-  );
+  text-align: center;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
 }
 
 #star-canvas {
@@ -178,16 +196,47 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; /* Capa intermedia para partículas */
   pointer-events: none;
+  z-index: 3; /* Renderiza partículas de JavaScript sobre la imagen */
 }
 
-/* Contenido tipográfico flotante sobre la imagen base */
-.hero-content {
-  position: relative;
-  z-index: 3; /* Al frente de todo */
-  max-width: 1000px;
+.hero-bg-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  z-index: 1; /* Detrás de las tipografías */
+  overflow: hidden;
+}
+
+/* IMAGEN HERO: Integración nativa de la lógica de scroll de tu archivo carrusel.css */
+.hero-img { 
+  width: 100%; 
+  height: 125%; /* Altura calculada para absorber el desplazamiento vertical de la animación */
+  object-fit: cover; 
+  object-position: center top;
+  
+  /* Lógica Scroll-driven Animations aplicada al eje Y */
+  animation: adjust-image-vertical linear both;
+  animation-timeline: view(y);
+  animation-range: exit-crossing;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(2, 1, 32, 0.4) 0%, rgba(2, 1, 32, 0.85) 100%);
+  z-index: 2;
+}
+
+.hero-content { 
+  position: relative; 
+  z-index: 4; /* Pone los títulos al frente de todo de forma intocable */
+  max-width: 1000px; 
 }
 
 .hero-eyebrow {
@@ -200,14 +249,15 @@ html, body {
   color: var(--color-accent-light);
   margin-bottom: 2rem;
 }
+.eyebrow-star { color: var(--color-accent-light); font-size: 0.7rem; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
   line-height: 1.1;
   margin-bottom: 2.5rem;
+  letter-spacing: 1px;
 }
-
 .title-line { display: block; }
 .title-accent {
   color: transparent;
@@ -215,10 +265,10 @@ html, body {
 }
 
 .hero-subtitle { 
-  font-size: clamp(1rem, 1.8vw, 1.2rem); 
+  font-size: clamp(1rem, 1.6vw, 1.15rem); 
   color: var(--color-muted-grey); 
+  font-weight: 300; 
   margin-bottom: 3.5rem; 
-  font-weight: 300;
 }
 
 .hero-actions { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 4.5rem; }
@@ -232,38 +282,172 @@ html, body {
   padding-top: 2.5rem;
 }
 .data-item { display: flex; flex-direction: column; }
-.data-value { font-family: var(--font-display); font-size: 2.8rem; }
-.data-label { font-size: 0.7rem; text-transform: uppercase; color: var(--color-muted-grey); letter-spacing: 2px; }
+.data-value { font-family: var(--font-display); font-size: 2.8rem; color: var(--color-text-display); }
+.data-label { font-size: 0.7rem; text-transform: uppercase; color: var(--color-muted-grey); letter-spacing: 2px; margin-top: 0.3rem; }
 .data-divider { font-size: 0.7rem; color: var(--color-btn-base); }
 
-/* SECCIONES COMPLEMENTARIAS */
-.section-editorial { padding: 8rem 2rem; display: flex; align-items: center; justify-content: center; }
-.editorial-grid { max-width: 1400px; width: 100%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; }
-.editorial-title { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 2rem; }
-.editorial-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-.editorial-p { color: var(--color-muted-grey); font-size: 0.95rem; text-align: justify; }
-.editorial-image-col { height: 450px; }
-.editorial-img { width: 100%; height: 100%; object-fit: cover; }
+/* ==========================================================================
+   02. SECCIÓN EDITORIAL (MANIFIESTO)
+   ========================================================================== */
+.editorial-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; width: 100%; }
+.editorial-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.2; margin-bottom: 3rem; }
+.editorial-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+.editorial-p { color: var(--color-muted-grey); font-weight: 400; font-size: 0.95rem; text-align: justify; }
+.editorial-image-col { height: 500px; border-left: 1px solid rgba(178, 183, 201, 0.15); padding-left: 3rem; }
+.editorial-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) contrast(110%); }
 
-/* REVELACIONES CON ANIMACIÓN INTERNA */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.is-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+/* ==========================================================================
+   03. TIMELINE DEL PROGRAMA
+   ========================================================================== */
+.program-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+.program-title { font-family: var(--font-display); font-size: 2.8rem; margin-bottom: 5rem; text-align: center; }
+.timeline { position: relative; margin-bottom: 6rem; }
+.timeline-item { display: grid; grid-template-columns: 60px 1fr; gap: 3rem; margin-bottom: 5rem; }
+.timeline-connector { display: flex; flex-direction: column; align-items: center; }
+.t-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-btn-base); }
+.t-dot--highlight { background-color: var(--color-accent-light); box-shadow: 0 0 12px var(--color-accent-light); }
+.t-line { width: 1px; flex-grow: 1; background-color: rgba(178, 183, 201, 0.15); margin-top: 0.5rem; }
+.t-number { font-family: var(--font-display); font-size: 0.8rem; color: var(--color-accent-light); letter-spacing: 2px; display: block; margin-bottom: 0.5rem; }
+.t-number.highlight { color: var(--color-accent-light); text-shadow: 0 0 8px rgba(232, 210, 245, 0.5); }
+.t-title { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1rem; }
+.t-desc { color: var(--color-muted-grey); font-weight: 300; font-size: 0.95rem; max-width: 800px; margin-bottom: 2rem; }
+.t-image-holder { width: 100%; max-height: 250px; overflow: hidden; opacity: 0.4; border: 1px solid rgba(178, 183, 201, 0.1); transition: opacity 0.4s ease; }
+.t-image-holder:hover { opacity: 0.85; }
+.t-image-holder img { width: 100%; height: 100%; object-fit: cover; }
+
+.program-pack { background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-main) 100%); border: 1px solid rgba(178, 183, 201, 0.2); padding: 4rem; }
+.pack-inner { display: flex; justify-content: space-between; align-items: center; gap: 3rem; }
+.pack-badge { font-size: 0.75rem; letter-spacing: 3px; color: var(--color-accent-light); font-weight: 700; display: block; margin-bottom: 0.5rem; }
+.pack-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem; }
+.pack-text { color: var(--color-muted-grey); font-weight: 300; font-size: 0.95rem; max-width: 600px; }
+
+/* ==========================================================================
+   04. NUEVA SECCIÓN UNIFICADA: GALERÍA CON PARALLAX SIN TOCAR ESTILOS BASE
+   ========================================================================== */
+.section-galeria {
+  background-color: var(--color-bg-dark);
+  padding: 8rem 2rem;
+  width: 100%;
 }
 
-/* RESPONSIVE FLUIDO (PC Y MOBILE) */
+.galeria-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Columnas perfectas para monitores de PC */
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.galeria-item {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid rgba(178, 183, 201, 0.1);
+  background-color: var(--color-bg-main);
+}
+
+/* Aplicación limpia de la animación Scroll-driven en imágenes de campo */
+.galeria-img {
+  width: 100%;
+  height: 135%; /* Otorga el margen necesario para el recorrido vertical de la animación */
+  object-fit: cover;
+  object-position: center top;
+  
+  /* Lógica extraída de tu carrusel.css adaptada al flujo de renderizado vertical */
+  animation: scroll-reveal-image linear both;
+  animation-timeline: view(y);
+  animation-range: entry 5% exit 95%;
+}
+
+.galeria-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(2, 1, 32, 0.75) 0%, rgba(2, 1, 32, 0.1) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.galeria-info {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 3;
+}
+
+.galeria-tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--color-accent-light);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   05. SECCIÓN SECCIÓN CONTACTO Y ADMISIONES
+   ========================================================================== */
+.section-contact { justify-content: center; text-align: center; background: radial-gradient(circle at center, #1b0c2e 0%, var(--color-bg-main) 100%); }
+.contact-inner { max-width: 800px; }
+.contact-title { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.5rem); margin-bottom: 1.5rem; }
+.contact-sub { color: var(--color-muted-grey); font-weight: 300; font-size: 1rem; margin-bottom: 3.5rem; }
+.btn-whatsapp { background-color: var(--color-btn-base); color: var(--color-text-display); border: none; padding: 1.2rem 3.5rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
+.btn-whatsapp:hover { background-color: var(--color-accent-light); color: var(--color-bg-main); transform: translateY(-3px); box-shadow: 0 12px 25px rgba(232, 210, 245, 0.2); }
+
+/* ==========================================================================
+   KEYFRAMES DE ANIMACIÓN DE SCROLL COMPARTIDOS (LÓGICA DEL CARRUSEL EN EJE Y)
+   ========================================================================== */
+@keyframes adjust-image-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(15%); }
+}
+
+@keyframes scroll-reveal-image {
+  0% {
+    transform: translateY(-15%);
+    filter: brightness(0.4) grayscale(20%);
+  }
+  50% {
+    filter: brightness(1) grayscale(0%);
+  }
+  100% {
+    transform: translateY(0%);
+    filter: brightness(0.5) grayscale(15%);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTATIONS (OPTIMIZADO PARA MOBILE COMPLETO)
+   ========================================================================== */
 @media (max-width: 968px) {
   .nav-inner { flex-direction: column; gap: 1rem; padding: 1rem; }
   .nav-menu-themes { gap: 1.2rem; }
   .nav-menu-themes a { font-size: 0.75rem; }
-  .hero-actions { flex-direction: column; gap: 1rem; padding: 0 2rem; }
+  
+  .section-hero { padding-top: 11rem; } /* Margen extra para prevenir solapamientos del menú flotante en móviles */
+  
+  .editorial-grid, .editorial-columns, .pack-inner { flex-direction: column; grid-template-columns: 1fr; gap: 3rem; }
+  .editorial-image-col { height: 320px; border-left: none; padding-left: 0; }
   .hero-data { flex-direction: column; gap: 1.5rem; }
   .data-divider { display: none; }
-  .editorial-grid, .editorial-columns { grid-template-columns: 1fr; gap: 2rem; }
-  .editorial-image-col { height: 300px; }
+  
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 Columnas en tablet */
+    gap: 1.5rem;
+  }
+  .galeria-item { height: 300px; }
+}
+
+@media (max-width: 640px) {
+  .galeria-grid {
+    grid-template-columns: 1fr; /* 1 Columna en celulares */
+    gap: 1rem;
+  }
 }

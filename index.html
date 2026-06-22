@@ -3,35 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cúspides — Formación de Élite: Escalada Nocturna y Astrofotografía Avanzada en la Patagonia." />
-  <title>Cúspides — Escalada Nocturna de Alta Dificultad</title>
+  <meta name="description" content="Cúspides — Exploración científica, astronomía de campo y expediciones de alta montaña en la Patagonia Argentina. Bariloche." />
+  <meta name="keywords" content="astronomía de campo, astrofotografía, expedición patagonia, montañismo bariloche, exploración científica" />
+  <meta name="author" content="Cúspides" />
+  <meta property="og:title" content="Cúspides — La Montaña Te Lleva. El Universo Te Espera." />
+  <meta property="og:description" content="Programa integral de astronomía, astrofotografía y expedición en la Patagonia Argentina." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Cúspides — Exploración Científica & Astronomía de Montaña</title>
   
-  <!-- FUENTES SELECCIONADAS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- Vínculo al archivo de estilos CSS -->
+  <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"></script>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- INDICADOR DE LECTURA -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- NAVEGACIÓN ENCABEZADO -->
   <nav id="main-nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-inner">
-      <!-- Esquina izquierda: Logo apuntando a la subcarpeta assets de GitHub -->
       <a href="#hero" class="nav-logo-container">
         <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
       </a>
       
-      <!-- Menú de 4 temas -->
       <ul class="nav-menu-themes">
         <li><a href="#hero">Inicio</a></li>
-        <li><a href="#manifiesto">Filosofía</a></li>
         <li><a href="#programa">Programa</a></li>
+        <li><a href="#galeria">Excursiones</a></li>
         <li><a href="#contacto">Admisiones</a></li>
       </ul>
 
@@ -39,18 +42,14 @@
     </div>
   </nav>
 
-  <!-- 01. HERO CON INTEGRACIÓN ULTRA-FULLSCREEN -->
   <section id="hero" class="section-hero">
-    <!-- Lienzo para la animación de destellos en el scroll -->
     <canvas id="star-canvas" aria-hidden="true"></canvas>
     
-    <!-- Fondo Fullscreen absoluto debajo de las tipografías (PC y Mobile) -->
     <div class="hero-bg-parallax" aria-hidden="true">
       <img src="assets/image1.png" alt="Paredes rocosas de la Patagonia bajo el firmamento" class="hero-img" />
       <div class="hero-overlay"></div>
     </div>
 
-    <!-- Contenido tipográfico suspendido sobre el fondo -->
     <div class="hero-content">
       <div class="hero-eyebrow" data-reveal>
         <span class="eyebrow-star">✦</span>
@@ -64,7 +63,7 @@
       </h1>
       
       <p class="hero-subtitle" data-reveal>
-        Diseñado exclusivamente para escaladores y trekkers expertos. <br>Superá un nuevo nivel de dificultad física y técnica bajo el cielo más limpio de la Patagonia[cite: 5].
+        Diseñado exclusivamente para escaladores y trekkers expertos. <br>Superá un nuevo nivel de dificultad física y técnica bajo el cielo más limpio de la Patagonia.
       </p>
       
       <div class="hero-actions" data-reveal>
@@ -91,7 +90,6 @@
     </div>
   </section>
 
-  <!-- OTRAS SECCIONES QUEDAN INTACTAS PARA EL INTERSECTION OBSERVER -->
   <section id="manifiesto" class="section-editorial">
     <div class="editorial-grid">
       <div class="editorial-body">
@@ -99,10 +97,10 @@
         <h2 class="editorial-title" data-reveal>Donde termina el sendero convencional, comienza tu verdadero desafío.</h2>
         <div class="editorial-columns">
           <p class="editorial-p" data-reveal>
-            Ya dominás la roca de día. Sabés leer los agarres, gestionar la cuerda y controlar tus pulsaciones en situaciones límite. Pero cuando el sol se oculta en Bariloche, la montaña se transforma por completo[cite: 5]. Este programa exige autonomía absoluta[cite: 5].
+            Ya dominás la roca de día. Sabés leer los agarres, gestionar la cuerda y controlar tus pulsaciones en situaciones límite. Pero cuando el sol se oculta en Bariloche, la montaña se transforma por completo. Este programa no es para principiantes; exige autonomía absoluta y excelente condición física previa.
           </p>
           <p class="editorial-p" data-reveal>
-            Te entrenamos para resolver vías complejas en la oscuridad absoluta, dominar la orientación estelar táctica y registrar técnicamente la inmensidad del cosmos[cite: 5].
+            Te entrenamos para resolver vías complejas en la oscuridad absoluta, dominar la orientación estelar táctica y registrar técnicamente la inmensidad del cosmos mediante fotografía nocturna avanzada mientras estás colgado de un arnés.
           </p>
         </div>
       </div>
@@ -112,6 +110,64 @@
     </div>
   </section>
 
-  <script src="js/script.js"></script>
-</body>
-</html>
+  <section id="programa" class="section-dark section-program">
+    <div class="program-inner">
+      <span class="section-tag tag-light" data-reveal>LÍNEA DE APRENDIZAJE PROGRESIVO</span>
+      <h2 class="program-title" data-reveal>Formación Avanzada de 4 Niveles</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <span class="t-number">FASE 01</span>
+            <h3 class="t-title">Formación Física Avanzada y Resistencia Estática</h3>
+            <p class="t-desc">Optimización muscular para progresión nocturna, tolerancia al frío extremo prolongado en repisas de roca y control mental ante la pérdida de horizontes visuales.</p>
+            <div class="t-image-holder"><img src="assets/image3.png" alt="Entrenamiento de fuerza y resistencia estática"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <span class="t-number">FASE 02</span>
+            <h3 class="t-title">Introducción a la Astronomía de Campo Táctica</h3>
+            <p class="t-desc">Mecánica celeste y orientación por referencias estelares australes. Reconocimiento de dinámicas espaciales aplicadas a la navegación en rutas de montaña desérticas.</p>
+            <div class="t-image-holder"><img src="assets/image4.png" alt="Estudio cartográfico de constelaciones"></div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <span class="t-number">FASE 03</span>
+            <h3 class="t-title">Curso de Fotografía Nocturna y Astronómica</h3>
+            <p class="t-desc">Operación avanzada de cámaras en arnés. Ajustes de exposición prolongada, balance óptico para captura de Vía Láctea y manipulación de equipos ópticos bajo cero grados.</p>
+            <div class="t-image-holder"><img src="assets/image2.png" alt="Configuración de astrofotografía en montaña"></div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot t-dot--highlight"></div></div>
+          <div class="timeline-content">
+            <span class="t-number highlight">CULMINACIÓN</span>
+            <h3 class="t-title">Expedición de 3 Noches: Escalada y Astrofotografía Real</h3>
+            <p class="t-desc">Tres jornadas completas en terreno vertical patagónico. Escalamiento técnico nocturno real en roca combinando autonomía táctica, campamento base suspendido y registro de astros.</p>
+            <div class="t-image-holder"><img src="assets/image5.png" alt="Expedición de escalada nocturna en Bariloche"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="program-pack" data-reveal>
+        <div class="pack-inner">
+          <div class="pack-left">
+            <span class="pack-badge">PROCESO DE ADMISIÓN ABIERTO</span>
+            <h3 class="pack-title">Programa Unificado Completo</h3>
+            <p class="pack-text">Certificación avanzada para escaladores experimentados. Incluye equipamiento de seguridad de montaña, instructores de élite y tutoría de astrofotografía de campo.</p>
+          </div>
+          <div class="pack-right">
+            <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
