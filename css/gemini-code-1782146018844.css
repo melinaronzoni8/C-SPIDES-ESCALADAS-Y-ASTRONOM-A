@@ -1,0 +1,645 @@
+/* ==========================================================================
+   00. VARIABLES & RESET (PALETA OFICIAL CÚSPIDES)
+   ========================================================================== */
+:root {
+  --color-primary: #7CA5C1;      /* Azul Glacial */
+  --color-bg-dark: #0B2137;      /* Abismo Base */
+  --color-bg-deep: #050E18;      /* Espacio Profundo / Negro Quirúrgico */
+  --color-accent-blue: #183F6F;  /* Azul Técnico */
+  --color-nebula-deep: #2A0032;  /* Tonos Cósmicos */
+  --color-nebula-bright: #7C0083;/* Purpura estelar */
+  --color-text-light: #ECEDEB;   /* Blanco Técnico Titilante */
+  --color-text-muted: rgba(236, 237, 235, 0.6);
+  
+  --font-display: 'Titillium Web', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   01. COMPONENTES COMUNES (EDITORIAL Y PREMIUM)
+   ========================================================================== */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-nebula-bright));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* Navegación */
+#main-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(5,14,24,0.9) 0%, rgba(5,14,24,0) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(236, 237, 235, 0.05);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text-light);
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.nav-coords {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+/* Botones Premium */
+button, .btn-ghost {
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-cta, .btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(236, 237, 235, 0.2);
+  color: var(--color-text-light);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav-cta:hover, .btn-ghost:hover {
+  background-color: var(--color-text-light);
+  color: var(--color-bg-deep);
+  border-color: var(--color-text-light);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg-deep);
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(124, 165, 193, 0.2);
+}
+
+/* Estructuras Editoriales por Sección */
+section {
+  position: relative;
+  padding: 8rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.section-dark {
+  background-color: var(--color-bg-deep);
+}
+
+/* Marcadores de Sección Estilo Revista Científica */
+.editorial-label, .philosophy-label, .learn-label, .program-label, .gallery-label, .test-label, .req-label, .contact-label {
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section-number {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--color-bg-dark);
+}
+
+.section-number.light { color: rgba(236,237,235,0.1); }
+
+.section-tag {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   02. DESARROLLO DE SECCIONES INTERNAS
+   ========================================================================== */
+
+/* Hero Cinematográfico */
+.section-hero {
+  height: 100vh;
+  background: radial-gradient(circle at center, var(--color-bg-dark) 0%, var(--color-bg-deep) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+#star-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-bg-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.35;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.eyebrow-line {
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-primary);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 2.5rem;
+}
+
+.title-line { display: block; }
+.title-accent {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-text-light);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text-muted);
+  font-weight: 300;
+  margin-bottom: 3rem;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.hero-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border-top: 1px solid rgba(236,237,235,0.1);
+  padding-top: 2rem;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.data-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+}
+
+/* Manifiesto Editorial */
+.editorial-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.editorial-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+
+.editorial-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.editorial-p {
+  color: var(--color-text-muted);
+  font-weight: 300;
+  font-size: 0.95rem;
+}
+
+.editorial-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  border-top: 1px solid rgba(5,14,24,0.1);
+  padding-top: 2rem;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-accent-blue);
+}
+
+.stat-desc {
+  font-size: 0.75rem;
+  color: rgba(5,14,24,0.6);
+}
+
+.editorial-image-col {
+  position: relative;
+  height: 600px;
+}
+
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+.img-coord-tag {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--color-bg-deep);
+  padding: 0.4rem 0.8rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+/* Filosofía de Diseño */
+.philosophy-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.philosophy-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
+
+.philosophy-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+}
+
+.pillar {
+  background: linear-gradient(135deg, rgba(11,33,55,0.4) 0%, rgba(5,14,24,0.8) 100%);
+  border: 1px solid rgba(236,237,235,0.05);
+  padding: 2.5rem 2rem;
+}
+
+.pillar-icon {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.pillar-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* Lo que aprenderás Grid */
+.learn-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.learn-header {
+  margin-bottom: 5rem;
+}
+
+.learn-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background-color: rgba(236,237,235,0.1);
+}
+
+.learn-item {
+  background-color: var(--color-bg-deep);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.learn-item-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.learn-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.learn-item p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* Timeline Inmersivo del Programa */
+.program-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.timeline {
+  margin: 4rem 0;
+  position: relative;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.timeline-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.t-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.t-dot(--highlight) {
+  background-color: var(--color-nebula-bright);
+  box-shadow: 0 0 15px var(--color-nebula-bright);
+}
+
+.t-line {
+  width: 1px;
+  flex-grow: 1;
+  background-color: rgba(236,237,235,0.1);
+  margin-top: 0.5rem;
+}
+
+.t-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.t-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.t-desc {
+  color: var(--color-text-muted);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+}
+
+.t-image-holder {
+  width: 100%;
+  max-height: 250px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.t-image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.t-image-holder:hover img {
+  opacity: 1;
+}
+
+/* CRO Admisión Pack */
+.program-pack {
+  background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-deep) 100%);
+  border: 1px solid var(--color-primary);
+  padding: 4rem;
+  margin-top: 6rem;
+}
+
+.pack-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.pack-tag {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.pack-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.pack-desc {
+  color: var(--color-text-muted);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.pack-scarcity {
+  color: #ff4a4a;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pack-price-block {
+  margin-bottom: 2rem;
+}
+
+.pack-total {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.pack-currency {
+  font-size: 2rem;
+  vertical-align: top;
+}
+
+.pack-sub {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Galería Grid Estilo Editorial */
+.gallery-inner, .gallery-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gallery-header { margin-bottom: 4rem; }
+.gallery-title { font-family: var(--font-display); font-size: 3rem; font-weight: 900; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.gallery-item--tall { grid-row: span 2; height: 624px; }
+.gallery-item--wide { grid-column: span 2; }
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition
