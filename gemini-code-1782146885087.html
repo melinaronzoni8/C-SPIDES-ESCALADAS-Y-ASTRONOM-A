@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cúspides — Exploración Científica & Astronomía de Montaña</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <nav id="main-nav" role="navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-mark">▲</span>
+        <span class="logo-text">CÚSPIDES</span>
+      </a>
+      <div class="nav-coords" aria-hidden="true">
+        <span id="coords-display">41°08'S · 71°18'O · 850m</span>
+      </div>
+      <button class="nav-cta" onclick="openWhatsApp()">Solicitar Información</button>
+    </div>
+  </nav>
+
+  <section id="hero" class="section-hero">
+    <canvas id="star-canvas" aria-hidden="true"></canvas>
+    
+    <div class="hero-bg-parallax" aria-hidden="true">
+      <img src="image1.png" alt="Montañas de la Patagonia" class="hero-img" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="eyebrow-line"></span>
+        <span>BARILOCHE · PATAGONIA ARGENTINA</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      
+      <h1 class="hero-title" data-reveal>
+        <span class="title-line">LA MONTAÑA</span>
+        <span class="title-line title-accent">TE LLEVA</span>
+        <span class="title-line">EL UNIVERSO</span>
+        <span class="title-line title-accent">TE ESPERA</span>
+      </h1>
+      
+      <p class="hero-subtitle" data-reveal>
+        Formación técnica de élite donde la altitud y el cosmos convergen.
+      </p>
+      
+      <div class="hero-actions" data-reveal>
+        <button class="btn-primary" onclick="openWhatsApp()">
+          <span>Solicitar Información</span>
+        </button>
+        <a href="#programa" class="btn-ghost">Ver el Programa</a>
+      </div>
+      
+      <div class="hero-data" data-reveal>
+        <div class="data-item">
+          <span class="data-value" data-count="20">0</span>
+          <span class="data-label">semanas</span>
+        </div>
+        <div class="data-divider" aria-hidden="true">·</div>
+        <div class="data-item">
+          <span class="data-value" data-count="4">0</span>
+          <span class="data-label">módulos</span>
+        </div>
+        <div class="data-divider" aria-hidden="true">·</div>
+        <div class="data-item">
+          <span class="data-value">12</span>
+          <span class="data-label">cupos disponibles</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" class="section-editorial">
+    <div class="editorial-grid">
+      <div class="editorial-body">
+        <h2 class="editorial-title" data-reveal>No venimos a mostrarte el cielo.</h2>
+        <div class="editorial-columns">
+          <p class="editorial-p" data-reveal>Cúspides nació en la Patagonia porque es aquí donde el firmamento se vuelve instrumento.</p>
+          <p class="editorial-p" data-reveal>No somos turismo. Somos formación técnica.</p>
+        </div>
+      </div>
+      <div class="editorial-image-col" data-reveal-lateral>
+        <img src="image2.png" alt="Escala de montaña" class="editorial-img" />
+      </div>
+    </div>
+  </section>
+
+  <section id="programa" class="section-dark section-program">
+    <div class="program-inner">
+      <h2 class="program-title" data-reveal>Programa Integral</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <h3 class="t-title">Astronomía de Campo</h3>
+            <div class="t-image-holder"><img src="image3.png" alt="Módulo 1"></div>
+          </div>
+        </div>
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot"></div></div>
+          <div class="timeline-content">
+            <h3 class="t-title">Astrofotografía Nocturna</h3>
+            <div class="t-image-holder"><img src="image4.png" alt="Módulo 2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="program-pack" data-reveal>
+        <div class="pack-inner">
+          <h3 class="pack-title">Inversión Final</h3>
+          <div class="pack-total"><span class="pack-currency">USD</span> <span class="pack-amount">500</span></div>
+          <button class="btn-primary" onclick="openWhatsApp()">SOLICITAR INFORMACIÓN</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section-contact section-dark">
+    <div class="contact-inner">
+      <h2 class="contact-title" data-reveal>Iniciá tu postulación.</h2>
+      <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
+        <span>SOLICITAR INFORMACIÓN POR WHATSAPP</span>
+      </button>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
