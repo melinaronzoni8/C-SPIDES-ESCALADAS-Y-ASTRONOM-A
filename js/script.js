@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initStarCanvasBackground();
   initIntersectionObserverReveal();
   initNumericalCounterEngine();
-});
+  initEditorialSlider(); 
+});});
 
 /**
  * REGLA DE SCROLL: Modifica dinámicamente el ancho de la barra superior en base al scroll del HTML
@@ -153,4 +154,34 @@ function openWhatsApp() {
   const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
   
   window.open(apiLink, '_blank');
+}
+/**
+ * MOTOR DE ANIMACIÓN: Slider cíclico cada 5 segundos hacia la izquierda
+ */
+function initEditorialSlider() {
+  const slides = document.querySelectorAll('.slide-img');
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+
+  setInterval(() => {
+    // 1. Imagen actual pasa a estado de salida (se desliza a la izquierda)
+    const currentSlide = slides[currentIndex];
+    currentSlide.classList.remove('active');
+    currentSlide.classList.add('exit');
+
+    // 2. Calculamos el índice del siguiente frame de forma cíclica
+    currentIndex = (currentIndex + 1) % slides.length;
+
+    // 3. La nueva imagen se prepara y pasa a estar activa
+    const nextSlide = slides[currentIndex];
+    nextSlide.classList.remove('exit');
+    nextSlide.classList.add('active');
+
+    // Limpieza: Tras terminar la animación, removemos la clase de salida
+    setTimeout(() => {
+      currentSlide.classList.remove('exit');
+    }, 800); // Sincronizado con los 0.8s del CSS
+    
+  }, 5000); // Intervalo estricto de 5 segundos
 }
