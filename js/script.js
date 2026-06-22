@@ -1,148 +1,156 @@
 /**
- * CÚSPIDES — Motor Interactivo de Conversión 2026
+ * CÚSPIDES — Motor Frontend Sincronizado
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollTracker();
-  initAtmosphericStars();
-  initConversionObserver();
-  initDynamicCounters();
+  // Inicialización de submotores interactivos
+  initReadingProgressBar();
+  initStarCanvasBackground();
+  initIntersectionObserverReveal();
+  initNumericalCounterEngine();
 });
 
 /**
- * 1. Control en vivo del progreso superior
+ * REGLA DE SCROLL: Modifica dinámicamente el ancho de la barra superior en base al scroll del HTML
  */
-function initScrollTracker() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
+function initReadingProgressBar() {
+  const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
 
   window.addEventListener('scroll', () => {
-    const rawScroll = window.scrollY;
-    const scrollableLimit = document.documentElement.scrollHeight - window.innerHeight;
+    const windowScrollTop = window.scrollY;
+    const totalDocScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     
-    if (scrollableLimit > 0) {
-      const globalPercent = (rawScroll / scrollableLimit) * 100;
-      bar.style.width = `${globalPercent}%`;
+    if (totalDocScrollableHeight > 0) {
+      const scrollPercentage = (windowScrollTop / totalDocScrollableHeight) * 100;
+      // Modificación de propiedad CSS en vivo
+      progressBar.style.width = `${scrollPercentage}%`;
     }
   });
 }
 
 /**
- * 2. Canvas de Estrellas de Fondo (Render sutil sobre Hex #020120)
+ * CANVAS 2D: Renderiza el cielo estrellado dinámico detrás del contenido del Hero
  */
-function initAtmosphericStars() {
+function initStarCanvasBackground() {
   const canvas = document.getElementById('star-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   
-  let stardust = [];
-  const totalStars = 90;
+  let starArray = [];
+  const maxStars = 100;
 
-  function resize() {
+  function setCanvasDimensions() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    setup();
+    populateStarArray();
   }
 
-  function setup() {
-    stardust = [];
-    for (let i = 0; i < totalStars; i++) {
-      stardust.push({
+  function populateStarArray() {
+    starArray = [];
+    for (let i = 0; i < maxStars; i++) {
+      starArray.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.1,
-        o: Math.random(),
-        factor: 0.004 + Math.random() * 0.008
+        size: Math.random() * 1.3,
+        opacity: Math.random(),
+        twinkleFactor: 0.006 + Math.random() * 0.01
       });
     }
   }
 
-  function loop() {
+  function animationLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = '#ECEDEB'; // Código de color oficial blanco técnico
     
-    stardust.forEach(star => {
-      ctx.globalAlpha = star.o;
+    starArray.forEach(star => {
+      ctx.globalAlpha = star.opacity;
       ctx.beginPath();
-      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
       ctx.fill();
       
-      star.o += star.factor;
-      if (star.o > 1 || star.o < 0) {
-        star.factor = -star.factor;
+      // Simulación de oscilación lumínica atmosférica
+      star.opacity += star.twinkleFactor;
+      if (star.opacity > 1 || star.opacity < 0) {
+        star.twinkleFactor = -star.twinkleFactor;
       }
     });
     
-    requestAnimationFrame(loop);
+    requestAnimationFrame(animationLoop);
   }
 
-  window.addEventListener('resize', resize);
-  resize();
-  loop();
+  window.addEventListener('resize', setCanvasDimensions);
+  setCanvasDimensions();
+  animationLoop();
 }
 
 /**
- * 3. Intersection Observer: Inyección de la clase .is-visible ante el Scroll
+ * REGLA EXPLICADA: El JS escanea el sitio buscando [data-reveal].
+ * Cuando detecta mediante scroll que entró en pantalla, le inyecta la clase .is-visible de CSS.
  */
-function initConversionObserver() {
-  const items = document.querySelectorAll('[data-reveal]');
+function initIntersectionObserverReveal() {
+  const revealTargets = document.querySelectorAll('[data-reveal]');
   
-  const options = {
-    root: null,
-    threshold: 0.1,
-    rootMargin: '0px 0px -30px 0px'
+  const observerConfig = {
+    root: null, // Viewport del navegador
+    threshold: 0.12, // Se activa cuando el 12% del bloque entra al campo visual
+    rootMargin: '0px 0px -40px 0px'
   };
 
-  const observer = new IntersectionObserver((entries, obs) => {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // SE INYECTA LA CLASE AL ELEMENTO DEL HTML
         entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
+        // Deja de observarlo para ahorrar rendimiento
+        observer.unobserve(entry.target);
       }
     });
-  }, options);
+  }, observerConfig);
 
-  items.forEach(item => observer.observe(item));
+  revealTargets.forEach(target => revealObserver.observe(target));
 }
 
 /**
- * 4. Motor de Animación Numérica Lineal
+ * REGLA EXPLICADA: El JS lee el atributo data-count e incrementa el número en pantalla
  */
-function initDynamicCounters() {
-  const counters = document.querySelectorAll('[data-count]');
+function initNumericalCounterEngine() {
+  const activeCounters = document.querySelectorAll('[data-count]');
   
-  const countObserver = new IntersectionObserver((entries, obs) => {
+  const counterObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        let current = 0;
-        const step = target / 40;
+        const counterElement = entry.target;
+        const targetValue = parseInt(counterElement.getAttribute('data-count'), 10);
+        let currentValue = 0;
+        const speedStep = targetValue / 50; // Divide el incremento de forma progresiva
 
-        function animate() {
-          current += step;
-          if (current < target) {
-            el.textContent = Math.floor(current);
-            requestAnimationFrame(animate);
+        function runAnimation() {
+          currentValue += speedStep;
+          if (currentValue < targetValue) {
+            counterElement.textContent = Math.floor(currentValue);
+            requestAnimationFrame(runAnimation);
           } else {
-            el.textContent = target;
+            counterElement.textContent = targetValue;
           }
         }
         
-        animate();
-        obs.unobserve(el);
+        runAnimation();
+        observer.unobserve(counterElement);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.6 });
 
-  counters.forEach(c => countObserver.observe(c));
+  activeCounters.forEach(counter => counterObserver.observe(counter));
 }
 
 /**
- * Redirección Estratégica CRO
+ * ENRUTAMIENTO WHATSAPP (CRO)
  */
 function openWhatsApp() {
-  const phone = "5492944000000"; 
-  const msg = encodeURIComponent("Hola Cúspides, cumplo con el perfil de escalador/trekker experto. Quiero consultar la disponibilidad de cupos y las fechas de los próximos cursos.");
-  window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}`, '_blank');
+  const targetPhone = "5492944000000"; // Código de Bariloche, Argentina
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación para los cupos de la expedición.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  
+  window.open(apiLink, '_blank');
 }
