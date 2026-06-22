@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
   initHeaderScrollAndNavigation();
   initHeroParallaxInteraction();
-  initDynamicCourseButtons();
 });
 
 function initReadingProgressBar() {
@@ -232,21 +231,4 @@ function openWhatsApp() {
   const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
   const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
   window.open(apiLink, '_blank');
-}
-
-function initDynamicCourseButtons() {
-  const courses = document.querySelectorAll('.timeline-item');
-  
-  courses.forEach(course => {
-    const btn = document.createElement('button');
-    btn.className = 'btn-more-info-dynamic';
-    btn.innerText = 'Más Info';
-    
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openWhatsApp();
-    });
-    
-    course.appendChild(btn);
-  });
 }
