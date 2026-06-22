@@ -10,7 +10,6 @@
   --color-text-muted: rgba(236, 237, 235, 0.6);
   --color-highlight: #7C0083;   
   
-  /* Fuentes oficiales solicitadas */
   --font-display: 'Russo One', sans-serif;
   --font-body: 'Lato', sans-serif;
 }
@@ -36,14 +35,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* REGLAS ESTRICTAS DE FUENTES */
-h1, h2, h3, h4, h5, h6, 
-.hero-title, .editorial-title, .excursiones-title, .program-title, .t-title, .pack-title, .contact-title {
+/* Forzar fuentes según requerimiento */
+h1, h2, h3, .hero-title, .editorial-title, .excursiones-title, .program-title, .t-title, .pack-title, .contact-title {
   font-family: var(--font-display) !important;
 }
 
-p, span, a, button, input, textarea,
-.editorial-p, .t-desc, .pack-text, .contact-sub, .testimonial-quote, .testimonial-author {
+p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub {
   font-family: var(--font-body) !important;
 }
 
@@ -171,7 +168,7 @@ p, span, a, button, input, textarea,
   color: var(--color-bg-deep);
   border: none;
   padding: 1rem 2rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
@@ -189,7 +186,7 @@ p, span, a, button, input, textarea,
   border: 1px solid rgba(236, 237, 235, 0.2);
   color: var(--color-text-light);
   padding: 1rem 2rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
@@ -257,7 +254,7 @@ section {
   color: var(--color-accent-blue);
   display: block;
   margin-bottom: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 .section-tag.tag-light { color: var(--color-primary); }
 
@@ -327,7 +324,6 @@ section {
   letter-spacing: 3px;
   color: var(--color-primary);
   margin-bottom: 2rem;
-  font-weight: 400;
 }
 .eyebrow-line { width: 30px; height: 1px; background-color: var(--color-primary); }
 
@@ -362,6 +358,7 @@ section {
 .editorial-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
 .editorial-p { color: var(--color-text-muted); font-weight: 300; font-size: 1rem; text-align: justify; }
 
+/* NUEVO COMENTARIO DE TESTIMONIO FICTICIO */
 .testimonial-box {
   grid-column: span 2;
   background: rgba(5, 14, 24, 0.5);
@@ -374,14 +371,12 @@ section {
   font-size: 1.1rem;
   color: var(--color-text-light);
   margin-bottom: 0.5rem;
-  font-weight: 300;
 }
 .testimonial-author {
   font-size: 0.85rem;
   color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 700;
 }
 
 .editorial-image-col { 
@@ -419,6 +414,7 @@ section {
 .excursiones-title { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 4rem; }
 .excursiones-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
 
+/* Configuración del contenedor 3D */
 .excursion-card { 
   background: transparent; 
   perspective: 1000px; 
@@ -434,10 +430,12 @@ section {
   transform-style: preserve-3d;
 }
 
+/* Efecto rotación al pasar el cursor */
 .excursion-card:hover .card-flip-inner {
   transform: rotateY(180deg);
 }
 
+/* Caras frontales y traseras */
 .card-front, .card-back {
   position: absolute;
   width: 100%;
@@ -479,6 +477,7 @@ section {
 .timeline { position: relative; margin-bottom: 6rem; }
 .timeline-item { display: grid; grid-template-columns: 60px 1fr; gap: 3rem; margin-bottom: 5rem; position: relative; transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease; padding: 1.5rem; border-radius: 4px; }
 
+/* REQUERIMIENTO INTERACTIVO: Iluminación de los cursos */
 .timeline-item:hover {
   transform: scale(1.02);
   background-color: rgba(11, 33, 55, 0.4);
@@ -492,11 +491,12 @@ section {
 .t-number { font-size: 0.85rem; color: var(--color-primary); font-weight: 700; letter-spacing: 2px; display: block; margin-bottom: 0.5rem; }
 .t-number.highlight { color: var(--color-highlight); }
 .t-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
-.t-desc { color: var(--color-text-muted); font-weight: 300; max-width: 800px; margin-bottom: 2.5rem; font-size: 1rem; }
+.t-desc { color: var(--color-text-muted); font-weight: 300; max-width: 800px; margin-bottom: 2.5rem; }
 .t-image-holder { width: 100%; max-height: 280px; overflow: hidden; opacity: 0.65; transition: opacity 0.4s ease; }
 .t-image-holder:hover { opacity: 0.95; }
 .t-image-holder img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Botón interactivo abajo a la derecha */
 .btn-more-info-dynamic {
   position: absolute;
   bottom: 1.5rem;
@@ -521,7 +521,7 @@ section {
 
 .program-pack { background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-deep) 100%); border: 1px solid var(--color-primary); padding: 4rem; }
 .pack-inner { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
-.pack-badge { font-size: 0.75rem; letter-spacing: 2px; color: var(--color-primary); font-weight: 700; display: block; margin-bottom: 0.5rem; }
+.pack-badge { font-size: 0.75rem; letter-spacing: 2px; color: var(--color-primary); font-weight: 600; display: block; margin-bottom: 0.5rem; }
 .pack-title { font-size: 2.2rem; margin-bottom: 1rem; }
 .pack-text { color: var(--color-text-muted); font-weight: 300; font-size: 0.95rem; }
 
@@ -530,7 +530,7 @@ section {
 .contact-inner { max-width: 800px; }
 .contact-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; }
 .contact-sub { color: var(--color-text-muted); font-weight: 300; margin-bottom: 3.5rem; }
-.btn-whatsapp { background-color: #25D366; color: white; border: none; padding: 1.2rem 3.5rem; font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; }
+.btn-whatsapp { background-color: #25D366; color: white; border: none; padding: 1.2rem 3.5rem; font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; }
 .btn-whatsapp:hover { background-color: #20ba5a; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(37,211,102,0.2); }
 
 /* RESPONSIVE / MEDIA QUERIES */
