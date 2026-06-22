@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cúspides — Exploración Científica & Astronomía de Montaña</title>
+  <meta name="description" content="Cúspides — Escuela de exploración astronómica en la Patagonia. Cursos progresivos de montaña, astronomía y fotografía nocturna." />
+  <title>Cúspides — Escuela de Exploración Astronómica</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,16 +16,16 @@
 
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <nav id="main-nav" role="navigation">
+  <nav id="main-nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">
         <span class="logo-mark">▲</span>
         <span class="logo-text">CÚSPIDES</span>
       </a>
       <div class="nav-coords" aria-hidden="true">
-        <span id="coords-display">41°08'S · 71°18'O · 850m</span>
+        <span>BARILOCHE · 41°08'S · 71°18'O</span>
       </div>
-      <button class="nav-cta" onclick="openWhatsApp()">Solicitar Información</button>
+      <button class="nav-cta" onclick="openWhatsApp()">SOLICITAR INFORMACIÓN</button>
     </div>
   </nav>
 
@@ -32,95 +33,121 @@
     <canvas id="star-canvas" aria-hidden="true"></canvas>
     
     <div class="hero-bg-parallax" aria-hidden="true">
-      <img src="image1.png" alt="Montañas de la Patagonia" class="hero-img" />
+      <img src="image1.png" alt="Montañas de Bariloche bajo el cielo nocturno patagónico" class="hero-img" />
       <div class="hero-overlay"></div>
     </div>
 
     <div class="hero-content">
       <div class="hero-eyebrow" data-reveal>
         <span class="eyebrow-line"></span>
-        <span>BARILOCHE · PATAGONIA ARGENTINA</span>
+        <span>DONDE TERMINA EL SENDERO, COMIENZA EL CIELO</span>
         <span class="eyebrow-line"></span>
       </div>
       
       <h1 class="hero-title" data-reveal>
-        <span class="title-line">LA MONTAÑA</span>
-        <span class="title-line title-accent">TE LLEVA</span>
-        <span class="title-line">EL UNIVERSO</span>
-        <span class="title-line title-accent">TE ESPERA</span>
+        <span class="title-line">EXPLORÁ LA MONTAÑA</span>
+        <span class="title-line title-accent">DESCUBRÍ EL UNIVERSO</span>
       </h1>
       
       <p class="hero-subtitle" data-reveal>
-        Formación técnica de élite donde la altitud y el cosmos convergen.
+        Una escuela de exploración astronómica en la Patagonia diseñada para quienes buscan <br>aprender a mirar y dominar la autonomía en ambientes outdoor reales.
       </p>
       
       <div class="hero-actions" data-reveal>
-        <button class="btn-primary" onclick="openWhatsApp()">
-          <span>Solicitar Información</span>
-        </button>
-        <a href="#programa" class="btn-ghost">Ver el Programa</a>
+        <button class="btn-primary" onclick="openWhatsApp()">MÁNDANOS UN WHATSAPP</button>
+        <a href="#programa" class="btn-ghost">VER CURSOS PROGRESIVOS</a>
       </div>
       
       <div class="hero-data" data-reveal>
         <div class="data-item">
-          <span class="data-value" data-count="20">0</span>
-          <span class="data-label">semanas</span>
+          <span class="data-value" data-count="3">0</span>
+          <span class="data-label">Niveles de Formación</span>
         </div>
         <div class="data-divider" aria-hidden="true">·</div>
         <div class="data-item">
-          <span class="data-value" data-count="4">0</span>
-          <span class="data-label">módulos</span>
+          <span class="data-value" data-count="2400">0</span>
+          <span class="data-label">Metros Altitud Máxima</span>
         </div>
         <div class="data-divider" aria-hidden="true">·</div>
         <div class="data-item">
-          <span class="data-value">12</span>
-          <span class="data-label">cupos disponibles</span>
+          <span class="data-value">100%</span>
+          <span class="data-label">Enfoque de Campo</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="nosotros" class="section-editorial">
+  <section id="manifiesto" class="section-editorial">
     <div class="editorial-grid">
       <div class="editorial-body">
-        <h2 class="editorial-title" data-reveal>No venimos a mostrarte el cielo.</h2>
+        <span class="section-tag" data-reveal>FILOSOFÍA DE EXPLORACIÓN</span>
+        <h2 class="editorial-title" data-reveal>La montaña es el camino.<br>El cielo es el objetivo.</h2>
         <div class="editorial-columns">
-          <p class="editorial-p" data-reveal>Cúspides nació en la Patagonia porque es aquí donde el firmamento se vuelve instrumento.</p>
-          <p class="editorial-p" data-reveal>No somos turismo. Somos formación técnica.</p>
+          <p class="editorial-p" data-reveal>
+            Alcanzar una cima no es solamente una meta física, sino una oportunidad para observar, comprender y experimentar el cosmos desde una perspectiva privilegiada. El trekking, la supervivencia y la orientación son las herramientas técnicas que te permitirán llegar a esos lugares de observación astronómica excepcionales.
+          </p>
+          <p class="editorial-p" data-reveal>
+            Buscamos conectar la aventura outdoor con el rigor de las ciencias planetarias. Nos alejamos de la contaminación lumínica de las ciudades para convertir la geografía andina en nuestro propio puente de aprendizaje hacia las estrellas.
+          </p>
         </div>
       </div>
-      <div class="editorial-image-col" data-reveal-lateral>
-        <img src="image2.png" alt="Escala de montaña" class="editorial-img" />
+      <div class="editorial-image-col" data-reveal>
+        <img src="image2.png" alt="Explorador observando el firmamento sobre una cresta rocosa" class="editorial-img" />
       </div>
     </div>
   </section>
 
   <section id="programa" class="section-dark section-program">
     <div class="program-inner">
-      <h2 class="program-title" data-reveal>Programa Integral</h2>
+      <span class="section-tag tag-light" data-reveal>CARRERA TÉCNICA DE CAMPO</span>
+      <h2 class="program-title" data-reveal>Tu expedición empieza antes<br>del primer paso.</h2>
       
       <div class="timeline">
         <div class="timeline-item" data-reveal>
           <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
           <div class="timeline-content">
-            <h3 class="t-title">Astronomía de Campo</h3>
-            <div class="t-image-holder"><img src="image3.png" alt="Módulo 1"></div>
+            <span class="t-number">01</span>
+            <h3 class="t-title">Astronomía de Campo y Orientación</h3>
+            <p class="t-desc">Mecánica celeste, reconocimiento de constelaciones australes, uso analógico de planisferios y lectura cartográfica nocturna sin soporte digital en la cordillera.</p>
+            <div class="t-image-holder"><img src="image3.png" alt="Estudiante midiendo coordenadas estelares analógicamente"></div>
           </div>
         </div>
+        
         <div class="timeline-item" data-reveal>
-          <div class="timeline-connector"><div class="t-dot"></div></div>
+          <div class="timeline-connector"><div class="t-dot"></div><div class="t-line"></div></div>
           <div class="timeline-content">
-            <h3 class="t-title">Astrofotografía Nocturna</h3>
-            <div class="t-image-holder"><img src="image4.png" alt="Módulo 2"></div>
+            <span class="t-number">02</span>
+            <h3 class="t-title">Astrofotografía y Gestión del Paisaje Nocturno</h3>
+            <p class="t-desc">Calibración de sensores ópticos para baja luminosidad, astrofotografía de espacio profundo, técnicas de larga exposición y configuraciones de tracking en frío extremo.</p>
+            <div class="t-image-holder"><img src="image4.png" alt="Cámara fotográfica configurada para capturar la Vía Láctea"></div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-connector"><div class="t-dot t-dot--highlight"></div></div>
+          <div class="timeline-content">
+            <span class="t-number highlight">HITO</span>
+            <h3 class="t-title">Expedición Invernal Real</h3>
+            <p class="t-desc">La culminación absoluta del programa. Tres días de acampada alpina autónoma e invernal en alta montaña, donde la supervivencia, la fotografía nocturna y la ciencia de campo se unifican bajo cero.</p>
+            <div class="t-image-holder"><img src="image5.png" alt="Campamento base invernal iluminado bajo un cielo estrellado nítido"></div>
           </div>
         </div>
       </div>
 
       <div class="program-pack" data-reveal>
         <div class="pack-inner">
-          <h3 class="pack-title">Inversión Final</h3>
-          <div class="pack-total"><span class="pack-currency">USD</span> <span class="pack-amount">500</span></div>
-          <button class="btn-primary" onclick="openWhatsApp()">SOLICITAR INFORMACIÓN</button>
+          <div class="pack-left">
+            <span class="pack-badge">VALOR UNIFICADO DEL PROGRAMA</span>
+            <h3 class="pack-title">Formación Integral Completa</h3>
+            <p class="pack-text">Incluye los módulos teóricos presenciales en Bariloche, las prácticas controladas de campo y la logística de seguridad para la expedición invernal de alta montaña.</p>
+          </div>
+          <div class="pack-right">
+            <div class="pack-price-block">
+              <span class="pack-currency">USD</span>
+              <span class="pack-amount">500</span>
+            </div>
+            <button class="btn-primary" onclick="openWhatsApp()">SOLICITAR INFORMACIÓN</button>
+          </div>
         </div>
       </div>
     </div>
@@ -128,9 +155,11 @@
 
   <section id="contacto" class="section-contact section-dark">
     <div class="contact-inner">
-      <h2 class="contact-title" data-reveal>Iniciá tu postulación.</h2>
+      <span class="section-tag tag-light" data-reveal>MISIONES ACTIVAS 2026</span>
+      <h2 class="contact-title" data-reveal>Ascendé para observar más lejos.</h2>
+      <p class="contact-sub" data-reveal>Cupos limitados por cohorte de exploración. Admisiones habilitadas mediante entrevista técnica de perfil outdoor.</p>
       <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
-        <span>SOLICITAR INFORMACIÓN POR WHATSAPP</span>
+        <span>SOLICITAR POSTULACIÓN VÍA WHATSAPP</span>
       </button>
     </div>
   </section>

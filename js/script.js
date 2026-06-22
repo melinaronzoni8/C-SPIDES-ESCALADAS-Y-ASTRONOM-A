@@ -1,163 +1,156 @@
 /**
- * CÚSPIDES — Motor de Interacciones y Animaciones Técnicas Premium 2026
+ * CÚSPIDES — Motor Frontend Sincronizado
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollProgress();
-  initStarCanvas();
-  initIntersectionObserver();
-  initCounterAnimation();
+  // Inicialización de submotores interactivos
+  initReadingProgressBar();
+  initStarCanvasBackground();
+  initIntersectionObserverReveal();
+  initNumericalCounterEngine();
 });
 
 /**
- * 1. Barra superior indicadora de lectura y scroll
+ * REGLA DE SCROLL: Modifica dinámicamente el ancho de la barra superior en base al scroll del HTML
  */
-function initScrollProgress() {
+function initReadingProgressBar() {
   const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
+
   window.addEventListener('scroll', () => {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (totalHeight > 0) {
-      const progress = (window.scrollY / totalHeight) * 100;
-      progressBar.style.width = `${progress}%`;
+    const windowScrollTop = window.scrollY;
+    const totalDocScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    
+    if (totalDocScrollableHeight > 0) {
+      const scrollPercentage = (windowScrollTop / totalDocScrollableHeight) * 100;
+      // Modificación de propiedad CSS en vivo
+      progressBar.style.width = `${scrollPercentage}%`;
     }
   });
 }
 
 /**
- * 2. Canvas de Estrellas Dinámicas en Sección Hero
+ * CANVAS 2D: Renderiza el cielo estrellado dinámico detrás del contenido del Hero
  */
-function initStarCanvas() {
+function initStarCanvasBackground() {
   const canvas = document.getElementById('star-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   
-  let stars = [];
-  const numStars = 120;
+  let starArray = [];
+  const maxStars = 100;
 
-  function resizeCanvas() {
+  function setCanvasDimensions() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    generateStars();
+    populateStarArray();
   }
 
-  function generateStars() {
-    stars = [];
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
+  function populateStarArray() {
+    starArray = [];
+    for (let i = 0; i < maxStars; i++) {
+      starArray.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5,
-        alpha: Math.random(),
-        speed: 0.005 + Math.random() * 0.01
+        size: Math.random() * 1.3,
+        opacity: Math.random(),
+        twinkleFactor: 0.006 + Math.random() * 0.01
       });
     }
   }
 
-  function draw() {
+  function animationLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ECEDEB';
+    ctx.fillStyle = '#ECEDEB'; // Código de color oficial blanco técnico
     
-    stars.forEach(star => {
-      ctx.globalAlpha = star.alpha;
+    starArray.forEach(star => {
+      ctx.globalAlpha = star.opacity;
       ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
       ctx.fill();
       
-      // Animación de titileo científico sutil
-      star.alpha += star.speed;
-      if (star.alpha > 1 || star.alpha < 0) {
-        star.speed = -star.speed;
+      // Simulación de oscilación lumínica atmosférica
+      star.opacity += star.twinkleFactor;
+      if (star.opacity > 1 || star.opacity < 0) {
+        star.twinkleFactor = -star.twinkleFactor;
       }
     });
     
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animationLoop);
   }
 
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  draw();
+  window.addEventListener('resize', setCanvasDimensions);
+  setCanvasDimensions();
+  animationLoop();
 }
 
 /**
- * 3. Animaciones Premium con Intersection Observer (Reveals & Fades)
+ * REGLA EXPLICADA: El JS escanea el sitio buscando [data-reveal].
+ * Cuando detecta mediante scroll que entró en pantalla, le inyecta la clase .is-visible de CSS.
  */
-function initIntersectionObserver() {
-  const elementsToReveal = document.querySelectorAll('[data-reveal], [data-reveal-text], [data-reveal-lateral]');
+function initIntersectionObserverReveal() {
+  const revealTargets = document.querySelectorAll('[data-reveal]');
   
-  const observerOptions = {
-    root: null,
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+  const observerConfig = {
+    root: null, // Viewport del navegador
+    threshold: 0.12, // Se activa cuando el 12% del bloque entra al campo visual
+    rootMargin: '0px 0px -40px 0px'
   };
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // SE INYECTA LA CLASE AL ELEMENTO DEL HTML
         entry.target.classList.add('is-visible');
-        // Estilos en línea controlados para fluidez óptima (alternativa limpia a librerías pesadas)
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0) scale(1)';
+        // Deja de observarlo para ahorrar rendimiento
         observer.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, observerConfig);
 
-  elementsToReveal.forEach(el => {
-    // Configuración inicial de estados invisibles controlados por JS
-    el.style.opacity = '0';
-    if (el.hasAttribute('data-reveal-lateral')) {
-      el.style.transform = 'translateX(30px)';
-    } else {
-      el.style.transform = 'translateY(25px)';
-    }
-    el.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-    observer.observe(el);
-  });
+  revealTargets.forEach(target => revealObserver.observe(target));
 }
 
 /**
- * 4. Animación de Contadores de Datos Técnicos en el Hero
+ * REGLA EXPLICADA: El JS lee el atributo data-count e incrementa el número en pantalla
  */
-function initCounterAnimation() {
-  const counters = document.querySelectorAll('[data-count]');
+function initNumericalCounterEngine() {
+  const activeCounters = document.querySelectorAll('[data-count]');
   
-  const countObserver = new IntersectionObserver((entries, observer) => {
+  const counterObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const target = entry.target;
-        const endValue = parseInt(target.getAttribute('data-count'), 10);
-        let startValue = 0;
-        const duration = 1500; // ms
-        const startTime = performance.now();
+        const counterElement = entry.target;
+        const targetValue = parseInt(counterElement.getAttribute('data-count'), 10);
+        let currentValue = 0;
+        const speedStep = targetValue / 50; // Divide el incremento de forma progresiva
 
-        function updateCounter(currentTime) {
-          const elapsedTime = currentTime - startTime;
-          if (elapsedTime < duration) {
-            const progress = elapsedTime / duration;
-            // Easing de salida OutQuad
-            const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
-            target.textContent = currentValue;
-            requestAnimationFrame(updateCounter);
+        function runAnimation() {
+          currentValue += speedStep;
+          if (currentValue < targetValue) {
+            counterElement.textContent = Math.floor(currentValue);
+            requestAnimationFrame(runAnimation);
           } else {
-            target.textContent = endValue;
+            counterElement.textContent = targetValue;
           }
         }
         
-        requestAnimationFrame(updateCounter);
-        observer.unobserve(target);
+        runAnimation();
+        observer.unobserve(counterElement);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.6 });
 
-  counters.forEach(counter => countObserver.observe(counter));
+  activeCounters.forEach(counter => counterObserver.observe(counter));
 }
 
 /**
- * 5. CRO Enrutamiento Estratégico Directo a WhatsApp
+ * ENRUTAMIENTO WHATSAPP (CRO)
  */
 function openWhatsApp() {
-  const telefono = "5492944000000"; // Reemplazar por tu número real de Bariloche con código de área
-  const mensaje = encodeURIComponent("Hola Cúspides, me interesa recibir más información sobre el Programa Integral de Exploración Científica y Astronomía.");
-  const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${mensaje}`;
-  window.open(url, '_blank');
+  const targetPhone = "5492944000000"; // Código de Bariloche, Argentina
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación para los cupos de la expedición.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  
+  window.open(apiLink, '_blank');
 }
