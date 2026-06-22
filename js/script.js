@@ -8,12 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initStarCanvasBackground();
   initIntersectionObserverReveal();
   initNumericalCounterEngine();
-  initEditorialSlider(); 
-});});
+  initEditorialSlider(); // Slider automático integrado
+});
 
-/**
- * REGLA DE SCROLL: Modifica dinámicamente el ancho de la barra superior en base al scroll del HTML
- */
 function initReadingProgressBar() {
   const progressBar = document.getElementById('scroll-progress');
   if (!progressBar) return;
@@ -24,15 +21,11 @@ function initReadingProgressBar() {
     
     if (totalDocScrollableHeight > 0) {
       const scrollPercentage = (windowScrollTop / totalDocScrollableHeight) * 100;
-      // Modificación de propiedad CSS en vivo
       progressBar.style.width = `${scrollPercentage}%`;
     }
   });
 }
 
-/**
- * CANVAS 2D: Renderiza el cielo estrellado dinámico detrás del contenido del Hero
- */
 function initStarCanvasBackground() {
   const canvas = document.getElementById('star-canvas');
   if (!canvas) return;
@@ -62,7 +55,7 @@ function initStarCanvasBackground() {
 
   function animationLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ECEDEB'; // Código de color oficial blanco técnico
+    ctx.fillStyle = '#ECEDEB';
     
     starArray.forEach(star => {
       ctx.globalAlpha = star.opacity;
@@ -70,7 +63,6 @@ function initStarCanvasBackground() {
       ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
       ctx.fill();
       
-      // Simulación de oscilación lumínica atmosférica
       star.opacity += star.twinkleFactor;
       if (star.opacity > 1 || star.opacity < 0) {
         star.twinkleFactor = -star.twinkleFactor;
@@ -85,25 +77,19 @@ function initStarCanvasBackground() {
   animationLoop();
 }
 
-/**
- * REGLA EXPLICADA: El JS escanea el sitio buscando [data-reveal].
- * Cuando detecta mediante scroll que entró en pantalla, le inyecta la clase .is-visible de CSS.
- */
 function initIntersectionObserverReveal() {
   const revealTargets = document.querySelectorAll('[data-reveal]');
   
   const observerConfig = {
-    root: null, // Viewport del navegador
-    threshold: 0.12, // Se activa cuando el 12% del bloque entra al campo visual
+    root: null,
+    threshold: 0.12,
     rootMargin: '0px 0px -40px 0px'
   };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // SE INYECTA LA CLASE AL ELEMENTO DEL HTML
         entry.target.classList.add('is-visible');
-        // Deja de observarlo para ahorrar rendimiento
         observer.unobserve(entry.target);
       }
     });
@@ -112,9 +98,6 @@ function initIntersectionObserverReveal() {
   revealTargets.forEach(target => revealObserver.observe(target));
 }
 
-/**
- * REGLA EXPLICADA: El JS lee el atributo data-count e incrementa el número en pantalla
- */
 function initNumericalCounterEngine() {
   const activeCounters = document.querySelectorAll('[data-count]');
   
@@ -124,7 +107,7 @@ function initNumericalCounterEngine() {
         const counterElement = entry.target;
         const targetValue = parseInt(counterElement.getAttribute('data-count'), 10);
         let currentValue = 0;
-        const speedStep = targetValue / 50; // Divide el incremento de forma progresiva
+        const speedStep = targetValue / 50;
 
         function runAnimation() {
           currentValue += speedStep;
@@ -146,16 +129,6 @@ function initNumericalCounterEngine() {
 }
 
 /**
- * ENRUTAMIENTO WHATSAPP (CRO)
- */
-function openWhatsApp() {
-  const targetPhone = "5492944000000"; // Código de Bariloche, Argentina
-  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación para los cupos de la expedición.");
-  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
-  
-  window.open(apiLink, '_blank');
-}
-/**
  * MOTOR DE ANIMACIÓN: Slider cíclico cada 5 segundos hacia la izquierda
  */
 function initEditorialSlider() {
@@ -165,23 +138,26 @@ function initEditorialSlider() {
   let currentIndex = 0;
 
   setInterval(() => {
-    // 1. Imagen actual pasa a estado de salida (se desliza a la izquierda)
     const currentSlide = slides[currentIndex];
     currentSlide.classList.remove('active');
     currentSlide.classList.add('exit');
 
-    // 2. Calculamos el índice del siguiente frame de forma cíclica
     currentIndex = (currentIndex + 1) % slides.length;
 
-    // 3. La nueva imagen se prepara y pasa a estar activa
     const nextSlide = slides[currentIndex];
     nextSlide.classList.remove('exit');
     nextSlide.classList.add('active');
 
-    // Limpieza: Tras terminar la animación, removemos la clase de salida
     setTimeout(() => {
       currentSlide.classList.remove('exit');
-    }, 800); // Sincronizado con los 0.8s del CSS
+    }, 800);
     
-  }, 5000); // Intervalo estricto de 5 segundos
+  }, 5000);
+}
+
+function openWhatsApp() {
+  const targetPhone = "5492944000000";
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  window.open(apiLink, '_blank');
 }

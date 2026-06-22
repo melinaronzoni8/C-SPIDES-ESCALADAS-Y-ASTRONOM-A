@@ -2,16 +2,16 @@
    00. VARIABLES, PALETA DE COLOR OFICIAL Y RESET
    ========================================================================== */
 :root {
-  --color-primary: #7CA5C1;      /* Azul Glacial */
-  --color-bg-dark: #0B2137;      /* Abismo Base */
-  --color-bg-deep: #050E18;      /* Negro Espacio Profundo */
-  --color-accent-blue: #183F6F;  /* Azul Técnico */
-  --color-text-light: #ECEDEB;   /* Blanco Técnico */
+  --color-primary: #7CA5C1;      
+  --color-bg-dark: #0B2137;      
+  --color-bg-deep: #050E18;      
+  --color-accent-blue: #183F6F;  
+  --color-text-light: #ECEDEB;   
   --color-text-muted: rgba(236, 237, 235, 0.6);
-  --color-highlight: #7C0083;   /* Púrpura de Espectro Estelar */
+  --color-highlight: #7C0083;   
   
-  --font-display: 'Titillium Web', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Russo One', sans-serif;
+  --font-body: 'Lato', sans-serif;
 }
 
 * {
@@ -38,13 +38,11 @@ body {
 /* ==========================================================================
    INTERFACES COMPARTIDAS (NAV, BOTONES, BARRAS)
    ========================================================================== */
-
-/* Barra indicadora superior cuyo width es controlado por JS */
 #scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0%; /* JS manipula este porcentaje basándose en el scroll */
+  width: 0%;
   height: 3px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-highlight));
   z-index: 9999;
@@ -64,21 +62,23 @@ body {
 .nav-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.nav-logo {
+/* Justificación exacta a la izquierda para el contenedor del Logo */
+.nav-logo-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: var(--color-text-light);
-  font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: 3px;
+  height: 40px;
+}
+
+.nav-brand-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav-coords {
@@ -98,7 +98,7 @@ body {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
 }
 
 .nav-cta:hover, .btn-ghost:hover {
@@ -116,7 +116,7 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -125,25 +125,21 @@ body {
 }
 
 /* ==========================================================================
-   MECANISMO DE REVELADO SINCRONIZADO CON JS
+   MECANISMO DE REVELADO (OBSERVER)
    ========================================================================== */
-
-/* Regla explicada: El CSS ve el atributo y le aplica opacidad cero e invisibilidad inicial */
 [data-reveal] {
   opacity: 0;
   transform: translateY(25px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* El CSS reacciona inmediatamente a la inyección de la clase gatillada por el JS en scroll */
 .is-visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
 /* ==========================================================================
-   ESTILOS GENERALES DE SECCIONES INTERNAS
+   SECCIONES INTERNAS
    ========================================================================== */
 section {
   position: relative;
@@ -166,7 +162,7 @@ section {
 }
 .section-tag.tag-light { color: var(--color-primary); }
 
-/* 01. Hero */
+/* 01. HERO CON CAPA DE FONDO SUBORDINADA */
 .section-hero {
   background: #050E18;
   text-align: center;
@@ -181,6 +177,7 @@ section {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 2; /* Sobre la imagen pero bajo las letras */
 }
 
 .hero-bg-parallax {
@@ -189,12 +186,22 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  opacity: 0.25;
+  z-index: 1; /* Al fondo absoluto por debajo de las tipografías */
+  opacity: 0.35;
 }
 
 .hero-img { width: 100%; height: 100%; object-fit: cover; }
-.hero-content { position: relative; z-index: 2; max-width: 1000px; }
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(5,14,24,0.2) 0%, var(--color-bg-deep) 100%);
+}
+
+.hero-content { position: relative; z-index: 3; max-width: 1000px; } /* Encima de todo */
 
 .hero-eyebrow {
   display: flex;
@@ -234,10 +241,12 @@ section {
 .data-label { font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 1px; }
 .data-divider { font-size: 2rem; color: rgba(236,237,235,0.1); }
 
-/* 02. Manifiesto Editorial */
-/* ==========================================================================
-   MODIFICACIÓN PROPUESTA DE VALOR: SLIDER INTEGRADO
-   ========================================================================== */
+/* 02. PROPUESTA DE VALOR CON ANIMACIÓN LATERAL */
+.editorial-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; width: 100%; }
+.editorial-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 3rem; }
+.editorial-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.editorial-p { color: var(--color-text-muted); font-weight: 300; font-size: 1rem; text-align: justify; }
+
 .editorial-image-col { 
   height: 550px; 
   border-left: 1px solid rgba(236, 237, 235, 0.1); 
@@ -249,43 +258,32 @@ section {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Recorta las imágenes que se desplazan fuera del marco */
+  overflow: hidden;
 }
 
 .slide-img { 
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
-  filter: grayscale(15%);
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateX(100%); /* Esperan ocultas a la derecha */
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Curva fluida de deslizamiento */
+  transform: translateX(100%);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1;
 }
 
-/* Estado activo: entra en el marco visual */
 .slide-img.active {
   transform: translateX(0);
   z-index: 2;
 }
 
-/* Estado previo: sale deslizándose elegantemente hacia el borde izquierdo */
 .slide-img.exit {
   transform: translateX(-100%);
   z-index: 1;
 }
 
-/* Adaptación para pantallas medianas */
-@media (max-width: 968px) {
-  .editorial-image-col { 
-    height: 350px; 
-    border-left: none; 
-    padding-left: 0; 
-  }
-}
-/* 03. Timeline de Cursos */
+/* 03. TIMELINE DE CURSOS */
 .program-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
 .program-title { font-family: var(--font-display); font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 5rem; }
 .timeline { position: relative; margin-bottom: 6rem; }
@@ -302,17 +300,13 @@ section {
 .t-image-holder:hover { opacity: 0.95; }
 .t-image-holder img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Tarjeta CRO */
 .program-pack { background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-deep) 100%); border: 1px solid var(--color-primary); padding: 4rem; }
-.pack-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+.pack-inner { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
 .pack-badge { font-size: 0.75rem; letter-spacing: 2px; color: var(--color-primary); font-weight: 600; display: block; margin-bottom: 0.5rem; }
 .pack-title { font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 1rem; }
 .pack-text { color: var(--color-text-muted); font-weight: 300; font-size: 0.95rem; }
-.pack-price-block { margin-bottom: 1.5rem; }
-.pack-currency { font-size: 1.8rem; font-family: var(--font-display); color: var(--color-primary); vertical-align: top; margin-right: 0.2rem; }
-.pack-amount { font-family: var(--font-display); font-size: 4.5rem; font-weight: 900; line-height: 1; }
 
-/* 04. Contacto Inevitable */
+/* 04. CONTACTO */
 .section-contact { justify-content: center; text-align: center; background: radial-gradient(circle at center, #15021a 0%, var(--color-bg-deep) 100%); }
 .contact-inner { max-width: 800px; }
 .contact-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; }
@@ -322,7 +316,7 @@ section {
 
 /* RESPONSIVE */
 @media (max-width: 968px) {
-  .editorial-grid, .editorial-columns, .pack-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .editorial-grid, .editorial-columns { grid-template-columns: 1fr; gap: 3rem; }
   .editorial-image-col { height: 350px; border-left: none; padding-left: 0; }
   .hero-data { flex-direction: column; gap: 1.5rem; }
   .data-divider { display: none; }
