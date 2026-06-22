@@ -1,144 +1,156 @@
 /**
- * CÚSPIDES — Motor Interactivo de Conversión 2026
+ * CÚSPIDES — Motor Frontend Sincronizado
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollTracker();
-  initInteractiveScrollSparks(); 
-  initConversionObserver();
-  initDynamicCounters();
+  // Inicialización de submotores interactivos
+  initReadingProgressBar();
+  initStarCanvasBackground();
+  initIntersectionObserverReveal();
+  initNumericalCounterEngine();
 });
 
-function initScrollTracker() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
+/**
+ * REGLA DE SCROLL: Modifica dinámicamente el ancho de la barra superior en base al scroll del HTML
+ */
+function initReadingProgressBar() {
+  const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
 
   window.addEventListener('scroll', () => {
-    const rawScroll = window.scrollY;
-    const scrollableLimit = document.documentElement.scrollHeight - window.innerHeight;
+    const windowScrollTop = window.scrollY;
+    const totalDocScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     
-    if (scrollableLimit > 0) {
-      const globalPercent = (rawScroll / scrollableLimit) * 100;
-      bar.style.width = `${globalPercent}%`;
+    if (totalDocScrollableHeight > 0) {
+      const scrollPercentage = (windowScrollTop / totalDocScrollableHeight) * 100;
+      // Modificación de propiedad CSS en vivo
+      progressBar.style.width = `${scrollPercentage}%`;
     }
   });
 }
 
 /**
- * Generador óptico de destellos sutiles basados en desplazamiento vertical
+ * CANVAS 2D: Renderiza el cielo estrellado dinámico detrás del contenido del Hero
  */
-function initInteractiveScrollSparks() {
+function initStarCanvasBackground() {
   const canvas = document.getElementById('star-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   
-  let sparks = [];
-  let lastScrollY = window.scrollY;
+  let starArray = [];
+  const maxStars = 100;
 
-  function resizeCanvas() {
+  function setCanvasDimensions() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight; 
+    canvas.height = window.innerHeight;
+    populateStarArray();
   }
 
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    const delta = Math.abs(currentScrollY - lastScrollY);
-    
-    if (delta > 1) {
-      const sparkCount = Math.min(Math.floor(delta / 4), 4);
-      for (let i = 0; i < sparkCount; i++) {
-        sparks.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * (canvas.height * 0.35), 
-          size: 0.6 + Math.random() * 1.6,
-          alpha: 1,
-          speedY: -0.3 - Math.random() * 0.7, 
-          speedX: (Math.random() - 0.5) * 0.3,
-          decay: 0.012 + Math.random() * 0.02
-        });
-      }
+  function populateStarArray() {
+    starArray = [];
+    for (let i = 0; i < maxStars; i++) {
+      starArray.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.3,
+        opacity: Math.random(),
+        twinkleFactor: 0.006 + Math.random() * 0.01
+      });
     }
-    lastScrollY = currentScrollY;
-  });
+  }
 
-  function renderLoop() {
+  function animationLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ECEDEB'; // Código de color oficial blanco técnico
     
-    for (let i = sparks.length - 1; i >= 0; i--) {
-      const s = sparks[i];
-      ctx.save();
-      ctx.globalAlpha = s.alpha;
-      ctx.fillStyle = '#E8D2F5'; 
-      
+    starArray.forEach(star => {
+      ctx.globalAlpha = star.opacity;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
       
-      s.x += s.speedX;
-      s.y += s.speedY;
-      s.alpha -= s.decay;
-      
-      if (s.alpha <= 0) {
-        sparks.splice(i, 1);
-      }
-    }
-    
-    requestAnimationFrame(renderLoop);
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  renderLoop();
-}
-
-function initConversionObserver() {
-  const items = document.querySelectorAll('[data-reveal]');
-  const options = { threshold: 0.1, rootMargin: '0px 0px -30px 0px' };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
+      // Simulación de oscilación lumínica atmosférica
+      star.opacity += star.twinkleFactor;
+      if (star.opacity > 1 || star.opacity < 0) {
+        star.twinkleFactor = -star.twinkleFactor;
       }
     });
-  }, options);
+    
+    requestAnimationFrame(animationLoop);
+  }
 
-  items.forEach(item => observer.observe(item));
+  window.addEventListener('resize', setCanvasDimensions);
+  setCanvasDimensions();
+  animationLoop();
 }
 
-function initDynamicCounters() {
-  const counters = document.querySelectorAll('[data-count]');
+/**
+ * REGLA EXPLICADA: El JS escanea el sitio buscando [data-reveal].
+ * Cuando detecta mediante scroll que entró en pantalla, le inyecta la clase .is-visible de CSS.
+ */
+function initIntersectionObserverReveal() {
+  const revealTargets = document.querySelectorAll('[data-reveal]');
   
-  const countObserver = new IntersectionObserver((entries, obs) => {
+  const observerConfig = {
+    root: null, // Viewport del navegador
+    threshold: 0.12, // Se activa cuando el 12% del bloque entra al campo visual
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        let current = 0;
-        const step = target / 40;
+        // SE INYECTA LA CLASE AL ELEMENTO DEL HTML
+        entry.target.classList.add('is-visible');
+        // Deja de observarlo para ahorrar rendimiento
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerConfig);
 
-        function animate() {
-          current += step;
-          if (current < target) {
-            el.textContent = Math.floor(current);
-            requestAnimationFrame(animate);
+  revealTargets.forEach(target => revealObserver.observe(target));
+}
+
+/**
+ * REGLA EXPLICADA: El JS lee el atributo data-count e incrementa el número en pantalla
+ */
+function initNumericalCounterEngine() {
+  const activeCounters = document.querySelectorAll('[data-count]');
+  
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counterElement = entry.target;
+        const targetValue = parseInt(counterElement.getAttribute('data-count'), 10);
+        let currentValue = 0;
+        const speedStep = targetValue / 50; // Divide el incremento de forma progresiva
+
+        function runAnimation() {
+          currentValue += speedStep;
+          if (currentValue < targetValue) {
+            counterElement.textContent = Math.floor(currentValue);
+            requestAnimationFrame(runAnimation);
           } else {
-            el.textContent = target;
+            counterElement.textContent = targetValue;
           }
         }
-        animate();
-        obs.unobserve(el);
+        
+        runAnimation();
+        observer.unobserve(counterElement);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.6 });
 
-  counters.forEach(c => countObserver.observe(c));
+  activeCounters.forEach(counter => counterObserver.observe(counter));
 }
 
+/**
+ * ENRUTAMIENTO WHATSAPP (CRO)
+ */
 function openWhatsApp() {
-  const phone = "5492944000000"; 
-  const msg = encodeURIComponent("Hola Cúspides, cumplo con el perfil de escalador/trekker experto. Quiero consultar la disponibilidad de cupos y las fechas de los próximos cursos.");
-  window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}`, '_blank');
+  const targetPhone = "5492944000000"; // Código de Bariloche, Argentina
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación para los cupos de la expedición.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  
+  window.open(apiLink, '_blank');
 }
