@@ -914,42 +914,39 @@ section {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  
-  /* ... (Tus reglas anteriores de .nosotros-grid y .nosotros-image-col se mantienen igual) ... */
 
-  /* 1. Llevamos la imagen de fondo a sus colores y brillo 100% originales */
-  .nosotros-image-col .nosotros-img {
+  /* 1. El contenedor padre debe ser relativo para crear el subcontexto de capas */
+  .nosotros-grid {
+    position: relative;
+    z-index: 1; /* Contexto inicial */
+  }
+
+  /* 2. Forzamos a la columna de la imagen a irse al fondo absoluto */
+  .nosotros-image-col {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: none !important; /* Eliminamos por completo el oscurecimiento y la opacidad */
-    opacity: 1 !important;   /* Forzamos visibilidad al 100% */
+    height: 100% !important;
+    z-index: 10; /* Capa baja */
+    padding: 0;
+    margin: 0;
   }
 
-  /* 2. Ajustamos el recuadro para que sea totalmente transparente y no opaque las letras */
+  /* 3. Elevamos la columna de texto y su caja contenedora por sobre la imagen */
+  .nosotros-text-col {
+    position: relative; /* Habilita el uso de z-index */
+    z-index: 20;        /* Capa alta: pasa al frente superando el z-index 10 de la foto */
+    pointer-events: auto; /* Asegura que los textos sigan siendo seleccionables */
+  }
+
+  /* Tu caja de contenido estilizada se renderizará al frente gracias a su padre (.nosotros-text-col) */
   .nosotros-content-box {
-    background: rgba(11, 33, 55, 0.4); /* Fondo sutil para que las letras sigan siendo legibles sobre la foto */
-    border: 1px solid rgba(124, 165, 193, 0.6); /* Borde con más fuerza imitando tus botones */
-    padding: 2rem 1.5rem;
-    border-radius: 4px;
-    backdrop-filter: blur(4px); /* Suavizado sutil */
+    position: relative;
+    z-index: 30; /* Capa de seguridad máxima al frente */
+    background: rgba(11, 33, 55, 0.4);
+    border: 1px solid rgba(124, 165, 193, 0.6);
+    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  }
-
-  /* 3. Forzamos a que las letras utilicen el 100% de su color original brillante */
-  .nosotros-p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-text-light) !important; /* Blanco original al 100% */
-    opacity: 1 !important;                       /* Sin transparencias que lo apaguen */
-    text-align-last: left;
-    margin-bottom: 1rem;
-  }
-  
-  .sig-name, .sig-role {
-    color: var(--color-text-light) !important; /* Nombre y cargo al 100% de brillo */
-    opacity: 1 !important;
   }
 }
