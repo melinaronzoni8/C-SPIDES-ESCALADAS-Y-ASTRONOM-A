@@ -882,6 +882,7 @@ section {
     border: 0.5px solid rgba(124, 165, 193, 0.3); /* Borde sutil */
     padding: 2rem 1.5rem;
     border-radius: 4px; /* Mismo redondeo que tus botones */
+    backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   }
