@@ -668,3 +668,135 @@ section {
 .timeline-item-stack.phase-02 { border-left-color: #5a8ab0; }
 .timeline-item-stack.phase-03 { border-left-color: #3d6f96; }
 .timeline-item-stack.phase-04 { border-left-color: var(--color-highlight); }
+
+/* ==========================================================================
+   CONTROL DE ACORDEÓN COMPACTO, TÍTULOS GRANDES Y BOTÓN SOBRE LA IMAGEN
+   ========================================================================== */
+
+.timeline-item-stack {
+  background: rgba(11, 33, 55, 0.35);
+  padding: 1.8rem 2rem;
+  border-left: 5px solid var(--color-primary);
+  cursor: pointer;
+  transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  max-height: 70px; /* Al colapsar, solo da espacio para el texto "FASE XX" */
+  position: relative;
+}
+
+.stack-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.t-number {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+/* Agranda los títulos de los cursos y los oculta inicialmente */
+.t-title {
+  font-size: 1.95rem; 
+  color: var(--font-display);
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  margin-left: 2.5rem;
+}
+
+.stack-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  margin-top: 1.8rem;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* Capas ordenadas: Fase 04 siempre por encima de Fase 03 */
+.timeline-item-stack.phase-01 { z-index: 10; border-left-color: #3d6f96; }
+.timeline-item-stack.phase-02 { z-index: 20; border-left-color: #b19edf; }
+.timeline-item-stack.phase-03 { z-index: 30; border-left-color: #ffd0c8; }
+.timeline-item-stack.phase-04 { 
+  z-index: 40; /* Nativamente sobre la 03 */
+  border-left-color: var(--color-highlight); 
+}
+
+/* Comportamiento al pasar el mouse (:hover) */
+.timeline-item-stack:hover {
+  max-height: 480px; 
+  background: rgba(11, 33, 55, 0.95);
+  border-left-width: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 50 !important; /* Pasa al frente absoluto solo mientras esté activa */
+}
+
+.timeline-item-stack:hover .t-title {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-item-stack:hover .stack-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.t-desc {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* Caja de la imagen */
+.t-image-container {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.t-image-holder {
+  width: 100%;
+  height: 100%;
+}
+
+.t-image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6); /* Oscurece levemente la foto para que resalte el texto del botón */
+  transition: filter 0.3s ease;
+}
+
+/* El botón "Saber más" centrado y con los estilos idénticos al HERO */
+.btn-saber-mas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-highlight);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  white-space: nowrap;
+}
+
+.btn-saber-mas:hover {
+  background-color: #a000a8;
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 6px 20px rgba(124, 0, 131, 0.4);
+}

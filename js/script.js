@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
   initHeaderScrollAndNavigation();
   initHeroParallaxInteraction();
-  initDynamicCourseButtons();
 });
 
 function initReadingProgressBar() {
@@ -433,4 +432,8 @@ function initDynamicCourseButtons() {
     
     course.appendChild(btn);
   });
+}
+
+function initDynamicCourseButtons() {
+  // Borrá todo lo que esté dentro de esta función y la función misma
 }
