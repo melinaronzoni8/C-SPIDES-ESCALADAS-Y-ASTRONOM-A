@@ -664,8 +664,8 @@ section {
   opacity: 1;
 }
 
-.timeline-item-stack.phase-01 { border-left-color: #7CA5C1; }
-.timeline-item-stack.phase-02 { border-left-color: #5a8ab0; }
+.timeline-item-stack.phase-01 { border-left-color: #ffd0c8; }
+.timeline-item-stack.phase-02 { border-left-color: #b19edf; }
 .timeline-item-stack.phase-03 { border-left-color: #3d6f96; }
 .timeline-item-stack.phase-04 { border-left-color: var(--color-highlight); }
 
@@ -799,4 +799,99 @@ section {
   background-color: #a000a8;
   transform: translate(-50%, -50%) scale(1.05);
   box-shadow: 0 6px 20px rgba(124, 0, 131, 0.4);
+}
+/* ==========================================================================
+   AJUSTE RESPONSIVE: IMAGEN DE FONDO Y RECUADRO EN SECCIÓN "NOSOTROS"
+   ========================================================================== */
+
+/* En pantallas grandes el contenedor de texto es invisible visualmente */
+.nosotros-content-box {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+/* Solo se activa en dispositivos móviles */
+@media (max-width: 768px) {
+  
+  /* Convertimos el grid en un contenedor relativo para posicionar la foto por detrás */
+  .nosotros-grid {
+    position: relative;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  /* Forzamos a la columna de la imagen a estirarse y ser el fondo real */
+  .nosotros-image-col {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100% !important; /* Sobreescribe el height fijo anterior */
+    z-index: 1; /* Al fondo */
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  /* Control de la imagen original como background */
+  .nosotros-image-col .nosotros-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* 80% de visibilidad = oscurecemos con brightness para que contraste el texto blanco */
+    filter: brightness(0.2) opacity(0.8); 
+  }
+
+  /* Pasamos la columna de texto al frente */
+  .nosotros-text-col {
+    position: relative;
+    z-index: 2; /* Por encima de la imagen de fondo */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nosotros-title {
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Estilizamos el recuadro imitando a tus botones (.btn-primary) */
+  .nosotros-content-box {
+    background: rgba(11, 33, 55, 0.85); /* Color azul oscuro con transparencia */
+    border: 1px solid rgba(124, 165, 193, 0.3); /* Borde sutil */
+    padding: 2rem 1.5rem;
+    border-radius: 4px; /* Mismo redondeo que tus botones */
+    backdrop-filter: blur(8px); /* Efecto esmerilado moderno */
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Forzamos alineaciones correctas dentro del recuadro móvil */
+  .nosotros-body {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .nosotros-p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    text-align-last: left;
+  }
+
+  .nosotros-p:last-child {
+    margin-bottom: 0;
+  }
+
+  .nosotros-signature {
+    border-top: 1px solid rgba(236, 237, 235, 0.1);
+    padding-top: 1rem;
+  }
 }
