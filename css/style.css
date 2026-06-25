@@ -1173,3 +1173,78 @@ section {
     right: 1rem !important;
   }
 }
+/* ==========================================================================
+   OPTIMIZACIÓN DE ACORDEÓN (SECCIÓN PROGRAMA)
+   ========================================================================== */
+
+/* Contenedor de la imagen: Eliminamos la altura fija previa 
+   para permitir que la imagen se amplíe y muestre completa */
+.t-image-container {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important; /* Permite crecimiento dinámico */
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.t-image-holder {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.t-image-holder img {
+  width: 100% !important;
+  height: auto !important; /* Muestra el 100% de la proporción de la imagen */
+  display: block !important;
+  object-fit: contain !important; 
+}
+
+/* --- LOGICA DE TITULOS (CERRADO VS DESPLEGADO) --- */
+
+/* Encabezado por defecto (Cerrado): Alineación horizontal lado a lado */
+.stack-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 1.5rem !important; /* Espacio entre el número y el título */
+  transition: all 0.4s ease !important;
+}
+
+/* El número mantiene su estilo base */
+.stack-header .t-number {
+  font-size: 1.2rem !important;
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+
+/* TÍTULO CUANDO LA FASE NO ESTÁ EXPANDIDA (Por defecto)
+   Se lee más pequeño, al lado, con tipografía reducida y 80% de opacidad */
+.timeline-item-stack .stack-header .t-title {
+  font-size: 0.95rem !important; /* Más pequeña que el número */
+  opacity: 0.8 !important;       /* 80% de opacidad */
+  font-weight: 400 !important;
+  text-align: left !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* TÍTULO CUANDO LA FASE SÍ ESTÁ DESPLEGADA (Hover del cursor)
+   Crece a su jerarquía original, alineado estrictamente a la izquierda */
+.timeline-item-stack:hover .stack-header {
+  flex-direction: column !important; /* Cambia a vertical para dar aire al diseño abierto */
+  align-items: flex-start !important; /* Alineación estricta a la izquierda */
+  gap: 0.5rem !important;
+}
+
+.timeline-item-stack:hover .stack-header .t-title {
+  font-size: 1.5rem !important; /* Escala y recupera tamaño destacado */
+  opacity: 1 !important;        /* Opacidad completa al 100% */
+  font-weight: 700 !important;
+  font-family: var(--font-display) !important; /* Opcional: vuelve a la fuente display si querés resaltar */
+  text-align: left !important;
+}
+
+/* Ajuste del botón para que no colisione con el nuevo flujo del título */
+.timeline-item-stack .btn-saber-mas {
+  z-index: 10;
+}
