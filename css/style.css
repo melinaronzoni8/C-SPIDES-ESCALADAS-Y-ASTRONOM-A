@@ -1012,3 +1012,6 @@ section {
     opacity: 1 !important;
   }
 }
+.spacer-fases {
+  margin-top: 60px; /* Ajustá los píxeles (60px, 80px, etc.) para darle más o menos distancia */
+}
