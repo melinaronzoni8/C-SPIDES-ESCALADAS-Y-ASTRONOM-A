@@ -910,3 +910,47 @@ section {
     padding-top: 1rem;
   }
 }
+/* ==========================================================================
+   CORRECCIÓN DE BRILLO Y COLORES AL 100% EN NOSOTROS RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  
+  /* ... (Tus reglas anteriores de .nosotros-grid y .nosotros-image-col se mantienen igual) ... */
+
+  /* 1. Llevamos la imagen de fondo a sus colores y brillo 100% originales */
+  .nosotros-image-col .nosotros-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: none !important; /* Eliminamos por completo el oscurecimiento y la opacidad */
+    opacity: 1 !important;   /* Forzamos visibilidad al 100% */
+  }
+
+  /* 2. Ajustamos el recuadro para que sea totalmente transparente y no opaque las letras */
+  .nosotros-content-box {
+    background: rgba(11, 33, 55, 0.4); /* Fondo sutil para que las letras sigan siendo legibles sobre la foto */
+    border: 1px solid rgba(124, 165, 193, 0.6); /* Borde con más fuerza imitando tus botones */
+    padding: 2rem 1.5rem;
+    border-radius: 4px;
+    backdrop-filter: blur(4px); /* Suavizado sutil */
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  /* 3. Forzamos a que las letras utilicen el 100% de su color original brillante */
+  .nosotros-p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-light) !important; /* Blanco original al 100% */
+    opacity: 1 !important;                       /* Sin transparencias que lo apaguen */
+    text-align-last: left;
+    margin-bottom: 1rem;
+  }
+  
+  .sig-name, .sig-role {
+    color: var(--color-text-light) !important; /* Nombre y cargo al 100% de brillo */
+    opacity: 1 !important;
+  }
+}
