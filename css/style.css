@@ -329,12 +329,12 @@ section {
 .hero-title {
   line-height: 1.1;
   margin-bottom: 2.5rem;
+}
 .hero-title .title-line:first-child {
-  font-size: font-size: clamp(1.8rem, 4.5vw, 3.8rem); 
+  font-size: clamp(2rem, 5vw, 4.5rem);
 }
 .hero-title .title-line:last-child {
-  font-size: font-size: clamp(2.2rem, 5.5vw, 4.8rem);
-};
+  font-size: clamp(2.5rem, 6.5vw, 6rem);
 }
 .title-line { display: block; }
 .title-accent { color: transparent; -webkit-text-stroke: 1px var(--color-text-light); }
@@ -354,6 +354,28 @@ section {
 .data-value { font-size: 2.5rem; font-weight: 900; color: var(--color-primary); }
 .data-label { font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 1px; }
 .data-divider { font-size: 2rem; color: rgba(236,237,235,0.1); }
+
+@media (min-width: 769px) {
+  .section-hero {
+    height: 100vh;
+    padding: 0 10%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .hero-content {
+    max-width: 80%;
+    text-align: left;
+  }
+  .hero-eyebrow {
+    justify-content: flex-start;
+  }
+  .hero-actions {
+    justify-content: flex-start;
+  }
+  .hero-data {
+    justify-content: flex-start;
+  }
+}
 
 /* SECCIÓN NUEVA: NOSOTROS */
 .section-nosotros {
