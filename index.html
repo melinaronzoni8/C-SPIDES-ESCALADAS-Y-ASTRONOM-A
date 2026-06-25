@@ -25,243 +25,179 @@
       <div class="nav-menu" id="navMenu">
         <a href="#hero" class="nav-link active">Home</a>
         <a href="#nosotros" class="nav-link">Nosotros</a>
-        <a href="#excursiones" class="nav-link">Excursiones</a>
-        <a href="#programa" class="nav-link">Cursos</a>
+        <a href="#editoriales" class="nav-link">Editorial</a>
+        <a href="#excursiones" class="nav-link">Expediciones</a>
+        <a href="#programas" class="nav-link">Programa</a>
         <a href="#contacto" class="nav-link">Contacto</a>
       </div>
-      
-      <div class="nav-actions">
-        <a href="#perfil" class="nav-user-profile" aria-label="Perfil de usuario">
-          <svg class="user-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </nav>
 
-  <section id="hero" class="section-hero">
-    <canvas class="star-canvas" aria-hidden="true"></canvas>
-    
-    <div class="hero-bg-parallax" aria-hidden="true">
-      <img src="assets/image1.png" alt="Pared vertical de roca en la Patagonia" class="hero-img standard-zoom" id="heroZoomImg" />
-      <div class="hero-overlay"></div>
+  <header id="hero" class="hero-section">
+    <div class="hero-zoom-box">
+      <img src="assets/image20.png" alt="Montañas de la Patagonia bajo estrellas" class="hero-bg-img standard-zoom" id="heroZoomImg" />
     </div>
-
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow" data-reveal>
-        <span class="eyebrow-line"></span>
-        <span>El Siguiente Nivel de Dificultad</span>
-        <span class="eyebrow-line"></span>
-      </div>
-      
-      <h1 class="hero-title" data-reveal>
-        <span class="title-line">NO SOLO ES ESCALAR</span>
-        <span class="title-line title-accent">ES CAPTURAR EL CIELO</span>
-      </h1>
-      
+      <span class="hero-tag" data-reveal>EXPEDICIONES TÉCNICAS NOCTURNAS</span>
+      <h1 class="hero-title" data-reveal>DOMINÁ LA VERTICALIDAD EXTREMA</h1>
+      <p class="hero-subtitle" data-reveal>Formación avanzada en escalada en roca y astrofotografía extrema en las paredes más exigentes de la Patagonia.</p>
       <div class="hero-actions" data-reveal>
-        <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
-        <a href="#programa" class="btn-ghost">VER PROGRAMA DE ÉLITE</a>
+        <button class="btn-primary" onclick="openWhatsApp()">SOLICITAR ENTREVISTA</button>
+        <a href="#programas" class="btn-secondary">VER PROGRAMA TÉCNICO</a>
       </div>
-      
       <div class="hero-data" data-reveal>
-        <!-- Primero -->
         <div class="data-item">
-          <span class="data-value" data-count="3">0</span>
-          <span class="data-label">Noches de Expedición Vertical</span>
+          <span class="data-num" data-target="1200">0</span><span class="data-plus">m</span>
+          <span class="data-label">Desnivel Técnico</span>
         </div>
-        <div class="data-divider" aria-hidden="true"></div>
-        
-        <!-- Segundo -->
+        <div class="data-divider"></div>
         <div class="data-item">
-          <span class="data-value">MÁXIMA</span>
-          <span class="data-label">Dificultad Técnica</span>
+          <span class="data-num" data-target="3">0</span>
+          <span class="data-label">Noches en Pared</span>
         </div>
-        <div class="data-divider" aria-hidden="true"></div>
-        
-        <!-- Tercero -->
+        <div class="data-divider"></div>
         <div class="data-item">
-          <span class="data-value" data-count="4">0</span>
-          <span class="data-label">Módulos Técnicos</span>
+          <span class="data-num" data-target="100">0</span><span class="data-plus">%</span>
+          <span class="data-label">Autonomía Extrema</span>
         </div>
       </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN NOSOTROS MODIFICADA CON BACKGROUND-IMAGE -->
+  <section id="nosotros" class="section-nosotros section-dark" style="background-image: url('assets/image4.png');">
+    <div class="nosotros-grid">
+      <div class="nosotros-text-col" data-reveal>
+        <span class="section-tag tag-blue">FILOSOFÍA DE ÉLITE</span>
+        <h2 class="nosotros-title">Trascendé el llano.</h2>
+        <div class="nosotros-content-box">
+          <div class="nosotros-body">
+            <p class="nosotros-p">Cúspides no es un club de escalada ni una agencia de turismo alternativo. Es un centro de alta especialización diseñado para fundir dos disciplinas exigentes: la verticalidad técnica y la captura fotográfica en condiciones extremas.</p>
+            <p class="nosotros-p">Nuestra filosofía radica en dominar el miedo a través del conocimiento y la preparación estricta. Convertimos la noche patagónica en un lienzo y las paredes de roca en tu estudio fotográfico.</p>
+          </div>
+          <div class="nosotros-signature">
+            <span class="sig-name">Mariano Scaler</span>
+            <span class="sig-role">Director Técnico & Astrofotógrafo</span>
+          </div>
+        </div>
+      </div>
+      <!-- Columna vacía que genera la transparencia en desktop para ver la foto -->
+      <div class="nosotros-spacer-col"></div>
     </div>
   </section>
 
-<section id="nosotros" class="section-nosotros">
-  <canvas class="star-canvas" aria-hidden=\"true"></canvas>
-  
-  <div class="nosotros-grid">
-    
-    <div class="nosotros-body" data-reveal>
-      <span class="section-tag">NUESTRA VISIÓN</span>
-      <h2 class="nosotros-title">Tu experiencia previa es solo el punto de partida.</h2>
-      
-      <div class="nosotros-content-box">
-        <p class="nosotros-p">
-          En Cúspides nos enfocamos en montañistas y escaladores experimentados para desafiar sus límites con una propuesta inédita: fusionar la escalada técnica en roca con la precisión de la astronomía de campo. Más que enseñarte a escalar, te guiamos para transformar tus noches en la pared en lienzos cósmicos, descubriendo una nueva dimensión táctica y estética bajo las estrellas más limpias del hemisferio sur en un aprendizaje avanzado e inolvidable.
-        </p>
-      </div>
-    </div>
-
-    </div>
-</section>
-
-  <section id="excursiones" class="section-editorial">
-    <canvas class="star-canvas" aria-hidden="true"></canvas>
+  <section id="editoriales" class="section-editorial section-dark">
     <div class="editorial-grid">
-      <div class="editorial-body">
-        <span class="section-tag" data-reveal>SANGRE · ROCA · COSMOS</span>
-        <h2 class="editorial-title" data-reveal>Donde termina el sendero convencional, comienza tu vertical.</h2>
-        <p class="editorial-p" data-reveal>
-          Diseñado exclusivamente para expertos en trekking y escalada clásica. Cuatro módulos de rendimiento físico avanzado, astrofotografía y ascensos verticales en roca bajo la oscuridad absoluta de la Patagonia.
-        </p>
-        
-        <div class="testimonial-box" data-reveal>
-          <p class="testimonial-quote">"Fue una travesía alucinante y físicamente demoledora que transformó mi visión del montañismo. La exigencia en la roca combinada con el rigor académico en astrofotografía hicieron de esto una experiencia fascinante y disruptiva que renovó mi pasión de toda la vida."</p>
-          <span class="testimonial-author">— Juliana Albarracín, Escaladora Avanzada</span>
+      <div class="editorial-text-col" data-reveal>
+        <span class="section-tag tag-blue">NUESTRA VISIÓN EDITORIAL</span>
+        <h2 class="editorial-title">La estética del vacío absoluto.</h2>
+        <div class="editorial-slider" id="editorialSlider">
+          <div class="slide active">
+            <h3 class="slide-title">Luz de Estrellas en la Pared</h3>
+            <p class="slide-desc">Fotografiar a un escalador suspendido a 400 metros de altura exige comprender la luz residual del universo. No usamos flashes artificiales; dependemos de exposiciones calculadas al milisegundo y sensores de alta sensibilidad térmica.</p>
+          </div>
+          <div class="slide">
+            <h3 class="slide-title">Psicología de la Altura</h3>
+            <p class="slide-desc">El verdadero equipo que testeamos es la mente. Operar controles mecánicos de precisión con las manos entumecidas por la escarcha patagónica, mientras el abismo tira hacia abajo, requiere una disciplina mental casi militar.</p>
+          </div>
+          <div class="slide">
+            <h3 class="slide-title">El Peso del Equipo Mínimo</h3>
+            <p class="slide-desc">Cada gramo en el arnés se multiplica por el cansancio. Desarrollamos sistemas de anclaje rápido modificados para cámaras réflex y ópticas fijas de alta luminosidad, asegurando que el equipo no comprometa la seguridad en el ascenso.</p>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="btn-control" id="prevSlide" aria-label="Anterior diapositiva">←</button>
+          <div class="slider-dots" id="sliderDots"></div>
+          <button class="btn-control" id="nextSlide" aria-label="Siguiente diapositiva">→</button>
         </div>
       </div>
-      
       <div class="editorial-image-col" data-reveal>
-        <div class="slider-wrapper">
-          <img src="assets/image7.png" alt="Escalador experto en pared" class="editorial-img slide-img active" />
-          <img src="assets/image8.png" alt="Observación técnica del firmamento" class="editorial-img slide-img" />
-          <img src="assets/image9.png" alt="Navegación táctica nocturna" class="editorial-img slide-img" />
-        </div>
+        <img src="assets/image8.png" alt="Cámara profesional montada en trípode de roca nocturna" class="editorial-img" />
       </div>
     </div>
   </section>
 
-  <section id="excursiones-galeria" class="section-dark section-excursiones">
-    <canvas class="star-canvas" aria-hidden="true"></canvas>
-    <div class="excursiones-inner">
-      <span class="section-tag tag-light" data-reveal>EXPLORACIÓN EXTREMA</span>
-      <h2 class="excursiones-title" data-reveal>Expediciones Verticales<br>Explorando la Noche de la Patagonia.</h2>
-      
-      <div class="excursiones-grid" data-reveal>
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front">
-              <div class="card-img-holder"><img src="assets/image10.png" alt="Ruta de Ascenso Nocturno"></div>
-            </div>
-            <div class="card-back">
-              <h3>Frey Vertical</h3>
-              <p>Ascensos de alta exigencia en las agujas de granito del Cerro Frey bajo cielos limpios.</p>
-            </div>
+  <section id="excursiones" class="section-excursiones section-dark">
+    <div class="excursiones-container">
+      <div class="excursiones-header" data-reveal>
+        <span class="section-tag tag-blue">ZONAS DE OPERACIÓN</span>
+        <h2 class="excursiones-title">Expediciones de Alta Frontera</h2>
+        <p class="excursiones-sub">Rutas técnicas seleccionadas por su aislamiento lumínico y su dificultad vertical. No aptas para principiantes.</p>
+      </div>
+      <div class="excursiones-grid">
+        <div class="excursion-card" data-reveal>
+          <div class="card-img-container">
+            <img src="assets/image10.png" alt="Aguja de granito iluminada por estrellas" class="card-img" />
+          </div>
+          <div class="card-info">
+            <span class="card-meta">DIFICULTAD: ALTA (6B+ REQUERIDO)</span>
+            <h3 class="card-title">Filo Suroeste — Aguja Stellaris</h3>
+            <p class="card-text">Ascenso rápido de 14 horas con vivac en repisa colgada. Exposición total a vientos del Pacífico y ventana limpia para captura de la Vía Láctea detrás del bloque de granito central.</p>
           </div>
         </div>
-
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front">
-              <div class="card-img-holder"><img src="assets/image11.png" alt="Fotografía en la Cumbre"></div>
-            </div>
-            <div class="card-back">
-              <h3>Astro-Travesía</h3>
-              <p>Campamentos base de altura diseñados para la captura profunda del cosmos austral.</p>
-            </div>
+        <div class="excursion-card" data-reveal>
+          <div class="card-img-container">
+            <img src="assets/image12.png" alt="Pared vertical en la oscuridad" class="card-img" />
           </div>
-        </div>
-
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front">
-              <div class="card-img-holder"><img src="assets/image12.png" alt="Escalada en hielo nocturna"></div>
-            </div>
-            <div class="card-back">
-              <h3>Roca y Hielo</h3>
-              <p>Navegación táctica y progresión en terrenos mixtos bajo condiciones invernales severas.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front">
-              <div class="card-img-holder"><img src="assets/image13.png" alt="Campamento portaledge colgado"></div>
-            </div>
-            <div class="card-back">
-              <h3>Vivac de Altura</h3>
-              <p>Noches colgados del abismo en plataformas suspendidas controlando la fatiga térmica.</p>
-            </div>
+          <div class="card-info">
+            <span class="card-meta">DIFICULTAD: EXTREMA (7A MÍNIMO)</span>
+            <h3 class="card-title">Gran Diedro — Pared de las Sombras</h3>
+            <p class="card-text">Escalada 100% nocturna superando tres techos técnicos. Enfoque exclusivo en técnicas de iluminación selectiva y astrofotografía de acción en condiciones de congelamiento.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="programa" class="section-program">
-  <canvas class="star-canvas" aria-hidden="true"></canvas>
-  <div class="program-inner">
-    <span class="section-tag" data-reveal>RIDGE PROGRAM 2026</span>
-    <h2 class="program-title" data-reveal>La ruta hacia la cumbre oscura.<br>Cuatro fases de dificultad.</h2>
-    
-    <div class="timeline-stack" data-reveal>
-  <div class="timeline-item-stack phase-01">
-    <div class="stack-header">
-      <span class="t-number">FASE 01</span>
-      <h3 class="t-title">Formación Física Avanzada</h3>
-    </div>
-    <div class="stack-content">
-      <p class="t-desc">Acondicionamiento de alta exigencia muscular. Gestión del ácido láctico en climas bajo cero, técnicas de agarre a ciegas y optimización del equilibrio estático.</p>
-      <div class="t-image-container">
-        <div class="t-image-holder"><img src="assets/image14.png" alt="Entrenamiento estricto"></div>
-        <button class="btn-saber-mas" onclick="openWhatsApp()">Saber más</button>
+  <section id="programas" class="section-program section-dark">
+    <div class="program-container">
+      <div class="program-header" data-reveal>
+        <span class="section-tag tag-blue">CRONOGRAMA FORMATIVO</span>
+        <h2 class="program-title">El Camino hacia la Vertical</h2>
+        <p class="program-sub">Tres fases obligatorias de evolución técnica y física para alcanzar la autonomía total en paredes de roca nocturnas.</p>
       </div>
-    </div>
-  </div>
-  
-  <div class="timeline-item-stack phase-02">
-    <div class="stack-header">
-      <span class="t-number">FASE 02</span>
-      <h3 class="t-title">Astronomía de Campo</h3>
-    </div>
-    <div class="stack-content">
-      <p class="t-desc">Orientación sideral pura sin asistencia GPS. Reconocimiento técnico de constelaciones australes y ventanas de visibilidad óptima.</p>
-      <div class="t-image-container">
-        <div class="t-image-holder"><img src="assets/image15.png" alt="Observación técnica"></div>
-        <button class="btn-saber-mas" onclick="openWhatsApp()">Saber más</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="timeline-item-stack phase-03">
-    <div class="stack-header">
-      <span class="t-number">FASE 03</span>
-      <h3 class="t-title">Fotografía Nocturna</h3>
-    </div>
-    <div class="stack-content">
-      <p class="t-desc">Control técnico de cámaras fotográficas en la verticalidad. Configuración de exposición prolongada y balance de blancos.</p>
-      <div class="t-image-container">
-        <div class="t-image-holder"><img src="assets/image5.png" alt="Fotografía de larga exposición"></div>
-        <button class="btn-saber-mas" onclick="openWhatsApp()">Saber más</button>
-      </div>
-    </div>
-  </div>
+      <div class="timeline-stack">
+        <div class="timeline-item-stack" data-reveal>
+          <div class="stack-header">
+            <span class="t-number">FASE 01</span>
+            <h3 class="t-title">Nivelación en Roca & Óptica Básica</h3>
+          </div>
+          <div class="stack-content">
+            <p class="t-desc">Consolidación de nudos de seguridad, maniobras de autorrescate y control de tiempos de exposición en tierra firma antes de encarar el vacío.</p>
+            <div class="t-image-container"><div class="t-image-holder"><img src="assets/image14.png" alt="Prácticas técnicas en base de roca"></div></div>
+          </div>
+        </div>
 
-  <div class="timeline-item-stack phase-04">
-    <div class="stack-header">
-      <span class="t-number highlight">FASE 04</span>
-      <h3 class="t-title">Expedición Vertical: 3 Noches</h3>
-    </div>
-    <div class="stack-content">
-      <p class="t-desc">Tres noches consecutivas de vivac en portaledge y escalada técnica real en Bariloche, aplicando las técnicas de captura fotográfica mientras dominás el vacío.</p>
-      <div class="t-image-container">
-        <div class="t-image-holder"><img src="assets/image16.png" alt="Campamento de pared"></div>
-        <button class="btn-saber-mas" onclick="openWhatsApp()">Saber más</button>
+        <div class="timeline-item-stack" data-reveal>
+          <div class="stack-header">
+            <span class="t-number">FASE 02</span>
+            <h3 class="t-title">Paredes Intermedias & Gestión del Frío</h3>
+          </div>
+          <div class="stack-content">
+            <p class="t-desc">Técnicas de izado de material pesado, configuración de portaledges en altura media y calibración de cámaras con guantes térmicos profesionales de triple capa.</p>
+            <div class="t-image-container"><div class="t-image-holder"><img src="assets/image15.png" alt="Escalador configurando anclaje"></div></div>
+          </div>
+        </div>
+
+        <div class="timeline-item-stack" data-reveal>
+          <div class="stack-header">
+            <span class="t-number">FASE 03</span>
+            <h3 class="t-title">Expedición Alta Frontera Nocturna</h3>
+          </div>
+          <div class="stack-content">
+            <p class="t-desc">Ascenso definitivo de 3 noches seguidas. Autonomía total, producción de portafolio editorial de alta gama y certificación final avalada por Cúspides.</p>
+            <div class="t-image-container"><div class="t-image-holder"><img src="assets/image16.png" alt="Campamento de pared"></div></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-</section>
 
       <div class="program-pack" data-reveal>
         <div class="pack-inner">
@@ -289,6 +225,10 @@
       </button>
     </div>
   </section>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 Cúspides Alta Frontera. Desarrollado para mentes verticales y fotógrafos del abismo.</p>
+  </footer>
 
   <script src="js/script.js"></script>
 </body>
