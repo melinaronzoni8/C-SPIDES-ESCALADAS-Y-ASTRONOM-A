@@ -913,40 +913,101 @@ section {
    CORRECCIÓN DE BRILLO Y COLORES AL 100% EN NOSOTROS RESPONSIVE
    ========================================================================== */
 
-@media (max-width: 768px) {
+/* ==========================================================================
+   CORRECCIÓN DEFINITIVA DE VISIBILIDAD PARA "NOSOTROS" (MÓVIL)
+   ========================================================================== */
 
-  /* 1. El contenedor padre debe ser relativo para crear el subcontexto de capas */
-  .nosotros-grid {
-    position: relative;
-    z-index: 1; /* Contexto inicial */
+@media (max-width: 768px) {
+  
+  /* 1. Evitamos que el script de JS oculte los elementos al recargar */
+  .nosotros-text-col[data-reveal],
+  .nosotros-image-col[data-reveal],
+  .nosotros-grid [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    transition: none !important;
   }
 
-  /* 2. Forzamos a la columna de la imagen a irse al fondo absoluto */
+  /* 2. Forzamos el contenedor general a ser relativo y establecemos una altura mínima alternativa */
+  .nosotros-grid {
+    position: relative;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 3rem 1.5rem;
+    overflow: hidden;
+    border-radius: 8px;
+    display: block; /* Cambiamos a block para evitar fallos de cálculo con grid absoluto */
+  }
+
+  /* 3. Columna de la imagen fija como tapiz de fondo real */
   .nosotros-image-col {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100% !important;
-    z-index: 10; /* Capa baja */
+    z-index: 1 !important; /* Capa del fondo */
     padding: 0;
     margin: 0;
   }
 
-  /* 3. Elevamos la columna de texto y su caja contenedora por sobre la imagen */
-  .nosotros-text-col {
-    position: relative; /* Habilita el uso de z-index */
-    z-index: 20;        /* Capa alta: pasa al frente superando el z-index 10 de la foto */
-    pointer-events: auto; /* Asegura que los textos sigan siendo seleccionables */
+  .nosotros-image-col .nosotros-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: none !important;
+    opacity: 1 !important;
   }
 
-  /* Tu caja de contenido estilizada se renderizará al frente gracias a su padre (.nosotros-text-col) */
+  /* 4. Columna de texto al frente absoluto con opacidad completa */
+  .nosotros-text-col {
+    position: relative !important;
+    z-index: 10 !important; /* Capa superior por encima del fondo */
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nosotros-title {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-light) !important;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+    opacity: 1 !important;
+  }
+
+  /* 5. El recuadro del texto con colores al 100% legibles */
   .nosotros-content-box {
     position: relative;
-    z-index: 30; /* Capa de seguridad máxima al frente */
-    background: rgba(11, 33, 55, 0.4);
+    z-index: 20 !important;
+    background: rgba(11, 33, 55, 0.5); /* Fondo intermedio para asegurar contraste */
     border: 1px solid rgba(124, 165, 193, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    padding: 2.2rem 1.8rem;
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Textos internos en blanco nítido */
+  .nosotros-p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-light) !important;
+    opacity: 1 !important;
+    margin-bottom: 1.2rem;
+  }
+
+  .nosotros-p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sig-name, .sig-role {
+    color: var(--color-text-light) !important;
+    opacity: 1 !important;
   }
 }
