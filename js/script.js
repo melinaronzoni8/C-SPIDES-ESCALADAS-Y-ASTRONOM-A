@@ -39,6 +39,8 @@ function initStarCanvasBackground() {
     const maxStars = 60;
     let animationFrameId = null;
     let isAnimating = false;
+    let activeConstellation = null;
+    let constellationCooldown = 100 + Math.random() * 150; // frames before first constellation (~2-4 seconds)
 
     function setCanvasDimensions() {
       canvas.width = canvas.offsetWidth;
@@ -52,30 +54,183 @@ function initStarCanvasBackground() {
         starArray.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1.3,
+          size: 0.4 + Math.random() * 1.4, // Slightly larger and more visible (was Math.random() * 1.3)
           opacity: Math.random(),
-          twinkleFactor: 0.006 + Math.random() * 0.01
+          twinkleFactor: 0.006 + Math.random() * 0.01,
+          isConstellationNode: false,
+          originalSize: 0,
+          targetSize: 0
         });
       }
+      activeConstellation = null; // reset active constellation on resize
+    }
+
+    function triggerConstellation() {
+      if (starArray.length < 15) return;
+
+      // Pick a random seed star that is not too close to the borders
+      let seedIndex = Math.floor(Math.random() * starArray.length);
+      let seed = starArray[seedIndex];
+      let attempts = 0;
+      while ((seed.x < 50 || seed.x > canvas.width - 50 || seed.y < 50 || seed.y > canvas.height - 50) && attempts < 10) {
+        seedIndex = Math.floor(Math.random() * starArray.length);
+        seed = starArray[seedIndex];
+        attempts++;
+      }
+
+      // Find stars near the seed (distance between 40px and 220px)
+      const neighbors = starArray.map((star, idx) => ({ 
+        star, 
+        idx, 
+        dist: Math.hypot(star.x - seed.x, star.y - seed.y) 
+      }))
+      .filter(n => n.dist > 30 && n.dist < 220 && !n.star.isConstellationNode)
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, 4); // Take up to 4 nearest neighbors
+
+      if (neighbors.length < 2) {
+        // Not enough neighbors, wait a bit and try again
+        constellationCooldown = 100;
+        return;
+      }
+
+      const constellationStars = [seed, ...neighbors.map(n => n.star)];
+
+      // Sort stars by X coordinate so the lines flow nicely from left to right
+      constellationStars.sort((a, b) => a.x - b.x);
+
+      // Create sequential lines connecting the sorted stars
+      const lines = [];
+      for (let i = 0; i < constellationStars.length - 1; i++) {
+        lines.push({
+          from: constellationStars[i],
+          to: constellationStars[i + 1],
+          progress: 0
+        });
+      }
+
+      // Configure stars to grow and glow
+      constellationStars.forEach(star => {
+        star.isConstellationNode = true;
+        star.originalSize = star.size;
+        star.targetSize = Math.max(star.size * 2.2, 2.5); // Ensure a good size for the main nodes
+      });
+
+      activeConstellation = {
+        stars: constellationStars,
+        lines: lines,
+        phase: 'drawing', // 'drawing' | 'visible' | 'fading'
+        currentLineIndex: 0,
+        visibleTimer: 180, // frames to remain visible (~3 seconds)
+        opacity: 0.7 // target opacity of lines
+      };
     }
 
     function animationLoop() {
       if (!isAnimating) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ECEDEB';
       
+      // 1. Draw regular stars (and glow for constellation nodes)
       starArray.forEach(star => {
+        // Interpolate size if it is a constellation node
+        if (star.isConstellationNode && activeConstellation) {
+          if (activeConstellation.phase === 'drawing' || activeConstellation.phase === 'visible') {
+            star.size += (star.targetSize - star.size) * 0.08; // smooth grow
+          }
+        }
+
+        ctx.fillStyle = '#ECEDEB';
         ctx.globalAlpha = star.opacity;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
-        
+
+        // Draw a soft outer glow for constellation nodes
+        if (star.isConstellationNode && activeConstellation) {
+          ctx.fillStyle = '#7CA5C1'; // Beautiful light blue glow matching site accent
+          ctx.globalAlpha = star.opacity * activeConstellation.opacity * 0.45;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size * 2.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Star twinkle animation
         star.opacity += star.twinkleFactor;
         if (star.opacity > 1 || star.opacity < 0) {
           star.twinkleFactor = -star.twinkleFactor;
         }
       });
-      
+
+      // 2. Animate and draw constellation lines
+      if (activeConstellation) {
+        ctx.strokeStyle = '#7CA5C1'; // Light blue line matching design accent
+        ctx.lineWidth = 0.75; // thin line
+
+        activeConstellation.lines.forEach((line, index) => {
+          ctx.globalAlpha = activeConstellation.opacity;
+          if (index < activeConstellation.currentLineIndex) {
+            // Fully drawn line
+            ctx.beginPath();
+            ctx.moveTo(line.from.x, line.from.y);
+            ctx.lineTo(line.to.x, line.to.y);
+            ctx.stroke();
+          } else if (index === activeConstellation.currentLineIndex) {
+            // Currently drawing line
+            ctx.beginPath();
+            ctx.moveTo(line.from.x, line.from.y);
+            const targetX = line.from.x + (line.to.x - line.from.x) * line.progress;
+            const targetY = line.from.y + (line.to.y - line.from.y) * line.progress;
+            ctx.lineTo(targetX, targetY);
+            ctx.stroke();
+
+            // Advance drawing progress
+            line.progress += 0.045; // drawing speed
+            if (line.progress >= 1) {
+              line.progress = 1;
+              activeConstellation.currentLineIndex++;
+            }
+          }
+        });
+
+        // 3. Constellation lifecycle phases
+        if (activeConstellation.phase === 'drawing') {
+          if (activeConstellation.currentLineIndex >= activeConstellation.lines.length) {
+            activeConstellation.phase = 'visible';
+          }
+        } else if (activeConstellation.phase === 'visible') {
+          activeConstellation.visibleTimer--;
+          if (activeConstellation.visibleTimer <= 0) {
+            activeConstellation.phase = 'fading';
+          }
+        } else if (activeConstellation.phase === 'fading') {
+          activeConstellation.opacity -= 0.015;
+          
+          // Smoothly return stars back to original size
+          activeConstellation.stars.forEach(star => {
+            if (star.size > star.originalSize) {
+              star.size -= (star.size - star.originalSize) * 0.08;
+            }
+          });
+
+          if (activeConstellation.opacity <= 0) {
+            // Clean up node states
+            activeConstellation.stars.forEach(star => {
+              star.isConstellationNode = false;
+              star.size = star.originalSize;
+            });
+            activeConstellation = null;
+            constellationCooldown = 400 + Math.random() * 400; // frames before next one (~10-15s)
+          }
+        }
+      } else {
+        // Cooldown timer
+        if (constellationCooldown > 0) {
+          constellationCooldown--;
+        } else {
+          triggerConstellation();
+        }
+      }
+
       animationFrameId = requestAnimationFrame(animationLoop);
     }
 
