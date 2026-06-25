@@ -931,14 +931,16 @@ section {
 
   /* 2. Forzamos el contenedor general a ser relativo y establecemos una altura mínima alternativa */
   .nosotros-grid {
-    position: relative;
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 3rem 1.5rem;
-    overflow: hidden;
-    border-radius: 8px;
-    display: block; /* Cambiamos a block para evitar fallos de cálculo con grid absoluto */
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  position: relative;
+  /* Actualizado con la imagen de tu bloque: assets/image20.png */
+  background-image: url('../assets/image20.png'); 
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 50% 100%;
+}
 
   /* 3. Columna de la imagen fija como tapiz de fondo real */
   .nosotros-image-col {
