@@ -1,6 +1,5 @@
 /**
  * CÚSPIDES — Motor Frontend Sincronizado
- * Rediseño con Secciones de Navegación, Efecto Scroll, Micro-Parallax e Ícono de Usuario Ajustado.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,10 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initStarCanvasBackground();
   initIntersectionObserverReveal();
   initNumericalCounterEngine();
-  initEditorialSlider();
   initHeaderScrollAndNavigation();
   initHeroParallaxInteraction();
-  initDynamicCourseButtons();
 });
 
 function initReadingProgressBar() {
@@ -37,320 +34,108 @@ function initStarCanvasBackground() {
     const ctx = canvas.getContext('2d');
     let starArray = [];
     const maxStars = 60;
-    let animationFrameId = null;
-    let isAnimating = false;
-    let activeConstellation = null;
-    let constellationCooldown = 100 + Math.random() * 150; // frames before first constellation (~2-4 seconds)
 
     function setCanvasDimensions() {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      populateStarArray();
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
     }
 
-    function populateStarArray() {
+    function createStars() {
       starArray = [];
       for (let i = 0; i < maxStars; i++) {
         starArray.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: 0.4 + Math.random() * 1.4, // Slightly larger and more visible (was Math.random() * 1.3)
-          opacity: Math.random(),
-          twinkleFactor: 0.006 + Math.random() * 0.01,
-          isConstellationNode: false,
-          originalSize: 0,
-          targetSize: 0
+          size: Math.random() * 1.5,
+          alpha: Math.random(),
+          speed: 0.02 + Math.random() * 0.03
         });
       }
-      activeConstellation = null; // reset active constellation on resize
     }
 
-    function triggerConstellation() {
-      if (starArray.length < 15) return;
-
-      // Pick a random seed star that is not too close to the borders
-      let seedIndex = Math.floor(Math.random() * starArray.length);
-      let seed = starArray[seedIndex];
-      let attempts = 0;
-      while ((seed.x < 50 || seed.x > canvas.width - 50 || seed.y < 50 || seed.y > canvas.height - 50) && attempts < 10) {
-        seedIndex = Math.floor(Math.random() * starArray.length);
-        seed = starArray[seedIndex];
-        attempts++;
-      }
-
-      // Find stars near the seed (distance between 40px and 220px)
-      const neighbors = starArray.map((star, idx) => ({ 
-        star, 
-        idx, 
-        dist: Math.hypot(star.x - seed.x, star.y - seed.y) 
-      }))
-      .filter(n => n.dist > 30 && n.dist < 220 && !n.star.isConstellationNode)
-      .sort((a, b) => a.dist - b.dist)
-      .slice(0, 4); // Take up to 4 nearest neighbors
-
-      if (neighbors.length < 2) {
-        // Not enough neighbors, wait a bit and try again
-        constellationCooldown = 100;
-        return;
-      }
-
-      const constellationStars = [seed, ...neighbors.map(n => n.star)];
-
-      // Sort stars by X coordinate so the lines flow nicely from left to right
-      constellationStars.sort((a, b) => a.x - b.x);
-
-      // Create sequential lines connecting the sorted stars
-      const lines = [];
-      for (let i = 0; i < constellationStars.length - 1; i++) {
-        lines.push({
-          from: constellationStars[i],
-          to: constellationStars[i + 1],
-          progress: 0
-        });
-      }
-
-      // Configure stars to grow and glow
-      constellationStars.forEach(star => {
-        star.isConstellationNode = true;
-        star.originalSize = star.size;
-        star.targetSize = Math.max(star.size * 2.2, 2.5); // Ensure a good size for the main nodes
-      });
-
-      activeConstellation = {
-        stars: constellationStars,
-        lines: lines,
-        phase: 'drawing', // 'drawing' | 'visible' | 'fading'
-        currentLineIndex: 0,
-        visibleTimer: 180, // frames to remain visible (~3 seconds)
-        opacity: 0.7 // target opacity of lines
-      };
-    }
-
-    function animationLoop() {
-      if (!isAnimating) return;
+    function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // 1. Draw regular stars (and glow for constellation nodes)
       starArray.forEach(star => {
-        // Interpolate size if it is a constellation node
-        if (star.isConstellationNode && activeConstellation) {
-          if (activeConstellation.phase === 'drawing' || activeConstellation.phase === 'visible') {
-            star.size += (star.targetSize - star.size) * 0.08; // smooth grow
-          }
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
         }
-
-        ctx.fillStyle = '#ECEDEB';
-        ctx.globalAlpha = star.opacity;
+        ctx.fillStyle = `rgba(236, 237, 235, ${Math.abs(star.alpha)})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
-
-        // Draw a soft outer glow for constellation nodes
-        if (star.isConstellationNode && activeConstellation) {
-          ctx.fillStyle = '#7CA5C1'; // Beautiful light blue glow matching site accent
-          ctx.globalAlpha = star.opacity * activeConstellation.opacity * 0.45;
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.size * 2.8, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Star twinkle animation
-        star.opacity += star.twinkleFactor;
-        if (star.opacity > 1 || star.opacity < 0) {
-          star.twinkleFactor = -star.twinkleFactor;
-        }
       });
-
-      // 2. Animate and draw constellation lines
-      if (activeConstellation) {
-        ctx.strokeStyle = '#7CA5C1'; // Light blue line matching design accent
-        ctx.lineWidth = 0.75; // thin line
-
-        activeConstellation.lines.forEach((line, index) => {
-          ctx.globalAlpha = activeConstellation.opacity;
-          if (index < activeConstellation.currentLineIndex) {
-            // Fully drawn line
-            ctx.beginPath();
-            ctx.moveTo(line.from.x, line.from.y);
-            ctx.lineTo(line.to.x, line.to.y);
-            ctx.stroke();
-          } else if (index === activeConstellation.currentLineIndex) {
-            // Currently drawing line
-            ctx.beginPath();
-            ctx.moveTo(line.from.x, line.from.y);
-            const targetX = line.from.x + (line.to.x - line.from.x) * line.progress;
-            const targetY = line.from.y + (line.to.y - line.from.y) * line.progress;
-            ctx.lineTo(targetX, targetY);
-            ctx.stroke();
-
-            // Advance drawing progress
-            line.progress += 0.045; // drawing speed
-            if (line.progress >= 1) {
-              line.progress = 1;
-              activeConstellation.currentLineIndex++;
-            }
-          }
-        });
-
-        // 3. Constellation lifecycle phases
-        if (activeConstellation.phase === 'drawing') {
-          if (activeConstellation.currentLineIndex >= activeConstellation.lines.length) {
-            activeConstellation.phase = 'visible';
-          }
-        } else if (activeConstellation.phase === 'visible') {
-          activeConstellation.visibleTimer--;
-          if (activeConstellation.visibleTimer <= 0) {
-            activeConstellation.phase = 'fading';
-          }
-        } else if (activeConstellation.phase === 'fading') {
-          activeConstellation.opacity -= 0.015;
-          
-          // Smoothly return stars back to original size
-          activeConstellation.stars.forEach(star => {
-            if (star.size > star.originalSize) {
-              star.size -= (star.size - star.originalSize) * 0.08;
-            }
-          });
-
-          if (activeConstellation.opacity <= 0) {
-            // Clean up node states
-            activeConstellation.stars.forEach(star => {
-              star.isConstellationNode = false;
-              star.size = star.originalSize;
-            });
-            activeConstellation = null;
-            constellationCooldown = 400 + Math.random() * 400; // frames before next one (~10-15s)
-          }
-        }
-      } else {
-        // Cooldown timer
-        if (constellationCooldown > 0) {
-          constellationCooldown--;
-        } else {
-          triggerConstellation();
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(animationLoop);
+      requestAnimationFrame(animate);
     }
 
-    function startAnimation() {
-      if (isAnimating) return;
-      isAnimating = true;
-      animationLoop();
-    }
+    window.addEventListener('resize', () => {
+      setCanvasDimensions();
+      createStars();
+    });
 
-    function stopAnimation() {
-      isAnimating = false;
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    }
-
-    window.addEventListener('resize', setCanvasDimensions);
     setCanvasDimensions();
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          startAnimation();
-        } else {
-          stopAnimation();
-        }
-      });
-    }, { threshold: 0.02 });
-
-    observer.observe(canvas);
+    createStars();
+    animate();
   });
 }
 
 function initIntersectionObserverReveal() {
-  const revealTargets = document.querySelectorAll('[data-reveal]');
+  const revealElements = document.querySelectorAll('[data-reveal]');
   
-  const observerConfig = {
-    root: null,
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  };
-
-  const revealObserver = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        entry.target.classList.add('revealed');
       }
     });
-  }, observerConfig);
+  }, {
+    threshold: 0.15
+  });
 
-  revealTargets.forEach(target => revealObserver.observe(target));
+  revealElements.forEach(el => observer.observe(el));
 }
 
 function initNumericalCounterEngine() {
-  const activeCounters = document.querySelectorAll('[data-count]');
+  const counterElements = document.querySelectorAll('.data-value[data-count]');
   
-  const counterObserver = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const counterElement = entry.target;
-        const targetValue = parseInt(counterElement.getAttribute('data-count'), 10);
+        const target = entry.target;
+        const endValue = parseInt(target.getAttribute('data-count'), 10);
         let currentValue = 0;
-        const speedStep = targetValue / 50;
+        const duration = 1500;
+        const increment = endValue / (duration / 16);
 
-        function runAnimation() {
-          currentValue += speedStep;
-          if (currentValue < targetValue) {
-            counterElement.textContent = Math.floor(currentValue);
-            requestAnimationFrame(runAnimation);
+        const updateCounter = () => {
+          currentValue += increment;
+          if (currentValue >= endValue) {
+            target.textContent = endValue;
           } else {
-            counterElement.textContent = targetValue;
+            target.textContent = Math.floor(currentValue);
+            requestAnimationFrame(updateCounter);
           }
-        }
+        };
         
-        runAnimation();
-        observer.unobserve(counterElement);
+        requestAnimationFrame(updateCounter);
+        observer.unobserve(target);
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.5 });
 
-  activeCounters.forEach(counter => counterObserver.observe(counter));
-}
-
-function initEditorialSlider() {
-  const slides = document.querySelectorAll('.slide-img');
-  if (slides.length === 0) return;
-
-  let currentIndex = 0;
-
-  setInterval(() => {
-    const currentSlide = slides[currentIndex];
-    currentSlide.classList.remove('active');
-    currentSlide.classList.add('exit');
-
-    currentIndex = (currentIndex + 1) % slides.length;
-
-    const nextSlide = slides[currentIndex];
-    nextSlide.classList.remove('exit');
-    nextSlide.classList.add('active');
-
-    setTimeout(() => {
-      currentSlide.classList.remove('exit');
-    }, 800);
-    
-  }, 5000);
+  counterElements.forEach(el => observer.observe(el));
 }
 
 function initHeaderScrollAndNavigation() {
-  const mainNav = document.getElementById('main-nav');
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
+  const nav = document.getElementById('main-nav');
+  const links = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('header, section');
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      mainNav.classList.add('scrolled');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
     } else {
-      mainNav.classList.remove('scrolled');
+      nav.classList.remove('scrolled');
     }
 
     let currentSectionId = '';
@@ -361,30 +146,13 @@ function initHeaderScrollAndNavigation() {
       }
     });
 
-    navLinks.forEach(link => {
+    links.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${currentSectionId}`) {
         link.classList.add('active');
       }
     });
   });
-
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('open');
-      navMenu.classList.toggle('open');
-      const expanded = menuToggle.classList.contains('open');
-      menuToggle.setAttribute('aria-expanded', expanded);
-    });
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        menuToggle.classList.remove('open');
-        navMenu.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
 }
 
 function initHeroParallaxInteraction() {
@@ -402,12 +170,10 @@ function initHeroParallaxInteraction() {
     const moveY = (mouseY / (height / 2)) * 12;
 
     heroImg.style.transform = `scale(1.08) translate(${moveX}px, ${moveY}px)`;
-    heroImg.classList.remove('standard-zoom');
   });
 
   heroSection.addEventListener('mouseleave', () => {
     heroImg.style.transform = '';
-    heroImg.classList.add('standard-zoom');
   });
 }
 
@@ -416,21 +182,4 @@ function openWhatsApp() {
   const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
   const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
   window.open(apiLink, '_blank');
-}
-
-function initDynamicCourseButtons() {
-  const courses = document.querySelectorAll('.timeline-item');
-  
-  courses.forEach(course => {
-    const btn = document.createElement('button');
-    btn.className = 'btn-more-info-dynamic';
-    btn.innerText = 'Más Info';
-    
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openWhatsApp();
-    });
-    
-    course.appendChild(btn);
-  });
 }
