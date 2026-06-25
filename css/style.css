@@ -329,7 +329,12 @@ section {
 .hero-title {
   line-height: 1.1;
   margin-bottom: 2.5rem;
-  font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+.hero-title .title-line:first-child {
+  font-size: font-size: clamp(1.8rem, 4.5vw, 3.8rem); 
+}
+.hero-title .title-line:last-child {
+  font-size: font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+};
 }
 .title-line { display: block; }
 .title-accent { color: transparent; -webkit-text-stroke: 1px var(--color-text-light); }
