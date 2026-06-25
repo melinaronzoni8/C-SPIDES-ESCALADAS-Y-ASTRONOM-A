@@ -265,7 +265,7 @@ section {
   padding-top: 6rem;
 }
 
-#star-canvas {
+.star-canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -273,6 +273,11 @@ section {
   height: 100%;
   pointer-events: none;
   z-index: 2;
+}
+
+.nosotros-grid, .editorial-grid, .excursiones-inner, .program-inner, .contact-inner {
+  position: relative;
+  z-index: 3;
 }
 
 .hero-bg-parallax {

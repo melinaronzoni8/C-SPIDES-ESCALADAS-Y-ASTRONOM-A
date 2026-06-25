@@ -30,54 +30,83 @@ function initReadingProgressBar() {
 }
 
 function initStarCanvasBackground() {
-  const canvas = document.getElementById('star-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  
-  let starArray = [];
-  const maxStars = 100;
+  const canvases = document.querySelectorAll('.star-canvas');
+  if (canvases.length === 0) return;
 
-  function setCanvasDimensions() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    populateStarArray();
-  }
+  canvases.forEach(canvas => {
+    const ctx = canvas.getContext('2d');
+    let starArray = [];
+    const maxStars = 60;
+    let animationFrameId = null;
+    let isAnimating = false;
 
-  function populateStarArray() {
-    starArray = [];
-    for (let i = 0; i < maxStars; i++) {
-      starArray.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 1.3,
-        opacity: Math.random(),
-        twinkleFactor: 0.006 + Math.random() * 0.01
-      });
+    function setCanvasDimensions() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      populateStarArray();
     }
-  }
 
-  function animationLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ECEDEB';
-    
-    starArray.forEach(star => {
-      ctx.globalAlpha = star.opacity;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-      ctx.fill();
-      
-      star.opacity += star.twinkleFactor;
-      if (star.opacity > 1 || star.opacity < 0) {
-        star.twinkleFactor = -star.twinkleFactor;
+    function populateStarArray() {
+      starArray = [];
+      for (let i = 0; i < maxStars; i++) {
+        starArray.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.3,
+          opacity: Math.random(),
+          twinkleFactor: 0.006 + Math.random() * 0.01
+        });
       }
-    });
-    
-    requestAnimationFrame(animationLoop);
-  }
+    }
 
-  window.addEventListener('resize', setCanvasDimensions);
-  setCanvasDimensions();
-  animationLoop();
+    function animationLoop() {
+      if (!isAnimating) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ECEDEB';
+      
+      starArray.forEach(star => {
+        ctx.globalAlpha = star.opacity;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        star.opacity += star.twinkleFactor;
+        if (star.opacity > 1 || star.opacity < 0) {
+          star.twinkleFactor = -star.twinkleFactor;
+        }
+      });
+      
+      animationFrameId = requestAnimationFrame(animationLoop);
+    }
+
+    function startAnimation() {
+      if (isAnimating) return;
+      isAnimating = true;
+      animationLoop();
+    }
+
+    function stopAnimation() {
+      isAnimating = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    }
+
+    window.addEventListener('resize', setCanvasDimensions);
+    setCanvasDimensions();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      });
+    }, { threshold: 0.02 });
+
+    observer.observe(canvas);
+  });
 }
 
 function initIntersectionObserverReveal() {
