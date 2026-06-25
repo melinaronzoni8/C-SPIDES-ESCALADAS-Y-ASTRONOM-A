@@ -1293,3 +1293,30 @@ section {
   display: block !important;
   object-fit: contain !important;      /* Hace que calce perfecto dentro del ancho de la fase */
 }
+/* Estado cerrado por defecto */
+.stack-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Una vez que JS añade la clase active, dejamos que el alto sea orgánico */
+.timeline-item-stack.active .stack-content {
+  overflow: visible !important; /* Permite que la imagen renderice al 100% de su aspecto */
+}
+
+.t-image-container,
+.t-image-holder {
+  width: 100% !important;
+  height: auto !important; /* Clave: deshacerse de los 240px fijos anteriores */
+}
+
+.t-image-holder img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important; /* Encaja justo sin recortar ningún borde */
+}

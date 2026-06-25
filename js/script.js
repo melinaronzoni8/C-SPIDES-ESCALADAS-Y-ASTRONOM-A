@@ -417,6 +417,53 @@ function openWhatsApp() {
   window.open(apiLink, '_blank');
 }
 
+// ==========================================================================
+// MOTOR DEL ACORDEÓN: DETERMINACIÓN DE ALTURA TOTAL REAL (EVITA RECORTES)
+// ==========================================================================
+function initAccordionTimeline() {
+  const items = document.querySelectorAll('.timeline-item-stack');
+  
+  items.forEach(item => {
+    const header = item.querySelector('.stack-header');
+    const content = item.querySelector('.stack-content');
+    
+    if (!header || !content) return;
+    
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+      
+      // 1. Cerramos todas las demás fases abiertas para mantener el orden
+      items.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        const otherContent = otherItem.querySelector('.stack-content');
+        if (otherContent) {
+          otherContent.style.maxHeight = null;
+        }
+      });
+      
+      // 2. Si estaba cerrada, le añadimos la clase activa y calculamos su scrollHeight
+      if (!isOpen) {
+        item.classList.add('active');
+        
+        // scrollHeight le pregunta al navegador la altura total del bloque,
+        // incluyendo la imagen adaptada orgánicamente al 100% de su aspecto.
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+}
+
+// Ejecutamos la inicialización del acordeón al cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+  initAccordionTimeline();
+});
+function openWhatsApp() {
+  const targetPhone = "5492944000000";
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  window.open(apiLink, '_blank');
+}
+
 function initDynamicCourseButtons() {
   const courses = document.querySelectorAll('.timeline-item');
   
