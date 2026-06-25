@@ -1015,3 +1015,161 @@ section {
 .spacer-fases {
   margin-top: 60px; /* Ajustá los píxeles (60px, 80px, etc.) para darle más o menos distancia */
 }
+/* ==========================================================================
+   REDISEÑO DE IMÁGENES Y BOTONES DINÁMICOS (SECCIÓN PROGRAMA)
+   ========================================================================== */
+
+/* Ajustamos el layout interno del acordeón desplegado */
+.stack-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem;
+}
+
+/* Modificación del Contenedor: Ocupa el 100% del ancho de su fase */
+.t-image-container {
+  position: relative !important;
+  width: 100% !important;
+  height: 240px !important; /* Altura estilizada fija para el banner completo */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.t-image-holder {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.t-image-holder img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* COMPORTAMIENTO DINÁMICO DEL BOTÓN "SABER MÁS" */
+
+/* Caso 1: Por defecto (Fase NO desplegada / Sin cursor encima) 
+   Se alinea arriba y a la derecha de la fase */
+.timeline-item-stack .btn-saber-mas {
+  position: absolute !important;
+  top: 1.5rem !important;
+  right: 2rem !important;
+  left: auto !important;
+  transform: none !important;
+  background: transparent !important;
+  color: var(--color-primary) !important;
+  border: 1px solid rgba(124, 165, 193, 0.4) !important;
+  padding: 0.5rem 1.2rem !important;
+  font-size: 0.75rem !important;
+  z-index: 100;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Caso 2: Al hacer Hover (Fase SÍ desplegada por el cursor) 
+   Cambia de reglas y se centra por encima de la imagen con estética del Hero */
+.timeline-item-stack:hover .btn-saber-mas {
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+  background: var(--color-highlight) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.8rem 2rem !important;
+  font-size: 0.9rem !important;
+  box-shadow: 0 6px 20px rgba(255, 132, 31, 0.4) !important;
+}
+
+.timeline-item-stack:hover .btn-saber-mas:hover {
+  transform: translate(-50%, -50%) scale(1.05) !important;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE DESKTOP (PANTALLAS GRANDES)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .section-nosotros {
+    background-image: none !important; /* Limpia cualquier rastro de background */
+  }
+
+  .nosotros-grid {
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important; /* Dos columnas proporcionales */
+    gap: 4rem !important;
+    align-items: center !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Alineación estricta a la izquierda para textos y títulos */
+  .nosotros-body {
+    text-align: left !important;
+  }
+
+  .nosotros-p {
+    text-align: left !important;
+    text-align-last: left !important;
+  }
+
+  /* Columna de la derecha para la imagen */
+  .nosotros-image-col {
+    display: block !important;
+    height: 500px !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+  }
+
+  .nosotros-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+
+
+/* ==========================================================================
+   RESPONSIVE MÓVIL (PANTALLAS CHICAS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* La imagen desaparece de la estructura grid y pasa a ser Background de la sección */
+  .section-nosotros {
+    background-image: linear-gradient(rgba(5, 14, 24, 0.82), rgba(5, 14, 24, 0.9)), url('../assets/image4.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    padding: 6rem 1.5rem !important;
+  }
+
+  .nosotros-grid {
+    display: block !important; /* Desactiva la grilla para evitar espacios fantasmas */
+    width: 100% !important;
+  }
+
+  .nosotros-image-col {
+    display: none !important; /* Oculta el contenedor img duplicado en móvil */
+  }
+
+  .nosotros-body {
+    text-align: center !important; /* Centrado fluido para dispositivos móviles */
+  }
+
+  .nosotros-p {
+    text-align: justify !important;
+    text-align-last: center !important;
+  }
+
+  .nosotros-content-box {
+    background: rgba(11, 33, 55, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(124, 165, 193, 0.3) !important;
+    padding: 2rem 1.5rem !important;
+  }
+  
+  /* Ajuste de posición del botón compacto en móviles por la altura nativa del header */
+  .timeline-item-stack .btn-saber-mas {
+    top: 1.2rem !important;
+    right: 1rem !important;
+  }
+}
