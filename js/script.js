@@ -457,3 +457,78 @@ function initAccordionTimeline() {
 document.addEventListener('DOMContentLoaded', () => {
   initAccordionTimeline();
 });
+function openWhatsApp() {
+  const targetPhone = "5492944000000";
+  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
+  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
+  window.open(apiLink, '_blank');
+}
+
+function initDynamicCourseButtons() {
+  const courses = document.querySelectorAll('.timeline-item');
+  
+  courses.forEach(course => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-more-info-dynamic';
+    btn.innerText = 'Más Info';
+    
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWhatsApp();
+    });
+    
+    course.appendChild(btn);
+  });
+}
+
+function initDynamicCourseButtons() {
+// ==========================================================================
+// MOTOR DEL ACORDEÓN COMPATIBLE CON IMÁGENES Y TEXTOS DINÁMICOS
+// ==========================================================================
+function initAccordionTimeline() {
+  const items = document.querySelectorAll('.timeline-item-stack');
+  
+  items.forEach(item => {
+    const header = item.querySelector('.stack-header');
+    const content = item.querySelector('.stack-content');
+    
+    if (!header || !content) return;
+    
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+      
+      // 1. Cerramos todos los paneles abiertos y reseteamos su altura
+      items.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        const otherContent = otherItem.querySelector('.stack-content');
+        if (otherContent) {
+          otherContent.style.maxHeight = null;
+        }
+      });
+      
+      // 2. Si estaba cerrado, ejecutamos el render instantáneo para capturar el tamaño de la foto
+      if (!isOpen) {
+        item.classList.add('active');
+        
+        content.style.visibility = "visible";
+        content.style.maxHeight = "none";
+        
+        const totalHeight = content.scrollHeight;
+        
+        content.style.maxHeight = "0px";
+        content.style.visibility = "";
+        
+        // Ejecución limpia de la transición fluidificada
+        setTimeout(() => {
+          content.style.maxHeight = totalHeight + "px";
+        }, 10);
+      }
+    });
+  });
+}
+
+// Inicialización de la lógica al cargar el árbol DOM
+document.addEventListener('DOMContentLoaded', () => {
+  initAccordionTimeline();
+});
+}
