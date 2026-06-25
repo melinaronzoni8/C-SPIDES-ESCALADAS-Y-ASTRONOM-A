@@ -1248,3 +1248,48 @@ section {
 .timeline-item-stack .btn-saber-mas {
   z-index: 10;
 }
+/* ==========================================================================
+   ALINEACIÓN DE TEXTOS E IMÁGENES COMPLETAS EN LAS FASES
+   ========================================================================== */
+
+/* 1. Forzamos a que el contenedor de los textos alinee todo a la izquierda */
+.stack-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important; /* Alinea los elementos internos a la izquierda */
+  text-align: left !important;         /* Alinea el texto a la izquierda */
+  gap: 1.5rem;
+}
+
+/* 2. Alineación del párrafo descriptivo */
+.t-desc {
+  text-align: left !important;
+  text-align-last: left !important;    /* Asegura que la última línea no se justifique */
+  width: 100% !important;
+  opacity: 0.9;
+}
+
+/* 3. Contenedor de la imagen: Se adapta al 100% de la altura natural */
+.t-image-container {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;             /* Crucial: elimina cualquier altura fija previa (como 240px) */
+  max-height: none !important;         /* Elimina límites de altura */
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+/* 4. El contenedor interno de la imagen */
+.t-image-holder {
+  width: 100% !important;
+  height: auto !important;             /* Deja que el alto sea orgánico */
+}
+
+/* 5. La imagen real: Ajuste perfecto sin recortes */
+.t-image-holder img {
+  width: 100% !important;
+  height: auto !important;             /* Mantiene la proporción nativa de la foto */
+  display: block !important;
+  object-fit: contain !important;      /* Hace que calce perfecto dentro del ancho de la fase */
+}
