@@ -420,43 +420,68 @@ function openWhatsApp() {
 // ==========================================================================
 // MOTOR DEL ACORDEÓN: DETERMINACIÓN DE ALTURA TOTAL REAL (EVITA RECORTES)
 // ==========================================================================
+// ==========================================================================
+// DETECTOR SEGURO DE CARGA E INTERACCIÓN
+// ==========================================================================
 function initAccordionTimeline() {
   const items = document.querySelectorAll('.timeline-item-stack');
-  
-  items.forEach(item => {
+  console.log("Fases encontradas en el DOM:", items.length); // Mirá la consola del navegador (F12)
+
+  items.forEach((item, index) => {
     const header = item.querySelector('.stack-header');
     const content = item.querySelector('.stack-content');
     
-    if (!header || !content) return;
+    if (!header || !content) {
+      console.warn(`Error en la fase index ${index}: Falta header o content.`);
+      return;
+    }
     
+    // Forzamos un reseteo limpio al arrancar
+    content.style.maxHeight = "0px";
+    content.style.opacity = "0";
+    content.style.visibility = "hidden";
+
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('active');
       
-      // 1. Cerramos todas las demás fases abiertas para mantener el orden
       items.forEach(otherItem => {
         otherItem.classList.remove('active');
         const otherContent = otherItem.querySelector('.stack-content');
         if (otherContent) {
-          otherContent.style.maxHeight = null;
+          otherContent.style.maxHeight = "0px";
+          otherContent.style.opacity = "0";
+          otherContent.style.visibility = "hidden";
         }
       });
       
-      // 2. Si estaba cerrada, le añadimos la clase activa y calculamos su scrollHeight
       if (!isOpen) {
         item.classList.add('active');
         
-        // scrollHeight le pregunta al navegador la altura total del bloque,
-        // incluyendo la imagen adaptada orgánicamente al 100% de su aspecto.
-        content.style.maxHeight = content.scrollHeight + "px";
+        // Renderizado e inyección de estilos directo al elemento (ataca el problema de especificidad)
+        content.style.visibility = "visible";
+        content.style.opacity = "1";
+        content.style.maxHeight = "none";
+        
+        const totalHeight = content.scrollHeight;
+        console.log(`Altura calculada para fase ${index + 1}:`, totalHeight + "px");
+        
+        content.style.maxHeight = "0px";
+        
+        setTimeout(() => {
+          content.style.maxHeight = totalHeight + "px";
+        }, 30);
       }
     });
   });
 }
 
-// Ejecutamos la inicialización del acordeón al cargar el DOM
-document.addEventListener('DOMContentLoaded', () => {
+// Ejecución triple para asegurar inicialización ante cualquier entorno
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAccordionTimeline);
+} else {
   initAccordionTimeline();
-});
+}
+window.onload = initAccordionTimeline;
 function openWhatsApp() {
   const targetPhone = "5492944000000";
   const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
