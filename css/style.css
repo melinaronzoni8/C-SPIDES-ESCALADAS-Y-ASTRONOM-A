@@ -673,39 +673,54 @@ section {
    CONTROL DE ACORDEÓN COMPACTO, TÍTULOS GRANDES Y BOTÓN SOBRE LA IMAGEN
    ========================================================================== */
 
+/* ==========================================================================
+   ALINEACIÓN DE ETIQUETAS DE FASE ARRIBA Y A LA IZQUIERDA
+   ========================================================================== */
+
 .timeline-item-stack {
   background: rgba(11, 33, 55, 0.35);
-  padding: 1.8rem 2rem;
+  padding: 1.5rem 2rem; /* Ajuste sutil de padding superior */
   border-left: 5px solid var(--color-primary);
   cursor: pointer;
   transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
-  max-height: 70px; /* Al colapsar, solo da espacio para el texto "FASE XX" */
+  max-height: 70px; /* Mantiene la tarjeta compacta al inicio */
   position: relative;
 }
 
+/* Cambiamos a flex-direction: column y alineamos al inicio (arriba e izquierda) */
 .stack-header {
   display: flex;
-  align-items: center;
+  flex-direction: column; 
+  align-items: flex-start; /* Alinea todo a la izquierda */
   justify-content: flex-start;
   width: 100%;
 }
 
+/* Forzamos a la etiqueta a estar arriba del todo */
 .t-number {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.1rem; /* Un tamaño un poco más compacto para que actúe de tag superior */
   color: var(--color-primary);
   transition: color 0.3s ease;
+  margin-bottom: 0.5rem; /* Margen inferior para separarlo del título cuando se expande */
+  display: block;
 }
 
-/* Agranda los títulos de los cursos y los oculta inicialmente */
+/* El título ahora se acomoda de manera natural debajo de la fase */
 .t-title {
   font-size: 1.95rem; 
   color: var(--font-display);
   opacity: 0;
-  transform: translateX(-15px);
+  transform: translateY(10px); /* Cambiamos el efecto: ahora sube sutilmente en vez de venir de la izquierda */
   transition: opacity 0.4s ease, transform 0.4s ease;
-  margin-left: 2.5rem;
+  margin-left: 0; /* Eliminamos el margen izquierdo viejo para que no se desfase */
+}
+
+/* Al hacer hover, el título se vuelve visible en su posición correcta abajo de la fase */
+.timeline-item-stack:hover .t-title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .stack-content {
