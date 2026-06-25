@@ -457,30 +457,3 @@ function initAccordionTimeline() {
 document.addEventListener('DOMContentLoaded', () => {
   initAccordionTimeline();
 });
-function openWhatsApp() {
-  const targetPhone = "5492944000000";
-  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
-  const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
-  window.open(apiLink, '_blank');
-}
-
-function initDynamicCourseButtons() {
-  const courses = document.querySelectorAll('.timeline-item');
-  
-  courses.forEach(course => {
-    const btn = document.createElement('button');
-    btn.className = 'btn-more-info-dynamic';
-    btn.innerText = 'Más Info';
-    
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openWhatsApp();
-    });
-    
-    course.appendChild(btn);
-  });
-}
-
-function initDynamicCourseButtons() {
-  // Borrá todo lo que esté dentro de esta función y la función misma
-}
