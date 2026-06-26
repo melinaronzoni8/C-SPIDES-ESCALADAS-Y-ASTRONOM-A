@@ -1292,6 +1292,7 @@ section {
   height: auto !important;             /* Mantiene la proporción nativa de la foto */
   display: block !important;
   object-fit: contain !important;      /* Hace que calce perfecto dentro del ancho de la fase */
+<<<<<<< HEAD
 }
 /* Estado cerrado por defecto */
 .stack-content {
@@ -1513,4 +1514,6 @@ section {
     top: 1.2rem !important;
     right: 1rem !important;
   }
+=======
+>>>>>>> parent of 45b5ec7 (diseño 29)
 }
