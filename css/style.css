@@ -1,368 +1,86 @@
-/* ==========================================================================
-   00. VARIABLES, PALETA DE COLOR OFICIAL Y RESET
-   ========================================================================== */
-:root {
-  --color-primary: #7CA5C1;      
-  --color-bg-dark: #0B2137;      
-  --color-bg-deep: #050E18;      
-  --color-accent-blue: #183F6F;  
-  --color-text-light: #ECEDEB;   
-  --color-text-muted: rgba(236, 237, 235, 0.6);
-  --color-highlight: #ff841f;   
-  
-  --font-display: 'Russo One', sans-serif;
-  --font-body: 'Lato', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  background-color: var(--color-bg-deep);
-  color: var(--color-text-light);
-  font-family: var(--font-body);
-  font-size: 16px;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100vh;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ==========================================================================
-   01. NAV & STRUCTURE DESKTOP
-   ========================================================================== */
-#main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  background: rgba(5, 14, 24, 0.85);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(236, 237, 235, 0.1);
-  padding: 1rem 2rem;
-}
-
-.nav-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-brand-img {
-  height: 40px;
-  width: auto;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-link {
-  color: var(--color-text-light);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--color-primary);
-}
-
-/* ==========================================================================
-   02. HERO SECTION DESKTOP
-   ========================================================================== */
-.section-hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 6rem 2rem 2rem 2rem;
-  overflow: hidden;
-}
-
-.star-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.eyebrow-line {
-  height: 1px;
-  width: 40px;
-  background: var(--color-primary);
-}
-
-.eyebrow-text {
-  font-family: var(--font-display);
-  color: var(--color-primary);
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-}
-
-.hero-title {
-  font-family: var(--font-display);
-  font-size: 3.5rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: var(--color-text-light);
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: var(--color-text-muted);
-  max-width: 600px;
-  margin: 0 auto 2.5rem auto;
-}
-
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: var(--color-bg-deep);
-  border: none;
-  padding: 1rem 2rem;
-  font-weight: 700;
-  font-family: var(--font-display);
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
-}
-
-.btn-primary:hover {
-  background: #9bc0dc;
-  transform: translateY(-2px);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--color-text-light);
-  border: 1px solid var(--color-text-light);
-  padding: 1rem 2rem;
-  font-weight: 700;
-  text-decoration: none;
-  font-family: var(--font-display);
-  letter-spacing: 1px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.btn-ghost:hover {
-  background: var(--color-text-light);
-  color: var(--color-bg-deep);
-}
-
-/* HERO DATA DESKTOP */
-.hero-data {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem;
-  background: rgba(11, 33, 55, 0.4);
-  backdrop-filter: blur(5px);
-  padding: 2rem 4rem;
-  border-radius: 8px;
-  border: 1px solid rgba(236, 237, 235, 0.05);
-}
-
-.data-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.data-value {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  color: var(--color-highlight);
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-
-.data-label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.data-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(236, 237, 235, 0.15);
-}
-
-/* CONTACT SECTION */
-.section-contact {
-  position: relative;
-  padding: 6rem 2rem;
-  text-align: center;
-  background: var(--color-bg-dark);
-}
-
-.contact-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.section-tag {
-  font-family: var(--font-display);
-  color: var(--color-highlight);
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-}
-
-.contact-title {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  margin: 1rem 0;
-}
-
-.btn-whatsapp {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-weight: 700;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-top: 2rem;
-}
-
-/* ==========================================================================
-   03. RESPONSIVE MOBILE MEDIA QUERY (CON CAMBIOS DE MAQUETACIÓN SOLICITADOS)
-   ========================================================================== */
 @media (max-width: 768px) {
-  #main-nav {
-    padding: 1rem;
-  }
-  
-  .nav-menu {
-    display: none; /* Simplificado para el ejemplo móvil */
-  }
+  /* ... tus otros estilos existentes para nav, grids, etc ... */
 
-  /* 1. Hacemos que el Hero ocupe exactamente el frame inicial y empuje contenidos excedentes */
+  /* 1. Hacemos que el Hero ocupe el alto de la pantalla pero permita scroll para sus datos */
   .section-hero {
-    min-height: 100vh;
-    height: auto;
+    min-height: 100vh;      /* Asegura el tamaño completo del dispositivo */
+    height: auto;           /* Permite que crezca hacia abajo si es necesario */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Alinea los textos hacia el piso/base del frame horizontal inicial */
-    align-items: flex-start;   /* Alinea los textos a la izquierda */
-    text-align: left;
-    padding: 7rem 1.5rem 0 1.5rem;
+    justify-content: flex-end; /* Empuja el contenedor del texto hacia el piso del frame inicial */
+    align-items: flex-start;   /* Alinea el contenido a la izquierda */
+    text-align: left;          /* Fuerza que los textos se alineen a la izquierda */
+    padding: 7rem 1.5rem 0 1.5rem; /* Ajuste de paddings laterales y superior por la barra de navegación */
   }
 
-  /* 2. El contenedor de títulos y botones se ajusta completamente a la izquierda */
+  /* 2. Ajustamos el contenedor de textos, títulos y botones */
   .hero-content {
     max-width: 100%;
     width: 100%;
-    margin-bottom: 2.5rem;      /* Espacio estético de resguardo antes de salir del primer fold */
+    margin-bottom: 2rem;    /* Espacio antes de salir del primer cuadro */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;   /* Forza elementos internos como botones al inicio */
+    align-items: flex-start; /* Alinea los elementos internos (botones, eyebrow) a la izquierda */
   }
 
+  /* Forzamos que las líneas decorativas del eyebrow y los botones se acomoden a la izquierda */
   .hero-eyebrow {
     justify-content: flex-start;
     width: 100%;
   }
   
+  /* Quitamos la línea de la izquierda si querés un look 100% pegado al borde, o las dejamos dinámicas */
   .hero-eyebrow .eyebrow-line:first-child {
-    display: none; /* Elimina la línea decorativa izquierda para calzar a la perfección en el borde */
+    display: none; /* Opcional: elimina la línea izquierda para encuadrar perfecto con el texto */
   }
 
   .hero-title {
     text-align: left;
-    font-size: 2.3rem; /* Tamaño optimizado para pantallas chicas */
     width: 100%;
-  }
-
-  .hero-subtitle {
-    text-align: left;
-    margin: 0 0 2rem 0;
-    font-size: 1rem;
   }
 
   .hero-actions {
-    justify-content: flex-start;
-    flex-direction: column;     /* Botones apilados verticalmente para máxima comodidad */
+    justify-content: flex-start; /* Botones alineados a la izquierda */
+    flex-direction: column;     /* Apila los botones en vertical para mejor usabilidad móvil */
     width: 100%;
     gap: 1rem;
+    margin-bottom: 2rem;
   }
   
   .hero-actions .btn-primary, 
   .hero-actions .btn-ghost {
-    width: 100%;               /* Botones cómodos a todo el ancho disponible */
+    width: 100%;               /* Botones full-width muy cómodos para el dedo */
     text-align: center;
   }
 
-  /* 3. DESPLAZAMIENTO ORGÁNICO: .hero-data se renderiza debajo del primer frame */
+  /* 3. El truco clave para la "hero-data": la sacamos del flujo visual del frame inicial */
   .hero-data {
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-    margin-top: auto;          /* Empuja el bloque fuera del primer impacto visual */
-    padding: 3rem 1.5rem 4rem 1.5rem;
-    background: var(--color-bg-deep); /* Fondo opaco sólido para cubrir el canvas de estrellas correctamente al hacer scroll */
-    border-radius: 0;          /* Estilo fluido de sección completa */
-    border: none;
-    border-top: 1px solid rgba(236, 237, 235, 0.15); /* Separador elegante superior */
+    
+    /* Estos estilos logran que rompa el alto del frame inicial y se lea haciendo scroll */
+    margin-top: auto;          
+    padding-top: 3rem;
+    padding-bottom: 4rem;      /* Espaciado generoso abajo */
+    border-top: 1px solid rgba(236, 237, 235, 0.15); /* Línea divisoria superior estética */
+    background: var(--color-bg-deep); /* Un fondo sólido para que al scrollear hacia abajo tape correctamente */
+    
+    /* Aseguramos que se mantenga por encima del fondo animado */
     position: relative;
     z-index: 5; 
   }
 
-  /* Ocultamos los divisores verticales de escritorio */
+  /* Forzamos que los divisores viejos de desktop no molesten */
   .data-divider {
     display: none;
   }
   
-  /* Los ítems numéricos se ordenan y alinean de manera limpia a la izquierda */
+  /* Alineamos los ítems numéricos a la izquierda */
   .data-item {
     align-items: flex-start;
     text-align: left;
     width: 100%;
+    padding-left: 0.5rem;
   }
 }
