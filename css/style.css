@@ -313,7 +313,7 @@ section {
 }
 
 .hero-overlay {
-  position: absolute;
+  position: static;
   top: 0;
   left: 0;
   width: 100%;
@@ -356,7 +356,7 @@ section {
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  border-top: 1px solid rgba(236,237,235,0.1);
+  border-top: 10px solid rgba(236,237,235,0.1);
   padding-top: 2rem;
 }
 .data-item { display: flex; flex-direction: column; }
