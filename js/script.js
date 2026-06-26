@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
   initHeaderScrollAndNavigation();
   initHeroParallaxInteraction();
+  initAccordionTimeline(); 
+  initDynamicCourseButtons(); 
 });
 
 function initReadingProgressBar() {
@@ -421,6 +423,35 @@ function openWhatsApp() {
 // MOTOR DEL ACORDEÓN: DETERMINACIÓN DE ALTURA TOTAL REAL (EVITA RECORTES)
 // ==========================================================================
 function initAccordionTimeline() {
+  // Cambia .timeline-item-stack por .timeline-item
+  const timelineItems = document.querySelectorAll('.timeline-item'); 
+  
+  timelineItems.forEach(item => {
+    // Si tienes un título o cabecera que hace de disparador (trigger) dentro del item
+    const trigger = item.querySelector('.timeline-content'); 
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      const content = item.querySelector('.stack-content');
+      if (!content) return;
+
+      const isOpen = item.classList.contains('active');
+      
+      // Cerrar los demás si es necesario
+      timelineItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        const otherContent = otherItem.querySelector('.stack-content');
+        if (otherContent) otherContent.style.maxHeight = null;
+      });
+      
+      // Abrir el actual
+      if (!isOpen) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+}
   const items = document.querySelectorAll('.timeline-item-stack');
   
   items.forEach(item => {
@@ -451,7 +482,6 @@ function initAccordionTimeline() {
       }
     });
   });
-}
 
 // Ejecutamos la inicialización del acordeón al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
