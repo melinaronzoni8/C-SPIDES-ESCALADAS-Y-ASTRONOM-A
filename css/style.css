@@ -1324,19 +1324,12 @@ section {
   display: block !important;
   object-fit: contain !important; /* Encaja justo sin recortar ningún borde */
 }
-/* ==========================================================================
-   SECCIÓN GALERÍA - INTEGRACIÓN PARA STYLE.CSS
-   ==========================================================================
-   Instrucciones: Pegá este bloque completo al final de tu archivo style.css.
-   Utiliza las variables nativas (--color-primary, --color-bg-dark, etc.) de tu web.
-*/
-
 .section-gallery {
   position: relative;
   padding: 8rem 2rem;
   overflow: hidden;
-  border-bottom: 1px solid rgba(124, 165, 193, 0.1);
   background-color: var(--color-bg-deep);
+  border-bottom: 1px solid rgba(124, 165, 193, 0.1);
 }
 
 .gallery-container {
@@ -1368,286 +1361,140 @@ section {
   font-size: 1.1rem;
 }
 
-/* --- CONTENEDOR DEL CARRUSEL --- */
-.gallery-carousel-wrapper {
+/* --- ESTRUCTURA DEL CARRUSEL DE IMÁGENES COMPLETO --- */
+.gallery-carousel-side {
+  max-width: 900px;
+  margin: 0 auto;
   position: relative;
-  background-color: var(--color-bg-dark);
-  border: 1px solid rgba(124, 165, 193, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 3.5rem;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
-.gallery-carousel {
+.expeditions-carousel {
   position: relative;
-  min-height: 480px;
-}
-
-/* Tarjetas con layouts de tabla fluidos para evitar desbordes */
-.carousel-card {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.carousel-card.active {
-  display: table;
-  position: relative;
-  opacity: 1;
+/* Flechitas chiquitas en los laterales */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(11, 33, 55, 0.8);
+  border: 1px solid var(--color-primary);
+  color: var(--color-text-light);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1rem;
+  line-height: 34px;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-.card-image-panel,
-.card-review-panel {
-  display: table-cell;
-  width: 50%;
-  vertical-align: middle;
-  position: relative;
+.carousel-arrow:hover {
+  background: var(--color-primary);
+  color: var(--color-bg-deep);
 }
 
-.card-image-panel {
-  height: 480px;
-  background-color: #000;
+.carousel-arrow.prev {
+  left: -18px;
+}
+
+.carousel-arrow.next {
+  right: -18px;
+}
+
+/* Ventana de visualización idéntica al código de referencia */
+.carousel-viewport {
+  width: 100%;
   overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 165, 193, 0.15);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.6);
 }
 
-.card-image-panel img {
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+/* Cada Slide es la imagen completa ocupando todo el contenedor */
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.carousel-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Opacidad más oscura por defecto */
+  filter: brightness(0.35) contrast(1.05);
+  transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-/* Datos Exif de la Astrofotografía */
-.photo-specs {
+/* Al pasar el cursor, la imagen toma claridad total */
+.carousel-slide:hover img {
+  filter: brightness(0.85);
+  transform: scale(1.02);
+}
+
+/* Texto por encima de la imagen completa */
+.slide-overlay-content {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 3.5rem 3rem 3rem 3rem;
   background: linear-gradient(transparent, rgba(5, 14, 24, 0.95));
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  pointer-events: none; /* Permite el hover directo a la imagen */
+  transition: transform 0.4s ease;
 }
 
-.spec-location {
-  display: block;
+.slide-overlay-content h3 {
   font-family: var(--font-display);
   color: var(--color-primary);
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
 }
 
-.spec-data {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-/* Panel de Reseñas */
-.card-review-panel {
-  padding: 4rem 3.5rem;
-  background-color: var(--color-bg-dark);
-}
-
-.quote-icon {
-  font-family: var(--font-display);
-  font-size: 4.5rem;
-  line-height: 1;
-  color: var(--color-primary);
-  opacity: 0.15;
-  margin-bottom: -1rem;
-}
-
-.review-text {
+.slide-overlay-content p {
   font-family: var(--font-body);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  color: var(--color-text-light);
   font-style: italic;
-  color: var(--color-text-light);
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
+  line-height: 1.6;
+  max-width: 80%;
+  margin-bottom: 1rem;
 }
 
-.review-author strong {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--color-primary);
-  font-family: var(--font-body);
-  margin-bottom: 0.15rem;
-}
-
-.review-author span {
-  font-size: 0.9rem;
+.exif-tag {
+  display: inline-block;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
+  letter-spacing: 1px;
 }
 
-/* --- CONTROLES INTERACTIVOS --- */
-.carousel-controls {
-  position: absolute;
-  bottom: 2rem;
-  right: 3.5rem;
-  z-index: 10;
-}
-
-.ctrl-btn {
-  background: transparent;
-  border: 1px solid var(--color-primary);
-  color: var(--color-text-light);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.2rem;
-  line-height: 42px;
-  text-align: center;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  margin: 0 0.4rem;
-}
-
-.ctrl-btn:hover {
-  background-color: var(--color-primary);
-  color: var(--color-bg-deep);
-}
-
-.carousel-indicators {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 0.8rem;
-}
-
-.carousel-indicators .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(232, 237, 235, 0.2);
-  margin: 0 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carousel-indicators .dot.active {
-  background-color: var(--color-primary);
-  width: 14px;
-  border-radius: 4px;
-}
-
-/* --- MOSAICO GRID INTERACTIVO --- */
-.gallery-grid {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-.grid-item {
-  display: inline-block;
-  width: calc(25% - 1.2rem);
-  margin: 0.6rem;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #000;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  cursor: pointer;
-}
-
-.grid-item img {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.grid-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(5, 14, 24, 0.9);
-  border: 1px solid var(--color-primary);
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  padding: 1.5rem;
-  display: table; /* Contenedor seguro para centrado absoluto en WeasyPrint/Navegadores */
-  width: 100%;
-  height: 100%;
-}
-
-.grid-overlay-inner {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.grid-item:hover img {
-  transform: scale(1.06);
-}
-
-.grid-item:hover .grid-overlay {
-  opacity: 1;
-}
-
-.grid-title {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-  display: block;
-  margin-bottom: 0.4rem;
-}
-
-.grid-author {
-  font-size: 0.85rem;
-  color: var(--color-primary);
-  display: block;
-}
-
-/* --- RESPONSIVE ADAPTABILITY --- */
-@media (max-width: 992px) {
-  .carousel-card.active {
-    display: block;
+/* Ajustes Responsive */
+@media (max-width: 768px) {
+  .carousel-slide {
+    height: 400px;
   }
-  .card-image-panel, 
-  .card-review-panel {
-    display: block;
-    width: 100%;
+  .slide-overlay-content {
+    padding: 2rem;
   }
-  .card-image-panel {
-    height: 320px;
+  .slide-overlay-content p {
+    max-width: 100%;
+    font-size: 1rem;
   }
-  .gallery-carousel {
-    min-height: auto;
-  }
-  .card-review-panel {
-    padding: 3rem 2rem 5rem 2rem;
-  }
-  .carousel-controls {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 0;
-    right: 0;
-    text-align: center;
-  }
-  .grid-item {
-    width: calc(50% - 1.2rem);
-  }
-}
-
-@media (max-width: 576px) {
-  .gallery-title {
-    font-size: 2rem;
-  }
-  .grid-item {
-    width: 100%;
-    margin: 0.6rem 0;
-  }
-  .review-text {
-    font-size: 1.1rem;
-  }
+  .carousel-arrow.prev { left: 5px; }
+  .carousel-arrow.next { right: 5px; }
 }

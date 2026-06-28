@@ -114,119 +114,107 @@
   </section>
   
 <section id="galeria" class="section-gallery section-dark">
-  <!-- Fondo de estrellas dinámicas idéntico al resto de tus secciones -->
   <canvas class="star-canvas" aria-hidden="true"></canvas>
   
   <div class="gallery-container">
     <div class="gallery-header">
       <span class="section-tag tag-light" data-reveal>REGISTROS DE EXPEDICIÓN</span>
-      <h2 class="gallery-title" data-reveal>Lienzos Cósmicos y Reseñas</h2>
-      <p class="gallery-sub" data-reveal>Explorá los resultados reales obtenidos por nuestros alumnos y guías en las paredes verticales de la Patagonia bajo ventanas astronómicas óptimas.</p>
+      <h2 class="gallery-title" data-reveal>Nuestra Galería de Expediciones</h2>
+      <p class="gallery-sub" data-reveal>Capturas de nuestros alumnos y guías en las paredes verticales de la Patagonia bajo ventanas astronómicas óptimas.</p>
     </div>
 
-    <!-- Carrusel Dinámico de Experiencias y Testimonios -->
-    <div class="gallery-carousel-wrapper" data-reveal>
-      <div class="gallery-carousel" id="galleryCarousel">
+    <!-- Carrusel Deslizante de 8 Fotos con Texto Superpuesto -->
+    <div class="gallery-carousel-side" data-reveal>
+      <div class="expeditions-carousel">
         
-        <!-- Diapositiva 1 -->
-        <div class="carousel-card active">
-          <div class="card-image-panel">
-            <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1200&q=80" alt="Astrofotografía en el Frey">
-            <div class="photo-specs">
-              <span class="spec-location">Frey Ridge — Fase 2</span>
-              <span class="spec-data">ISO 3200 • 25s • f/2.8 • 14mm</span>
+        <!-- Flechitas laterales chiquitas -->
+        <button class="carousel-arrow prev" id="gallery-prev" aria-label="Anterior">&larr;</button>
+        <button class="carousel-arrow next" id="gallery-next" aria-label="Siguiente">&rarr;</button>
+        
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="gallery-track">
+            
+            <!-- Slide 1 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80" alt="Frey Ridge">
+              <div class="slide-overlay-content">
+                <h3>Frey Ridge</h3>
+                <p>"La Vía Láctea sobre las agujas verticales de granito." — Matías S.</p>
+                <span class="exif-tag">ISO 3200 • 25s • f/2.8</span>
+              </div>
             </div>
-          </div>
-          <div class="card-review-panel">
-            <div class="quote-icon">“</div>
-            <p class="review-text">"Colgar el portaledge a oscuras mientras la Vía Láctea se abría sobre las agujas del Frey fue surrealista. La rigurosidad técnica de los guías me dio la seguridad absoluta para concentrarme en la exposición de mi cámara reflex."</p>
-            <div class="review-author">
-              <strong>Matías S.</strong>
-              <span>Alumno Promoción 2025 • CABA</span>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Aguja Guillaumet">
+              <div class="slide-overlay-content">
+                <h3>Aguja Guillaumet</h3>
+                <p>"Aprender astrofotografía profunda colgada de un arnés." — Sofía R.</p>
+                <span class="exif-tag">ISO 6400 • 15s • f/1.8</span>
+              </div>
             </div>
-          </div>
-        </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Valle del Challhuaco">
+              <div class="slide-overlay-content">
+                <h3>Challhuaco Vivac</h3>
+                <p>"La mejor introducción a la alta montaña y al cielo profundo." — Lucas G.</p>
+                <span class="exif-tag">ISO 1600 • 30s • f/4</span>
+              </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" alt="Cerro Catedral">
+              <div class="slide-overlay-content">
+                <h3>Torres de Catedral</h3>
+                <p>"Vivac de tres noches suspendidos sobre el abismo estelar." — Elena W.</p>
+                <span class="exif-tag">ISO 3200 • 20s • f/2.0</span>
+              </div>
+            </div>
 
-        <!-- Diapositiva 2 -->
-        <div class="carousel-card">
-          <div class="card-image-panel">
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" alt="Escalada Nocturna Patagonia">
-            <div class="photo-specs">
-              <span class="spec-location">Aguja Guillaumet — Fase 3</span>
-              <span class="spec-data">ISO 6400 • 15s • f/1.8 • 24mm</span>
+            <!-- Slide 5 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=800&q=80" alt="Paso de Cresta">
+              <div class="slide-overlay-content">
+                <h3>Paso de Cresta</h3>
+                <p>"Siluetas en progresión bajo la danza de las estrellas." — Tomás P.</p>
+                <span class="exif-tag">ISO 4000 • 13s • f/2.8</span>
+              </div>
             </div>
-          </div>
-          <div class="card-review-panel">
-            <div class="quote-icon">“</div>
-            <p class="review-text">"El desafío físico en la roca congelada es real, pero la recompensa visual no tiene nombre en la Tierra. Aprender astrofotografía profunda colgada de los arneses transformó mi fotografía para siempre."</p>
-            <div class="review-author">
-              <strong>Sofía R.</strong>
-              <span>Fotógrafa y Escaladora • Bariloche</span>
+
+            <!-- Slide 6 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Refugio Frey">
+              <div class="slide-overlay-content">
+                <h3>Refugio en la Noche</h3>
+                <p>"Planificación de rutas verticales con mapas lumínicos." — Nicolás F.</p>
+                <span class="exif-tag">ISO 2000 • 25s • f/2.8</span>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Diapositiva 3 -->
-        <div class="carousel-card">
-          <div class="card-image-panel">
-            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80" alt="Campamento Base Estelar">
-            <div class="photo-specs">
-              <span class="spec-location">Valle del Challhuaco — Fase 1</span>
-              <span class="spec-data">ISO 1600 • 30s • f/4 • 11mm</span>
+            <!-- Slide 7 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=800&q=80" alt="Glaciar Torrecillas">
+              <div class="slide-overlay-content">
+                <h3>Ventana Astronómica</h3>
+                <p>"Capturando la Nebulosa de Orión sobre hielo eterno." — Instructores</p>
+                <span class="exif-tag">ISO 6400 • 10s • f/1.4</span>
+              </div>
             </div>
-          </div>
-          <div class="card-review-panel">
-            <div class="quote-icon">“</div>
-            <p class="review-text">"La mejor introducción a la alta montaña nocturna. La combinación de clases de astronomía de campo con la progresión en roca me permitieron lograr mi primera panorámica limpia de cielo profundo."</p>
-            <div class="review-author">
-              <strong>Lucas G.</strong>
-              <span>Alumno Promoción 2026 • Córdoba</span>
+
+            <!-- Slide 8 -->
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=800&q=80" alt="Pared Sur">
+              <div class="slide-overlay-content">
+                <h3>Paredes de Granito</h3>
+                <p>"El fin de una travesía técnica inolvidable." — Comunidad Cúspides</p>
+                <span class="exif-tag">ISO 3200 • 30s • f/2.8</span>
+              </div>
             </div>
+
           </div>
-        </div>
-
-      </div>
-
-      <!-- Controles del Carrusel Dinámico -->
-      <div class="carousel-controls">
-        <button class="ctrl-btn prev" id="prevGalleryBtn" aria-label="Tarjeta Anterior">&larr;</button>
-        <div class="carousel-indicators" id="carouselIndicators">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
-        </div>
-        <button class="ctrl-btn next" id="nextGalleryBtn" aria-label="Tarjeta Siguiente">&rarr;</button>
-      </div>
-    </div>
-
-    <!-- Mosaico de Imágenes Interactivo (Grid) -->
-    <div class="gallery-grid" data-reveal>
-      <div class="grid-item">
-        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80" alt="Cielo Estelar">
-        <div class="grid-overlay">
-          <span class="grid-title">Lienzo Estelar</span>
-          <span class="grid-author">Por Tomás P.</span>
-        </div>
-      </div>
-      <div class="grid-item">
-        <img src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=600&q=80" alt="Paso de Cresta">
-        <div class="grid-overlay">
-          <span class="grid-title">Paso de Cresta Nocturno</span>
-          <span class="grid-author">Por Elena W.</span>
-        </div>
-      </div>
-      <div class="grid-item">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Refugio Nocturno">
-        <div class="grid-overlay">
-          <span class="grid-title">Vivac en Frey</span>
-          <span class="grid-author">Por Nicolás F.</span>
-        </div>
-      </div>
-      <div class="grid-item">
-        <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=600&q=80" alt="Cielo Profundo Patagonia">
-        <div class="grid-overlay">
-          <span class="grid-title">Nebulosas de Campo</span>
-          <span class="grid-author">Por Instructores Cúspides</span>
         </div>
       </div>
     </div>

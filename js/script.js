@@ -600,3 +600,74 @@ function initCuspidesGallerySlider() {
     setTimeout(initStarCanvasBackground, 100);
   }
 }
+/**
+ * MOTOR DE LA GALERÍA DESLIZANTE V2 (8 FOTOS) — CÚSPIDES
+ * Basado exactamente en la lógica estructural de animación por track horizontal.
+ */
+
+function initCuspidesExpeditionsSlider() {
+  const track = document.getElementById('gallery-track');
+  const prevBtn = document.getElementById('gallery-prev');
+  const nextBtn = document.getElementById('gallery-next');
+  
+  if (!track) return;
+
+  const slides = Array.from(track.children);
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  function moveToSlide(index) {
+    // Control circular seguro
+    if (index < 0) {
+      currentIndex = totalSlides - 1;
+    } else if (index >= totalSlides) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+    
+    // Desplazamiento horizontal por porcentaje idéntico a tu track de simuladores
+    const amountToMove = currentIndex * -100;
+    track.style.transform = `translateX(${amountToMove}%)`;
+  }
+
+  // Eventos de las flechitas chiquitas laterales
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      moveToSlide(currentIndex + 1);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      moveToSlide(currentIndex - 1);
+    });
+  }
+
+  // Soporte para gestos táctiles (Swipe) en móviles para mejorar la experiencia
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  }, { passive: true });
+
+  function handleSwipeGesture() {
+    if (touchStartX - touchEndX > 50) {
+      moveToSlide(currentIndex + 1); // Swipe izquierdo -> siguiente
+    }
+    if (touchEndX - touchStartX > 50) {
+      moveToSlide(currentIndex - 1); // Swipe derecho -> anterior
+    }
+  }
+}
+
+// Inyección automática en la carga del DOM
+document.addEventListener('DOMContentLoaded', () => {
+  initCuspidesExpeditionsSlider();
+});
