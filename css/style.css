@@ -1340,7 +1340,7 @@ section {
 }
 
 .gallery-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 4rem;
 }
 
@@ -1388,7 +1388,7 @@ section {
   z-index: 10;
   font-size: 1rem;
   line-height: 34px;
-  text-align: center;
+  text-align: left;
   transition: all 0.3s ease;
 }
 
