@@ -1,6 +1,16 @@
 /* ==========================================================================
    00. VARIABLES, PALETA DE COLOR OFICIAL Y RESET
    ========================================================================== */
+
+/* 1. Registrar la tipografía local 'Russo One' desde la carpeta 'fuentes' */
+@font-face {
+  font-family: 'Russo One';
+  src: url('../fuentes/russoone.ttf') format('truetype'); /* <-- CORREGIDO AQUÍ */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-primary: #7CA5C1;      
   --color-bg-dark: #0B2137;      
@@ -36,12 +46,19 @@ body {
   padding-top: 80px; 
 }
 
-h1, h2, h3, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title, .card-front-title {
+/* Solo el h1 principal usará Russo One */
+h1 {
   font-family: var(--font-display) !important;
 }
 
+/* El subtítulo "NUESTROS CURSOS EN VIVO" y demás elementos usarán Lato */
+h2, h3, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title, .card-front-title,
 p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p, .btn-saber-mas {
   font-family: var(--font-body) !important;
+}
+/* BLINDAJE PARA EL HERO: Obliga a los spans internos a heredar Russo One */
+.hero-title .title-line {
+  font-family: var(--font-display) !important;
 }
 
 /* ==========================================================================
@@ -348,6 +365,16 @@ section {
 
 .hero-subtitle { font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--color-text-muted); font-weight: 300; margin-bottom: 3.5rem; }
 .hero-actions { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 4.5rem; }
+
+/* Opción B: Estilizar para que las letras se perciban más delgadas */
+.hero-title .title-line {
+  font-weight: normal !important; /* Evita que el navegador fuerce un "bold" extra */
+  letter-spacing: 4px;           /* Separa las letras para dar aire y ligereza */
+  transform: scaleY(0.95);       /* Aplana imperceptiblemente la tipografía verticalmente */
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: none !important;  /* Quitamos cualquier sombra que la haga ver más gruesa */
+}
 
 .hero-data {
   display: flex;
@@ -937,10 +964,17 @@ section, .section-hero, .section-nosotros, .section-editorial, .section-cursos, 
   text-align: left !important;
 }
 
-/* Forzamos texto a la izquierda, exceptuando elementos estructurales tridimensionales */
+/* CORREGIDO: Separamos la alineación y reafirmamos el uso de Russo One */
+
+/* 1. Forzar alineación a la izquierda a todos los textos */
 h1, h2, h3, h4, p, span, .hero-title, .hero-subtitle, .nosotros-title, .nosotros-p, .editorial-title, .editorial-p, .cursos-title, .contact-title, .contact-sub, .gallery-header, .gallery-title, .gallery-sub {
   text-align: left !important;
   text-align-last: left !important;
+}
+
+/* 2. Blindaje final: Obligamos a todos los h1 de sección a usar la tipografía display */
+h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-title, .contact-title {
+  font-family: var(--font-display) !important;
 }
 
 /* Alineamos los bloques de texto sin romper los contenedores Flex/Grid */
