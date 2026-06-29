@@ -30,20 +30,131 @@
   padding: 0;
 }
 
+/* ==========================================================================
+   00. VARIABLES, PALETA DE COLOR OFICIAL Y RESET
+   ========================================================================== */
+
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-bg-deep);
   color: var(--color-text-light);
   font-family: var(--font-body);
   font-size: 16px;
   overflow-x: hidden;
+  /* El HTML mantiene el color más oscuro de base para evitar parpadeos blancos */
+  background-color: var(--color-bg-deep) !important;
 }
 
-body {
+/* ==========================================================================
+   00. CONFIGURACIÓN DEL FONDO INTEGRAL DE LA WEB
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+  /* Mantenemos un color oscuro de respaldo por si la imagen tarda en cargar */
+  background-color: var(--color-bg-deep) !important;
+}
+
+/* ==========================================================================
+   00. CONFIGURACIÓN DEL FONDO INTEGRAL DE LA WEB
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+  /* Fondo oscuro de respaldo por seguridad */
+  background-color: var(--color-bg-deep) !important;
+}
+
+body, 
+body.bg-dark, 
+body.text-light {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   padding-top: 80px; 
+  
+  /* ASIGNACIÓN DE TU IMAGEN PROPIA (Verifica la ruta exacta y la extensión) */
+  background-image: url('../assets/degradado.pmg') !important; 
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important; 
+  background-color: transparent !important; /* Limpia cualquier fondo que inyecten clases del HTML */
+}
+
+/* ==========================================================================
+   EXCEPCIÓN DEL HERO: Se mantiene sólido y oscuro (Noche)
+   ========================================================================== */
+#hero {
+  background-color: var(--color-bg-deep) !important;
+  background-image: none !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   TRANSPARENCIA ABSOLUTA PARA EL RESTO DE SECCIONES
+   ========================================================================== */
+section, 
+.section-dark, 
+.section-contact, 
+.bg-dark,
+#nosotros, 
+#editorial, 
+#cursos, 
+#contacto,
+#introduccion,
+#itinerario,
+#equipamiento,
+#certificacion {
+  background-color: transparent !important;
+  background-image: url('../assets/degradado.pmg') !important;
+}
+
+/* Aseguramos que los canvas de estrellas queden atrapados entre el fondo y los textos */
+.star-canvas {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* Forzamos a los bloques de contenido a flotar sobre las estrellas */
+.about-inner, 
+.editorial-inner, 
+.cursos-inner, 
+.contact-inner, 
+.gallery-inner,
+.course-hero-inner,
+.timeline-container,
+.equipment-grid {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* 2. EXCEPCIÓN DEL HERO: La sección inicial tapa la imagen para mantenerse oscura */
+#hero {
+  background-color: var(--color-bg-deep) !important;
+  background-image: none !important;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* 2. Blindaje de transparencia para las secciones */
+/* Esto garantiza que las constelaciones de los canvas y las letras floten sobre tu imagen */
+.section-dark, #nosotros, #editorial, #cursos, #contacto, .section-contact, .bg-dark {
+  background-color: transparent !important;
 }
 
 /* Solo el h1 principal usará Russo One */
@@ -1110,4 +1221,8 @@ button, .btn-saber-mas, .btn-whatsapp, .btn-editorial {
   /* Permite que el colapso del texto sea fluido en JS */
   transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
               opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+footer {
+  background-color: transparent !important;
+  border-top: 1px solid rgba(236, 237, 235, 0.1) !important;
 }

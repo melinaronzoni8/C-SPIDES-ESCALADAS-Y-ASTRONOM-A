@@ -24,6 +24,7 @@ function initReadingProgressBar() {
     const totalDocScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     
     if (totalDocScrollableHeight > 0) {
+      // Calcula el progreso y mueve la barra horizontal del encabezado
       const scrollPercentage = (windowScrollTop / totalDocScrollableHeight) * 100;
       progressBar.style.width = `${scrollPercentage}%`;
     }
