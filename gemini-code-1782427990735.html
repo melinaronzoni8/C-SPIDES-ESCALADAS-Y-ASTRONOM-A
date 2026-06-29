@@ -46,7 +46,7 @@
     </div>
   </nav>
 
-  <section id="hero" class="section-hero">
+  <header id="hero" class="section-hero">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
     
     <div class="hero-bg-parallax" aria-hidden="true">
@@ -70,13 +70,31 @@
         <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
         <a href="#programa" class="btn-ghost">VER PROGRAMA DE ÉLITE</a>
       </div>
+      
+      <div class="hero-data" data-reveal>
+        <div class="data-item">
+          <span class="data-value" data-count="3">0</span>
+          <span class="data-label">Noches de Expedición Vertical</span>
+        </div>
+        <div class="data-divider" aria-hidden="true"></div>
+        
+        <div class="data-item">
+          <span class="data-value">MÁXIMA</span>
+          <span class="data-label">Dificultad Técnico</span>
+        </div>
+        <div class="data-divider" aria-hidden="true"></div>
+        
+        <div class="data-item">
+          <span class="data-value" data-count="4">0</span>
+          <span class="data-label">Módulos Técnicos</span>
+        </div>
+      </div>
     </div>
-  </section>
+  </header>
 
   <section id="nosotros" class="section-nosotros">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
     <div class="nosotros-grid">
-      
       <div class="nosotros-body" data-reveal>
         <span class="section-tag">NUESTRA VISIÓN</span>
         <h2 class="nosotros-title">Tu experiencia previa es solo el punto de partida.</h2>
@@ -86,122 +104,8 @@
           </p>
         </div>
       </div>
-      
-      <div class="nosotros-image-col" data-reveal>
-        <img src="assets/image20.png" alt="Expedición Cúspides" class="nosotros-img" />
-      </div>
-
     </div>
   </section>
-  
-<section id="galeria" class="section-gallery section-dark">
-  <canvas class="star-canvas" aria-hidden="true"></canvas>
-  
-  <div class="gallery-container">
-    <div class="gallery-header">
-      <span class="section-tag tag-light" data-reveal>REGISTROS DE EXPEDICIÓN</span>
-      <h2 class="gallery-title" data-reveal>Nuestra Galería de Expediciones</h2>
-      <p class="gallery-sub" data-reveal>Capturas de nuestros alumnos y guías en las paredes verticales de la Patagonia bajo ventanas astronómicas óptimas.</p>
-    </div>
-
-    <!-- Carrusel Deslizante de 8 Fotos con Texto Superpuesto -->
-    <div class="gallery-carousel-side" data-reveal>
-      <div class="expeditions-carousel">
-        
-        <!-- Flechitas laterales chiquitas -->
-        <button class="carousel-arrow prev" id="gallery-prev" aria-label="Anterior">&larr;</button>
-        <button class="carousel-arrow next" id="gallery-next" aria-label="Siguiente">&rarr;</button>
-        
-        <div class="carousel-viewport">
-          <div class="carousel-track" id="gallery-track">
-            
-            <!-- Slide 1 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80" alt="Frey Ridge">
-              <div class="slide-overlay-content">
-                <h3>Frey Ridge</h3>
-                <p>"La Vía Láctea sobre las agujas verticales de granito." — Matías S.</p>
-                <span class="exif-tag">ISO 3200 • 25s • f/2.8</span>
-              </div>
-            </div>
-            
-            <!-- Slide 2 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Aguja Guillaumet">
-              <div class="slide-overlay-content">
-                <h3>Aguja Guillaumet</h3>
-                <p>"Aprender astrofotografía profunda colgada de un arnés." — Sofía R.</p>
-                <span class="exif-tag">ISO 6400 • 15s • f/1.8</span>
-              </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Valle del Challhuaco">
-              <div class="slide-overlay-content">
-                <h3>Challhuaco Vivac</h3>
-                <p>"La mejor introducción a la alta montaña y al cielo profundo." — Lucas G.</p>
-                <span class="exif-tag">ISO 1600 • 30s • f/4</span>
-              </div>
-            </div>
-            
-            <!-- Slide 4 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" alt="Cerro Catedral">
-              <div class="slide-overlay-content">
-                <h3>Torres de Catedral</h3>
-                <p>"Vivac de tres noches suspendidos sobre el abismo estelar." — Elena W.</p>
-                <span class="exif-tag">ISO 3200 • 20s • f/2.0</span>
-              </div>
-            </div>
-
-            <!-- Slide 5 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=800&q=80" alt="Paso de Cresta">
-              <div class="slide-overlay-content">
-                <h3>Paso de Cresta</h3>
-                <p>"Siluetas en progresión bajo la danza de las estrellas." — Tomás P.</p>
-                <span class="exif-tag">ISO 4000 • 13s • f/2.8</span>
-              </div>
-            </div>
-
-            <!-- Slide 6 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Refugio Frey">
-              <div class="slide-overlay-content">
-                <h3>Refugio en la Noche</h3>
-                <p>"Planificación de rutas verticales con mapas lumínicos." — Nicolás F.</p>
-                <span class="exif-tag">ISO 2000 • 25s • f/2.8</span>
-              </div>
-            </div>
-
-            <!-- Slide 7 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=800&q=80" alt="Glaciar Torrecillas">
-              <div class="slide-overlay-content">
-                <h3>Ventana Astronómica</h3>
-                <p>"Capturando la Nebulosa de Orión sobre hielo eterno." — Instructores</p>
-                <span class="exif-tag">ISO 6400 • 10s • f/1.4</span>
-              </div>
-            </div>
-
-            <!-- Slide 8 -->
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=800&q=80" alt="Pared Sur">
-              <div class="slide-overlay-content">
-                <h3>Paredes de Granito</h3>
-                <p>"El fin de una travesía técnica inolvidable." — Comunidad Cúspides</p>
-                <span class="exif-tag">ISO 3200 • 30s • f/2.8</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
   <section id="excursiones" class="section-editorial">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
@@ -289,12 +193,12 @@
 
   <section id="programa" class="section-program">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
+    
     <div class="program-inner">
       <span class="section-tag" data-reveal>RIDGE PROGRAM 2026</span>
       <h2 class="program-title" data-reveal>La ruta hacia la cumbre oscura.<br>Cuatro fases de dificultad.</h2>
       
       <div class="timeline-stack" data-reveal>
-        
         <div class="timeline-item-stack phase-01">
           <div class="stack-header">
             <span class="t-number">FASE 01</span>
@@ -350,8 +254,8 @@
             </div>
           </div>
         </div>
-
-      </div> <div class="program-pack spacer-fases" data-reveal>
+      </div> </div> <div class="program-inner program-pack-spacer">
+      <div class="program-pack" data-reveal>
         <div class="pack-inner">
           <div class="pack-left">
             <span class="pack-badge">PROCESO DE SELECCIÓN EXCLUSIVO</span>
@@ -363,21 +267,7 @@
           </div>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <section id="contacto" class="section-contact section-dark">
-    <canvas class="star-canvas" aria-hidden="true"></canvas>
-    <div class="contact-inner">
-      <span class="section-tag tag-light" data-reveal>ÚLTIMA CONVOCATORIA</span>
-      <h2 class="contact-title" data-reveal>Aceptá el desafío vertical.</h2>
-      <p class="contact-sub" data-reveal>Iniciá tu proceso de validación de experiencia. Las plazas para la expedición de 3 noches son estrictamente limitadas por cuestiones de seguridad en pared.</p>
-      <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
-        <span>CONSULTAR CURSOS POR WHATSAPP</span>
-      </button>
-    </div>
-  </section>
+    </div> </section>
 
   <section id="contacto" class="section-contact section-dark">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
