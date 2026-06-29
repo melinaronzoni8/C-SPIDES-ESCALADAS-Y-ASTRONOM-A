@@ -262,8 +262,8 @@ section {
 /* HERO */
 .section-hero {
   background: #050E18;
-  text-align: center;
-  justify-content: center;
+  text-align: left;
+  justify-content: left;
   padding: 12rem 2rem 2rem 2rem; 
   
   overflow: hidden;
@@ -396,7 +396,7 @@ section {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   gap: 5rem;
-  align-items: center;
+  align-items: left;
   width: 100%;
 }
 .nosotros-image-col {
@@ -1359,6 +1359,7 @@ section {
   max-width: 700px;
   margin: 0 auto;
   font-size: 1.1rem;
+  text-align: left;
 }
 
 /* --- ESTRUCTURA DEL CARRUSEL DE IMÁGENES COMPLETO --- */
@@ -1388,7 +1389,7 @@ section {
   z-index: 10;
   font-size: 1rem;
   line-height: 34px;
-  text-align: left;
+  text-align: center;
   transition: all 0.3s ease;
 }
 

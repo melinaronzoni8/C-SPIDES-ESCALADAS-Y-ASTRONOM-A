@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Excursión Integradora Final en la Patagonia — Cúspides." />
+  <title>Excursión Integradora Final — Cúspides</title>
+  
+  <!-- Tus fuentes oficiales (ya se heredan por cascada en style.css) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
+  
+  <!-- FontAwesome (mismos íconos que usás en el Home) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+  
+  <!-- Tu único archivo de estilos base -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-dark text-light">
+
+  <!-- Barra de progreso superior -->
+  <div id="scroll-progress"></div> <!-- Corregido al ID exacto de tu CSS -->
+
+  <!-- Menú de Navegación Oficial (Con tus clases exactas) -->
+  <nav id="main-nav" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-container">
+        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
+      </a>
+      <!-- Usamos las clases exactas de tu CSS: .nav-menu y .nav-link -->
+      <div class="nav-menu" id="navMenu">
+        <a href="#introduccion" class="nav-link">Introducción</a>
+        <a href="#requisitos" class="nav-link">Requisitos</a>
+        <a href="#itinerario" class="nav-link">Itinerario</a>
+        <a href="#logistica" class="nav-link">Logística</a>
+        <a href="#equipamiento" class="nav-link">Equipamiento</a>
+        <a href="index.html" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem; text-decoration: none;">Volver</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN 1: HERO (Adaptado a tu formato de .section-hero) -->
+  <section id="introduccion" class="section-hero section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>FASE MÁXIMA • EXPEDICIÓN DE 3 NOCHES</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      
+      <!-- Usamos tu truco de doble línea para títulos del Hero -->
+      <h1 class="hero-title">
+        <span class="title-line">Excursión</span>
+        <span class="title-line title-accent">Integradora Final</span>
+      </h1>
+      
+      <p class="hero-subtitle">La cumbre de nuestra formación de élite. Tres días de aislamiento táctico en las paredes de granito de la Patagonia profunda, fusionando la escalada de alta dificultad técnica con ventanas astronómicas de exposición extrema.</p>
+      
+      <!-- Tus contenedores de datos integrados -->
+      <div class="hero-data">
+        <div class="data-item">
+          <span class="data-value">Patagonia</span>
+          <span class="data-label">Entorno</span>
+        </div>
+        <div class="data-divider">/</div>
+        <div class="data-item">
+          <span class="data-value">72 Hs</span>
+          <span class="data-label">Duración</span>
+        </div>
+        <div class="data-divider">/</div>
+        <div class="data-item">
+          <span class="data-value">6b+</span>
+          <span class="data-label">Dificultad Mínima</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: REQUISITOS (Adaptado a tus tarjetas 3D .excursiones-grid) -->
+  <section id="requisitos" class="section-editorial">
+    <div class="excursiones-inner">
+      <span class="section-tag tag-light">FILTRO DE SEGURIDAD</span>
+      <h2 class="excursiones-title">Requisitos Obligatorios de Admisión</h2>
+      
+      <!-- Usamos tu grilla de 4 columnas y el efecto Flip 3D de tus tarjetas -->
+      <div class="excursiones-grid">
+        
+        <!-- Tarjeta 1 -->
+        <div class="excursion-card">
+          <div class="card-flip-inner">
+            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
+              <i class="fas fa-shield-halved" style="font-size: 3rem; color: var(--color-primary);"></i>
+              <h4 style="font-family: var(--font-display);">Fase 1 y 2</h4>
+            </div>
+            <div class="card-back">
+              <h3>Fases Completadas</h3>
+              <p>Haber aprobado los módulos de Progresión en Roca Nocturna y Manejo de Exposición Lumínica Crítica de Cúspides.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="excursion-card">
+          <div class="card-flip-inner">
+            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
+              <i class="fas fa-heart-pulse" style="font-size: 3rem; color: var(--color-primary);"></i>
+              <h4 style="font-family: var(--font-display);">Autonomía</h4>
+            </div>
+            <div class="card-back">
+              <h3>Autorrescate</h3>
+              <p>Dominio absoluto de nudos de bloqueo (Prusik, Machard), polipastos simples y maniobras de descenso a oscuras.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="excursion-card">
+          <div class="card-flip-inner">
+            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
+              <i class="fas fa-ruler-vertical" style="font-size: 3rem; color: var(--color-primary);"></i>
+              <h4 style="font-family: var(--font-display);">Nivel Técnico</h4>
+            </div>
+            <div class="card-back">
+              <h3>Escalada Sólida</h3>
+              <p>Capacidad demostrable de puntear vías de grado 6b (escala francesa) o contar con solidez en boulder de grado V4.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: ITINERARIO CRONOLÓGICO (Usa tu .timeline de fases integrado) -->
+  <section id="itinerario" class="section-program">
+    <div class="program-inner">
+      <span class="section-tag tag-light">PLAN DE OPERACIONES</span>
+      <h2 class="program-title">Cronograma Técnico de la Misión</h2>
+      
+      <!-- Usamos la estructura nativa de tus bloques de curso (.timeline-item-stack) -->
+      <div class="timeline-stack">
+        
+        <!-- Bloque Día 1 -->
+        <div class="timeline-item-stack phase-01 active">
+          <div class="stack-header">
+            <span class="t-number">DÍA 01</span>
+            <h3 class="t-title">Aproximación y Emplazamiento Vertical</h3>
+          </div>
+          <div class="stack-content" style="opacity: 1; visibility: visible; max-height: none;">
+            <p class="t-desc">Ascenso al vivac de altura portando equipo técnico completo. Evaluación meteorológica in situ y montaje del campamento base flotante (portaledges) antes del crepúsculo astronómico.</p>
+          </div>
+        </div>
+
+        <!-- Bloque Día 2 -->
+        <div class="timeline-item-stack phase-02 active">
+          <div class="stack-header">
+            <span class="t-number">DÍA 02</span>
+            <h3 class="t-title">Ataque a las Agujas y Rastreo Estelar</h3>
+          </div>
+          <div class="stack-content" style="opacity: 1; visibility: visible; max-height: none;">
+            <p class="t-desc">Escalada en cordada durante la ventana de máxima oscuridad (01:00 AM a 04:30 AM). Fijación de estaciones fotográficas suspendidas en repisas de granito para capturas de cielo profundo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: LOGÍSTICA (Usa tu bloque destacado .program-pack) -->
+  <section id="logistica" class="section-program">
+    <div class="program-inner">
+      <div class="program-pack">
+        <div class="pack-inner">
+          <span class="pack-badge">CONTINGENCIA DE ALTA MONTAÑA</span>
+          <h2 class="pack-title">Seguridad Activa y Logística</h2>
+          <p class="pack-text" style="margin-bottom: 1rem;">• <strong>Enlace Satelital:</strong> Dispositivos Garmin InReach activos las 24 horas con reportes en tiempo real.</p>
+          <p class="pack-text" style="margin-bottom: 1rem;">• <strong>Ratio de Seguridad:</strong> Estricto ratio de un Guía de Alta Montaña UIAGM por cada dos alumnos (1:2).</p>
+          <p class="pack-text">• <strong>Soporte Médico:</strong> Kits de trauma completos de expedición y protocolos unificados WFR.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: ACCIÓN Y POSTULACIÓN -->
+  <section id="certificacion" class="section-contact">
+    <div class="contact-inner">
+      <h2 class="contact-title">Acreditación Vertical Homologada</h2>
+      <p class="contact-sub">Las ventanas de buen clima estelar en la Patagonia son sumamente limitadas. Iniciá tu proceso de postulación técnica ahora mismo.</p>
+      
+      <!-- Tu botón nativo de WhatsApp oficial -->
+      <button class="btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> INICIAR MI POSTULACIÓN TÉCNICA
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer con tus clases -->
+  <footer style="text-align: center; padding: 4rem 2rem; background-color: var(--color-bg-deep); border-top: 1px solid rgba(236,237,235,0.05);">
+    <p style="color: var(--color-text-muted); font-size: 0.9rem;">&copy; 2026 Cúspides Formación Avanzada.</p>
+  </footer>
+
+  <!-- Tu motor JavaScript (Asegúrate de que exista para que no tire error) -->
+  <script src="js/script.js"></script>
+</body>
+
+  <!-- Barra de progreso superior (si tenés la clase en tu CSS) -->
+  <div id="scroll-progress" class="progress-bar-glow" aria-hidden="true"></div>
+
+  <!-- Menú de Navegación Idéntico al Principal -->
+  <nav id="main-nav" class="nav-container" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="logo-link">
+        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-logo" />
+      </a>
+      <div class="nav-links" id="navMenu">
+        <a href="#introduccion" class="nav-item">Introducción</a>
+        <a href="#requisitos" class="nav-item">Requisitos</a>
+        <a href="#itinerario" class="nav-item">Itinerario</a>
+        <a href="#logistica" class="nav-item">Logística</a>
+        <a href="#equipamiento" class="nav-item">Equipamiento</a>
+        <a href="#certificacion" class="nav-item">Acreditación</a>
+        <a href="index.html" class="btn-primary btn-nav-back">Volver</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN 1: HERO (Usa tus clases de cabecera estándar) -->
+  <header id="introduccion" class="hero-section section-dark text-center">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container main-content">
+      <span class="badge-tag" data-reveal>FASE MÁXIMA • EXPEDICIÓN DE 3 NOCHES</span>
+      <h1 class="main-title" data-reveal>Excursión Integradora Final</h1>
+      <p class="subtitle" data-reveal>La cumbre de nuestra formación de élite. Tres días de aislamiento táctico en las paredes de granito de la Patagonia profunda, fusionando la escalada de alta dificultad técnica con ventanas astronómicas de exposición extrema.</p>
+      
+      <!-- Tabla de especificaciones con la misma estructura de filas de tu web -->
+      <div class="info-grid row" data-reveal>
+        <div class="col-3 text-center">
+          <i class="fas fa-mountain icon-primary"></i>
+          <h3 class="item-title">Entorno</h3>
+          <p class="item-desc">Aguja Guillaumet / Frey</p>
+        </div>
+        <div class="col-3 text-center">
+          <i class="fas fa-clock icon-primary"></i>
+          <h3 class="item-title">Duración</h3>
+          <p class="item-desc">72 Horas Continuas</p>
+        </div>
+        <div class="col-3 text-center">
+          <i class="fas fa-signal icon-primary"></i>
+          <h3 class="item-title">Dificultad</h3>
+          <p class="item-desc">Avanzada (6b+ / V4 Mínimo)</p>
+        </div>
+        <div class="col-3 text-center">
+          <i class="fas fa-camera icon-primary"></i>
+          <h3 class="item-title">Enfoque</h3>
+          <p class="item-desc">Cielo Profundo Terrestre</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN 2: REQUISITOS (Misma estructura de tarjetas/cards de tus cursos) -->
+  <section id="requisitos" class="section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <span class="badge-tag" data-reveal>FILTRO DE SEGURIDAD</span>
+      <h2 class="section-title" data-reveal>Requisitos Obligatorios de Admisión</h2>
+      <p class="section-desc" data-reveal>Esta expedición no es turística. Para asegurar la viabilidad del grupo en la pared nocturna, cada postulante debe certificar los siguientes estándares:</p>
+      
+      <div class="cards-grid row" data-reveal>
+        <div class="card col-4">
+          <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+          <h3 class="card-title">Fase 1 y Fase 2 Completadas</h3>
+          <p class="card-text">Haber aprobado los módulos de Progresión en Roca Nocturna y Manejo de Exposición Lumínica Crítica de Cúspides.</p>
+        </div>
+        <div class="card col-4">
+          <div class="card-icon"><i class="fas fa-heart-pulse"></i></div>
+          <h3 class="card-title">Autonomía en Autorrescate</h3>
+          <p class="card-text">Dominio absoluto de nudos de bloqueo (Prusik, Machard), polipastos simples y maniobras de descenso a oscuras.</p>
+        </div>
+        <div class="card col-4">
+          <div class="card-icon"><i class="fas fa-ruler-vertical"></i></div>
+          <h3 class="card-title">Nivel Técnico en Escalada</h3>
+          <p class="card-text">Capacidad demostrable de puntear vías de grado 6b (escala francesa) o contar con solidez en boulder de grado V4.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: ITINERARIO CRONOLÓGICO -->
+  <section id="itinerario" class="section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <span class="badge-tag" data-reveal>PLAN DE OPERACIONES</span>
+      <h2 class="section-title" data-reveal>Cronograma Técnico de la Misión</h2>
+      
+      <!-- Reutiliza las clases de tu timeline principal -->
+      <div class="timeline-container">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-badge">DÍA 1</div>
+          <div class="timeline-content">
+            <h3 class="item-title">Aproximación y Emplazamiento Vertical</h3>
+            <p class="item-text">Ascenso al vivac de altura portando equipo técnico completo. Evaluación meteorológica in situ y montaje del campamento base flotante (portaledges) en la pared elegida antes del crepúsculo astronómico.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-badge">DÍA 2</div>
+          <div class="timeline-content">
+            <h3 class="item-title">Ataque a las Agujas y Rastreo Estelar</h3>
+            <p class="item-text">Escalade en cordada durante la ventana de máxima oscuridad (01:00 AM a 04:30 AM). Fijación de estaciones fotográficas suspendidas en repisas de granito para capturas de cielo profundo sin contaminación lumínica.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-badge">DÍA 3</div>
+          <div class="timeline-content">
+            <h3 class="item-title">Integración Final y Descenso Táctico</h3>
+            <p class="item-text">Procesamiento de astrofotografías en condiciones de vivac. Descenso mediante líneas de rápel encadenadas aplicando protocolos de impacto ambiental cero y repliegue seguro hacia la base.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: LOGÍSTICA (Usa el formato de filas alternas o tablas limpias de tu sitio) -->
+  <section id="logistica" class="section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <span class="badge-tag" data-reveal>CONTINGENCIA DE ALTA MONTAÑA</span>
+      <h2 class="section-title" data-reveal>Logística, Comunicación y Seguridad Activa</h2>
+      
+      <div class="table-responsive" data-reveal>
+        <table class="custom-table text-left">
+          <tbody>
+            <tr>
+              <td><strong class="text-primary"><i class="fas fa-satellite"></i> Enlace de Redundancia</strong></td>
+              <td>Dispositivos satelitales Garmin InReach activos las 24 horas con reportes meteorológicos en tiempo real.</td>
+            </tr>
+            <tr>
+              <td><strong class="text-primary"><i class="fas fa-user-shield"></i> Ratio de Seguridad</strong></td>
+              <td>Estricto ratio de un Guía de Alta Montaña UIAGM por cada dos alumnos (1:2), garantizando supervisión personalizada.</td>
+            </tr>
+            <tr>
+              <td><strong class="text-primary"><i class="fas fa-kit-medical"></i> Soporte Médico</strong></td>
+              <td>Kits de trauma completos de expedición y protocolos unificados WFR (Wilderness First Responder).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: EQUIPAMIENTO -->
+  <section id="equipamiento" class="section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <span class="badge-tag" data-reveal>LISTA DE CARGA</span>
+      <h2 class="section-title" data-reveal>Equipamiento Requerido e Incluido</h2>
+      
+      <div class="row" data-reveal>
+        <div class="col-6 split-box">
+          <h3 class="text-primary"><i class="fas fa-check-circle"></i> Provisto por Cúspides</h3>
+          <ul class="custom-list">
+            <li>Portaledges técnicos dobles de alta resistencia con fly impermeable.</li>
+            <li>Cuerdas dinámicas y estáticas certificadas UIAA.</li>
+            <li>Anclajes móviles, friends, empotradores y sistemas de izado de carga.</li>
+            <li>Estaciones de seguimiento estelar astronómico (Star Trackers).</li>
+          </ul>
+        </div>
+        <div class="col-6 split-box">
+          <h3 class="text-highlight"><i class="fas fa-user-gear"></i> Aportado por el Alumno</h3>
+          <ul class="custom-list">
+            <li>Arnés técnico, casco de escalada y linterna frontal de doble haz (rojo/blanco).</li>
+            <li>Calzado técnico de aproximación y zapatillas de escalada (pedulas).</li>
+            <li>Cámara Réflex o Mirrorless con control manual y objetivo gran angular luminoso.</li>
+            <li>Bolsa de dormir apta para temperaturas extremas de alta montaña (-10°C confort).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: ACCIÓN Y CERTIFICACIÓN -->
+  <section id="certificacion" class="section-dark text-center">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="container unique-cta-block">
+      <span class="badge-tag" data-reveal>CREDENCIAL DE ÉLITE</span>
+      <h2 class="section-title" data-reveal>Acreditación Vertical Homologada</h2>
+      <p class="section-desc" data-reveal>Al completar con éxito las 72 horas operativas de la Excursión Integradora Final, recibirás el certificado oficial de Cúspides.</p>
+      
+      <div class="cta-container" data-reveal>
+        <p class="urgency-text">Las ventanas de buen clima estelar en la Patagonia son sumamente limitadas. El proceso de postulación técnica toma tiempo.</p>
+        <!-- Tu botón nativo de WhatsApp con las mismas clases del Index -->
+        <button class="btn-whatsapp main-btn-style" onclick="openWhatsApp()">
+          <i class="fab fa-whatsapp"></i> INICIAR MI POSTULACIÓN TÉCNICA
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer con tus clases base -->
+  <footer class="main-footer text-center">
+    <p>&copy; 2026 Cúspides Formación Avanzada.</p>
+  </footer>
+
+  <!-- Tu único motor JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
