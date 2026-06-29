@@ -391,7 +391,7 @@ section {
   background: #050E18;
   text-align: center;
   justify-content: center;
-  padding: 12rem 2rem 2rem 2rem; 
+  padding: 6rem 2rem 2rem 2rem; 
   overflow: hidden;
 }
 
@@ -1303,4 +1303,54 @@ button, .btn-saber-mas, .btn-whatsapp, .btn-editorial {
 footer {
   background-color: transparent !important;
   border-top: 1px solid rgba(236, 237, 235, 0.1) !important;
+}
+/* ==========================================================================
+   ALINEACIÓN: CENTRADO VERTICAL CON TEXTO A LA IZQUIERDA EN EL HERO
+   ========================================================================== */
+
+/* 1. El contenedor del Hero se centra VERTICALMENTE, pero alinea su contenido a la izquierda */
+#hero .hero-inner,
+#hero {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;  /* ¡Clave! Centrado vertical exacto en el frame */
+  align-items: flex-start !important;  /* Empuja todo el bloque hacia la izquierda */
+  text-align: left !important;         /* Alineación del texto a la izquierda */
+  min-height: calc(100vh - 80px) !important; /* Ocupa el alto completo de la pantalla */
+  width: 100% !important;
+  padding-left: 10% !important;        /* Margen elegante para que no pegue contra el borde de la pantalla */
+  padding-right: 5% !important;
+}
+
+/* 2. Ajuste estricto a la izquierda para el título y sus líneas individuales */
+#hero .hero-title,
+#hero .hero-title .title-line {
+  text-align: left !important;
+  text-align-last: left !important;   /* Asegura que la última línea también vaya a la izquierda */
+  width: auto !important;
+  display: block !important;
+}
+
+/* 3. Ajuste para los botones de acción para que arranquen desde la izquierda */
+#hero .hero-actions {
+  display: flex !important;
+  justify-content: flex-start !important; /* Botones alineados a la izquierda abajo del título */
+  gap: 1.5rem !important;                /* Separación entre botones */
+  width: auto !important;
+  margin-top: 2.5rem !important;         /* Espacio generoso respecto al texto */
+}
+
+/* Ajuste responsivo para pantallas pequeñas (celulares) */
+@media (max-width: 576px) {
+  #hero .hero-inner,
+  #hero {
+    padding-left: 5% !important;        /* Reducimos el margen en móviles para ganar espacio */
+  }
+  
+  #hero .hero-actions {
+    flex-direction: column !important;   /* Los botones se apilan verticales si no entran */
+    align-items: flex-start !important;  /* Mantienen la línea izquierda perfecta */
+    gap: 1rem !important;
+    width: 100% !important;
+  }
 }
