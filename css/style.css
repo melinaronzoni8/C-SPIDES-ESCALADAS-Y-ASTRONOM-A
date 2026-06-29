@@ -1388,7 +1388,7 @@ section {
   z-index: 10;
   font-size: 1rem;
   line-height: 34px;
-  text-align: left;
+  text-align: center;
   transition: all 0.3s ease;
 }
 
@@ -1497,4 +1497,78 @@ section {
   }
   .carousel-arrow.prev { left: 5px; }
   .carousel-arrow.next { right: 5px; }
+}
+/* ==========================================================================
+   FORZAR ALINEACIÓN ESTRICTA A LA IZQUIERDA EN TODAS LAS SECCIONES
+   ========================================================================== */
+
+/* 1. Reset general de textos y alineación de secciones */
+section, 
+.section-hero, 
+.section-nosotros, 
+.section-editorial, 
+.section-excursiones, 
+.section-program, 
+.section-contact,
+.section-gallery {
+  text-align: left !important;
+  justify-content: flex-start !important;
+}
+
+/* 2. Forzar elementos de texto a la izquierda */
+h1, h2, h3, h4, p, span, 
+.hero-title, .hero-subtitle, 
+.nosotros-title, .nosotros-p,
+.editorial-title, .editorial-p,
+.excursiones-title, .program-title,
+.contact-title, .contact-sub,
+.gallery-header, .gallery-title, .gallery-sub {
+  text-align: left !important;
+  text-align-last: left !important;
+}
+
+/* 3. Corrección de los bloques que estaban centrados o a la derecha */
+.hero-content, 
+.hero-eyebrow, 
+.hero-actions, 
+.hero-data,
+.nosotros-body,
+.contact-inner,
+.gallery-container,
+.gallery-carousel-side {
+  margin-left: 0 !important; /* Quita el centrado automático (margin: 0 auto) */
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+/* 4. Reestructuración de grillas asimétricas (Nosotros y Editorial) 
+   para que sigan un orden natural de izquierda a derecha */
+@media (min-width: 769px) {
+  .nosotros-grid {
+    /* Cambiamos el orden para que el texto aparezca primero a la izquierda y la foto a la derecha */
+    grid-template-columns: 1.2fr 0.8fr !important; 
+  }
+  
+  .nosotros-text-col {
+    order: 1 !important;
+  }
+  
+  .nosotros-image-col {
+    order: 2 !important;
+    border-left: 1px solid rgba(236, 237, 235, 0.1) !important;
+    border-right: none !important;
+    padding-left: 2rem !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* 5. Ajuste del bloque del acordeón/timeline para evitar desfases */
+.stack-header {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.timeline-item-stack .stack-header .t-title {
+  text-align: left !important;
 }
