@@ -702,6 +702,84 @@ section {
   text-align: left !important;
   margin-bottom: 4rem; /* espacio para el botón inferior derecho */
 }
+/* ==========================================================================
+   EFECTO ESTELAR DE ILUMINACIÓN EXTREMA — TARJETA "CURSO FINAL"
+   ========================================================================== */
+
+/* 1. Seleccionamos de forma única la última tarjeta y le damos iluminación base */
+.cursos-grid .curso-card:last-child {
+  position: relative;
+  /* Creamos un resplandor de fondo (aura) combinando el azul y tu color naranja destacado */
+  box-shadow: 0 0 25px rgba(24, 63, 111, 0.4), 
+              0 0 50px rgba(31, 173, 255, 0.3) !important;
+  border: 1px solid #7CA5C1;
+  animation: auraPulsante 4s ease-in-out infinite alternate;
+}
+
+/* 2. Forzamos a que el frente de esta tarjeta tenga un brillo extra */
+.cursos-grid .curso-card:last-child .card-front {
+  background: linear-gradient(135deg, rgba(11, 33, 55, 0.95) 0%, rgba(24, 63, 111, 0.8) 100%) !important;
+}
+
+/* 3. Inyección de Destellos Estelares (Estrellas de 4 puntas) usando pseudo-elementos */
+.cursos-grid .curso-card:last-child::before,
+.cursos-grid .curso-card:last-child::after {
+  content: "✦" !important;
+  position: absolute !important;
+  font-family: serif !important;
+  color: #fff !important; 
+  text-shadow: 0 0 10px #7CA5C1, 0 0 20px #fff !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+}
+
+/* Posicionamos el destello de la esquina superior derecha */
+.cursos-grid .curso-card:last-child::before {
+  top: -10px !important;
+  right: 15px !important;
+  font-size: 28px !important;
+  animation: destelloEstelar 2.5s ease-in-out infinite;
+}
+
+/* Posicionamos el destello de la esquina inferior izquierda */
+.cursos-grid .curso-card:last-child::after {
+  bottom: 15px !important;
+  left: -10px !important;
+  font-size: 22px !important;
+  animation: destelloEstelar 3s ease-in-out infinite 0.5s; /* Desfasado para naturalidad */
+}
+
+/* ==========================================================================
+   MOTORES DE ANIMACIÓN CINÉTICA (KEYFRAMES)
+   ========================================================================== */
+
+/* Animación del aura para que simule la oscilación de una nebulosa */
+@keyframes auraPulsante {
+  0% {
+    box-shadow: 0 0 20px rgba(24, 63, 111, 0.4), 
+                0 0 40px rgba(255, 132, 31, 0.2);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(24, 63, 111, 0.6), 
+                0 0 70px rgba(255, 255, 255, 0.733);
+    transform: scale(1.015); /* Crece milimétricamente flotando */
+  }
+}
+
+/* Animación de titileo y rotación fina para las estrellas fijas */
+@keyframes destelloEstelar {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.7) rotate(0deg);
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3) rotate(15deg);
+    filter: blur(0px);
+  }
+}
 
 /* Botón inferior derecho "SABER MÁS" */
 .btn-saber-mas {
