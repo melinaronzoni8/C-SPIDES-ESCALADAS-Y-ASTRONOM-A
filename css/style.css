@@ -31,34 +31,6 @@
 }
 
 /* ==========================================================================
-   00. VARIABLES, PALETA DE COLOR OFICIAL Y RESET
-   ========================================================================== */
-
-html {
-  scroll-behavior: smooth;
-  color: var(--color-text-light);
-  font-family: var(--font-body);
-  font-size: 16px;
-  overflow-x: hidden;
-  /* El HTML mantiene el color más oscuro de base para evitar parpadeos blancos */
-  background-color: var(--color-bg-deep) !important;
-}
-
-/* ==========================================================================
-   00. CONFIGURACIÓN DEL FONDO INTEGRAL DE LA WEB
-   ========================================================================== */
-
-html {
-  scroll-behavior: smooth;
-  color: var(--color-text-light);
-  font-family: var(--font-body);
-  font-size: 16px;
-  overflow-x: hidden;
-  /* Mantenemos un color oscuro de respaldo por si la imagen tarda en cargar */
-  background-color: var(--color-bg-deep) !important;
-}
-
-/* ==========================================================================
    00. CONFIGURACIÓN DEL FONDO INTEGRAL DE LA WEB
    ========================================================================== */
 
@@ -72,23 +44,19 @@ html {
   background-color: var(--color-bg-deep) !important;
 }
 
-body, 
-body.bg-dark, 
-body.text-light {
-  min-height: 100vh;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  padding-top: 80px; 
-  
-  /* ASIGNACIÓN DE TU IMAGEN PROPIA (Verifica la ruta exacta y la extensión) */
-  background-image: url('../assets/degradado.pmg') !important; 
-  background-size: cover !important;
-  background-position: center top !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important; 
-  background-color: transparent !important; /* Limpia cualquier fondo que inyecten clases del HTML */
+body {
+  background-color:trasparent !important; /* Permite que el fondo del html se vea */
+  /* Nueva imagen de fondo general fija */
+  background-image: url('../assets/degradado.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* Mantiene el fondo quieto mientras haces scroll */
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  position: relative;
 }
-
 /* ==========================================================================
    EXCEPCIÓN DEL HERO: Se mantiene sólido y oscuro (Noche)
    ========================================================================== */
@@ -115,7 +83,7 @@ section,
 #equipamiento,
 #certificacion {
   background-color: transparent !important;
-  background-image: url('../assets/degradado.pmg') !important;
+  background-image: none !important;
 }
 
 /* Aseguramos que los canvas de estrellas queden atrapados entre el fondo y los textos */
@@ -1173,6 +1141,7 @@ h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-titl
   margin-left: 0 !important; 
   text-align: left !important;
 }
+
 
 /* ==========================================================================
    BLINDAJE TRIDIMENSIONAL DE LAS CARDS (Corrige el desplazamiento de image_9514f4.jpg)
