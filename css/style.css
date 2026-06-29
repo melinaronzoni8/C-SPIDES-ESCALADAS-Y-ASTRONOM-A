@@ -931,22 +931,70 @@ bottom: 1.8rem !important;
 }
 
 /* ==========================================================================
-   FORZAR ALINEACIÓN ESTRICTA A LA IZQUIERDA EN TODAS LAS SECCIONES
+   FORZAR ALINEACIÓN ESTRICTA A LA IZQUIERDA (PRESERVANDO LAS TARJETAS 3D)
    ========================================================================== */
 section, .section-hero, .section-nosotros, .section-editorial, .section-cursos, .section-contact, .section-gallery {
   text-align: left !important;
-  justify-content: flex-start !important;
 }
 
+/* Forzamos texto a la izquierda, exceptuando elementos estructurales tridimensionales */
 h1, h2, h3, h4, p, span, .hero-title, .hero-subtitle, .nosotros-title, .nosotros-p, .editorial-title, .editorial-p, .cursos-title, .contact-title, .contact-sub, .gallery-header, .gallery-title, .gallery-sub {
   text-align: left !important;
   text-align-last: left !important;
 }
 
+/* Alineamos los bloques de texto sin romper los contenedores Flex/Grid */
 .hero-content, .hero-eyebrow, .hero-actions, .hero-data, .nosotros-body, .contact-inner, .gallery-container, .gallery-carousel-side {
   margin-left: 0 !important; 
-  justify-content: flex-start !important;
   text-align: left !important;
+}
+
+/* ==========================================================================
+   BLINDAJE TRIDIMENSIONAL DE LAS CARDS (Corrige el desplazamiento de image_9514f4.jpg)
+   ========================================================================== */
+.curso-card {
+  perspective: 1000px !important;
+}
+
+.card-flip-inner {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform-style: preserve-3d !important;
+}
+
+/* Obliga al frente y al dorso a ocupar EXACTAMENTE el mismo espacio superpuesto */
+.card-front, .card-back {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+.card-back {
+  transform: rotateY(180deg) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  padding: 2.2rem 1.8rem !important;
+}
+
+/* Posicionamiento blindado del botón abajo a la derecha */
+.card-back .btn-saber-mas {
+  position: absolute !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+.card-back .btn-saber-mas:hover {
+  transform: scale(1.05) !important;
 }
 
 @media (min-width: 769px) {
