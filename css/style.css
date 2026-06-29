@@ -33,15 +33,14 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  
   padding-top: 80px; 
 }
 
-h1, h2, h3, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title {
+h1, h2, h3, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title, .card-front-title {
   font-family: var(--font-display) !important;
 }
 
-p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p {
+p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p, .btn-saber-mas {
   font-family: var(--font-body) !important;
 }
 
@@ -265,7 +264,6 @@ section {
   text-align: center;
   justify-content: center;
   padding: 12rem 2rem 2rem 2rem; 
-  
   overflow: hidden;
 }
 
@@ -375,21 +373,13 @@ section {
     max-width: 80%;
     text-align: left;
   }
-  .hero-eyebrow {
-    justify-content: flex-start;
-  }
-  .hero-actions {
-    justify-content: flex-start;
-  }
-  .hero-data {
-    justify-content: flex-start;
-  }
+  .hero-eyebrow { justify-content: flex-start; }
+  .hero-actions { justify-content: flex-start; }
+  .hero-data { justify-content: flex-start; }
 }
 
-/* SECCIÓN NUEVA: NOSOTROS */
-.section-nosotros {
-  background-color: var(--color-bg-deep);
-}
+/* SECCIÓN: NOSOTROS */
+.section-nosotros { background-color: var(--color-bg-deep); }
 .nosotros-grid {
   max-width: 1400px;
   margin: 0 auto;
@@ -410,9 +400,7 @@ section {
   object-fit: cover;
   border-radius: 4px;
 }
-.nosotros-body {
-  text-align: right;
-}
+.nosotros-body { text-align: right; }
 .nosotros-title {
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.15;
@@ -427,7 +415,7 @@ section {
   margin-bottom: 1.5rem;
 }
 
-/* EXCURSIONES (ANTERIOR QUIÉNES SOMOS) */
+/* EXCURSIONES */
 .section-editorial { background-color: var(--color-bg-dark); }
 .editorial-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; width: 100%; }
 .editorial-title { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 3rem; }
@@ -483,7 +471,9 @@ section {
 .slide-img.active { transform: translateX(0); z-index: 2; }
 .slide-img.exit { transform: translateX(-100%); z-index: 1; }
 
-/* SECCIÓN CURSOS (ANTERIOR EXCURSIONES-GALERIA) CON REDISEÑO DE TARJETAS 3D Y 4 COLUMNAS */
+/* ==========================================================================
+   SECCIONES CURSOS - ADAPTACIÓN REQUERIMIENTOS DE ALINEACIÓN Y BOTÓN
+   ========================================================================== */
 .section-cursos { width: 100%; }
 .cursos-inner { max-width: 1400px; margin: 0 auto; width: 100%; }
 .cursos-title { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 4rem; }
@@ -519,28 +509,98 @@ section {
   overflow: hidden;
 }
 
+/* Frente de la tarjeta */
 .card-front {
   background: rgba(11, 33, 55, 0.5);
+  position: relative;
 }
 
 .card-img-holder { height: 100%; width: 100%; }
 .card-img-holder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
 
+/* Título superior izquierdo en el frente */
+.card-front-title {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 5;
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+/* Reverso de la tarjeta con alineación arriba a la izquierda */
 .card-back {
   background: var(--color-bg-dark);
   color: var(--color-text-light);
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  justify-content: flex-start; /* Alineado arriba */
+  align-items: flex-start;     /* Alineado a la izquierda */
+  padding: 2.2rem 1.8rem;
   border-color: var(--color-primary);
   box-shadow: 0 0 20px rgba(124, 165, 193, 0.2);
+  position: relative;
 }
 
-.card-back h3 { margin-bottom: 1rem; font-size: 1.3rem; color: var(--color-primary); }
-.card-back p { color: var(--color-text-muted); font-weight: 300; font-size: 0.95rem; line-height: 1.5; }
+.card-back h3 { 
+  margin-top: 0;
+  margin-bottom: 0.8rem; 
+  font-size: 1.3rem; 
+  color: var(--color-primary); 
+  text-align: left !important;
+}
+
+.card-back p { 
+  color: var(--color-text-muted); 
+  font-weight: 300; 
+  font-size: 0.95rem; 
+  line-height: 1.5; 
+  text-align: left !important;
+  margin-bottom: 4rem; /* espacio para el botón inferior derecho */
+}
+
+/* Botón inferior derecho "SABER MÁS" */
+.btn-saber-mas {
+position: absolute !important;
+  bottom: 1.8rem !important;  /* Lo posiciona en la parte inferior */
+  right: 1.8rem !important;   /* Lo posiciona a la derecha */
+  top: auto !important;       /* Cancela cualquier anclaje superior previo */
+  left: auto !important;      /* Cancela cualquier anclaje izquierdo previo */
+  
+  /* Asegura que no sufra desvíos tridimensionales por herencia */
+  transform: translate(0, 0) scale(1) !important; 
+  transition: all 0.3s ease-in-out !important;
+  
+  /* Estilos visuales base */
+  background: transparent !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  padding: 0.6rem 1.2rem !important;
+  font-size: 0.85rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+}
+
+.btn-saber-mas:hover {
+bottom: 1.8rem !important;
+  right: 1.8rem !important;
+  top: auto !important;
+  left: auto !important;
+  
+  /* Escalado limpio sin alterar coordenadas absolutas */
+  transform: scale(1.05) !important; 
+  
+  background: var(--color-highlight) !important;
+  color: white !important;
+  border-color: var(--color-highlight) !important;
+  box-shadow: 0 4px 15px rgba(255, 132, 31, 0.4) !important;
+}
 
 /* CONTACTO */
 .section-contact { justify-content: center; text-align: center; background: radial-gradient(circle at center, #15021a 0%, var(--color-bg-deep) 100%); }
@@ -585,11 +645,7 @@ section {
   .menu-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
-/* ==========================================================================
-   AJUSTE RESPONSIVE: IMAGEN DE FONDO Y RECUADRO EN SECCIÓN "NOSOTROS"
-   ========================================================================== */
-
-/* En pantallas grandes el contenedor de texto es invisible visualmente */
+/* AJUSTE RESPONSIVE: IMAGEN DE FONDO Y RECUADRO EN SECCIÓN "NOSOTROS" */
 .nosotros-content-box {
   background: transparent;
   padding: 0;
@@ -597,10 +653,7 @@ section {
   border: none;
 }
 
-/* Solo se activa en dispositivos móviles */
 @media (max-width: 768px) {
-  
-  /* Convertimos el grid en un contenedor relativo para posicionar la foto por detrás */
   .nosotros-grid {
     position: relative;
     grid-template-columns: 1fr;
@@ -609,8 +662,6 @@ section {
     overflow: hidden;
     border-radius: 8px;
   }
-
-  /* Forzamos a la columna de la imagen a estirarse y ser el fondo real */
   .nosotros-image-col {
     position: absolute;
     top: 0;
@@ -622,30 +673,22 @@ section {
     margin: 0;
     border: none;
   }
-
-  /* Control de la imagen original como background */
   .nosotros-image-col .nosotros-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(1) opacity(1); 
   }
-
-  /* Pasamos la columna de texto al frente */
   .nosotros-text-col {
     position: relative;
     z-index: 2; 
     display: flex;
     flex-direction: column;
   }
-
   .nosotros-title {
     margin-bottom: 1.5rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
   }
-
-  /* Estilizamos el recuadro imitando a tus botones (.btn-primary) */
   .nosotros-content-box {
     background: rgba(11, 33, 55, 0.85); 
     border: 0.5px solid rgba(124, 165, 193, 0.3); 
@@ -655,13 +698,10 @@ section {
     -webkit-backdrop-filter: blur(1px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   }
-
-  /* Forzamos alineaciones correctas dentro del recuadro móvil */
   .nosotros-body {
     text-align: left;
     margin-bottom: 1.5rem;
   }
-
   .nosotros-p {
     font-size: 1rem;
     line-height: 1.6;
@@ -669,19 +709,10 @@ section {
     margin-bottom: 1rem;
     text-align-last: left;
   }
-
-  .nosotros-p:last-child {
-    margin-bottom: 0;
-  }
 }
 
-/* ==========================================================================
-   CORRECCIÓN DEFINITIVA DE VISIBILIDAD PARA "NOSOTROS" (MÓVIL)
-   ========================================================================== */
-
+/* CORRECCIÓN VISIBILIDAD PARA "NOSOTROS" (MÓVIL) */
 @media (max-width: 768px) {
-  
-  /* 1. Evitamos que el script de JS oculte los elementos al recargar */
   .nosotros-text-col[data-reveal],
   .nosotros-image-col[data-reveal],
   .nosotros-grid [data-reveal] {
@@ -690,8 +721,6 @@ section {
     visibility: visible !important;
     transition: none !important;
   }
-
-  /* 2. Forzamos el contenedor general a ser relativo */
   .nosotros-grid {
     position: relative;
     grid-template-columns: 1fr;
@@ -701,8 +730,6 @@ section {
     border-radius: 8px;
     display: block; 
   }
-
-  /* 3. Columna de la imagen fija como tapiz de fondo real */
   .nosotros-image-col {
     position: absolute;
     top: 0;
@@ -713,17 +740,12 @@ section {
     padding: 0;
     margin: 0;
   }
-
   .nosotros-image-col .nosotros-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: none !important;
-    opacity: 1 !important;
   }
-
-  /* 4. Columna de texto al frente absoluto con opacidad completa */
   .nosotros-text-col {
     position: relative !important;
     z-index: 10 !important; 
@@ -732,15 +754,11 @@ section {
     display: flex;
     flex-direction: column;
   }
-
   .nosotros-title {
     margin-bottom: 1.5rem;
     color: var(--color-text-light) !important;
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
-    opacity: 1 !important;
   }
-
-  /* 5. El recuadro del texto con colores al 100% legibles */
   .nosotros-content-box {
     position: relative;
     z-index: 20 !important;
@@ -751,32 +769,18 @@ section {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    opacity: 1 !important;
-    visibility: visible !important;
   }
-
-  /* Textos internos en blanco nítido */
   .nosotros-p {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text-light) !important;
-    opacity: 1 !important;
     margin-bottom: 1.2rem;
-  }
-
-  .nosotros-p:last-child {
-    margin-bottom: 0;
   }
 }
 
-/* ==========================================================================
-   RESPONSIVE DESKTOP (PANTALLAS GRANDES)
-   ========================================================================== */
+/* RESPONSIVE DESKTOP (PANTALLAS GRANDES) */
 @media (min-width: 769px) {
-  .section-nosotros {
-    background-image: none !important; 
-  }
-
+  .section-nosotros { background-image: none !important; }
   .nosotros-grid {
     display: grid !important;
     grid-template-columns: 1.1fr 0.9fr !important; 
@@ -785,25 +789,14 @@ section {
     max-width: 1400px !important;
     margin: 0 auto !important;
   }
-
-  /* Alineación estricta a la izquierda para textos y títulos */
-  .nosotros-body {
-    text-align: left !important;
-  }
-
-  .nosotros-p {
-    text-align: left !important;
-    text-align-last: left !important;
-  }
-
-  /* Columna de la derecha para la imagen */
+  .nosotros-body { text-align: left !important; }
+  .nosotros-p { text-align: left !important; text-align-last: left !important; }
   .nosotros-image-col {
     display: block !important;
     height: 500px !important;
     border-right: none !important;
     padding-right: 0 !important;
   }
-
   .nosotros-img {
     width: 100% !important;
     height: 100% !important;
@@ -811,11 +804,8 @@ section {
   }
 }
 
-/* ==========================================================================
-   RESPONSIVE MÓVIL (PANTALLAS CHICAS)
-   ========================================================================== */
+/* RESPONSIVE MÓVIL (PANTALLAS CHICAS) */
 @media (max-width: 768px) {
-  /* La imagen desaparece de la estructura grid y pasa a ser Background de la sección */
   .section-nosotros {
     background-image: linear-gradient(rgba(5, 14, 24, 0.82), rgba(5, 14, 24, 0.9)), url('../assets/image4.png') !important;
     background-size: cover !important;
@@ -823,25 +813,10 @@ section {
     background-repeat: no-repeat !important;
     padding: 6rem 1.5rem !important;
   }
-
-  .nosotros-grid {
-    display: block !important; 
-    width: 100% !important;
-  }
-
-  .nosotros-image-col {
-    display: none !important; 
-  }
-
-  .nosotros-body {
-    text-align: center !important; 
-  }
-
-  .nosotros-p {
-    text-align: justify !important;
-    text-align-last: center !important;
-  }
-
+  .nosotros-grid { display: block !important; width: 100% !important; }
+  .nosotros-image-col { display: none !important; }
+  .nosotros-body { text-align: center !important; }
+  .nosotros-p { text-align: justify !important; text-align-last: center !important; }
   .nosotros-content-box {
     background: rgba(11, 33, 55, 0.6) !important;
     backdrop-filter: blur(8px) !important;
@@ -858,19 +833,8 @@ section {
   background-color: var(--color-bg-deep);
   border-bottom: 1px solid rgba(124, 165, 193, 0.1);
 }
-
-.gallery-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.gallery-header {
-  text-align: left;
-  margin-bottom: 4rem;
-}
-
+.gallery-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+.gallery-header { text-align: left; margin-bottom: 4rem; }
 .gallery-title {
   font-family: var(--font-display);
   font-size: 2.5rem;
@@ -879,7 +843,6 @@ section {
   margin-bottom: 1rem;
   letter-spacing: 1px;
 }
-
 .gallery-sub {
   font-family: var(--font-body);
   color: var(--color-text-muted);
@@ -888,19 +851,9 @@ section {
   font-size: 1.1rem;
 }
 
-/* --- ESTRUCTURA DEL CARRUSEL DE IMÁGENES COMPLETO --- */
-.gallery-carousel-side {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-}
+.gallery-carousel-side { max-width: 900px; margin: 0 auto; position: relative; }
+.expeditions-carousel { position: relative; width: 100%; }
 
-.expeditions-carousel {
-  position: relative;
-  width: 100%;
-}
-
-/* Flechitas chiquitas en los laterales */
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -918,21 +871,10 @@ section {
   text-align: center;
   transition: all 0.3s ease;
 }
+.carousel-arrow:hover { background: var(--color-primary); color: var(--color-bg-deep); }
+.carousel-arrow.prev { left: -18px; }
+.carousel-arrow.next { right: -18px; }
 
-.carousel-arrow:hover {
-  background: var(--color-primary);
-  color: var(--color-bg-deep);
-}
-
-.carousel-arrow.prev {
-  left: -18px;
-}
-
-.carousel-arrow.next {
-  right: -18px;
-}
-
-/* Ventana de visualización idéntica al código de referencia */
 .carousel-viewport {
   width: 100%;
   overflow: hidden;
@@ -940,23 +882,8 @@ section {
   border: 1px solid rgba(124, 165, 193, 0.15);
   box-shadow: 0 20px 45px rgba(0,0,0,0.6);
 }
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  width: 100%;
-}
-
-/* Cada Slide es la imagen completa ocupando todo el contenedor */
-.carousel-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 500px;
-  position: relative;
-  overflow: hidden;
-  background-color: #000;
-}
-
+.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+.carousel-slide { flex: 0 0 100%; width: 100%; height: 500px; position: relative; overflow: hidden; background-color: #000; }
 .carousel-slide img {
   width: 100%;
   height: 100%;
@@ -965,14 +892,8 @@ section {
   filter: brightness(0.35) contrast(1.05);
   transition: filter 0.5s ease, transform 0.5s ease;
 }
+.carousel-slide:hover img { filter: brightness(0.85); transform: scale(1.02); }
 
-/* Al pasar el cursor, la imagen toma claridad total */
-.carousel-slide:hover img {
-  filter: brightness(0.85);
-  transform: scale(1.02);
-}
-
-/* Texto por encima de la imagen completa */
 .slide-overlay-content {
   position: absolute;
   bottom: 0;
@@ -983,7 +904,6 @@ section {
   pointer-events: none; 
   transition: transform 0.4s ease;
 }
-
 .slide-overlay-content h3 {
   font-family: var(--font-display);
   color: var(--color-primary);
@@ -991,7 +911,6 @@ section {
   margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
 }
-
 .slide-overlay-content p {
   font-family: var(--font-body);
   font-size: 1.15rem;
@@ -1001,26 +920,12 @@ section {
   max-width: 80%;
   margin-bottom: 1rem;
 }
+.exif-tag { display: inline-block; font-size: 0.8rem; color: var(--color-text-muted); letter-spacing: 1px; }
 
-.exif-tag {
-  display: inline-block;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  letter-spacing: 1px;
-}
-
-/* Ajustes Responsive */
 @media (max-width: 768px) {
-  .carousel-slide {
-    height: 400px;
-  }
-  .slide-overlay-content {
-    padding: 2rem;
-  }
-  .slide-overlay-content p {
-    max-width: 100%;
-    font-size: 1rem;
-  }
+  .carousel-slide { height: 400px; }
+  .slide-overlay-content { padding: 2rem; }
+  .slide-overlay-content p { max-width: 100%; font-size: 1rem; }
   .carousel-arrow.prev { left: 5px; }
   .carousel-arrow.next { right: 5px; }
 }
@@ -1028,55 +933,25 @@ section {
 /* ==========================================================================
    FORZAR ALINEACIÓN ESTRICTA A LA IZQUIERDA EN TODAS LAS SECCIONES
    ========================================================================== */
-
-/* 1. Reset general de textos y alineación de secciones */
-section, 
-.section-hero, 
-.section-nosotros, 
-.section-editorial, 
-.section-cursos, 
-.section-contact,
-.section-gallery {
+section, .section-hero, .section-nosotros, .section-editorial, .section-cursos, .section-contact, .section-gallery {
   text-align: left !important;
   justify-content: flex-start !important;
 }
 
-/* 2. Forzar elementos de texto a la izquierda */
-h1, h2, h3, h4, p, span, 
-.hero-title, .hero-subtitle, 
-.nosotros-title, .nosotros-p,
-.editorial-title, .editorial-p,
-.cursos-title,
-.contact-title, .contact-sub,
-.gallery-header, .gallery-title, .gallery-sub {
+h1, h2, h3, h4, p, span, .hero-title, .hero-subtitle, .nosotros-title, .nosotros-p, .editorial-title, .editorial-p, .cursos-title, .contact-title, .contact-sub, .gallery-header, .gallery-title, .gallery-sub {
   text-align: left !important;
   text-align-last: left !important;
 }
 
-/* 3. Corrección de los bloques que estaban centrados o a la derecha */
-.hero-content, 
-.hero-eyebrow, 
-.hero-actions, 
-.hero-data,
-.nosotros-body,
-.contact-inner,
-.gallery-container,
-.gallery-carousel-side {
+.hero-content, .hero-eyebrow, .hero-actions, .hero-data, .nosotros-body, .contact-inner, .gallery-container, .gallery-carousel-side {
   margin-left: 0 !important; 
   justify-content: flex-start !important;
   text-align: left !important;
 }
 
-/* 4. Reestructuración de grillas asimétricas (Nosotros y Editorial) */
 @media (min-width: 769px) {
-  .nosotros-grid {
-    grid-template-columns: 1.2fr 0.8fr !important; 
-  }
-  
-  .nosotros-text-col {
-    order: 1 !important;
-  }
-  
+  .nosotros-grid { grid-template-columns: 1.2fr 0.8fr !important; }
+  .nosotros-text-col { order: 1 !important; }
   .nosotros-image-col {
     order: 2 !important;
     border-left: 1px solid rgba(236, 237, 235, 0.1) !important;

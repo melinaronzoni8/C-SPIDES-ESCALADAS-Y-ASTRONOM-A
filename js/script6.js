@@ -1,6 +1,5 @@
 /**
  * CÚSPIDES — Motor Frontend Sincronizado
- * Rediseño con Secciones de Navegación, Efecto Scroll, Micro-Parallax e Ícono de Usuario Ajustado.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
   initHeaderScrollAndNavigation();
   initHeroParallaxInteraction();
-  initAccordionTimeline(); 
+  initCuspidesGallerySlider();
   initCuspidesExpeditionsSlider();
 });
 
@@ -41,7 +40,7 @@ function initStarCanvasBackground() {
     let animationFrameId = null;
     let isAnimating = false;
     let activeConstellation = null;
-    let constellationCooldown = 100 + Math.random() * 150;
+    let constellationCooldown = 100 + Math.random() * 150; 
 
     function setCanvasDimensions() {
       canvas.width = canvas.offsetWidth;
@@ -55,7 +54,7 @@ function initStarCanvasBackground() {
         starArray.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: 0.4 + Math.random() * 1.4,
+          size: 0.4 + Math.random() * 1.4, 
           opacity: Math.random(),
           twinkleFactor: 0.006 + Math.random() * 0.01,
           isConstellationNode: false,
@@ -63,7 +62,7 @@ function initStarCanvasBackground() {
           targetSize: 0
         });
       }
-      activeConstellation = null;
+      activeConstellation = null; 
     }
 
     function triggerConstellation() {
@@ -85,7 +84,7 @@ function initStarCanvasBackground() {
       }))
       .filter(n => n.dist > 30 && n.dist < 220 && !n.star.isConstellationNode)
       .sort((a, b) => a.dist - b.dist)
-      .slice(0, 4);
+      .slice(0, 4); 
 
       if (neighbors.length < 2) {
         constellationCooldown = 100;
@@ -107,16 +106,16 @@ function initStarCanvasBackground() {
       constellationStars.forEach(star => {
         star.isConstellationNode = true;
         star.originalSize = star.size;
-        star.targetSize = Math.max(star.size * 2.2, 2.5);
+        star.targetSize = Math.max(star.size * 2.2, 2.5); 
       });
 
       activeConstellation = {
         stars: constellationStars,
         lines: lines,
-        phase: 'drawing',
+        phase: 'drawing', 
         currentLineIndex: 0,
-        visibleTimer: 180,
-        opacity: 0.7
+        visibleTimer: 180, 
+        opacity: 0.7 
       };
     }
 
@@ -127,7 +126,7 @@ function initStarCanvasBackground() {
       starArray.forEach(star => {
         if (star.isConstellationNode && activeConstellation) {
           if (activeConstellation.phase === 'drawing' || activeConstellation.phase === 'visible') {
-            star.size += (star.targetSize - star.size) * 0.08;
+            star.size += (star.targetSize - star.size) * 0.08; 
           }
         }
 
@@ -138,7 +137,7 @@ function initStarCanvasBackground() {
         ctx.fill();
 
         if (star.isConstellationNode && activeConstellation) {
-          ctx.fillStyle = '#7CA5C1';
+          ctx.fillStyle = '#7CA5C1'; 
           ctx.globalAlpha = star.opacity * activeConstellation.opacity * 0.45;
           ctx.beginPath();
           ctx.arc(star.x, star.y, star.size * 2.8, 0, Math.PI * 2);
@@ -152,8 +151,8 @@ function initStarCanvasBackground() {
       });
 
       if (activeConstellation) {
-        ctx.strokeStyle = '#7CA5C1';
-        ctx.lineWidth = 0.75;
+        ctx.strokeStyle = '#7CA5C1'; 
+        ctx.lineWidth = 0.75; 
 
         activeConstellation.lines.forEach((line, index) => {
           ctx.globalAlpha = activeConstellation.opacity;
@@ -170,7 +169,7 @@ function initStarCanvasBackground() {
             ctx.lineTo(targetX, targetY);
             ctx.stroke();
 
-            line.progress += 0.045;
+            line.progress += 0.045; 
             if (line.progress >= 1) {
               line.progress = 1;
               activeConstellation.currentLineIndex++;
@@ -202,7 +201,7 @@ function initStarCanvasBackground() {
               star.size = star.originalSize;
             });
             activeConstellation = null;
-            constellationCooldown = 400 + Math.random() * 400;
+            constellationCooldown = 400 + Math.random() * 400; 
           }
         }
       } else {
@@ -248,12 +247,7 @@ function initStarCanvasBackground() {
 
 function initIntersectionObserverReveal() {
   const revealTargets = document.querySelectorAll('[data-reveal]');
-  
-  const observerConfig = {
-    root: null,
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  };
+  const observerConfig = { root: null, threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -287,7 +281,6 @@ function initNumericalCounterEngine() {
             counterElement.textContent = targetValue;
           }
         }
-        
         runAnimation();
         observer.unobserve(counterElement);
       }
@@ -300,24 +293,17 @@ function initNumericalCounterEngine() {
 function initEditorialSlider() {
   const slides = document.querySelectorAll('.slide-img');
   if (slides.length === 0) return;
-
   let currentIndex = 0;
 
   setInterval(() => {
     const currentSlide = slides[currentIndex];
     currentSlide.classList.remove('active');
     currentSlide.classList.add('exit');
-
     currentIndex = (currentIndex + 1) % slides.length;
-
     const nextSlide = slides[currentIndex];
     nextSlide.classList.remove('exit');
     nextSlide.classList.add('active');
-
-    setTimeout(() => {
-      currentSlide.classList.remove('exit');
-    }, 800);
-    
+    setTimeout(() => { currentSlide.classList.remove('exit'); }, 800);
   }, 5000);
 }
 
@@ -329,25 +315,17 @@ function initHeaderScrollAndNavigation() {
   const navMenu = document.getElementById('navMenu');
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      mainNav.classList.add('scrolled');
-    } else {
-      mainNav.classList.remove('scrolled');
-    }
+    if (window.scrollY > 40) { mainNav.classList.add('scrolled'); } else { mainNav.classList.remove('scrolled'); }
 
     let currentSectionId = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
-      if (window.scrollY >= sectionTop) {
-        currentSectionId = section.getAttribute('id');
-      }
+      if (window.scrollY >= sectionTop) { currentSectionId = section.getAttribute('id'); }
     });
 
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSectionId}`) {
-        link.classList.add('active');
-      }
+      if (link.getAttribute('href') === `#${currentSectionId}`) { link.classList.add('active'); }
     });
   });
 
@@ -372,17 +350,14 @@ function initHeaderScrollAndNavigation() {
 function initHeroParallaxInteraction() {
   const heroSection = document.getElementById('hero');
   const heroImg = document.getElementById('heroZoomImg');
-  
   if (!heroSection || !heroImg) return;
 
   heroSection.addEventListener('mousemove', (e) => {
     const { width, height } = heroSection.getBoundingClientRect();
     const mouseX = e.clientX - (heroSection.offsetLeft + width / 2);
     const mouseY = e.clientY - (heroSection.offsetTop + height / 2);
-
     const moveX = (mouseX / (width / 2)) * 12;
     const moveY = (mouseY / (height / 2)) * 12;
-
     heroImg.style.transform = `scale(1.08) translate(${moveX}px, ${moveY}px)`;
     heroImg.classList.remove('standard-zoom');
   });
@@ -395,51 +370,59 @@ function initHeroParallaxInteraction() {
 
 function openWhatsApp() {
   const targetPhone = "5492944000000";
-  const customMessage = encodeURIComponent("Hola Cúspides, leí el programa formativo y quiero solicitar una entrevista de postulación.");
+  const customMessage = encodeURIComponent("Hola Cúspides, quiero solicitar más información.");
   const apiLink = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${customMessage}`;
   window.open(apiLink, '_blank');
 }
 
-// ==========================================================================
-// MOTOR DEL ACORDEÓN: DETERMINACIÓN DE ALTURA TOTAL REAL (EVITA RECORTES)
-// ==========================================================================
-function initAccordionTimeline() {
-  const items = document.querySelectorAll('.timeline-item-stack');
-  if (items.length === 0) return;
-  
-  items.forEach(item => {
-    const header = item.querySelector('.stack-header');
-    const content = item.querySelector('.stack-content');
-    
-    if (!header || !content) return;
-    
-    header.addEventListener('click', () => {
-      const isOpen = item.classList.contains('active');
-      
-      items.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        const otherContent = otherItem.querySelector('.stack-content');
-        if (otherContent) {
-          otherContent.style.maxHeight = null;
-        }
-      });
-      
-      if (!isOpen) {
-        item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
+function initCuspidesGallerySlider() {
+  const carousel = document.getElementById('galleryCarousel');
+  if (!carousel) return;
+  const slides = carousel.querySelectorAll('.carousel-card');
+  const dots = document.querySelectorAll('#carouselIndicators .dot');
+  const prevBtn = document.getElementById('prevGalleryBtn');
+  const nextBtn = document.getElementById('nextGalleryBtn');
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  let autoplayTimer = null;
+
+  function changeSlide(nextIndex) {
+    slides[currentSlide].style.opacity = '0';
+    setTimeout(() => {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = (nextIndex + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      void slides[currentSlide].offsetWidth;
+      slides[currentSlide].style.opacity = '1';
+    }, 200); 
+  }
+
+  if (nextBtn) nextBtn.addEventListener('click', () => { changeSlide(currentSlide + 1); startAutoplay(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { changeSlide(currentSlide - 1); startAutoplay(); });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const clickedIndex = parseInt(e.target.getAttribute('data-index'));
+      if (clickedIndex === currentSlide) return;
+      changeSlide(clickedIndex);
+      startAutoplay();
     });
   });
+
+  function startAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(() => { changeSlide(currentSlide + 1); }, 6000);
+  }
+  if (slides[currentSlide]) slides[currentSlide].style.opacity = '1';
+  startAutoplay();
 }
 
-/**
- * MOTOR DE LA GALERÍA DESLIZANTE V2 (8 FOTOS) — CÚSPIDES
- */
 function initCuspidesExpeditionsSlider() {
   const track = document.getElementById('gallery-track');
   const prevBtn = document.getElementById('gallery-prev');
   const nextBtn = document.getElementById('gallery-next');
-  
   if (!track) return;
 
   const slides = Array.from(track.children);
@@ -447,44 +430,11 @@ function initCuspidesExpeditionsSlider() {
   const totalSlides = slides.length;
 
   function moveToSlide(index) {
-    if (index < 0) {
-      currentIndex = totalSlides - 1;
-    } else if (index >= totalSlides) {
-      currentIndex = 0;
-    } else {
-      currentIndex = index;
-    }
-    
+    if (index < 0) { currentIndex = totalSlides - 1; } else if (index >= totalSlides) { currentIndex = 0; } else { currentIndex = index; }
     const amountToMove = currentIndex * -100;
     track.style.transform = `translateX(${amountToMove}%)`;
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      moveToSlide(currentIndex + 1);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      moveToSlide(currentIndex - 1);
-    });
-  }
-
-  let touchStartX = 0;
-  let touchEndX = 0;
-  
-  track.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    if (touchStartX - touchEndX > 50) {
-      moveToSlide(currentIndex + 1);
-    }
-    if (touchEndX - touchStartX > 50) {
-      moveToSlide(currentIndex - 1);
-    }
-  }, { passive: true });
+  if (nextBtn) nextBtn.addEventListener('click', () => moveToSlide(currentIndex + 1));
+  if (prevBtn) prevBtn.addEventListener('click', () => moveToSlide(currentIndex - 1));
 }
