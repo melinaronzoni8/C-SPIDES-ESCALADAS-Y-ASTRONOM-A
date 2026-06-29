@@ -204,24 +204,34 @@
   <!-- Tu motor JavaScript (Asegúrate de que exista para que no tire error) -->
   <script src="js/script.js"></script>
 </body>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Barra de progreso superior (si tenés la clase en tu CSS) -->
-  <div id="scroll-progress" class="progress-bar-glow" aria-hidden="true"></div>
-
-  <!-- Menú de Navegación Idéntico al Principal -->
-  <nav id="main-nav" class="nav-container" role="navigation">
+  <nav id="main-nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-inner">
-      <a href="index.html" class="logo-link">
-        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-logo" />
+      <a href="#hero" class="nav-logo-container">
+        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
       </a>
-      <div class="nav-links" id="navMenu">
-        <a href="#introduccion" class="nav-item">Introducción</a>
-        <a href="#requisitos" class="nav-item">Requisitos</a>
-        <a href="#itinerario" class="nav-item">Itinerario</a>
-        <a href="#logistica" class="nav-item">Logística</a>
-        <a href="#equipamiento" class="nav-item">Equipamiento</a>
-        <a href="#certificacion" class="nav-item">Acreditación</a>
-        <a href="index.html" class="btn-primary btn-nav-back">Volver</a>
+      
+      <div class="nav-menu" id="navMenu">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#excursiones" class="nav-link">Excursiones</a>
+        <a href="#programa" class="nav-link">Cursos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </div>
+      
+      <div class="nav-actions">
+        <a href="#perfil" class="nav-user-profile" aria-label="Perfil de usuario">
+          <svg class="user-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       </div>
     </div>
   </nav>
