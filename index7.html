@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cúspides — Formación de élite en escalada nocturna y astrofotografía en la Patagonia. Superá tus límites." />
+  <title>Cúspides — Escalada Nocturna de Alta Dificultad</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <nav id="main-nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo-container">
+        <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
+      </a>
+      
+      <div class="nav-menu" id="navMenu">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#excursiones" class="nav-link">Excursiones</a>
+        <a href="#cursos" class="nav-link">Cursos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </div>
+      
+      <div class="nav-actions">
+        <a href="#perfil" class="nav-user-profile" aria-label="Perfil de usuario">
+          <svg class="user-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero" class="section-hero">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    
+    <div class="hero-bg-parallax" aria-hidden="true">
+      <img src="assets/image1.png" alt="Pared vertical de roca en la Patagonia" class="hero-img standard-zoom" id="heroZoomImg" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="eyebrow-line"></span>
+        <span>Nueva experiencia en las montañas</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      
+      <h1 class="hero-title" data-reveal>
+        <span class="title-line">NO SOLO ES ESCALAR</span>
+        <span class="title-line title-accent">ES CAPTURAR EL CIELO</span>
+      </h1>
+      
+      <div class="hero-actions" data-reveal>
+        <button class="btn-primary" onclick="openWhatsApp()">CONSULTAR CURSOS</button>
+        <a href="#cursos" class="btn-ghost">VER PROGRAMA DE ÉLITE</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" class="section-nosotros">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="nosotros-grid">
+      <div class="nosotros-body" data-reveal>
+        <span class="section-tag">NUESTRA VISIÓN</span>
+        <h1 class="nosotros-title">Tu experiencia previa es solo el punto de partida.</h1>
+        <div class="nosotros-content-box">
+          <p class="nosotros-p">No buscamos turistas de aventura; formamos expedicionarios de la noche. Nuestro método integra la escalada técnica en roca con la precisión científica de la fotografía astronómica de alta montaña.</p>
+          <p class="nosotros-p">Bajo los cielos más limpios y exigentes del planeta en la Patagonia, aprenderás a dominar el frío, la verticalidad extrema y los tiempos de exposición requeridos para registrar el cosmos como pocos lo han logrado.</p>
+        </div>
+      </div>
+      <div class="nosotros-visual" data-reveal>
+        <div class="visual-wrapper">
+          <img src="assets/image4.png" alt="Montañista bajo las estrellas en la Patagonia" class="nosotros-img" />
+          <div class="visual-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos" class="section-dark section-cursos">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="cursos-inner">
+      <span class="section-tag tag-light" data-reveal>EXPLORACIÓN EXTREMA</span>
+      <h1 class="cursos-title" data-reveal>Expediciones Verticales<br>Explorando la Noche de la Patagonia.</h1>
+      
+      <div class="cursos-grid" data-reveal>
+        <div class="curso-card">
+          <div class="card-flip-inner">
+            <div class="card-front">
+              <h3 class="card-front-title">CURSO 01</h3>
+              <div class="card-img-holder"><img src="assets/image10.png" alt="Frey Vertical"></div>
+            </div>
+            <div class="card-back">
+              <h3>Condicionamiento físico nocturno</h3>
+              <p>Praparación física para resistir las condiciones extremas de la oscuridad absoluta.</p>
+              
+              <div class="curso-meta">
+                <div class="curso-duration">
+                  <i class="far fa-clock glow-icon-line-blue"></i>
+                  <span>2 semanas</span>
+                </div>
+                <div class="curso-difficulty">
+                  <span class="diff-label">Dificultad:</span>
+                  <span class="constellation-stars">
+                    <i class="fas fa-star active-star s1"></i>
+                    <i class="fas fa-star active-star s2"></i>
+                    <i class="fas fa-star active-star s3"></i>
+                    <i class="fas fa-star active-star s4"></i>
+                    <i class="far fa-star native-space-star"></i>
+                  </span>
+                </div>
+              </div>
+
+              <button class="btn-saber-mas" onclick="openWhatsApp()">Saber Más</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="curso-card">
+          <div class="card-flip-inner">
+            <div class="card-front">
+              <h3 class="card-front-title">CURSO 02</h3>
+              <div class="card-img-holder"><img src="assets/image11.png" alt="Astro-Travesía"></div>
+            </div>
+            <div class="card-back">
+              <h3>Introducción a la Astrología</h3>
+              <p>Corto curso teórico sobre las constelaciones y los cuerpos celestes que se puden observar desde la Patagonia.</p>
+              
+              <div class="curso-meta">
+                <div class="curso-duration">
+                  <i class="far fa-clock glow-icon-line-blue"></i>
+                  <span>3 semanas</span>
+                </div>
+                <div class="curso-difficulty">
+                  <span class="diff-label">Dificultad:</span>
+                  <span class="constellation-stars">
+                    <i class="fas fa-star active-star s1"></i>
+                    <i class="fas fa-star active-star s2"></i>
+                    <i class="fas fa-star active-star s3"></i>
+                    <i class="far fa-star native-space-star"></i>
+                    <i class="far fa-star native-space-star"></i>
+                  </span>
+                </div>
+              </div>
+
+              <button class="btn-saber-mas" onclick="openWhatsApp()">Saber Más</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="curso-card">
+          <div class="card-flip-inner">
+            <div class="card-front">
+              <h3 class="card-front-title">CURSO 03</h3>
+              <div class="card-img-holder"><img src="assets/image12.png" alt="Roca y Hielo"></div>
+            </div>
+            <div class="card-back">
+              <h3>Introducción a la fotografía astronómica</h3>
+              <p>Curso práctico sobre técnicas de captura de imágenes del cielo nocturno en entornos de alta montaña.</p>
+              
+              <div class="curso-meta">
+                <div class="curso-duration">
+                  <i class="far fa-clock glow-icon-line-blue"></i>
+                  <span>4 semanas</span>
+                </div>
+                <div class="curso-difficulty">
+                  <span class="diff-label">Dificultad:</span>
+                  <span class="constellation-stars">
+                    <i class="fas fa-star active-star s1"></i>
+                    <i class="fas fa-star active-star s2"></i>
+                    <i class="far fa-star native-space-star"></i>
+                    <i class="far fa-star native-space-star"></i>
+                    <i class="far fa-star native-space-star"></i>
+                  </span>
+                </div>
+              </div>
+
+              <button class="btn-saber-mas" onclick="openWhatsApp()">Saber Más</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="curso-card">
+          <div class="card-flip-inner">
+            <div class="card-front">
+              <h3 class="card-front-title">CURSO FINAL</h3>
+              <div class="card-img-holder"><img src="assets/image13.png" alt="Vivac de Altura"></div>
+            </div>
+            <div class="card-back">
+              <h3>Excursión Astronómica Nocturna</h3>
+              <p>Experiencia inmersiva avanzada en la observación del cielo nocturno en entornos de alta montaña, con guía especializada.</p>
+              
+              <div class="curso-meta">
+                <div class="curso-duration">
+                  <i class="far fa-clock glow-icon-line-blue"></i>
+                  <span>6 semanas</span>
+                </div>
+                <div class="curso-difficulty">
+                  <span class="diff-label">Dificultad:</span>
+                  <span class="constellation-stars">
+                    <i class="fas fa-star active-star s1"></i>
+                    <i class="fas fa-star active-star s2"></i>
+                    <i class="fas fa-star active-star s3"></i>
+                    <i class="fas fa-star active-star s4"></i>
+                    <i class="fas fa-star active-star s5"></i>
+                  </span>
+                </div>
+              </div>
+
+              <a href="curso-integrador.html" class="btn-saber-mas">Saber Más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section-contact section-dark">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="contact-inner">
+      <span class="section-tag tag-light" data-reveal>ÚLTIMA CONVOCATORIA</span>
+      <h2 class="contact-title" data-reveal>Aceptá el desafío vertical.</h2>
+      <p class="contact-sub" data-reveal>Iniciá tu proceso de validación de experiencia. Las plazas para la expedición de 3 noches son estrictamente limitadas por cuestiones de seguridad en pared.</p>
+      <button class="btn-whatsapp" onclick="openWhatsApp()" data-reveal>
+        <span>CONSULTAR CURSOS POR WHATSAPP</span>
+      </button>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
