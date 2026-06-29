@@ -1170,11 +1170,17 @@ h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-titl
 
 .card-back {
   transform: rotateY(180deg) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
   align-items: flex-start !important;
   padding: 2.2rem 1.8rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye el título arriba, la info al medio y el botón abajo */
+  
+  /* ESTA ES LA CLAVE: Espacio controlado entre elementos sin romper nada */
+  gap: 12px; 
+  
+  /* Asegura que la info no toque los bordes del recuadro */
+  padding: 25px 20px !important; 
 }
 
 /* Posicionamiento blindado del botón abajo a la derecha */
@@ -1598,7 +1604,7 @@ footer {
   color: rgba(236, 237, 235, 0.12) !important;
 }
 
-/* Estrellas activas naranjas iluminadas */
+/* Estrellas activas iluminadas */
 #cursos .cursos-grid .curso-card .card-back .constellation-stars .active-star {
   color: var(--color-highlight) !important;
   font-size: 0.8rem !important;
