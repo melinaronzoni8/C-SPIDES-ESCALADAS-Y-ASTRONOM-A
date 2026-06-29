@@ -52,7 +52,7 @@ h1 {
 }
 
 /* El subtítulo "NUESTROS CURSOS EN VIVO" y demás elementos usarán Lato */
-h2, h3, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title, .card-front-title,
+h2, .hero-title, .editorial-title, .cursos-title, .t-title, .pack-title, .contact-title, .nosotros-title, .card-front-title,
 p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p, .btn-saber-mas {
   font-family: var(--font-body) !important;
 }
@@ -1041,4 +1041,73 @@ h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-titl
     padding-left: 2rem !important;
     padding-right: 0 !important;
   }
+}
+/* ==========================================================================
+   CAMBIO GLOBAL PARA ELEMENTOS H3
+   ========================================================================== */
+h3, .card-front-title {
+  font-family: var(--font-display) !important;
+  /* Mantiene automáticamente sus font-size, color y margins originales */
+}
+/* ==========================================================================
+   OPTIMIZACIÓN DE TRANSICIONES Y INTERACCIONES SUAVES
+   ========================================================================== */
+
+/* 1. Transición suave para todos los botones de la página */
+button, .btn-saber-mas, .btn-whatsapp, .btn-editorial {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              color 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 2. Suavizado para los enlaces del menú de navegación */
+.nav-link {
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.nav-link::after {
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 3. Transición limpia para las tarjetas interactivas (Tarjetas Flip de Cursos) */
+.curso-card {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.card-flip-inner {
+  /* Suavizado de la rotación 3D para que no sea rígida */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1) !important;
+}
+
+/* 4. Suavizado para las imágenes que hacen zoom al pasar el mouse */
+.editorial-img, .card-img-holder img, .gallery-item img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 5. Suavizado del menú desplegable móvil */
+.nav-menu {
+  transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.4s ease-in-out !important;
+}
+
+/* 6. Efecto de aparición (Reveal Animation) controlado desde JavaScript */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 7. Suavizado en los elementos del Acordeón (Timeline) */
+.accordion-header {
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+.accordion-content {
+  /* Permite que el colapso del texto sea fluido en JS */
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
