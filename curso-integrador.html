@@ -19,23 +19,40 @@
 </head>
 <body class="bg-dark text-light">
 
-  <!-- Barra de progreso superior -->
-  <div id="scroll-progress"></div> <!-- Corregido al ID exacto de tu CSS -->
+<!-- Barra de progreso superior (Con tus atributos originales) -->
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Menú de Navegación Oficial (Con tus clases exactas) -->
-  <nav id="main-nav" role="navigation">
+  <!-- Menú de Navegación Oficial Unificado -->
+  <nav id="main-nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-inner">
+      <!-- Logo apuntando de vuelta al index.html -->
       <a href="index.html" class="nav-logo-container">
         <img src="assets/image2.png" alt="Logo Cúspides" class="nav-brand-img" />
       </a>
-      <!-- Usamos las clases exactas de tu CSS: .nav-menu y .nav-link -->
+      
+      <!-- Menú con los enlaces de la excursión integradora -->
       <div class="nav-menu" id="navMenu">
         <a href="#introduccion" class="nav-link">Introducción</a>
         <a href="#requisitos" class="nav-link">Requisitos</a>
         <a href="#itinerario" class="nav-link">Itinerario</a>
         <a href="#logistica" class="nav-link">Logística</a>
         <a href="#equipamiento" class="nav-link">Equipamiento</a>
-        <a href="index.html" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem; text-decoration: none;">Volver</a>
+        <a href="index.html" class="nav-link" style="color: var(--color-primary); font-weight: bold;">Volver al Home</a>
+      </div>
+      
+      <!-- Acciones de navegación idénticas a tu Home (Perfil + Botón Móvil) -->
+      <div class="nav-actions">
+        <a href="#perfil" class="nav-user-profile" aria-label="Perfil de usuario">
+          <svg class="user-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       </div>
     </div>
   </nav>
