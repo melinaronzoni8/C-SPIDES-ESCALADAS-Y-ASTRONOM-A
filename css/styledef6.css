@@ -2489,33 +2489,18 @@ footer {
    INTEGRACIÓN COMPLETA - CURSO INTEGRADOR FINAL (CÚSPIDES)
    ========================================================================== */
 
-/* 1. CONFIGURACIÓN DEL CUERPO DE FONDO PERSONALIZADO CON DEGRADADO */
-body {
-  background-color: transparent !important; /* Permite que el fondo del html se vea */
-  /* Imagen de fondo general fija */
-  background-image: url('../assets/degradado.png') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: scroll !important; /* Mantiene el fondo quieto mientras haces scroll */
-  color: var(--color-text-light) !important;
-  font-family: var(--font-body) !important;
-  overflow-x: hidden !important;
-  position: relative !important;
-}
-
-html {
+/* 1. Fondo idéntico al index e inyección estelar */
+body.text-light {
   background-color: var(--color-bg-deep, #050E18) !important;
 }
 
-/* Configuración de secciones para capas estelares */
 .section-hero,
 .section-editorial,
 .section-program,
 .section-contact {
   position: relative;
   overflow: hidden;
-  background-color: transparent !important;
+  background-color: transparent !important; /* Permite ver el fondo unificado profundo */
 }
 
 /* Capas y comportamiento de Canvas Estelares */
@@ -2529,7 +2514,7 @@ html {
   z-index: 1;
 }
 
-/* Contenedores por encima del canvas estelar */
+/* Forzar que los contenedores de contenido queden encima de las estrellas */
 .hero-content,
 .excursiones-inner,
 .program-inner,
@@ -2538,14 +2523,14 @@ html {
   z-index: 2;
 }
 
-/* 2. COMPENSACIÓN DEL NAV EN EL HERO E INICIO ESTRICTO A LA IZQUIERDA */
+/* 2. Compensación del Nav en el Hero e inicio estricto a la izquierda */
 #introduccion.section-hero {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
-  padding-top: 11rem !important; /* Espacio protector para que el menú flotante no tape el h1 */
+  padding-top: 11rem !important; /* Espacio extra seguro para evitar que el menú flotante tape el h1 */
   padding-left: 2rem;
   padding-right: 2rem;
   box-sizing: border-box;
@@ -2571,7 +2556,7 @@ html {
   width: 100%;
 }
 
-/* 3. ALINEACIÓN A LA IZQUIERDA ESTRICTA PARA EL RESTO DE SECCIONES */
+/* 3. Alineación a la izquierda estricta para el resto de secciones */
 .excursiones-inner,
 .program-inner,
 .contact-inner {
@@ -2622,7 +2607,7 @@ html {
   margin-right: auto !important;
 }
 
-/* 4. COMPONENTES: GRILLA DE DATOS Y EFECTO FLIP EN TARJETAS REQUISITOS */
+/* 4. Estilos específicos para componentes de la grilla y tarjetas */
 .hero-data-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2668,6 +2653,7 @@ html {
   letter-spacing: 2px;
 }
 
+/* Estilos de tarjetas Requisitos con Flip */
 .excursion-card {
   height: 280px;
   background: transparent;
@@ -2709,7 +2695,7 @@ html {
   justify-content: center;
 }
 
-/* Ajustes Responsivos */
+/* Ajustes Responsive */
 @media (max-width: 768px) {
   #introduccion.section-hero {
     padding-top: 8.5rem !important;
@@ -2721,161 +2707,5 @@ html {
   .contact-inner {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
-  }
-}
-
-
-/* ==========================================================================
-   SECCIÓN PROFESORES / ACOMPAÑANTES - ESTILOS VISUALES
-   ========================================================================== */
-.section-profesores {
-  position: relative;
-  overflow: hidden;
-  padding: 6rem 0;
-  background-color: transparent !important;
-}
-
-.profesores-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  text-align: left !important;
-}
-
-.profesores-title {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 2.5rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-}
-
-.profesores-sub {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-  max-width: 750px;
-  margin-bottom: 4rem;
-}
-
-/* Grilla Responsiva para los 4 Integrantes */
-.profesores-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 3rem 2rem;
-  width: 100%;
-}
-
-@media (min-width: 576px) {
-  .profesores-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .profesores-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Tarjeta del Profesional */
-.profesor-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.profesor-card:hover {
-  transform: translateY(-8px);
-}
-
-/* Contenedor del Avatar PNG (De frente, alineación inferior en el torso) */
-.profesor-avatar-box {
-  position: relative;
-  width: 100%;
-  height: 290px; /* Altura controlada para estandarizar los encuadres */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.profesor-img {
-  max-width: 95%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.6));
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.profesor-card:hover .profesor-img {
-  filter: drop-shadow(0 15px 25px rgba(124, 165, 193, 0.35));
-  transform: scale(1.02);
-}
-
-/* Recuadro Técnico de Información con superposición para corte del Torso */
-.profesor-info-box {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(24, 63, 111, 0.15) 0%, rgba(11, 33, 55, 0.4) 100%);
-  border: 1px solid rgba(124, 165, 193, 0.12);
-  border-radius: 4px;
-  padding: 1.5rem;
-  text-align: left;
-  margin-top: -12px; /* Margen negativo exacto para lograr el efecto de corte sobre el torso */
-  z-index: 2;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profesor-card:hover .profesor-info-box {
-  border-color: rgba(124, 165, 193, 0.35);
-  box-shadow: 0 12px 35px rgba(5, 14, 24, 0.5);
-}
-
-.profesor-name {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 1.15rem;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.5px;
-}
-
-.profesor-age {
-  display: inline-block;
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-highlight, #ff841f);
-  background: rgba(255, 132, 31, 0.1);
-  border: 1px solid rgba(255, 132, 31, 0.2);
-  padding: 0.15rem 0.5rem;
-  border-radius: 2px;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  letter-spacing: 1px;
-}
-
-.profesor-charge {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-}
-
-@media (max-width: 768px) {
-  .profesores-inner {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-  .profesores-title {
-    font-size: 2rem;
   }
 }
