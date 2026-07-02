@@ -2724,7 +2724,6 @@ html {
   }
 }
 
-
 /* ==========================================================================
    SECCIÓN PROFESORES / ACOMPAÑANTES - ESTILOS VISUALES
    ========================================================================== */
@@ -2879,6 +2878,7 @@ html {
     font-size: 2rem;
   }
 }
+
 /* ==========================================================================
    SECCIÓN PRESTAMOS - TEXTO ACOPLADO A LA PARED GLOBAL / GRÁFICA FULL WIDTH
    ========================================================================== */
@@ -2891,12 +2891,11 @@ html {
   background-color: transparent !important;
 }
 
-/* Esta clase ahora copia exactamente el comportamiento de las otras secciones del index.html */
 .prestamos-inner {
   width: 100%;
-  max-width: 1200px; /* Alínealo al ancho máximo que usen tus otras secciones */
-  margin: 0 auto;    /* Hace la magia del centrado invisible */
-  padding: 0 2rem;   /* Padding de seguridad idéntico al de tu layout global */
+  max-width: 1200px; 
+  margin: 0 auto;    
+  padding: 0 2rem;   
   text-align: left !important;
   box-sizing: border-box;
 }
@@ -2916,7 +2915,7 @@ html {
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-  margin-bottom: 4rem; /* Distancia hacia el corte inferior donde inicia la montaña */
+  margin-bottom: 4rem; 
 }
 
 /* Contenedor del gráfico (Se mantiene rompiendo márgenes de lado a lado) */
@@ -2981,24 +2980,25 @@ html {
   height: 100%;
 }
 
+/* Gráficos PNG Interactivos (Escalados a 160px con centrado compensado) */
 .interactive-png {
   position: absolute;
-  top: -60px;
-  left: -60px;
-  width: 120px; 
-  height: 120px;
+  top: -80px;                  /* Ajustado a la mitad del nuevo tamaño */
+  left: -80px;                 /* Ajustado a la mitad del nuevo tamaño */
+  width: 160px;                /* Incrementado de 120px a 160px */
+  height: 160px;               /* Incrementado de 120px a 160px */
   object-fit: contain;
   pointer-events: none;
   opacity: 0.95;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.65));
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: scale(0.95);
+  transform: scale(0.85);      /* Mantiene una escala inicial contenida */
 }
 
 .interactive-node:hover .interactive-png {
   opacity: 1;
-  filter: drop-shadow(0 20px 30px rgba(255, 255, 255, 0.3));
-  transform: scale(1.15) translateY(-15px);
+  filter: drop-shadow(0 25px 35px rgba(255, 255, 255, 0.35));
+  transform: scale(1.2) translateY(-20px); /* Escalado dinámico en Hover */
   z-index: 20;
 }
 
@@ -3076,6 +3076,7 @@ html {
     padding: 1rem 2rem;
   }
   .montana-svg-wrapper { display: none; }
+  
   .interactive-node {
     position: relative !important;
     top: auto !important;
@@ -3089,9 +3090,22 @@ html {
     display: flex;
     align-items: center;
   }
+  
   .node-pulse { position: relative; width: 12px; height: 12px; margin-right: 15px; flex-shrink: 0; }
   .node-element-wrapper { display: flex; align-items: center; width: 100%; }
-  .interactive-png { position: relative !important; top: auto !important; left: auto !important; width: 60px; height: 60px; margin-right: 15px; opacity: 1; transform: none !important; }
+  
+  /* Optimizadas las dimensiones en mobile para los PNGs más grandes */
+  .interactive-png { 
+    position: relative !important; 
+    top: auto !important; 
+    left: auto !important; 
+    width: 80px;                 /* Ajustado de 60px a 80px */
+    height: 80px;                /* Ajustado de 60px a 80px */
+    margin-right: 15px; 
+    opacity: 1; 
+    transform: none !important; 
+  }
+  
   .interactive-tooltip { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
   .interactive-tooltip::after { display: none; }
 }
