@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initReadingProgressBar();
+  initCuspidesEquipmentInteractivity();
   initStarCanvasBackground();
   initIntersectionObserverReveal();
   initNumericalCounterEngine();
@@ -488,4 +489,20 @@ function initCuspidesExpeditionsSlider() {
       moveToSlide(currentIndex - 1);
     }
   }, { passive: true });
+}
+/**
+ * MOTOR INTERACTIVO DE ELEMENTOS PROVISTOS - CÚSPIDES
+ * Previene bugs y asegura compatibilidad táctil en tablets o dispositivos híbridos.
+ */
+function initCuspidesEquipmentInteractivity() {
+  const nodes = document.querySelectorAll('.interactive-node');
+  if(nodes.length === 0) return;
+  
+  nodes.forEach(node => {
+    node.addEventListener('click', (e) => {
+      if(window.innerWidth > 850) {
+        e.stopPropagation();
+      }
+    });
+  });
 }

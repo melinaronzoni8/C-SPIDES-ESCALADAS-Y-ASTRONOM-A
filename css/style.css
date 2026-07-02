@@ -2879,3 +2879,219 @@ html {
     font-size: 2rem;
   }
 }
+/* ==========================================================================
+   SECCIÓN PRESTAMOS - TEXTO ACOPLADO A LA PARED GLOBAL / GRÁFICA FULL WIDTH
+   ========================================================================== */
+.section-prestamos {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 0 0;
+  background-color: transparent !important;
+}
+
+/* Esta clase ahora copia exactamente el comportamiento de las otras secciones del index.html */
+.prestamos-inner {
+  width: 100%;
+  max-width: 1200px; /* Alínealo al ancho máximo que usen tus otras secciones */
+  margin: 0 auto;    /* Hace la magia del centrado invisible */
+  padding: 0 2rem;   /* Padding de seguridad idéntico al de tu layout global */
+  text-align: left !important;
+  box-sizing: border-box;
+}
+
+.prestamos-title {
+  font-family: var(--font-display, 'Russo One'), sans-serif;
+  font-size: 2.8rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.prestamos-sub {
+  font-family: var(--font-body, 'Lato'), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
+  margin-bottom: 4rem; /* Distancia hacia el corte inferior donde inicia la montaña */
+}
+
+/* Contenedor del gráfico (Se mantiene rompiendo márgenes de lado a lado) */
+.montana-interactive-container {
+  position: relative;
+  width: 100vw; 
+  left: 0;
+  min-height: 825px; 
+  background: linear-gradient(to bottom, rgba(5, 14, 24, 0) 0%, rgba(11, 33, 55, 0.25) 50%, rgba(5, 14, 24, 0) 100%);
+  border-top: 1px solid rgba(124, 165, 193, 0.08);
+  border-bottom: 1px solid rgba(124, 165, 193, 0.08);
+  overflow: visible;
+  backdrop-filter: blur(4px);
+}
+
+.montana-svg-wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.montana-line-svg {
+  width: 100%;
+  height: 825px; 
+  display: block;
+  object-fit: fill; 
+}
+
+/* Nodos Interactivos */
+.interactive-node {
+  position: absolute;
+  width: 28px; 
+  height: 28px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Nodos e Interacciones del gráfico */
+.node-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #ffffff, 0 0 24px var(--color-primary, #7CA5C1), 0 0 40px #ffffff;
+  animation: starPulseAnimation 2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes starPulseAnimation {
+  0% { transform: scale(0.7); opacity: 0.5; box-shadow: 0 0 10px #ffffff, 0 0 18px var(--color-primary, #7CA5C1); }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 22px #ffffff, 0 0 35px var(--color-highlight, #ff841f); }
+  100% { transform: scale(0.7); opacity: 0.5; box-shadow: 0 0 10px #ffffff, 0 0 18px var(--color-primary, #7CA5C1); }
+}
+
+.node-element-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.interactive-png {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 120px; 
+  height: 120px;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.95;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.65));
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: scale(0.95);
+}
+
+.interactive-node:hover .interactive-png {
+  opacity: 1;
+  filter: drop-shadow(0 20px 30px rgba(255, 255, 255, 0.3));
+  transform: scale(1.15) translateY(-15px);
+  z-index: 20;
+}
+
+/* Tooltips */
+.interactive-tooltip {
+  position: absolute;
+  bottom: 80px; 
+  left: 50%;
+  transform: translateX(-50%) translateY(15px);
+  width: 290px;
+  background: linear-gradient(135deg, var(--color-bg-dark, #0B2137) 0%, var(--color-bg-deep, #050E18) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  padding: 1.35rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.interactive-tooltip h4 {
+  font-family: var(--font-display, 'Russo One'), sans-serif;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.interactive-tooltip p {
+  font-family: var(--font-body, 'Lato'), sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(236, 237, 235, 0.7);
+}
+
+.interactive-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--color-bg-deep, #050E18) transparent transparent transparent;
+}
+
+.interactive-node:hover .interactive-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.interactive-node:last-of-type .interactive-tooltip {
+  transform: translateX(-85%) translateY(15px);
+}
+.interactive-node:last-of-type:hover .interactive-tooltip {
+  transform: translateX(-85%) translateY(0);
+}
+.interactive-node:last-of-type .interactive-tooltip::after {
+  left: 85%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+  .montana-interactive-container {
+    width: 100%;
+    min-height: auto;
+    background: transparent;
+    border: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+  }
+  .montana-svg-wrapper { display: none; }
+  .interactive-node {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100%;
+    background: rgba(24, 63, 111, 0.15);
+    border: 1px solid rgba(124, 165, 193, 0.12);
+    border-radius: 4px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+  }
+  .node-pulse { position: relative; width: 12px; height: 12px; margin-right: 15px; flex-shrink: 0; }
+  .node-element-wrapper { display: flex; align-items: center; width: 100%; }
+  .interactive-png { position: relative !important; top: auto !important; left: auto !important; width: 60px; height: 60px; margin-right: 15px; opacity: 1; transform: none !important; }
+  .interactive-tooltip { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  .interactive-tooltip::after { display: none; }
+}
