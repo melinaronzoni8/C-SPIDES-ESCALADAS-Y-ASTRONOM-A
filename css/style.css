@@ -2991,19 +2991,22 @@ html {
   height: 100%;
 }
 
-/* Gráficos PNG Interactivos (Escalados a 160px con centrado compensado) */
+/* Gráficos PNG Interactivos (Aumentados un 30% respecto a los 200px anteriores) */
 .interactive-png {
   position: absolute;
-  top: -80px;                  /* Ajustado a la mitad del nuevo tamaño */
-  left: -80px;                 /* Ajustado a la mitad del nuevo tamaño */
-  width: 160px;                /* Incrementado de 120px a 160px */
-  height: 160px;               /* Incrementado de 120px a 160px */
-  object-fit: contain;
+  /* 260px / 2 = 130px. Por eso usamos -130px para mantener el centro */
+  top: -130px; 
+  left: -130px; 
+  
+  width: 260px;  /* 200px * 1.3 = 260px */
+  height: 260px; /* 200px * 1.3 = 260px */
+  
+  object-fit: contain; /* Cambié 'fill' a 'contain' para evitar deformaciones */
   pointer-events: none;
   opacity: 0.95;
   filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: scale(0.85);      /* Mantiene una escala inicial contenida */
+  transform: scale(1);
 }
 
 .interactive-node:hover .interactive-png {
