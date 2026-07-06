@@ -117,6 +117,7 @@ section,
   background-image: none !important;
   position: relative;
   z-index: 2;
+  padding: 6vh 10% 0 10%;
 }
 /* Grilla cuadriculada de 2x3 para los datos destacados */
 .hero-data-grid {
@@ -124,18 +125,16 @@ section,
   grid-template-columns: repeat(3, 1fr); /* Genera exactamente 3 columnas iguales */
   gap: 2.5rem 2rem;                       /* Espacio de 2.5rem entre filas y 2rem entre columnas */
   max-width: 800px;                      /* Centra y limita el ancho máximo de la composición */
-  margin: 3rem auto 0 auto;              /* Margen arriba y centrado horizontal */
-  text-align: center;
+  margin: -2rem auto 0 auto;              /* Margen arriba y centrado horizontal */
+  text-align: left;
 }
 
 /* Opcional: Ajuste responsivo para que en celulares se transforme en 1 o 2 columnas si el espacio es muy chico */
-@media (max-width: 580px) {
-  .hero-data-grid {
-    grid-template-columns: repeat(2, 1fr); /* Pasa a 2 columnas en pantallas pequeñas para que no se encime el texto */
-    gap: 2rem 1.5rem;
+@media (max-width: 768px) {
+  #introduccion.section-hero {
+    padding: 8rem 5% 2rem 5% !important;
   }
 }
-
 /* 2. Blindaje de transparencia para las secciones */
 /* Esto garantiza que las constelaciones de los canvas y las letras floten sobre tu imagen */
 .section-dark, #nosotros, #editorial, #cursos, #contacto, .section-contact, .bg-dark {
@@ -352,10 +351,10 @@ p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p
    ========================================================================== */
 section {
   position: relative;
-  padding: 8rem 2rem;
+  padding: 4rem 2rem;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: left;
   overflow: hidden;
 }
 
@@ -376,7 +375,7 @@ section {
   background: #050E18;
   text-align: center;
   justify-content: center;
-  padding: 6rem 2rem 2rem 2rem; 
+  padding: 2rem 2rem 2rem 2rem; 
   overflow: hidden;
 }
 
@@ -390,9 +389,8 @@ section {
   z-index: 2;
 }
 
-.nosotros-grid, .editorial-grid, .cursos-inner, .contact-inner {
-  position: relative;
-  z-index: 3;
+.editorial-grid, .editorial-columns, .cursos-grid, .nosotros-grid {
+  grid-template-columns: 1fr; /* O los valores viejos */
 }
 
 .hero-bg-parallax {
@@ -511,20 +509,23 @@ section {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 5rem;
+  /* CAMBIO CLAVE: Le damos 1.4 de espacio a la imagen y solo 0.6 al texto */
+  grid-template-columns: 1.4fr 0.6fr !important; 
+  gap: 6rem !important; /* Más separación entre ambos para que respire el diseño */
   align-items: center;
   width: 100%;
 }
+
 .nosotros-image-col {
-  height: 550px;
+  height: 650px !important; /* Le subimos la altura para que la imagen sea imponente */
   border-right: 1px solid rgba(236, 237, 235, 0.1);
-  padding-right: 2rem;
+  padding-right: 3rem;
 }
+
 .nosotros-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover !important; /* Esto evita que la imagen se estire o se deforme */
   border-radius: 4px;
 }
 .nosotros-body { text-align: right; }
@@ -1137,15 +1138,15 @@ bottom: 1.8rem !important;
    FORZAR ALINEACIÓN ESTRICTA A LA IZQUIERDA (PRESERVANDO LAS TARJETAS 3D)
    ========================================================================== */
 section, .section-hero, .section-nosotros, .section-editorial, .section-cursos, .section-contact, .section-gallery {
-  text-align: left !important;
+  text-align: start !important;
 }
 
 /* CORREGIDO: Separamos la alineación y reafirmamos el uso de Russo One */
 
 /* 1. Forzar alineación a la izquierda a todos los textos */
 h1, h2, h3, h4, p, span, .hero-title, .hero-subtitle, .nosotros-title, .nosotros-p, .editorial-title, .editorial-p, .cursos-title, .contact-title, .contact-sub, .gallery-header, .gallery-title, .gallery-sub {
-  text-align: left !important;
-  text-align-last: left !important;
+  text-align: start !important;
+  text-align-last: start !important;
 }
 
 /* 2. Blindaje final: Obligamos a todos los h1 de sección a usar la tipografía display */
@@ -1156,7 +1157,7 @@ h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-titl
 /* Alineamos los bloques de texto sin romper los contenedores Flex/Grid */
 .hero-content, .hero-eyebrow, .hero-actions, .hero-data, .nosotros-body, .contact-inner, .gallery-container, .gallery-carousel-side {
   margin-left: 0 !important; 
-  text-align: left !important;
+  text-align: start !important;
 }
 
 
@@ -3493,4 +3494,269 @@ html {
   
   .interactive-tooltip { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
   .interactive-tooltip::after { display: none; }
+}
+/* ==========================================================================
+   AJUSTE DE ANCHO DE TEXTO (30%) PARA ESCRITORIO
+   Afecta a: Nosotros y Editorial (Excluye: Hero, Cursos y Acompañantes)
+   ========================================================================== */
+@media (min-width: 769px) {
+
+  /* 1. SECCIÓN NOSOTROS: El texto está a la derecha (ocupa 0.4) y la imagen a la izquierda (ocupa 0.6) */
+  .nosotros-grid {
+    grid-template-columns: 0.4fr 0.6fr !important;
+    gap: 5rem !important;
+  }
+
+  .nosotros-image-col {
+    height: 650px !important; /* Mantiene la imagen con buena altura proporcional */
+    padding-right: 2rem;
+  }
+
+
+  /* 2. SECCIÓN EDITORIAL: El texto está a la izquierda (ocupa 0.4) y la imagen/slider a la derecha (ocupa 0.6) */
+  .editorial-grid {
+    grid-template-columns: 0.4.5fr 0.5.5fr !important;
+    gap: 5rem !important;
+  }
+
+  /* Forzamos a que las dos columnas internas de párrafos se apilen en una sola fila vertical */
+  .editorial-columns {
+    grid-template-columns: 1fr !important; 
+    gap: 1.5rem !important;
+  }
+
+  .editorial-image-col {
+    height: 650px !important; /* El contenedor del slider crece para aprovechar el espacio */
+    padding-left: 2rem;
+  }
+
+}
+/* ==========================================================================
+   SECCIÓN GALERÍA — ENTRADAS FLUIDAS, FLECHAS BI-DIRECCIONALES Y DESTELLOS
+   ========================================================================== */
+#galeria {
+  position: relative;
+  padding: 6rem 0 8rem 0;
+  overflow: hidden;
+  background-color: var(--color-bg-deep);
+}
+
+.gallery-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 5;
+}
+
+.gallery-master-overlay {
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.gallery-main-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.gallery-sub {
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Área de carrusel y posicionamiento de controles */
+.gallery-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.gallery-track-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+/* El riel que se desplazará con JS de manera ultra fluida */
+.gallery-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Tarjeta individual */
+.gallery-item {
+  flex: 0 0 calc(25% - 1.125rem); /* Muestra 4 tarjetas perfectas en escritorio */
+  min-width: 280px;
+  background: rgba(11, 33, 55, 0.25);
+  border: 1px solid rgba(124, 165, 193, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background-color: var(--color-bg-dark);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  filter: brightness(0.7) contrast(1.1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+/* PSEUDO-ELEMENTO PARA EL DESTELLO AL PASAR EL MOUSE */
+.gallery-img-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.gallery-item-info {
+  padding: 1.25rem 1.5rem;
+  background: rgba(5, 14, 24, 0.4);
+}
+
+.gallery-item-info h3 {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  margin-bottom: 0.35rem;
+}
+
+.gallery-item-info .exif-tag {
+  display: block;
+  font-size: 0.78rem;
+  font-family: monospace;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+/* HOVER INTERACTIVO (ZOOM + ILUMINACIÓN + DISPARAR DESTELLO) */
+.gallery-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 165, 193, 0.35);
+  box-shadow: 0 15px 35px rgba(5, 14, 24, 0.6);
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+  filter: brightness(0.95) contrast(1.15);
+}
+
+.gallery-item:hover .gallery-img-wrapper::after {
+  animation: flashGleam 0.85s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes flashGleam {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+/* DISEÑO DE LAS FLECHAS LATERALES INTEGRADAS (IZQUIERDA Y DERECHA) */
+.gallery-carousel-container .carousel-arrow {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  z-index: 15;
+  background: rgba(11, 33, 55, 0.65) !important;
+  border: 1px solid rgba(236, 237, 235, 0.15) !important;
+  color: var(--color-text-light) !important;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
+}
+
+/* Separadas simétricamente a los lados del carrusel */
+.gallery-carousel-container #gallery-prev { left: -25px; }
+.gallery-carousel-container #gallery-next { right: -25px; }
+
+.gallery-carousel-container .carousel-arrow:hover {
+  background: var(--color-accent-blue) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 15px rgba(124, 165, 193, 0.3);
+}
+
+/* RESPONSIVE: Adaptación de columnas visibles */
+@media (max-width: 1100px) {
+  .gallery-item { flex: 0 0 calc(50% - 0.75rem); } /* Muestra 2 tarjetas */
+  .gallery-carousel-container #gallery-prev { left: -10px; }
+  .gallery-carousel-container #gallery-next { right: -10px; }
+}
+
+@media (max-width: 650px) {
+  .gallery-item { flex: 0 0 100%; } /* Muestra 1 tarjeta */
+  .gallery-main-title { font-size: 2.2rem; }
+  .gallery-carousel-container #gallery-prev { left: 5px; }
+  .gallery-carousel-container #gallery-next { right: 5px; }
+}
+/* ==========================================================================
+   CORRECCIÓN DE VISIBILIDAD DE FLECHAS EN EL CARRUSEL
+   ========================================================================== */
+
+/* Asegura que el contenedor permita posicionamiento absoluto visible para las flechas */
+#galeria .gallery-carousel-container {
+  position: relative !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Forzamos a las flechas a estar al frente de las fotos y no ser recortadas */
+#galeria .carousel-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 100 !important; /* Valor alto para que NUNCA queden detrás de las imágenes */
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ajuste de coordenadas exactas para que salgan de los bordes tapados */
+#gallery-prev {
+  left: 10px !important; /* Si se ve muy adentro, puedes cambiarlo a 20px o 2.5rem */
+}
+
+#gallery-next {
+  right: 10px !important; /* Saca la flecha del área de recorte lateral derecha */
+}
+
+/* Evita que la máscara del carrusel interfiera con la posición de los botones */
+#galeria .gallery-track-viewport {
+  width: 100% !important;
+  overflow: hidden !important; /* Permite que las flechas estén visibles fuera del área de recorte */
+  position: relative !important;
 }

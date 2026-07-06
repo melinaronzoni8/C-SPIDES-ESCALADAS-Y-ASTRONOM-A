@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNumericalCounterEngine();
   initEditorialSlider();
   initHeaderScrollAndNavigation();
-  initHeroParallaxInteraction();
+  //initHeroParallaxInteraction();
   initAccordionTimeline(); 
   initCuspidesExpeditionsSlider();
 });
@@ -434,61 +434,78 @@ function initAccordionTimeline() {
   });
 }
 
-/**
- * MOTOR DE LA GALERÍA DESLIZANTE V2 (8 FOTOS) — CÚSPIDES
- */
 function initCuspidesExpeditionsSlider() {
   const track = document.getElementById('gallery-track');
   const prevBtn = document.getElementById('gallery-prev');
   const nextBtn = document.getElementById('gallery-next');
   
-  if (!track) return;
+  // Si los elementos no existen en el HTML actual, salimos para evitar errores en consola
+  if (!track || !prevBtn || !nextBtn) return;
 
-  const slides = Array.from(track.children);
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-
-  function moveToSlide(index) {
-    if (index < 0) {
-      currentIndex = totalSlides - 1;
-    } else if (index >= totalSlides) {
-      currentIndex = 0;
-    } else {
-      currentIndex = index;
-    }
-    
-    const amountToMove = currentIndex * -100;
-    track.style.transform = `translateX(${amountToMove}%)`;
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      moveToSlide(currentIndex + 1);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      moveToSlide(currentIndex - 1);
-    });
-  }
-
-  let touchStartX = 0;
-  let touchEndX = 0;
+  const items = Array.from(track.children);
+  if (items.length === 0) return;
   
-  track.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
+  let currentIndex = 0;
 
-  track.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    if (touchStartX - touchEndX > 50) {
-      moveToSlide(currentIndex + 1);
+  // Evalúa de forma dinámica cuántas tarjetas se ven en pantalla según el ancho del navegador
+  function getVisibleItemsCount() {
+    const width = window.innerWidth;
+    if (width <= 768) return 1;  // Mobile: 1 imagen visible
+    if (width <= 1100) return 2; // Tablet: 2 imágenes visibles
+    return 4;                    // Desktop: 4 columnas según tu regla CSS (.gallery-grid)
+  }
+
+  // Realiza el desplazamiento exacto recalculando dimensiones fluidas
+  function updateSliderPosition() {
+    const visibleItems = getVisibleItemsCount();
+    const maxIndex = items.length - visibleItems;
+    
+    // Forzar límites seguros
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+
+    // Medimos el ancho real de una sola tarjeta en este instante
+    const itemWidth = items[0].getBoundingClientRect().width;
+    
+    // Leemos el valor real de 'gap' puesto por CSS (si no lee nada, usa 24px de respaldo)
+    const computedStyles = window.getComputedStyle(track);
+    const gap = parseFloat(computedStyles.gap) || 24; 
+    
+    // Fórmula matemática: posición actual * (ancho del elemento + separación)
+    const totalMove = currentIndex * (itemWidth + gap);
+    track.style.transform = `translateX(-${totalMove}px)`;
+  }
+
+  // Escuchador del botón Siguiente
+  nextBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Evita cualquier salto de página no deseado
+    const visibleItems = getVisibleItemsCount();
+    const maxIndex = items.length - visibleItems;
+    
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+    } else {
+      currentIndex = 0; // Al llegar al final, vuelve al inicio de manera cíclica
     }
-    if (touchEndX - touchStartX > 50) {
-      moveToSlide(currentIndex - 1);
+    updateSliderPosition();
+  });
+
+  // Escuchador del botón Anterior
+  prevBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const visibleItems = getVisibleItemsCount();
+    const maxIndex = items.length - visibleItems;
+
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = maxIndex; // Si retrocede en el inicio, salta al final del carrusel
     }
-  }, { passive: true });
+    updateSliderPosition();
+  });
+
+  // Ajusta la posición de forma fluida si el usuario cambia el tamaño o rota la pantalla
+  window.addEventListener('resize', updateSliderPosition);
 }
 /**
  * MOTOR INTERACTIVO DE ELEMENTOS PROVISTOS - CÚSPIDES
