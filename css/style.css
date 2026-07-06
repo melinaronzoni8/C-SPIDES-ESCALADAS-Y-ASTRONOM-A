@@ -2213,13 +2213,19 @@ footer {
 
 /* --- 3. CRONOGRAMA TÉCNICO (Timeline Stack de Cursos) --- */
 .section-program {
-  padding: 5rem 0;
+  padding: 5rem 20px; /* Agregamos padding lateral para evitar toques en móviles */
+  display: flex;
+  justify-content: center;  /* Centra el bloque en el eje horizontal */
+  width: 100%;
 }
 
 .program-inner {
   max-width: 900px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el título y el timeline dentro del bloque */
 }
 
 .program-title {
@@ -2228,6 +2234,7 @@ footer {
   color: #ffffff;
   margin-bottom: 3.5rem;
   text-transform: uppercase;
+  text-align: center; /* Título centrado */
 }
 
 .timeline-stack {
@@ -2235,6 +2242,7 @@ footer {
   flex-direction: column;
   gap: 1.5rem;
   position: relative;
+  width: 100%; /* Asegura que el timeline ocupe el espacio definido */
 }
 
 /* Línea sutil vertical de fondo conectando los nodos */
@@ -2250,7 +2258,7 @@ footer {
 
 @media (min-width: 768px) {
   .timeline-stack::before {
-    left: 3.5rem;
+    left: 5rem;
   }
 }
 
@@ -2260,6 +2268,7 @@ footer {
   border-radius: 4px;
   padding: 1.5rem;
   transition: all 0.4s ease;
+  text-align: left; /* ESTO FUERZA EL TEXTO A LA IZQUIERDA DENTRO DEL RECUADRO */
 }
 
 .timeline-item-stack:hover {
@@ -2272,6 +2281,7 @@ footer {
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 1rem;
+  justify-content: flex-start; /* Alinea los elementos del header a la izquierda */
 }
 
 @media (min-width: 768px) {
@@ -3759,4 +3769,120 @@ html {
   width: 100% !important;
   overflow: hidden !important; /* Permite que las flechas estén visibles fuera del área de recorte */
   position: relative !important;
+}
+/* Corrección de apilamiento para las flechas de la galería */
+#galeria .gallery-carousel-container {
+  position: relative !important;
+  width: 100% !important;
+}
+
+#galeria .carousel-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 999 !important; /* Capa superior absoluta por encima de las imágenes */
+}
+
+#gallery-prev {
+  left: 1.5rem !important;
+}
+
+#gallery-next {
+  right: 1.5rem !important; /* Ahora sí funcionará porque está fuera de la zona de recorte */
+}
+/* ==========================================================================
+   ELIMINACIÓN DIRECTA DEL BORDE SUTIL EN LAS CARDS DE CURSOS
+   ========================================================================== */
+
+#cursos .course-card {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important; /* Si el "borde" es un reflejo o sombra suave, esto lo elimina */
+  background: var(--color-bg-dark) !important; /* Mantiene el fondo oscuro plano y sólido de la tarjeta */
+}
+/* ==========================================================================
+   BOTÓN FLOTANTE FIJO (ESQUINA INFERIOR DERECHA)
+   ========================================================================== */
+
+.btn-comprar-flotante {
+  position: fixed;            /* Lo fija en la pantalla */
+  bottom: 30px;               /* Distancia desde abajo */
+  right: 30px;                /* Distancia desde la derecha */
+  z-index: 9999;              /* Asegura que esté por encima de todo */
+  
+  /* Estilos heredados de tu diseño original */
+  padding: 15px 30px;
+  background-color: var(--color-highlight, #ff841f);
+  color: var(--color-bg-dark, #0B2137);
+  font-family: var(--font-display, 'Russo One', sans-serif);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--color-highlight, #ff841f);
+  border-radius: 4px;
+  
+  /* Sombra para que destaque sobre cualquier fondo */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  
+  /* Transición suave */
+  transition: all 0.3s ease;
+}
+
+.btn-comprar-flotante:hover {
+  background-color: transparent;
+  color: var(--color-highlight, #ff841f);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 132, 31, 0.4);
+}
+
+/* Ajuste para móviles (opcional, para que no tape contenido importante) */
+@media (max-width: 768px) {
+  .btn-comprar-flotante {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 0.8rem;
+  }
+}
+/* ==========================================================================
+   ESTILO PARA EL PRECIO EN HERO (VERSIÓN RESALTADA)
+   ========================================================================== */
+
+.hero-price-tag {
+  display: flex;
+  align-items: baseline; /* Alinea mejor el texto pequeño con el precio grande */
+  gap: 15px;
+  margin-top: 25px;
+  padding: 10px 0;
+}
+
+.price-label {
+  font-family: var(--font-body);
+  font-size: 1.1rem; /* Un poco más grande para mejor lectura */
+  color: var(--color-text-light); /* Texto más claro para mayor visibilidad */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 300;
+}
+
+.price-value {
+  font-family: var(--font-display);
+  font-size: 3rem; /* AUMENTADO: Mucho más grande y visible */
+  color: var(--color-highlight); /* Tu naranja corporativo */
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(255, 132, 31, 0.4); /* Resplandor suave para que destaque */
+}
+
+/* Ajuste para que no sea gigante en móviles */
+@media (max-width: 768px) {
+  .hero-price-tag {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .price-value {
+    font-size: 2.2rem; /* Tamaño más equilibrado para celulares */
+  }
 }
