@@ -350,7 +350,7 @@ p, span, a, button, .editorial-p, .t-desc, .pack-text, .contact-sub, .nosotros-p
    SECCIONES INTERNAS
    ========================================================================== */
 section {
-  position: relative;
+  position: static;
   padding: 4rem 2rem;
   min-height: 100vh;
   overflow: hidden;
@@ -602,7 +602,8 @@ section {
    ========================================================================== */
 .section-cursos { width: 100%; }
 .cursos-inner { max-width: 1400px; margin: 0 auto; width: 100%; }
-.cursos-title { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 4rem; }
+.cursos-title { font-size: 4cap; font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; color: var(--color-highlight); }
+.cursos-title2 { font-size: 4cap; font-weight: 900; line-height: 1.1; margin-bottom: 4rem; color: var(--color-text-light); }
 .cursos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
 
 .curso-card { 
@@ -641,8 +642,27 @@ section {
   position: relative;
 }
 
-.card-img-holder { height: 100%; width: 100%; }
-.card-img-holder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.card-img-holder {
+    position: fixed !important;
+    display: relative !important;
+    width: 100% !important;
+    height: 100% !important; /* Si la tarjeta define el alto, esto lo ocupa por completo */
+    min-height: 200px; /* Ajustá este valor aproximado al alto real que querés que tenga tu imagen */
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important; /* Corta de raíz cualquier espacio sobrante arriba o abajo */
+}
+
+.card-img-holder img {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 /* Título superior izquierdo en el frente */
 .card-front-title {
@@ -2047,18 +2067,21 @@ footer {
 }
 
 .card-img-holder {
-    width: 100% !important;
-    height: 100% !important;
-    margin: 0 !important;         /* Quita márgenes externos que separen la imagen del borde */
-    padding: 0 !important;        /* Quita paddings del contenedor de la imagen */
-    overflow: hidden !important;
+    display: flex !important;
+    align-items: flex-start !important; /* Alinea la imagen perfectamente arriba */
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important; /* Evita cualquier desborde residual */
 }
 
 .card-img-holder img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important; /* Clave: estira y adapta la imagen para llenar todo el espacio sin deformarse */
-    display: block !important;    /* Quita un pequeño espacio invisible inferior que traen las imágenes por defecto */
+    object-fit: cover !important; /* Mantiene la proporción sin deformar */
+    display: block !important;    
+    margin: 0 !important;
+    padding: 0 !important;
 }
 @keyframes trazarLinea { to { stroke-dashoffset: 0; } }
 @keyframes encenderNodoYDestello {
@@ -3592,4 +3615,112 @@ html {
 .btn-ui-library:hover {
     background: var(--color-accent-blue);
     color: #fff;
+}
+/* ==========================================================================
+   AJUSTES DE MARKETING Y ROTACIÓN PARA SECCIÓN CURSOS
+   ========================================================================== */
+
+/* 1. Desactivar el hover automático anterior y usar la nueva clase activa de JS */
+/* Contenedor principal de la tarjeta que mantiene la perspectiva */
+.course-card-container {
+    perspective: 1000px;
+}
+
+/* El elemento interno que realmente gira */
+.course-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+/* 1. COMPORTAMIENTO HOVER: Gira automáticamente al pasar el cursor... */
+/* PERO SOLO si no tiene la clase 'is-locked' (para evitar tirones visuales) */
+.course-card-container:hover .course-card-inner:not(.is-locked) {
+    transform: rotateY(180deg);
+}
+
+/* 2. COMPORTAMIENTO CLIC: Si se hace clic, se le añade esta clase y queda fija */
+.course-card-inner.is-locked {
+    transform: rotateY(180deg);
+}
+/* 2. Títulos Frontales Ultra Llamativos ("Marketineros") */
+.card-front h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 10px rgba(24, 63, 111, 0.8), 0 0 20px rgba(124, 165, 193, 0.4);
+  position: relative;
+  margin-bottom: 15px;
+  transition: all 0.4s ease;
+}
+
+/* Animación sutil de pulso de brillo para llamar la atención del cliente */
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 10px rgba(124, 165, 193, 0.6); }
+  50% { text-shadow: 0 0 20px var(--color-highlight), 0 0 30px rgba(255, 132, 31, 0.3); color: #fff; }
+  100% { text-shadow: 0 0 10px rgba(124, 165, 193, 0.6); }
+}
+
+.curso-card:not(.is-flipped) .card-front h3 {
+  animation: titlePulse 3s infinite ease-in-out;
+}
+
+/* Decoración lineal debajo del título dinámico */
+.card-front h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--color-highlight);
+  margin: 8px auto 0;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.curso-card:hover .card-front h3::after {
+  width: 90px; /* La barra se expande cuando pasas el mouse antes de cliquear */
+}
+
+/* 3. Diseño del Contenedor de Precios (Atrás - Inferior Izquierdo) */
+.card-back {
+  position: relative; /* Para poder posicionar el precio de forma absoluta */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px !important;
+}
+
+/* Contenedor envolvente inferior para alinear Precio a la izq y Botón a la der */
+.card-back-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+}
+
+.card-price-tag {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.price-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 0px;
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-highlight); /* Color naranja de énfasis de tu marca */
+  text-shadow: 0 0 10px rgba(255, 132, 31, 0.3);
+  font-weight: bold;
 }

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //initHeroParallaxInteraction();
   initAccordionTimeline(); 
   initCuspidesExpeditionsSlider();
+  initCourseCardFlipEngine();
 });
 
 function initReadingProgressBar() {
@@ -520,6 +521,45 @@ function initCuspidesEquipmentInteractivity() {
       if(window.innerWidth > 850) {
         e.stopPropagation();
       }
+    });
+  });
+}
+// CONTROL DE ROTACIÓN FIJA DE TARJETAS AL HACER CLIC
+document.querySelectorAll('.curso-card').forEach(card => {
+  card.addEventListener('click', function(e) {
+    // Si el usuario hace clic específicamente en el botón "Saber más", dejamos que actúe su enlace
+    if (e.target.closest('.btn-saber-mas') || e.target.closest('.card-btn')) {
+      return; 
+    }
+    
+    // Conmutamos la clase 'is-flipped' en la tarjeta para mantenerla volteada
+    this.classList.toggle('is-flipped');
+  });
+});
+/**
+ * MOTOR DE INTERACTIVIDAD DE TARJETAS (CURSOS)
+ * Permite el giro automático con hover, y congela la posición dada vuelta al hacer clic.
+ */
+function initCourseCardFlipEngine() {
+  // Selecciona el contenedor interactivo exterior de la tarjeta
+  const cards = document.querySelectorAll('.course-card-container');
+  
+  if (cards.length === 0) return;
+
+  cards.forEach(card => {
+    // Busca la pieza interna que posee el efecto de rotación 3D
+    const innerCard = card.querySelector('.course-card-inner');
+    
+    if (!innerCard) return;
+
+    card.addEventListener('click', (e) => {
+      // Si el clic fue en un botón, enlace o elemento interactivo del reverso, no altera el giro
+      if (e.target.closest('a') || e.target.closest('button') || e.target.closest('form')) {
+        return; 
+      }
+
+      // Alterna la clase que congela el reverso de la tarjeta expuesto
+      innerCard.classList.toggle('is-locked');
     });
   });
 }
