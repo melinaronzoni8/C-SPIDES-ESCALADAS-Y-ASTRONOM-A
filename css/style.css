@@ -353,8 +353,6 @@ section {
   position: relative;
   padding: 4rem 2rem;
   min-height: 100vh;
-  display: flex;
-  align-items: left;
   overflow: hidden;
 }
 
@@ -485,7 +483,7 @@ section {
 
 @media (min-width: 769px) {
   .section-hero {
-    height: 150vh;
+    height: 100vh;
     padding: 0 10%;
     justify-content: flex-start;
     text-align: left;
@@ -2121,7 +2119,6 @@ footer {
 /* --- 2. TARJETAS REQUISITOS (Efecto Flip compatible con index.html) --- */
 .excursiones-inner {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 5rem 1.5rem;
   text-align: center;
 }
@@ -2222,10 +2219,9 @@ footer {
 .program-inner {
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
-  display: flex;
+  display: flex; /* <-- ERROR: 'center' no es un valor válido para 'display'. Debería ser 'flex' o 'grid' */
   flex-direction: column;
-  align-items: center; /* Centra el título y el timeline dentro del bloque */
+  align-items: center;
 }
 
 .program-title {
@@ -2266,9 +2262,12 @@ footer {
   background: rgba(255, 255, 255, 0.01);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 4px;
-  padding: 1.5rem;
+  padding: 1rem;
   transition: all 0.4s ease;
-  text-align: left; /* ESTO FUERZA EL TEXTO A LA IZQUIERDA DENTRO DEL RECUADRO */
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: content-box;
 }
 
 .timeline-item-stack:hover {
@@ -2432,8 +2431,6 @@ footer {
 .program-inner,
 .gallery-container {
   text-align: left !important; /* Fuerza al texto base a alinearse a la izquierda */
-  margin-left: 0 !important;   /* Quita el centrado automático horizontal (margin: 0 auto) */
-  margin-right: auto !important;
   max-width: 1200px;
   padding-left: 2rem;          /* Mantiene el mismo aire/padding que le dimos al Hero */
   padding-right: 2rem;
@@ -2479,12 +2476,6 @@ footer {
   text-align: left;
 }
 
-/* --- Sección Equipamiento (Lista de Carga) --- */
-/* Forzamos a que el contenedor de las dos columnas de equipamiento se pegue a la izquierda */
-#equipamiento .excursiones-inner > div {
-  margin-left: 0 !important;
-  margin-right: auto !important;
-}
 
 /* --- Ajustes para Pantallas Móviles --- */
 @media (max-width: 768px) {
@@ -2582,17 +2573,6 @@ html {
   width: 100%;
 }
 
-/* 3. ALINEACIÓN A LA IZQUIERDA ESTRICTA PARA EL RESTO DE SECCIONES */
-.excursiones-inner,
-.program-inner,
-.contact-inner {
-  text-align: left !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  max-width: 1200px;
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
-}
 
 .excursiones-title,
 .program-title,
@@ -2612,8 +2592,10 @@ html {
 }
 
 .timeline-stack {
-  align-items: flex-start !important;
+  align-items: stretch;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .timeline-item-stack {
@@ -2630,7 +2612,7 @@ html {
 
 #equipamiento .excursiones-inner > div {
   margin-left: 0 !important;
-  margin-right: auto !important;
+  margin-right: 0 !important;
 }
 
 /* 4. COMPONENTES: GRILLA DE DATOS Y EFECTO FLIP EN TARJETAS REQUISITOS */
@@ -3007,391 +2989,6 @@ html {
   filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform: scale(1);
-}
-
-.interactive-node:hover .interactive-png {
-  opacity: 1;
-  filter: drop-shadow(0 25px 35px rgba(255, 255, 255, 0.35));
-  transform: scale(1.2) translateY(-20px); /* Escalado dinámico en Hover */
-  z-index: 20;
-}
-
-/* Tooltips */
-.interactive-tooltip {
-  position: absolute;
-  bottom: 80px; 
-  left: 50%;
-  transform: translateX(-50%) translateY(15px);
-  width: 290px;
-  background: linear-gradient(135deg, var(--color-bg-dark, #0B2137) 0%, var(--color-bg-deep, #050E18) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 4px;
-  padding: 1.35rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  z-index: 100;
-  backdrop-filter: blur(12px);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.interactive-tooltip h4 {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 1.1rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.interactive-tooltip p {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: rgba(236, 237, 235, 0.7);
-}
-
-.interactive-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 8px;
-  border-style: solid;
-  border-color: var(--color-bg-deep, #050E18) transparent transparent transparent;
-}
-
-.interactive-node:hover .interactive-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-.interactive-node:last-of-type .interactive-tooltip {
-  transform: translateX(-85%) translateY(15px);
-}
-.interactive-node:last-of-type:hover .interactive-tooltip {
-  transform: translateX(-85%) translateY(0);
-}
-.interactive-node:last-of-type .interactive-tooltip::after {
-  left: 85%;
-}
-
-/* RESPONSIVE */
-@media (max-width: 850px) {
-  .montana-interactive-container {
-    width: 100%;
-    min-height: auto;
-    background: transparent;
-    border: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1rem 2rem;
-  }
-  .montana-svg-wrapper { display: none; }
-  
-  .interactive-node {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100%;
-    background: rgba(24, 63, 111, 0.15);
-    border: 1px solid rgba(124, 165, 193, 0.12);
-    border-radius: 4px;
-    padding: 1.25rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .node-pulse { position: relative; width: 12px; height: 12px; margin-right: 15px; flex-shrink: 0; }
-  .node-element-wrapper { display: flex; align-items: center; width: 100%; }
-  
-  /* Optimizadas las dimensiones en mobile para los PNGs más grandes */
-  .interactive-png { 
-    position: relative !important; 
-    top: auto !important; 
-    left: auto !important; 
-    width: 80px;                 /* Ajustado de 60px a 80px */
-    height: 80px;                /* Ajustado de 60px a 80px */
-    margin-right: 15px; 
-    opacity: 1; 
-    transform: none !important; 
-  }
-  
-  .interactive-tooltip { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  .interactive-tooltip::after { display: none; }
-}
-/* ==========================================================================
-   SECCIÓN PROFESORES / ACOMPAÑANTES - ESTILOS VISUALES
-   ========================================================================== */
-.section-profesores {
-  position: relative;
-  overflow: hidden;
-  padding: 6rem 0;
-  background-color: transparent !important;
-}
-
-.profesores-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  text-align: left !important;
-}
-
-.profesores-title {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 2.5rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-}
-
-.profesores-sub {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-  max-width: 750px;
-  margin-bottom: 4rem;
-}
-
-/* Grilla Responsiva para los 4 Integrantes */
-.profesores-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 3rem 2rem;
-  width: 100%;
-}
-
-@media (min-width: 576px) {
-  .profesores-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .profesores-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Tarjeta del Profesional */
-.profesor-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.profesor-card:hover {
-  transform: translateY(-8px);
-}
-
-/* Contenedor del Avatar PNG (De frente, alineación inferior en el torso) */
-.profesor-avatar-box {
-  position: relative;
-  width: 100%;
-  height: 290px; /* Altura controlada para estandarizar los encuadres */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.profesor-img {
-  max-width: 95%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.6));
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.profesor-card:hover .profesor-img {
-  filter: drop-shadow(0 15px 25px rgba(124, 165, 193, 0.35));
-  transform: scale(1.02);
-}
-
-/* Recuadro Técnico de Información con superposición para corte del Torso */
-.profesor-info-box {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(24, 63, 111, 0.15) 0%, rgba(11, 33, 55, 0.4) 100%);
-  border: 1px solid rgba(124, 165, 193, 0.12);
-  border-radius: 4px;
-  padding: 1.5rem;
-  text-align: left;
-  margin-top: -12px; /* Margen negativo exacto para lograr el efecto de corte sobre el torso */
-  z-index: 2;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profesor-card:hover .profesor-info-box {
-  border-color: rgba(124, 165, 193, 0.35);
-  box-shadow: 0 12px 35px rgba(5, 14, 24, 0.5);
-}
-
-.profesor-name {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 1.15rem;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.5px;
-}
-
-.profesor-age {
-  display: inline-block;
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-highlight, #ff841f);
-  background: rgba(255, 132, 31, 0.1);
-  border: 1px solid rgba(255, 132, 31, 0.2);
-  padding: 0.15rem 0.5rem;
-  border-radius: 2px;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  letter-spacing: 1px;
-}
-
-.profesor-charge {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-}
-
-@media (max-width: 768px) {
-  .profesores-inner {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-  .profesores-title {
-    font-size: 2rem;
-  }
-}
-
-/* ==========================================================================
-   SECCIÓN PRESTAMOS - TEXTO ACOPLADO A LA PARED GLOBAL / GRÁFICA FULL WIDTH
-   ========================================================================== */
-.section-prestamos {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  padding: 8rem 0 0 0;
-  background-color: transparent !important;
-}
-
-.prestamos-inner {
-  width: 100%;
-  max-width: 1200px; 
-  margin: 0 auto;    
-  padding: 0 2rem;   
-  text-align: left !important;
-  box-sizing: border-box;
-}
-
-.prestamos-title {
-  font-family: var(--font-display, 'Russo One'), sans-serif;
-  font-size: 2.8rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-  margin-bottom: 1.2rem;
-  letter-spacing: 1px;
-}
-
-.prestamos-sub {
-  font-family: var(--font-body, 'Lato'), sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--color-text-muted, rgba(236, 237, 235, 0.6));
-  margin-bottom: 4rem; 
-}
-
-/* Contenedor del gráfico (Se mantiene rompiendo márgenes de lado a lado) */
-.montana-interactive-container {
-  position: relative;
-  width: 100vw; 
-  left: 0;
-  min-height: 825px; 
-  background: linear-gradient(to bottom, rgba(5, 14, 24, 0) 0%, rgba(11, 33, 55, 0.25) 50%, rgba(5, 14, 24, 0) 100%);
-  border-top: 1px solid rgba(124, 165, 193, 0.08);
-  border-bottom: 1px solid rgba(124, 165, 193, 0.08);
-  overflow: visible;
-  backdrop-filter: blur(4px);
-}
-
-.montana-svg-wrapper {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.montana-line-svg {
-  width: 100%;
-  height: 825px; 
-  display: block;
-  object-fit: fill; 
-}
-
-/* Nodos Interactivos */
-.interactive-node {
-  position: absolute;
-  width: 28px; 
-  height: 28px;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  cursor: pointer;
-}
-
-/* Nodos e Interacciones del gráfico */
-.node-pulse {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 0 12px #ffffff, 0 0 24px var(--color-primary, #7CA5C1), 0 0 40px #ffffff;
-  animation: starPulseAnimation 2s infinite ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes starPulseAnimation {
-  0% { transform: scale(0.7); opacity: 0.5; box-shadow: 0 0 10px #ffffff, 0 0 18px var(--color-primary, #7CA5C1); }
-  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 22px #ffffff, 0 0 35px var(--color-highlight, #ff841f); }
-  100% { transform: scale(0.7); opacity: 0.5; box-shadow: 0 0 10px #ffffff, 0 0 18px var(--color-primary, #7CA5C1); }
-}
-
-.node-element-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Gráficos PNG Interactivos (Escalados a 160px con centrado compensado) */
-.interactive-png {
-  position: absolute;
-  top: -80px;                  /* Ajustado a la mitad del nuevo tamaño */
-  left: -80px;                 /* Ajustado a la mitad del nuevo tamaño */
-  width: 160px;                /* Incrementado de 120px a 160px */
-  height: 160px;               /* Incrementado de 120px a 160px */
-  object-fit: contain;
-  pointer-events: none;
-  opacity: 0.95;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: scale(0.85);      /* Mantiene una escala inicial contenida */
 }
 
 .interactive-node:hover .interactive-png {
