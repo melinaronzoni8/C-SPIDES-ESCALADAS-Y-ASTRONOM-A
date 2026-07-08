@@ -117,7 +117,7 @@ section,
   background-image: none !important;
   position: relative;
   z-index: 2;
-  padding: 6vh 10% 0 10%;
+  padding: 18vh 10% 0 10%;
 }
 /* Grilla cuadriculada de 2x3 para los datos destacados */
 .hero-data-grid {
@@ -1684,7 +1684,7 @@ footer {
 /* SECCIÓN CONTACTO FIN */
 .section-contact { text-align: center; justify-content: center; }
 .contact-inner { max-width: 800px; margin: 0 auto; }
-.contact-title { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1.5rem; }
+.contact-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
 .contact-sub { color: var(--color-text-muted); margin-bottom: 3rem; }
 .btn-whatsapp { background-color: #25D366; color: #fff; border: none; padding: 1.2rem 2.5rem; font-weight: 700; cursor: pointer; border-radius: 4px; }
 
@@ -2009,7 +2009,57 @@ footer {
   margin: 0 !important;
   z-index: 5 !important;
 }
+/* ELIMINAR EL CUADRO, FILTROS Y BORDES CON BLUR DE LAS TARJETAS */
+.curso-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
 
+/* Forzar que las caras frontal y trasera sean sólidas y no tengan bordes extras */
+.card-front, 
+.card-back {
+    background-color: var(--color-bg-deep) !important; /* El color azul ultra oscuro de tu paleta base */
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+/* Quitar el marco, blur o sombras alrededor del contenedor de la imagen */
+.card-img-holder {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Asegurar que al girar la tarjeta o pasar el cursor (hover) no se reactive ningún efecto */
+.curso-card:hover .card-front,
+.curso-card:hover .card-back,
+.curso-card:hover .card-img-holder {
+    border: none !important;
+    box-shadow: none !important;
+}
+/* HACER QUE LA IMAGEN OCUPE EL 100% DE LA TARJETA SIN BORDES INTERNOS */
+.card-front {
+    padding: 0 !important;       /* Elimina cualquier espacio interno en la cara frontal */
+    overflow: hidden !important;  /* Recorta la imagen si sobresale de las esquinas redondeadas */
+}
+
+.card-img-holder {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;         /* Quita márgenes externos que separen la imagen del borde */
+    padding: 0 !important;        /* Quita paddings del contenedor de la imagen */
+    overflow: hidden !important;
+}
+
+.card-img-holder img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Clave: estira y adapta la imagen para llenar todo el espacio sin deformarse */
+    display: block !important;    /* Quita un pequeño espacio invisible inferior que traen las imágenes por defecto */
+}
 @keyframes trazarLinea { to { stroke-dashoffset: 0; } }
 @keyframes encenderNodoYDestello {
   0% { opacity: 0; transform: scale(0.4); filter: drop-shadow(0 0 0px transparent); }
@@ -3485,4 +3535,61 @@ html {
   .price-value {
     font-size: 2.2rem; /* Tamaño más equilibrado para celulares */
   }
+}
+.main-footer {
+    padding: 60px 20px 20px;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    border-top: 1px solid #222;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3, .footer-section h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-accent-blue);
+}
+
+/* Botón Biblioteca UI */
+.btn-ui-library {
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--color-accent-blue);
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-ui-library:hover {
+    background: var(--color-accent-blue);
+    color: #fff;
 }
