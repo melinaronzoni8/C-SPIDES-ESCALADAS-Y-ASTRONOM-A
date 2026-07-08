@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cúspides - Biblioteca de Diseño UI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Fuentes oficiales de Cúspides -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ENCABEZADO DEL DASHBOARD -->
+  <header class="ui-dashboard-header">
+    <div class="ui-container">
+      <span class="ui-dashboard-tag">SISTEMA DE DISEÑO</span>
+      <h1 class="ui-dashboard-title">Cúspides UI Library</h1>
+      <p class="ui-dashboard-desc">Guía de estilos, componentes modulares y patrones de animación interactivos para el entorno *Dark Mode* de alta montaña.</p>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="ui-container">
+
+    <!-- CATEGORÍA 1: TIPOGRAFÍA Y TÍTULOS -->
+    <section class="ui-category-section">
+      <h2 class="ui-category-title">01. Tipografía & Títulos</h2>
+      <div class="ui-card-showcase">
+        
+        <div class="ui-element-box">
+          <span class="ui-element-label">Tag de Sección (.ui-tag)</span>
+          <span class="ui-tag">MATERIAL INCLUIDO</span>
+        </div>
+
+        <div class="ui-element-box">
+          <span class="ui-element-label">Título Principal (.ui-title)</span>
+          <h2 class="ui-title">Equipamiento Oficial</h2>
+        </div>
+
+        <div class="ui-element-box">
+          <span class="ui-element-label">Párrafo Descriptivo Muted (.ui-desc)</span>
+          <p class="ui-desc" style="margin: 0;">No necesitás invertir en costoso material técnico de alta gama. Cúspides te provee las herramientas certificadas.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 2: BOTONES E INTERACCIONES -->
+    <section class="ui-category-section">
+      <h2 class="ui-category-title">02. Botones & Acciones</h2>
+      <div class="ui-card-showcase">
+        
+        <div class="ui-element-box">
+          <span class="ui-element-label">Botón Primario Destellante (.btn-primary)</span>
+          <button class="btn-primary">Explorar Cumbres</button>
+        </div>
+
+        <div class="ui-element-box">
+          <span class="ui-element-label">Botón Secundario Magnético (.btn-secondary)</span>
+          <button class="btn-secondary">Ver Equipamiento</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 3: ELEMENTOS DEL LIENZO INTERACTIVO -->
+    <section class="ui-category-section">
+      <h2 class="ui-category-title">03. Componentes del Lienzo Estelar</h2>
+      <div class="ui-card-showcase ui-canvas-preview">
+        
+        <div class="ui-element-box spec-node-box">
+          <span class="ui-element-label">Nodo Estelar con Tooltip Glassmorphism (.ui-interactive-node)</span>
+          
+          <!-- Nodo de prueba estático dentro de la biblioteca -->
+          <div class="ui-interactive-node" style="position: relative; top: 80px; left: 50%;">
+            <div class="ui-node-pulse"></div>
+            <div class="ui-node-content">
+              <span style="font-size: 1.5rem; display:block; text-align:center; transform: translateY(-5px);">🔭</span>
+              <div class="ui-node-tooltip">
+                <h4>Telescopio Catadióptrico</h4>
+                <p>Equipos ópticos avanzados optimizados para el rastreo de cúmulos estelares.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 4: CONTENEDORES Y CRISTALES -->
+    <section class="ui-category-section">
+      <h2 class="ui-category-title">04. Tarjetas & Cristalografía</h2>
+      <div class="ui-card-showcase">
+        
+        <div class="ui-element-box">
+          <span class="ui-element-label">Tarjeta Base Glassmorphism (.ui-glass-card)</span>
+          <div class="ui-glass-card">
+            <h3>Refugio Nocturno</h3>
+            <p>Estructuras con aislamiento térmico preparadas para soportar climas extremos de alta montaña.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 5: ANIMACIONES DE CARGA (REVEAL) -->
+    <section class="ui-category-section">
+      <h2 class="ui-category-title">05. Efectos de Entrada (Scroll Reveal)</h2>
+      <div class="ui-card-showcase">
+        
+        <div class="ui-element-box">
+          <span class="ui-element-label">Elemento con Scroll Reveal Pasivo (.ui-reveal)</span>
+          <div class="ui-reveal-demo-box ui-reveal">
+            ¡Hacé scroll o interactuá con el JS para verme aparecer!
+          </div>
+          <button class="btn-secondary btn-trigger-reveal" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.8rem;">Forzar Animación</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
