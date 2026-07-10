@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordionTimeline(); 
   initCuspidesExpeditionsSlider();
   initCourseCardFlipEngine();
+  initScrollytellingAnimation(); // Activamos la nueva sección de Experiencia Nocturna
 });
 
 function initReadingProgressBar() {
@@ -562,4 +563,87 @@ function initCourseCardFlipEngine() {
       innerCard.classList.toggle('is-locked');
     });
   });
+}
+/* ==========================================================================
+   Motor Scrollytelling con Control de Estados Dinámicos (Fixed/Absolute)
+   ========================================================================= */
+const initScrollytellingAnimation = () => {
+    const scrollySection = document.getElementById('experiencia-nocturna');
+    if (!scrollySection) return;
+
+    const bgContainer = scrollySection.querySelector('.scrolly-background');
+    const dayLayer = scrollySection.querySelector('.bg-day');
+    const climberLayer = scrollySection.querySelector('.bg-climber');
+    const nightOverlay = scrollySection.querySelector('.bg-night-overlay');
+    const starsLayer = scrollySection.querySelector('.bg-stars');
+    const cards = scrollySection.querySelectorAll('.info-card');
+
+    const handleScrollAnimation = () => {
+        const rect = scrollySection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // 1. CONTROL DE ESTADO DEL FONDO (Fijado dinámico)
+        if (rect.top > 0) {
+            // El usuario aún no llega a la sección (Fondo arriba de todo)
+            bgContainer.classList.remove('is-fixed', 'is-bottom');
+        } else if (rect.top <= 0 && rect.bottom >= windowHeight) {
+            // El usuario está scroleando DENTRO de la sección (Fondo se clava en pantalla)
+            bgContainer.classList.add('is-fixed');
+            bgContainer.classList.remove('is-bottom');
+        } else if (rect.bottom < windowHeight) {
+            // El usuario pasó la sección (El fondo se queda retenido al final del contenedor)
+            bgContainer.classList.remove('is-fixed');
+            bgContainer.classList.add('is-bottom');
+        }
+
+        // 2. CÁLCULO DEL PROGRESO (De 0 a 1)
+        const totalScrollableHeight = rect.height - windowHeight;
+        const currentScroll = Math.abs(rect.top);
+        const progress = Math.max(0, Math.min(1, currentScroll / totalScrollableHeight));
+
+        // 3. ANIMACIONES DE LAS CAPAS SEGÚN EL SCROLL
+        if (climberLayer) {
+            // El escalador sube de forma fluida a medida que bajas
+            const moveY = 150 - (progress * 280);
+            climberLayer.style.transform = `translateY(${moveY}px)`;
+        }
+
+        if (dayLayer && nightOverlay) {
+            // Transición de día a noche (ocurre entre el 10% y el 65% del scroll)
+            let nightOpacity = (progress - 0.1) / 0.55;
+            nightOpacity = Math.max(0, Math.min(1, nightOpacity));
+            dayLayer.style.opacity = 1 - nightOpacity;
+            nightOverlay.style.opacity = nightOpacity;
+        }
+
+        if (starsLayer) {
+            // Las constelaciones titilan y aparecen al final (del 60% al 95%)
+            let starsOpacity = (progress - 0.6) / 0.35;
+            starsOpacity = Math.max(0, Math.min(1, starsOpacity));
+            starsLayer.style.opacity = starsOpacity;
+        }
+
+        // 4. CONTROL DE APARICIÓN DE LOS CARTELES
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            if (cardTop < windowHeight * 0.8 && cardTop > -200) {
+                card.classList.add('is-visible');
+            } else {
+                card.classList.remove('is-visible');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(handleScrollAnimation);
+    }, { passive: true });
+
+    handleScrollAnimation();
+};
+
+// Inicialización limpia
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollytellingAnimation);
+} else {
+    initScrollytellingAnimation();
 }

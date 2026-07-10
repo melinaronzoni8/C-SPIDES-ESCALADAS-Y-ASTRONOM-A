@@ -3725,3 +3725,108 @@ html {
   text-shadow: 0 0 10px rgba(255, 132, 31, 0.3);
   font-weight: bold;
 }
+/* ==========================================================================
+   Sección Experiencia Nocturna (Scrollytelling) - SOLUCIÓN DEFINITIVA FIXED
+   ========================================================================== */
+.scrolly-section {
+    position: relative;
+    width: 100%;
+    min-height: 400vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
+    background-color: #02060c;
+    overflow: visible !important;
+}
+
+/* El contenedor del fondo ahora es absoluto por defecto */
+.scrolly-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Esta clase la pondrá el JavaScript automáticamente cuando entres a la sección */
+.scrolly-background.is-fixed {
+    position: fixed;
+    top: 0;
+}
+
+/* Esta clase la pondrá el JavaScript automáticamente cuando llegues al final de la sección */
+.scrolly-background.is-bottom {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+}
+
+/* Asegura el encaje perfecto e hiperrealista de todas las capas */
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.bg-day { z-index: 10; opacity: 1; }
+.bg-climber { z-index: 20; opacity: 1; transform: translateY(150px); }
+.bg-night-overlay { 
+    z-index: 30; 
+    background: linear-gradient(to bottom, rgba(2, 6, 12, 0.3) 0%, rgba(2, 6, 12, 0.95) 100%);
+    mix-blend-mode: multiply; 
+    opacity: 0; 
+}
+.bg-stars { z-index: 40; opacity: 0; mix-blend-mode: screen; }
+
+/* --- Contenedor de los Carteles --- */
+.scrolly-content {
+    position: relative;
+    z-index: 50; /* Esto hace que los carteles floten POR ENCIMA de las imágenes */
+    padding: 20vh 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 60vh; /* Espaciado enorme para que los carteles bajen espaciados uno a uno */
+}
+
+/* --- Carteles Azules con Poca Opacidad (Glassmorphism) --- */
+.info-card {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: rgba(11, 33, 55, 0.5); /* Azul con opacidad sutil */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.info-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info-card.left { align-self: flex-start; }
+.info-card.right { align-self: flex-end; }
+
+.card-badge {
+    position: absolute;
+    top: -16px;
+    left: 2rem;
+    background: var(--color-highlight, #ff6f00);
+    color: #fff;
+    font-family: 'Russo One', sans-serif;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
