@@ -606,12 +606,18 @@ function initScrollytellingAnimation() {
         }
 
         // 4. MOVIMIENTO SÍNCRONO DEL ESCALADOR
+        // 4. MOVIMIENTO SÍNCRONO DEL ESCALADOR (Por la línea del medio)
         if (geClimber) {
             // Comienza arriba en 10% y baja hasta el 75% del alto de la ventana según progresas
             const startTop = 10; 
             const endTop = 75;
             const currentTop = startTop + (progress * (endTop - startTop));
-            geClimber.style.top = `${currentTop}vh`; // Usamos vh para mantener consistencia con la pantalla
+            
+            // Asignamos el top en vh
+            geClimber.style.top = `${currentTop}vh`;
+            
+            // IMPORTANTE: Mantenemos el translateX(-50%) del CSS para que no pierda el centrado horizontal
+            geClimber.style.transform = `translateX(-50%)`;
         }
 
         // 5. CONTROL DE ENTRADA / SALIDA DE LAS TARJETAS GLASSMORPHISM

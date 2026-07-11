@@ -3778,18 +3778,24 @@ html {
     object-position: center center;
 }
 
-/* Capas inicial y de transición */
+/* Capas inicial y de transición (Cielos) */
 .layer-bg-initial { z-index: 10; }
 .layer-bg-transition { z-index: 20; opacity: 0; }
-.layer-foreground-static { z-index: 30; }
 
-/* Nodo del Escalador */
+/* Capa 3: Montaña Frontal (Por encima de los cielos) */
+.layer-foreground-static { 
+    z-index: 30; 
+}
+
+/* El Escalador (Aumentamos su z-index a 35 para que baje POR ENCIMA de la montaña) */
 .ge-climber-sprite-node {
     position: absolute;
-    right: 15%;
-    width: 110px;
-    z-index: 40;
+    left: 50%;
+    width: 165px;
+    z-index: 35; /* Al ser 35, se dibuja por encima de la montaña que es 30 */
+    transform: translateX(-50%);
     will-change: top;
+    pointer-events: none;
 }
 
 .ge-climber-sprite-node img {
@@ -3897,6 +3903,9 @@ html {
     .ge-row { margin-bottom: 50vh; }
     .ge-row.left-side, .ge-row.right-side { justify-content: flex-start; padding-left: 45px; padding-right: 5%; }
     .ge-glass-card { width: 100%; padding: 1.8rem; }
-    .ge-climber-sprite-node { right: 5%; width: 70px; }
-}
+    .ge-climber-sprite-node {
+        left: 20px !important;       /* Lo posiciona exactamente sobre los 20px de la línea guía */
+        width: 110px;                 /* Reduce un poco su tamaño para que no tape los textos en pantallas chicas */
+        transform: translateX(-50%); /* Lo mantiene perfectamente centrado sobre el eje de la línea */
+    }
 }
