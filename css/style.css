@@ -718,8 +718,8 @@ section {
 .cursos-grid .curso-card:last-child {
   position: relative;
   /* Creamos un resplandor de fondo (aura) combinando el azul y tu color naranja destacado */
-  box-shadow: 0 0 25px rgba(24, 63, 111, 0.4), 
-              0 0 50px rgba(31, 173, 255, 0.3) !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.603), 
+              0 0 50px rgba(255, 255, 255, 0.836) !important;
   border: 1px solid #7CA5C1;
   animation: auraPulsante 4s ease-in-out infinite alternate;
 }
@@ -3726,18 +3726,19 @@ html {
   font-weight: bold;
 }
 /* ==========================================================================
-   Sección Experiencia Nocturna (Scrollytelling) - SOLUCIÓN DEFINITIVA FIXED
+   SECCIÓN: GRAN EXPERIENCIA - SOLUCIÓN SCROLLYTELLING FIXED
    ========================================================================== */
-.scrolly-section {
+.ge-section-container {
     position: relative;
     width: 100%;
-    min-height: 400vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
-    background-color: #02060c;
+    min-height: 450vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
+    background-color: #050E18;
     overflow: visible !important;
+    padding: 0 !important; /* Eliminamos paddings viejos para control total */
 }
 
-/* El contenedor del fondo ahora es absoluto por defecto */
-.scrolly-background {
+/* El contenedor visual ahora se comporta absoluto por defecto */
+.ge-sticky-visual-box {
     position: absolute;
     top: 0;
     left: 0;
@@ -3748,85 +3749,154 @@ html {
     pointer-events: none;
 }
 
-/* Esta clase la pondrá el JavaScript automáticamente cuando entres a la sección */
-.scrolly-background.is-fixed {
+/* CLASE DINÁMICA: JS fijará el fondo a la pantalla mientras scroleás por la sección */
+.ge-sticky-visual-box.is-fixed {
     position: fixed;
     top: 0;
 }
 
-/* Esta clase la pondrá el JavaScript automáticamente cuando llegues al final de la sección */
-.scrolly-background.is-bottom {
+/* CLASE DINÁMICA: JS retendrá el fondo abajo cuando termines la sección y sigas bajando */
+.ge-sticky-visual-box.is-bottom {
     position: absolute;
     top: auto;
     bottom: 0;
 }
 
-/* Asegura el encaje perfecto e hiperrealista de todas las capas */
-.bg-layer {
+/* Asegura el encaje perfecto de todas las capas de imagen */
+.ge-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center bottom;
-    pointer-events: none;
-    will-change: transform, opacity;
 }
 
-.bg-day { z-index: 10; opacity: 1; }
-.bg-climber { z-index: 20; opacity: 1; transform: translateY(150px); }
-.bg-night-overlay { 
-    z-index: 30; 
-    background: linear-gradient(to bottom, rgba(2, 6, 12, 0.3) 0%, rgba(2, 6, 12, 0.95) 100%);
-    mix-blend-mode: multiply; 
-    opacity: 0; 
-}
-.bg-stars { z-index: 40; opacity: 0; mix-blend-mode: screen; }
-
-/* --- Contenedor de los Carteles --- */
-.scrolly-content {
-    position: relative;
-    z-index: 50; /* Esto hace que los carteles floten POR ENCIMA de las imágenes */
-    padding: 20vh 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 60vh; /* Espaciado enorme para que los carteles bajen espaciados uno a uno */
-}
-
-/* --- Carteles Azules con Poca Opacidad (Glassmorphism) --- */
-.info-card {
-    position: relative;
+.ge-layer img {
     width: 100%;
-    max-width: 450px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Capas inicial y de transición */
+.layer-bg-initial { z-index: 10; }
+.layer-bg-transition { z-index: 20; opacity: 0; }
+.layer-foreground-static { z-index: 30; }
+
+/* Nodo del Escalador */
+.ge-climber-sprite-node {
+    position: absolute;
+    right: 15%;
+    width: 110px;
+    z-index: 40;
+    will-change: top;
+}
+
+.ge-climber-sprite-node img {
+    width: 100%;
+    height: auto;
+}
+
+/* --- Contenedor de Texto y Carteles Flotantes --- */
+.ge-scrolly-content {
+    position: relative;
+    z-index: 50; /* Superpone los textos e información por encima de los fondos fixed */
+    width: 100%;
+    padding-top: 10vh;
+}
+
+.ge-header-sticky-title {
+    text-align: center;
+    padding: 5vh 2rem;
+    margin-bottom: 15vh;
+}
+
+.ge-section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #ffffff;
+    margin-top: 0.5rem;
+}
+
+/* Línea vertical guía de la línea de tiempo */
+.ge-timeline-layout {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20vh;
+}
+
+.ge-timeline-layout::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 15vh;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-primary), rgba(255,132,31,0.6));
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* Configuración de filas y espaciado gigante para que las tarjetas suban una por una */
+.ge-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 75vh; /* Espacio enorme entre tarjetas para simular el avance del scroll */
+    position: relative;
+    z-index: 2;
+}
+
+.ge-row.left-side { justify-content: flex-start; padding-left: 5%; }
+.ge-row.right-side { justify-content: flex-end; padding-right: 5%; }
+
+/* Estilo de Tarjetas Glassmorphism con transición de opacidad inicial */
+.ge-glass-card {
+    width: 42%;
+    background: rgba(11, 33, 55, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(124, 165, 193, 0.15);
     padding: 2.5rem;
-    border-radius: 12px;
-    background: rgba(11, 33, 55, 0.5); /* Azul con opacidad sutil */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.info-card.is-visible {
+/* Clase que aplicará JS cuando la tarjeta entre al rango visual */
+.ge-glass-card.card-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.info-card.left { align-self: flex-start; }
-.info-card.right { align-self: flex-end; }
+.ge-card-step {
+    font-family: var(--font-display);
+    color: var(--color-highlight);
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
 
-.card-badge {
-    position: absolute;
-    top: -16px;
-    left: 2rem;
-    background: var(--color-highlight, #ff6f00);
-    color: #fff;
-    font-family: 'Russo One', sans-serif;
-    padding: 4px 14px;
-    border-radius: 4px;
-    font-size: 1rem;
+.ge-glass-card h3 {
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.ge-glass-card p {
+    color: #8a94a6;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Optimización Responsive Mobile sin romper el flujo vertical */
+@media (max-width: 768px) {
+    .ge-timeline-layout::before { left: 20px; transform: none; }
+    .ge-row { margin-bottom: 50vh; }
+    .ge-row.left-side, .ge-row.right-side { justify-content: flex-start; padding-left: 45px; padding-right: 5%; }
+    .ge-glass-card { width: 100%; padding: 1.8rem; }
+    .ge-climber-sprite-node { right: 5%; width: 70px; }
+}
 }

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordionTimeline(); 
   initCuspidesExpeditionsSlider();
   initCourseCardFlipEngine();
-  initScrollytellingAnimation(); // Activamos la nueva sección de Experiencia Nocturna
+  initScrollytellingAnimation(); 
 });
 
 function initReadingProgressBar() {
@@ -564,86 +564,73 @@ function initCourseCardFlipEngine() {
     });
   });
 }
-/* ==========================================================================
-   Motor Scrollytelling con Control de Estados Dinámicos (Fixed/Absolute)
-   ========================================================================= */
-const initScrollytellingAnimation = () => {
-    const scrollySection = document.getElementById('experiencia-nocturna');
-    if (!scrollySection) return;
+function initScrollytellingAnimation() {
+    const geSection = document.getElementById('granexperiencia');
+    if (!geSection) return;
 
-    const bgContainer = scrollySection.querySelector('.scrolly-background');
-    const dayLayer = scrollySection.querySelector('.bg-day');
-    const climberLayer = scrollySection.querySelector('.bg-climber');
-    const nightOverlay = scrollySection.querySelector('.bg-night-overlay');
-    const starsLayer = scrollySection.querySelector('.bg-stars');
-    const cards = scrollySection.querySelectorAll('.info-card');
+    // Elementos internos de la sección
+    const geBgContainer = geSection.querySelector('.ge-sticky-visual-box');
+    const geBgTarget = document.getElementById('ge-bg-target');
+    const geClimber = document.getElementById('ge-climber');
+    const geCards = geSection.querySelectorAll('.ge-glass-card');
 
-    const handleScrollAnimation = () => {
-        const rect = scrollySection.getBoundingClientRect();
+    const handleGeScroll = () => {
+        const rect = geSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // 1. CONTROL DE ESTADO DEL FONDO (Fijado dinámico)
+        // 1. MOTOR DE ESTADOS (Fijación Dinámica)
         if (rect.top > 0) {
-            // El usuario aún no llega a la sección (Fondo arriba de todo)
-            bgContainer.classList.remove('is-fixed', 'is-bottom');
+            // Usuario arriba de la sección -> El fondo se queda arriba (Absolute)
+            geBgContainer.classList.remove('is-fixed', 'is-bottom');
         } else if (rect.top <= 0 && rect.bottom >= windowHeight) {
-            // El usuario está scroleando DENTRO de la sección (Fondo se clava en pantalla)
-            bgContainer.classList.add('is-fixed');
-            bgContainer.classList.remove('is-bottom');
+            // Usuario scroleando adentro -> Fondo anclado a pantalla (Fixed)
+            geBgContainer.classList.add('is-fixed');
+            geBgContainer.classList.remove('is-bottom');
         } else if (rect.bottom < windowHeight) {
-            // El usuario pasó la sección (El fondo se queda retenido al final del contenedor)
-            bgContainer.classList.remove('is-fixed');
-            bgContainer.classList.add('is-bottom');
+            // Usuario pasó la sección -> Fondo retenido al final (Absolute Bottom)
+            geBgContainer.classList.remove('is-fixed');
+            geBgContainer.classList.add('is-bottom');
         }
 
-        // 2. CÁLCULO DEL PROGRESO (De 0 a 1)
+        // 2. CÁLCULO DE PROGRESO DE LA SECCIÓN (Valor lineal suave de 0 a 1)
         const totalScrollableHeight = rect.height - windowHeight;
         const currentScroll = Math.abs(rect.top);
         const progress = Math.max(0, Math.min(1, currentScroll / totalScrollableHeight));
 
-        // 3. ANIMACIONES DE LAS CAPAS SEGÚN EL SCROLL
-        if (climberLayer) {
-            // El escalador sube de forma fluida a medida que bajas
-            const moveY = 150 - (progress * 280);
-            climberLayer.style.transform = `translateY(${moveY}px)`;
+        // 3. ANIMACIÓN DE CAPAS (Transición de Opacidad de Día a Noche)
+        if (geBgTarget) {
+            // Cambia el fondo del 0% al 80% del recorrido para un efecto inmersivo lento
+            let backgroundProgress = progress / 0.8;
+            backgroundProgress = Math.max(0, Math.min(1, backgroundProgress));
+            geBgTarget.style.opacity = backgroundProgress;
         }
 
-        if (dayLayer && nightOverlay) {
-            // Transición de día a noche (ocurre entre el 10% y el 65% del scroll)
-            let nightOpacity = (progress - 0.1) / 0.55;
-            nightOpacity = Math.max(0, Math.min(1, nightOpacity));
-            dayLayer.style.opacity = 1 - nightOpacity;
-            nightOverlay.style.opacity = nightOpacity;
+        // 4. MOVIMIENTO SÍNCRONO DEL ESCALADOR
+        if (geClimber) {
+            // Comienza arriba en 10% y baja hasta el 75% del alto de la ventana según progresas
+            const startTop = 10; 
+            const endTop = 75;
+            const currentTop = startTop + (progress * (endTop - startTop));
+            geClimber.style.top = `${currentTop}vh`; // Usamos vh para mantener consistencia con la pantalla
         }
 
-        if (starsLayer) {
-            // Las constelaciones titilan y aparecen al final (del 60% al 95%)
-            let starsOpacity = (progress - 0.6) / 0.35;
-            starsOpacity = Math.max(0, Math.min(1, starsOpacity));
-            starsLayer.style.opacity = starsOpacity;
-        }
-
-        // 4. CONTROL DE APARICIÓN DE LOS CARTELES
-        cards.forEach(card => {
+        // 5. CONTROL DE ENTRADA / SALIDA DE LAS TARJETAS GLASSMORPHISM
+        geCards.forEach(card => {
             const cardTop = card.getBoundingClientRect().top;
-            if (cardTop < windowHeight * 0.8 && cardTop > -200) {
-                card.classList.add('is-visible');
+            // Se activa cuando la tarjeta está al 75% de la pantalla y se oculta si ya pasó de largo hacia arriba
+            if (cardTop < windowHeight * 0.75 && cardTop > -100) {
+                card.classList.add('card-visible');
             } else {
-                card.classList.remove('is-visible');
+                card.classList.remove('card-visible');
             }
         });
     };
 
+    // Escuchamos el scroll usando requestAnimationFrame para máxima fluidez a 60fps
     window.addEventListener('scroll', () => {
-        window.requestAnimationFrame(handleScrollAnimation);
+        window.requestAnimationFrame(handleGeScroll);
     }, { passive: true });
 
-    handleScrollAnimation();
-};
-
-// Inicialización limpia
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollytellingAnimation);
-} else {
-    initScrollytellingAnimation();
+    // Ejecución inicial por si la página carga a mitad de camino
+    handleGeScroll();
 }

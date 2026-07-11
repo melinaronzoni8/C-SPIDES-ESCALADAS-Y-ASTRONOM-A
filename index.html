@@ -75,48 +75,64 @@
       </div>
     </div>
   </section>
-<section id="experiencia-nocturna" class="scrolly-section">
-    <div class="scrolly-background">
-        <img src="assets/montana-dia.jpg" alt="Montaña Patagonia Día" class="bg-layer bg-day">
-        <img src="assets/escalador.png" alt="Escalador subiendo" class="bg-layer bg-climber">
-        <div class="bg-layer bg-night-overlay"></div>
-        <img src="assets/constelaciones.png" alt="Constelaciones Patagonia" class="bg-layer bg-stars">
+
+<section id="granexperiencia" class="ge-section-container">
+    
+    <div class="ge-sticky-visual-box">
+        
+        <div class="ge-layer layer-bg-initial">
+            <img src="img/cielo-dia.jpg" alt="Fondo Inicial Gran Experiencia">
+        </div>
+        
+        <div class="ge-layer layer-bg-transition" id="ge-bg-target">
+            <img src="img/cielo-noche.jpg" alt="Fondo Transición Gran Experiencia">
+        </div>
+        
+        <div class="ge-layer layer-foreground-static">
+            <img src="img/montana-frente.png" alt="Estructura Frontal Estática" style="display: none;">
+        </div>
+        
+        <div class="ge-climber-sprite-node" id="ge-climber">
+            <img src="assets/escalador.png" alt="Escalador Progresivo Cúspides">
+        </div>
     </div>
 
-    <div class="scrolly-content container">
-        
-        <div class="info-card left data-reveal">
-            <div class="card-badge">01</div>
-            <h3>Desafío Vertical Nocturno</h3>
-            <p>Experimentá la adrenalina pura de escalar las paredes más icónicas de la Patagonia bajo la luz de la luna. Una perspectiva totalmente nueva donde tus sentidos se agudizan y cada movimiento cuenta.</p>
+    <div class="ge-scrolly-content">
+        <div class="ge-header-sticky-title">
+            <span class="ge-section-tag">METODOLOGÍA INMERSIVA</span>
+            <h2 class="ge-section-title">Nuestra Gran Experiencia</h2>
         </div>
 
-        <div class="info-card right data-reveal">
-            <div class="card-badge">02</div>
-            <h3>Ventanas Astronómicas Únicas</h3>
-            <p>Nuestros guías expertos seleccionan los momentos perfectos de oscuridad absoluta. Lejos de la contaminación lumínica, te garantizamos cielos tan claros que sentirás que podés tocar las estrellas.</p>
-        </div>
+        <div class="ge-timeline-layout">
+            
+            <div class="ge-row left-side">
+                <div class="ge-glass-card">
+                    <span class="ge-card-step">01</span>
+                    <h3>Aproximación Base</h3>
+                    <p>Iniciamos el ascenso antes del crepúsculo. Reconocimiento técnico del terreno de roca vertical, preparación de cámaras, lentes e iluminación extrema adaptada.</p>
+                </div>
+            </div>
 
-        <div class="info-card left data-reveal">
-            <div class="card-badge">03</div>
-            <h3>Vivac en la Pared</h3>
-            <p>No solo escalamos, vivimos la montaña. Disfrutá de un vivac técnico suspendido, una cena reconfortante y una noche de descanso literal entre el cielo y la tierra firme. Una experiencia de conexión total.</p>
-        </div>
+            <div class="ge-row right-side">
+                <div class="ge-glass-card">
+                    <span class="ge-card-step">02</span>
+                    <h3>Punto de Anclaje</h3>
+                    <p>Establecimiento de líneas de vida fijas. Suspensión a más de 120 metros para lograr la captura del ángulo perfecto mientras la luz natural decrece.</p>
+                </div>
+            </div>
 
-        <div class="info-card right data-reveal">
-            <div class="card-badge">04</div>
-            <h3>Guías y Astrofotografía</h3>
-            <p>Contamos con instructores de escalada y fotógrafos profesionales. Aprendé técnicas de ascensión nocturna y cómo capturar la majestuosidad de la Vía Láctea con tu cámara desde la misma pared.</p>
-        </div>
+            <div class="ge-row left-side">
+                <div class="ge-glass-card">
+                    <span class="ge-card-step">03</span>
+                    <h3>Cenit Fotográfico</h3>
+                    <p>Fusión total con la oscuridad patagónica. Exposiciones prolongadas de astrofotografía mientras el escalador ilumina los relieves tácticos de la piedra.</p>
+                </div>
+            </div>
 
-        <div class="info-card left data-reveal">
-            <div class="card-badge">05</div>
-            <h3>La Recompensa Final</h3>
-            <p>Coroná la expedición llegando a la cumbre justo cuando el cielo revela todo su esplendor. Las constelaciones del sur te darán la bienvenida a un club exclusivo de exploradores nocturnos.</p>
         </div>
-
     </div>
 </section>
+
   <section id="nosotros" class="section-nosotros">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
     <div class="nosotros-grid">
