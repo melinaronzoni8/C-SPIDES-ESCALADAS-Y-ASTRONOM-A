@@ -597,20 +597,22 @@ function initScrollytellingAnimation() {
         const currentScroll = Math.abs(rect.top);
         const progress = Math.max(0, Math.min(1, currentScroll / totalScrollableHeight));
 
+        
         // 3. ANIMACIÓN DE CAPAS (Transición de Opacidad de Día a Noche)
         if (geBgTarget) {
-            // Cambia el fondo del 0% al 80% del recorrido para un efecto inmersivo lento
             let backgroundProgress = progress / 0.8;
             backgroundProgress = Math.max(0, Math.min(1, backgroundProgress));
-            geBgTarget.style.opacity = backgroundProgress;
+            
+            // MULTIPLICAMOS por 0.4 (o 0.3) para que la capa de la noche 
+            // también aparezca oscurecida y mantenga la estética del Hero
+            geBgTarget.style.opacity = backgroundProgress * 0.4;
         }
-
-        // 4. MOVIMIENTO SÍNCRONO DEL ESCALADOR
+      
         // 4. MOVIMIENTO SÍNCRONO DEL ESCALADOR (Por la línea del medio)
         if (geClimber) {
             // Comienza arriba en 10% y baja hasta el 75% del alto de la ventana según progresas
-            const startTop = 10; 
-            const endTop = 75;
+            const startTop = 30; 
+            const endTop = 65;
             const currentTop = startTop + (progress * (endTop - startTop));
             
             // Asignamos el top en vh
