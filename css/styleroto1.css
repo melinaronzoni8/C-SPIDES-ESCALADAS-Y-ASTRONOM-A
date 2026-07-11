@@ -869,185 +869,147 @@ bottom: 1.8rem !important;
   .menu-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
-/* AJUSTE RESPONSIVE: IMAGEN DE FONDO Y RECUADRO EN SECCIÓN "NOSOTROS" */
+/* ==========================================================================
+   SECCIÓN: NOSOTROS - TEXTO FLOTANTE PURO (SIN RECUADRO EN NINGÚN CASO)
+   ========================================================================== */
+
+/* --- ESTILOS GLOBALES (Aplica a Desktop y Mobile por igual) --- */
 .nosotros-content-box {
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-  border: none;
-}
-
-@media (max-width: 768px) {
-  .nosotros-grid {
-    position: relative;
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 2rem 1.5rem;
-    overflow: hidden;
-    border-radius: 8px;
-  }
-  .nosotros-image-col {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100% !important; 
-    z-index: 1; 
-    padding: 0;
-    margin: 0;
-    border: none;
-  }
-  .nosotros-image-col .nosotros-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .nosotros-text-col {
-    position: relative;
-    z-index: 2; 
-    display: flex;
-    flex-direction: column;
-  }
-  .nosotros-title {
-    margin-bottom: 1.5rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-  }
-  .nosotros-content-box {
-    background: rgba(11, 33, 55, 0.85); 
-    border: 0.5px solid rgba(124, 165, 193, 0.3); 
-    padding: 2rem 1.5rem;
-    border-radius: 4px; 
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  }
-  .nosotros-body {
-    text-align: left;
-    margin-bottom: 1.5rem;
-  }
-  .nosotros-p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-text-light);
-    margin-bottom: 1rem;
-    text-align-last: left;
-  }
-}
-
-/* CORRECCIÓN VISIBILIDAD PARA "NOSOTROS" (MÓVIL) */
-@media (max-width: 768px) {
-  .nosotros-text-col[data-reveal],
-  .nosotros-image-col[data-reveal],
-  .nosotros-grid [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-    transition: none !important;
-  }
-  .nosotros-grid {
-    position: relative;
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 3rem 1.5rem;
-    overflow: hidden;
-    border-radius: 8px;
-    display: block; 
-  }
-  .nosotros-image-col {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100% !important;
-    z-index: 1 !important; 
-    padding: 0;
-    margin: 0;
-  }
-  .nosotros-image-col .nosotros-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .nosotros-text-col {
-    position: relative !important;
-    z-index: 10 !important; 
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: flex;
-    flex-direction: column;
-  }
-  .nosotros-title {
-    margin-bottom: 1.5rem;
-    color: var(--color-text-light) !important;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
-  }
-  .nosotros-content-box {
     position: relative;
     z-index: 20 !important;
-    background: rgba(11, 33, 55, 0.5); 
-    border: 1px solid rgba(124, 165, 193, 0.6);
-    padding: 2.2rem 1.8rem;
-    border-radius: 4px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-  }
-  .nosotros-p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-text-light) !important;
-    margin-bottom: 1.2rem;
-  }
+    padding: 1rem 0 !important; /* Ajuste limpio de espaciado para que el texto fluya libre */
+    box-sizing: border-box;
+
+    /* ELIMINACIÓN TOTAL DEL RECUADRO, BORDES Y BLUR GLOBAL EN CUALQUIER CASO */
+    background: transparent !important;       
+    background-image: none !important; /* Remueve cualquier intento de cargar imágenes de fondo tras el texto */
+    border: none !important;                   
+    box-shadow: none !important;               
+    backdrop-filter: none !important;          
+    -webkit-backdrop-filter: none !important;
 }
 
-/* RESPONSIVE DESKTOP (PANTALLAS GRANDES) */
+
+/* --- RESPONSIVE DESKTOP (Pantallas Grandes) --- */
 @media (min-width: 769px) {
-  .section-nosotros { background-image: none !important; }
-  .nosotros-grid {
-    display: grid !important;
-    grid-template-columns: 1.1fr 0.9fr !important; 
-    gap: 4rem !important;
-    align-items: center !important;
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-  }
-  .nosotros-body { text-align: left !important; }
-  .nosotros-p { text-align: left !important; text-align-last: left !important; }
-  .nosotros-image-col {
-    display: block !important;
-    height: 500px !important;
-    border-right: none !important;
-    padding-right: 0 !important;
-  }
-  .nosotros-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
+    .section-nosotros { 
+        background-image: none !important; 
+    }
+    
+    .nosotros-grid {
+        display: grid !important;
+        grid-template-columns: 1.2fr 0.8fr !important; /* Mantiene tu proporción exacta */
+        gap: 4rem !important;
+        align-items: center !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+    }
+    
+    .nosotros-text-col { 
+        order: 1 !important; 
+    }
+    
+    .nosotros-image-col {
+        display: block !important;
+        height: 500px !important;
+        order: 2 !important;
+        
+        /* CORRECCIÓN: Quitamos el borde izquierdo que generaba la línea divisoria */
+        border-left: none !important; 
+        border-right: none !important;
+        
+        padding-left: 2rem !important;
+        padding-right: 0 !important;
+    }
+    
+    .nosotros-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    
+    .nosotros-body { 
+        text-align: left !important; 
+    }
+    
+    .nosotros-p { 
+        text-align: left !important; 
+        text-align-last: left !important; 
+    }
+
+    /* Control de visibilidad de los textos en Desktop */
+    .nosotros-desktop {
+        display: none !important; 
+    }
+    
+    .nosotros-mobile {
+        display: block !important; 
+    }
 }
-/* RESPONSIVE MÓVIL (PANTALLAS CHICAS) */
+
+
+/* --- RESPONSIVE MÓVIL EXCLUSIVO (Pantallas Chicas) --- */
 @media (max-width: 768px) {
-  .section-nosotros {
-    background-image: linear-gradient(rgba(5, 14, 24, 0.82), rgba(5, 14, 24, 0.9)), url('../assets/image4.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    padding: 6rem 1.5rem !important;
-  }
-  .nosotros-grid { display: block !important; width: 100% !important; }
-  .nosotros-image-col { display: none !important; }
-  .nosotros-body { text-align: center !important; }
-  .nosotros-p { text-align: justify !important; text-align-last: center !important; }
-  .nosotros-content-box {
-    background: rgba(11, 33, 55, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(124, 165, 193, 0.3) !important;
-    padding: 2rem 1.5rem !important;
-  }
-}
+    .section-nosotros {
+        background-image: linear-gradient(rgba(5, 14, 24, 0.82), rgba(5, 14, 24, 0.9)), url('../assets/image4.png') !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        padding: 6rem 1.5rem !important;
+    }
+    
+    .nosotros-grid { 
+        display: block !important; 
+        width: 100% !important; 
+    }
+    
+    .nosotros-image-col { 
+        display: none !important; /* Evita que la imagen se renderice doble en celulares */
+    }
+    
+    .nosotros-body { 
+        text-align: center !important; 
+    }
+    
+    .nosotros-p { 
+        text-align: justify !important; 
+        text-align-last: center !important; 
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-text-light) !important;
+        margin-bottom: 1.2rem;
+    }
+    
+    .nosotros-title {
+        margin-bottom: 1.5rem;
+        color: var(--color-text-light) !important;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Correcciones de visibilidad para animaciones en móviles */
+    .nosotros-text-col {
+        border: none !important;
+        border-left: none !important;
+        padding-left: 0 !important; /* Quita cualquier espacio o margen que simule una línea */
+        margin-left: 0 !important;
+    }
+    .nosotros-text-col::after {
+        content: none !important;
+        display: none !important;
+        background: none !important;
+        border: none !important;
+    }
+
+    
+    .nosotros-text-col[data-reveal],
+    .nosotros-grid [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        transition: none !important;
+    }
+    }
+
 .section-gallery {
   position: relative;
   padding: 8rem 2rem;
@@ -1233,17 +1195,7 @@ h1, .hero-title, .nosotros-title, .editorial-title, .cursos-title, .gallery-titl
   transform: scale(1.05) !important;
 }
 
-@media (min-width: 769px) {
-  .nosotros-grid { grid-template-columns: 1.2fr 0.8fr !important; }
-  .nosotros-text-col { order: 1 !important; }
-  .nosotros-image-col {
-    order: 2 !important;
-    border-left: 1px solid rgba(236, 237, 235, 0.1) !important;
-    border-right: none !important;
-    padding-left: 2rem !important;
-    padding-right: 0 !important;
-  }
-}
+
 /* ==========================================================================
    CAMBIO GLOBAL PARA ELEMENTOS H3
    ========================================================================== */
@@ -1710,7 +1662,6 @@ footer {
 
 @media (max-width: 1024px) {
   .cursos-grid { grid-template-columns: repeat(2, 1fr); }
-  .nosotros-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .cursos-grid { grid-template-columns: 1fr; }
@@ -2109,23 +2060,20 @@ footer {
 
   /* CÓDIGO CORREGIDO: La caja con la imagen de fondo fija y única */
   .nosotros-content-box {
+
     /* 1. Ponemos una capa oscura transparente al 80% y la ruta exacta a la imagen */
     background-image: linear-gradient(rgba(11, 33, 55, 0.8), rgba(11, 33, 55, 0.8)), url('../assets/image20.png') !important;
     
-    /* 2. EVITA QUE SE COPIE O REPISTA EN MOSAICO (Esto resuelve tu problema) */
-    background-repeat: no-repeat !important;
-    
     /* 3. Hace que la imagen cubra toda la caja estirándose proporcionalmente */
-    background-size: cover !important;
+    background-size:  cover !important;
     
     /* 4. Centra la imagen para que se luzca el medio de la foto */
     background-position: center !important;
     
     /* 5. Estilos visuales de la caja para que el texto respire y quede estético */
-    padding: 2.5rem 2rem !important; 
-    border: 1px solid rgba(124, 165, 193, 0.3) !important;
+    padding: 2.5rem !important; 
     border-radius: 4px !important;
-  }
+  
 }
 /* ==========================================================================
    ESTILOS ADAPTADOS PARA EL CURSO INTEGRADOR FINAL (CÚSPIDES)
@@ -3731,7 +3679,7 @@ html {
 .ge-section-container {
     position: relative;
     width: 100%;
-    min-height: 200vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
+    min-height: 100vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
     background-color: #050E18;
     overflow: visible !important;
     padding: 0 !important; /* Eliminamos paddings viejos para control total */
@@ -3763,6 +3711,7 @@ html {
 }
 
 /* Asegura el encaje perfecto de todas las capas de imagen */
+/* Asegura el encaje perfecto de todas las capas de imagen */
 .ge-layer {
     position: absolute;
     top: 0;
@@ -3790,16 +3739,27 @@ html {
 .layer-bg-initial { z-index: 10; }
 .layer-bg-transition { z-index: 20; opacity: 0; }
 
-/* Capa 3: Montaña Frontal (Por encima de los cielos) */
+/* Capa 3: Montaña Frontal */
 .layer-foreground-static { 
     z-index: 30; 
+}
+
+/* Fuerza a la montaña a cubrir todo el alto de la sección visual fija */
+.layer-foreground-static img {
+    width: 100% !important;
+    height: 100vh !important; /* Obliga a la imagen a medir el 100% del alto de la pantalla */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    object-fit: cover !important; /* Recorta proporcionalmente los lados para que nunca queden bordes vacíos */
+    object-position: center bottom; /* Mantiene la base de la montaña fija abajo y el centro visible */
 }
 
 /* El Escalador (Aumentamos su z-index a 35 para que baje POR ENCIMA de la montaña) */
 .ge-climber-sprite-node {
     position: absolute;
     left: 50%;
-    width: 300px; /* Ajusta el tamaño del escalador según tu diseño */
+    width: 300px;
     z-index: 35; /* Al ser 35, se dibuja por encima de la montaña que es 30 */
     transform: translateX(-50%);
     will-change: top;
@@ -3816,13 +3776,13 @@ html {
     position: relative;
     z-index: 50; /* Superpone los textos e información por encima de los fondos fixed */
     width: 100%;
-    padding-top: 10vh;
+    padding-top: 5vh;
 }
 
 .ge-header-sticky-title {
     text-align: center;
     padding: 5vh 2rem;
-    margin-bottom: 15vh;
+    margin-bottom: 5vh;
 }
 
 .ge-section-title {
@@ -3837,7 +3797,7 @@ html {
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 20vh;
+    padding-bottom: 5vh;
 }
 
 .ge-timeline-layout::before {
@@ -3905,15 +3865,51 @@ html {
     line-height: 1.6;
 }
 
-/* Optimización Responsive Mobile sin romper el flujo vertical */
 @media (max-width: 768px) {
-    .ge-timeline-layout::before { left: 20px; transform: none; }
-    .ge-row { margin-bottom: 50vh; }
-    .ge-row.left-side, .ge-row.right-side { justify-content: flex-start; padding-left: 45px; padding-right: 5%; }
-    .ge-glass-card { width: 100%; padding: 1.8rem; }
-    .ge-climber-sprite-node {
-        left: 20px !important;       /* Lo posiciona exactamente sobre los 20px de la línea guía */
-        width: 110px;                 /* Reduce un poco su tamaño para que no tape los textos en pantallas chicas */
-        transform: translateX(-50%); /* Lo mantiene perfectamente centrado sobre el eje de la línea */
+    /* ... Tus otros estilos responsive generales (como .ge-section-title) ... */
+
+    /* 1. Forzar que el layout de la línea de tiempo use todo el ancho */
+    .ge-timeline-layout {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
     }
+
+    /* 2. Mover la línea guía al costado izquierdo (20px del borde) */
+    .ge-timeline-layout::before {
+        left: 20px !important;
+        transform: none !important;
+    }
+
+    /* 3. ALINEAR EL ESCALADOR EXACTAMENTE SOBRE LA LÍNEA IZQUIERDA */
+    .ge-climber-sprite-node {
+        left: 20px !important; 
+        width: 80px !important; /* Tamaño optimizado para pantallas chicas */
+        transform: translateX(-50%) !important; /* Centrado exacto sobre el eje de la línea */
+    }
+
+    /* 4. Alinear todas las filas hacia la derecha de la línea */
+    .ge-row {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 60vh !important; /* Espaciado vertical gigante para el scrollytelling */
+        padding-left: 65px !important;  /* Margen seguro para no pisar la línea ni al escalador */
+        padding-right: 15px !important; /* Margen de respiro del lado derecho */
+    }
+
+    .ge-row.left-side, 
+    .ge-row.right-side {
+        justify-content: flex-start !important;
+        padding-left: 65px !important;  /* Aplica a ambos lados por igual en mobile */
+        padding-right: 15px !important;
+    }
+
+    /* 5. Forzar a que las tarjetas usen el 100% del espacio restante sin deformarse */
+    .ge-glass-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.5rem !important; /* Padding interno más compacto para celulares */
+        box-sizing: border-box !important;
+    }
+  }
 }
