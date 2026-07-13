@@ -4389,3 +4389,23 @@ html {
     display: none !important;
   }
 }
+/* ==========================================================================
+   UNIFICACIÓN DE TÍTULOS (EXCEPTO EXCURSIONES)
+   ========================================================================== */
+
+/* Alineación maestra para todos los títulos de sección */
+.nosotros-title, 
+.cursos-title, 
+.contact-title, 
+.certificacion-title, 
+.equipo-title {
+  padding-left: 5% !important; /* Ajusta este % al valor exacto que desees para todas */
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+/* Exclusión explícita para la sección de excursiones (Editorial) */
+.editorial-title {
+  padding-left: 0 !important; 
+  /* Se mantiene tal cual está actualmente */
+}
