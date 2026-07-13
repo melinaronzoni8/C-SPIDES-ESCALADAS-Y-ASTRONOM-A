@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Biblioteca UI — Kit de Componentes Interactivos de Cúspides." />
+  <title>Biblioteca UI — Cúspides</title>
+  
+  <!-- Fuentes oficiales de Cúspides -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lato:wght=300;400;700&display=swap" rel="stylesheet" />
+  
+  <!-- FontAwesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Estilos Maestros Oficiales (Hereda variables y resets) -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Estilos específicos de la Biblioteca UI para que luzca impecable */
+    :root {
+      --sidebar-width: 260px;
+    }
+
+    body.ui-library-page {
+      background: var(--color-bg-deep) url('assets/degradado.png') no-repeat fixed center;
+      background-size: cover;
+      color: var(--color-text-light);
+      font-family: var(--font-body);
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    /* Contenedor Principal con Sidebar Fijo */
+    .ui-container {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Sidebar de Navegación del Kit */
+    .ui-sidebar {
+      width: var(--sidebar-width);
+      background: rgba(11, 33, 55, 0.9);
+      backdrop-filter: blur(15px);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .ui-sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--color-text-light);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .ui-sidebar-logo img {
+      height: 35px;
+      object-fit: contain;
+    }
+
+    .ui-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ui-nav-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ui-nav-links a:hover, 
+    .ui-nav-links li.active a {
+      color: #ffffff;
+      background: rgba(24, 63, 111, 0.6);
+      border-left: 3px solid var(--color-highlight);
+      padding-left: 12px;
+    }
+
+    /* Panel de Contenido Principal */
+    .ui-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 3.5rem 4rem;
+      max-width: 1200px;
+    }
+
+    /* Cabecera del Kit */
+    .ui-header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 2rem;
+    }
+
+    .ui-header h1 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .ui-header p {
+      color: var(--color-primary);
+      font-size: 1.1rem;
+    }
+
+    /* Secciones del Kit */
+    .ui-section {
+      margin-bottom: 5rem;
+      scroll-margin-top: 4rem;
+    }
+
+    .ui-section-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid rgba(124, 165, 193, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .ui-section-title i {
+      color: var(--color-highlight);
+    }
+
+    .ui-section-desc {
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* Contenedores de Demo */
+    .ui-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .ui-showcase-card {
+      background: rgba(11, 33, 55, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .ui-showcase-card:hover {
+      border-color: rgba(124, 165, 193, 0.3);
+      box-shadow: 0 10px 25px rgba(5, 14, 24, 0.5);
+    }
+
+    .ui-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Muestrario de Colores */
+    .ui-color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .ui-color-swatch {
+      background: rgba(11, 33, 55, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .ui-color-swatch:hover {
+      transform: translateY(-5px);
+    }
+
+    .ui-color-block {
+      height: 100px;
+      width: 100%;
+    }
+
+    .ui-color-info {
+      padding: 1rem;
+    }
+
+    .ui-color-name {
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .ui-color-hex {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Bloques de Código Inteligentes */
+    .ui-code-panel {
+      background: #020810;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      overflow: hidden;
+    }
+
+    .ui-code-header {
+      background: rgba(11, 33, 55, 0.8);
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ui-code-lang {
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: 1px solid rgba(124, 165, 193, 0.4);
+      color: var(--color-text-light);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+    }
+
+    .btn-copy:hover {
+      background: var(--color-highlight);
+      border-color: var(--color-highlight);
+      color: #fff;
+    }
+
+    .ui-code-block pre {
+      margin: 0;
+      padding: 1.2rem;
+      overflow-x: auto;
+    }
+
+    .ui-code-block code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      color: #a9b7c6;
+    }
+
+    /* Muestra de Tipografías */
+    .ui-font-showcase {
+      background: rgba(11, 33, 55, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .ui-font-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 1.5rem;
+    }
+
+    .ui-font-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .ui-font-meta {
+      width: 180px;
+    }
+
+    .ui-font-family-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .ui-font-usage {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+    }
+
+    .ui-font-preview {
+      flex: 1;
+    }
+
+    /* Estilos replicados del archivo maestro o complementados para demostración interactiva */
+    /* Botones */
+    .btn-demo-primary {
+      display: inline-block;
+      background: var(--color-highlight);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 132, 31, 0.3);
+      text-decoration: none;
+    }
+
+    .btn-demo-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 132, 31, 0.5);
+      background: #ff943d;
+    }
+
+    .btn-demo-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--color-text-light);
+      padding: 0.8rem 2rem;
+      border: 2px solid var(--color-primary);
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-demo-secondary:hover {
+      background: rgba(124, 165, 193, 0.15);
+      color: #fff;
+      border-color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-demo-link:hover {
+      color: var(--color-highlight);
+    }
+
+    .btn-demo-link i {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-demo-link:hover i {
+      transform: translateX(5px);
+    }
+
+    /* Cards interactivos en biblioteca */
+    /* Tarjeta Flip 3D (Adaptado) */
+    .card-demo-container {
+      perspective: 1000px;
+      width: 280px;
+      height: 380px;
+    }
+
+    .card-demo-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    .card-demo-container:hover .card-demo-inner,
+    .card-demo-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-demo-front, .card-demo-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card-demo-front {
+      background: var(--color-bg-dark);
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-demo-front-img {
+      height: 50%;
+      background: linear-gradient(135deg, var(--color-accent-blue), var(--color-bg-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-size: 3rem;
+    }
+
+    .card-demo-front-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-demo-front-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-demo-back {
+      background: var(--color-accent-blue);
+      transform: rotateY(180deg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    /* Glassmorphism Card interactivo */
+    .glass-demo-card {
+      background: rgba(15, 32, 67, 0.45);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 320px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .glass-demo-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 165, 193, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      transition: transform 0.5s ease;
+    }
+
+    .glass-demo-card:hover::before {
+      transform: translate(10%, 10%);
+    }
+
+    .glass-demo-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .glass-demo-card p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Acordeón / Itinerario Animado */
+    .acc-demo-container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .acc-demo-item {
+      background: rgba(11, 33, 55, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .acc-demo-header {
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-family: var(--font-body);
+      color: #fff;
+      transition: background 0.3s ease;
+    }
+
+    .acc-demo-header:hover {
+      background: rgba(24, 63, 111, 0.3);
+    }
+
+    .acc-demo-icon {
+      transition: transform 0.3s ease;
+      color: var(--color-highlight);
+    }
+
+    .acc-demo-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+      padding: 0 1.5rem;
+    }
+
+    .acc-demo-item.active {
+      border-color: rgba(124, 165, 193, 0.4);
+      background: rgba(11, 33, 55, 0.95);
+    }
+
+    .acc-demo-item.active .acc-demo-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .acc-demo-item.active .acc-demo-icon {
+      transform: rotate(180deg);
+    }
+
+    .acc-demo-item.active .acc-demo-content {
+      max-height: 1000px; /* Suficiente para abrir el contenido */
+      padding: 1.2rem 1.5rem;
+      transition: max-height 0.4s ease-in-out;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .ui-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1.5rem;
+      }
+
+      .ui-container {
+        flex-direction: column;
+      }
+
+      .ui-content {
+        margin-left: 0;
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body class="ui-library-page">
+
+  <!-- El UI Kit Container principal -->
+  <div class="ui-container">
+    
+    <!-- Sidebar interactivo que detecta scroll mediante JS -->
+    <aside class="ui-sidebar">
+      <a href="index.html" class="ui-sidebar-logo">
+        <img src="assets/image2.png" alt="Logo Cúspides" onerror="this.style.display='none';">
+        <span>CÚSPIDES</span>
+      </a>
+      
+      <ul class="ui-nav-links" id="sidebar-nav">
+        <li class="active"><a href="#introduccion"><i class="fa-solid fa-circle-info"></i> Introducción</a></li>
+        <li><a href="#colores"><i class="fa-solid fa-palette"></i> Colores</a></li>
+        <li><a href="#tipografia"><i class="fa-solid fa-font"></i> Tipografía</a></li>
+        <li><a href="#botones"><i class="fa-solid fa-square-caret-right"></i> Botones</a></li>
+        <li><a href="#tarjetas"><i class="fa-solid fa-id-card"></i> Tarjetas</a></li>
+        <li><a href="#desplegables"><i class="fa-solid fa-bars"></i> Desplegables</a></li>
+      </ul>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="ui-content">
+      
+      <!-- Cabecera de la Biblioteca -->
+      <header class="ui-header">
+        <h1>Biblioteca de Componentes UI</h1>
+        <p>Ecosistema interactivo, modular y responsive oficial de la experiencia de Cúspides.</p>
+      </header>
+
+      <!-- Introducción -->
+      <section id="introduccion" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-circle-info"></i> Introducción</h2>
+        <p class="ui-section-desc">
+          Este UI Kit ha sido diseñado bajo estándares profesionales de desarrollo frontend para garantizar la consistencia, modularidad y reusabilidad del código del sitio. Consume directamente las variables de entorno de nuestro <code>style.css</code> para mantener un ecosistema visual fluido entre el Home, el curso integrador y las secciones complementarias.
+        </p>
+      </section>
+
+      <!-- Colores -->
+      <section id="colores" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-palette"></i> Paleta Cromática</h2>
+        <p class="ui-section-desc">
+          La paleta cromática se inspira en el crepúsculo, la roca de montaña y la oscuridad absoluta patagónica.
+        </p>
+        
+        <div class="ui-color-palette">
+          <!-- Deep Blue Background -->
+          <div class="ui-color-swatch">
+            <div class="ui-color-block" style="background: #050E18;"></div>
+            <div class="ui-color-info">
+              <div class="ui-color-name">Fondo Profundo</div>
+              <div class="ui-color-hex">--color-bg-deep (#050E18)</div>
+            </div>
+          </div>
+          <!-- Dark Blue Navy -->
+          <div class="ui-color-swatch">
+            <div class="ui-color-block" style="background: #0B2137;"></div>
+            <div class="ui-color-info">
+              <div class="ui-color-name">Fondo Secundario</div>
+              <div class="ui-color-hex">--color-bg-dark (#0B2137)</div>
+            </div>
+          </div>
+          <!-- Primary Blue -->
+          <div class="ui-color-swatch">
+            <div class="ui-color-block" style="background: #7CA5C1;"></div>
+            <div class="ui-color-info">
+              <div class="ui-color-name">Celeste Principal</div>
+              <div class="ui-color-hex">--color-primary (#7CA5C1)</div>
+            </div>
+          </div>
+          <!-- Highlight Orange -->
+          <div class="ui-color-swatch">
+            <div class="ui-color-block" style="background: #ff841f;"></div>
+            <div class="ui-color-info">
+              <div class="ui-color-name">Naranja Destacado</div>
+              <div class="ui-color-hex">--color-highlight (#ff841f)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tipografía -->
+      <section id="tipografia" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-font"></i> Tipografía</h2>
+        <p class="ui-section-desc">
+          Tipografías que combinan dinamismo aventurero con excelente legibilidad en pantallas.
+        </p>
+        
+        <div class="ui-font-showcase">
+          <div class="ui-font-row">
+            <div class="ui-font-meta">
+              <div class="ui-font-family-name" style="font-family: 'Russo One', sans-serif;">Russo One</div>
+              <div class="ui-font-usage">Display & Títulos</div>
+            </div>
+            <div class="ui-font-preview">
+              <span style="font-family: 'Russo One', sans-serif; font-size: 1.8rem; letter-spacing: 1px;">A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z</span>
+            </div>
+          </div>
+          <div class="ui-font-row">
+            <div class="ui-font-meta">
+              <div class="ui-font-family-name" style="font-family: 'Lato', sans-serif;">Lato</div>
+              <div class="ui-font-usage">Textos de Cuerpo & Botones</div>
+            </div>
+            <div class="ui-font-preview">
+              <span style="font-family: 'Lato', sans-serif; font-size: 1.1rem; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat imperdiet nisl, vitae scelerisque erat scelerisque non.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botones -->
+      <section id="botones" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-square-caret-right"></i> Botones Interactivos</h2>
+        <p class="ui-section-desc">
+          Botones interactivos diseñados con efectos fluidos y de respuesta rápida (transitions de 0.3s) para invitar a la acción.
+        </p>
+
+        <div class="ui-showcase-grid">
+          <!-- Botón Maestro/Primary -->
+          <div class="ui-showcase-card">
+            <span class="ui-label">Primario / Maestro</span>
+            <button class="btn-demo-primary">Reservar Ahora</button>
+          </div>
+          <!-- Botón Secundario -->
+          <div class="ui-showcase-card">
+            <span class="ui-label">Secundario</span>
+            <button class="btn-demo-secondary">Saber Más</button>
+          </div>
+          <!-- Enlace UI con Flecha Animada -->
+          <div class="ui-showcase-card">
+            <span class="ui-label">Enlace UI</span>
+            <button class="btn-demo-link">Ver Equipamiento <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Panel de código para copiar -->
+        <div class="ui-code-panel">
+          <div class="ui-code-header">
+            <span class="ui-code-lang">HTML & CSS - Botón Primario</span>
+            <button class="btn-copy" onclick="copyCode('code-btn-primary')"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+          </div>
+          <div class="ui-code-block">
+            <pre><code id="code-btn-primary">&lt;!-- HTML --&gt;
+&lt;button class="btn-primary"&gt;Reservar Ahora&lt;/button&gt;
+
+&lt;!-- CSS --&gt;
+.btn-primary {
+  background: var(--color-highlight);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 132, 31, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 132, 31, 0.5);
+  background: #ff943d;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tarjetas -->
+      <section id="tarjetas" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-id-card"></i> Tarjetas Avanzadas</h2>
+        <p class="ui-section-desc">
+          Componentes de tarjeta interactivos que organizan la información mediante efectos de profundidad 3D (Flip) y Glassmorphism táctil.
+        </p>
+
+        <div class="ui-showcase-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+          <!-- Card Flip 3D -->
+          <div class="ui-showcase-card" style="min-height: 440px;">
+            <span class="ui-label">Card Flip 3D (Click o Hover)</span>
+            <div class="card-demo-container">
+              <div class="card-demo-inner" id="interactive-flip-card">
+                <div class="card-demo-front">
+                  <div class="card-demo-front-img">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                  </div>
+                  <div class="card-demo-front-body">
+                    <h4 class="card-demo-front-title">MÓDULO ASTRO</h4>
+                    <p style="font-size:0.85rem; color:var(--color-text-muted);">Fotografía avanzada de vías lácteas y astros.</p>
+                    <span style="color:var(--color-highlight); font-weight:bold; font-size: 1.1rem; margin-top: auto;">$45,000 ARS</span>
+                  </div>
+                </div>
+                <div class="card-demo-back">
+                  <h4 style="font-family: var(--font-display); font-size:1.2rem; color:#fff;">Temas Clave</h4>
+                  <p style="font-size:0.9rem;">Planificación astronómica, objetivos gran angular, técnica de apilado y revelado RAW.</p>
+                  <button class="btn-demo-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Saber Más</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Glassmorphism -->
+          <div class="ui-showcase-card" style="min-height: 440px;">
+            <span class="ui-label">Card Glassmorphism</span>
+            <div class="glass-demo-card">
+              <h3>Revelado Digital</h3>
+              <p>Clases en vivo vía streaming para exprimir al máximo tus fotos patagónicas. Aprenderás procesos profesionales utilizando softwares líderes de la industria en condiciones extremas.</p>
+              <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-weight: bold; color: var(--color-primary); font-size: 0.9rem;">100% Práctico</span>
+                <i class="fa-solid fa-laptop-code" style="color:var(--color-highlight); font-size:1.2rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de código para copiar la tarjeta Flip -->
+        <div class="ui-code-panel">
+          <div class="ui-code-header">
+            <span class="ui-code-lang">HTML & CSS - Card Flip 3D</span>
+            <button class="btn-copy" onclick="copyCode('code-card-flip')"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+          </div>
+          <div class="ui-code-block">
+            <pre><code id="code-card-flip">&lt;!-- HTML --&gt;
+&lt;div class="card-container"&gt;
+  &lt;div class="card-inner"&gt;
+    &lt;div class="card-front"&gt;
+      &lt;!-- Lado frontal --&gt;
+    &lt;/div&gt;
+    &lt;div class="card-back"&gt;
+      &lt;!-- Lado posterior --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS --&gt;
+.card-container {
+  perspective: 1000px;
+  width: 280px;
+  height: 380px;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card-container:hover .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+.card-back {
+  transform: rotateY(180deg);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Desplegables -->
+      <section id="desplegables" class="ui-section">
+        <h2 class="ui-section-title"><i class="fa-solid fa-bars"></i> Desplegables / Acordeones Animados</h2>
+        <p class="ui-section-desc">
+          Sistemas de acordeón y líneas de tiempo fluidos para desplegar cronogramas o temarios mediante una suave animación de altura controlada por JavaScript.
+        </p>
+
+        <div class="ui-showcase-grid" style="grid-template-columns: 1fr;">
+          <!-- Acordeón interactivo -->
+          <div class="ui-showcase-card" style="align-items: stretch; justify-content: flex-start; padding-top: 3rem;">
+            <span class="ui-label">Acordeón de Itinerario (Interacción en Vivo)</span>
+            
+            <div class="acc-demo-container">
+              <div class="acc-demo-item active">
+                <div class="acc-demo-header" onclick="toggleAccordion(this)">
+                  <span>Noche 1: Arribo y Fotografía de Atardecer</span>
+                  <i class="fa-solid fa-chevron-down acc-demo-icon"></i>
+                </div>
+                <div class="acc-demo-content">
+                  <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted);">
+                    Llegada a El Chaltén, trekking técnico inicial hacia el campamento base y primeras tomas del crepúsculo sobre las siluetas de granito de la Patagonia.
+                  </p>
+                </div>
+              </div>
+
+              <div class="acc-demo-item">
+                <div class="acc-demo-header" onclick="toggleAccordion(this)">
+                  <span>Noche 2: Escalada Nocturna de Paredes Verticales</span>
+                  <i class="fa-solid fa-chevron-down acc-demo-icon"></i>
+                </div>
+                <div class="acc-demo-content">
+                  <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted);">
+                    Ascenso vertical clásico asistido en roca bajo la luz de las estrellas. Trabajo de iluminación técnica y encuadre para capturar al escalador fundido con el cosmos.
+                  </p>
+                </div>
+              </div>
+
+              <div class="acc-demo-item">
+                <div class="acc-demo-header" onclick="toggleAccordion(this)">
+                  <span>Noche 3: Astrofotografía de Exposición Larga</span>
+                  <i class="fa-solid fa-chevron-down acc-demo-icon"></i>
+                </div>
+                <div class="acc-demo-content">
+                  <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted);">
+                    Exposición prolongada extrema, calibración de trazo de estrellas (startrails) y control del ruido digital en cámaras de formato completo a bajas temperaturas.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Panel de código para copiar el acordeón -->
+        <div class="ui-code-panel">
+          <div class="ui-code-header">
+            <span class="ui-code-lang">HTML, CSS & JS - Acordeón Animado</span>
+            <button class="btn-copy" onclick="copyCode('code-accordion')"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+          </div>
+          <div class="ui-code-block">
+            <pre><code id="code-accordion">&lt;!-- HTML --&gt;
+&lt;div class="acc-item" onclick="toggleAccordion(this)"&gt;
+  &lt;div class="acc-header"&gt;
+    &lt;span&gt;Noche 1&lt;/span&gt;
+    &lt;i class="fa-solid fa-chevron-down acc-icon"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;div class="acc-content"&gt;
+    &lt;p&gt;Contenido dinámico...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JS --&gt;
+function toggleAccordion(element) {
+  const item = element.parentElement;
+  const wasActive = item.classList.contains('active');
+  
+  // Cerrar todos los abiertos
+  document.querySelectorAll('.acc-item').forEach(el =&gt; el.classList.remove('active'));
+  
+  if (!wasActive) {
+    item.classList.add('active');
+  }
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer oficial unificado -->
+  <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Cúspides</h3>
+            <p>Explorando los límites de la fotografía y la aventura en las paredes verticales de la Patagonia.</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Secciones</h4>
+            <ul>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#cursos">Cursos</a></li>
+                <li><a href="index.html#galeria">Galería</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div id="contacto" class="footer-section">
+            <h4>Recursos</h4>
+            <a href="biblioteca.html" class="btn-ui-library">Biblioteca UI</a>
+            <p style="margin-top: 15px; font-size: 0.9rem;">contacto@cuspides.com</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2026 Cúspides. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script Oficial de Cúspides -->
+  <script src="js/script.js"></script>
+
+  <!-- Script Autónomo de Biblioteca UI -->
+  <script>
+    // Función de acordeón interactivo del kit
+    function toggleAccordion(headerElement) {
+      const currentItem = headerElement.closest('.acc-demo-item');
+      const container = currentItem.closest('.acc-demo-container');
+      const allItems = container.querySelectorAll('.acc-demo-item');
+      
+      const isActive = currentItem.classList.contains('active');
+      
+      allItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      if (!isActive) {
+        currentItem.classList.add('active');
+      }
+    }
+
+    // Permitir alternar el Flip de la tarjeta con un Click para dispositivos móviles
+    const flipCard = document.getElementById('interactive-flip-card');
+    if (flipCard) {
+      flipCard.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+      });
+    }
+
+    // Copiar Código al Portapapeles con feedback interactivo
+    function copyCode(elementId) {
+      const codeElement = document.getElementById(elementId);
+      if (!codeElement) return;
+
+      const codeText = codeElement.innerText;
+      
+      navigator.clipboard.writeText(codeText).then(() => {
+        // Encontrar el botón que disparó la función
+        const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
+        btn.style.background = '#2ec4b6';
+        btn.style.borderColor = '#2ec4b6';
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = 'transparent';
+          btn.style.borderColor = 'rgba(124, 165, 193, 0.4)';
+        }, 2000);
+      }).catch(err => {
+        console.error('Error al copiar código: ', err);
+      });
+    }
+
+    // Sidebar activo según el scroll en pantalla
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.ui-section');
+      const navLinks = document.querySelectorAll('#sidebar-nav li');
+
+      window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= (sectionTop - 150)) {
+            currentSectionId = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(li => {
+          li.classList.remove('active');
+          const a = li.querySelector('a');
+          if (a && a.getAttribute('href') === `#${currentSectionId}`) {
+            li.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
