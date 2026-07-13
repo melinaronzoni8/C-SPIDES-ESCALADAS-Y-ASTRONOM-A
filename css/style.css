@@ -1326,12 +1326,12 @@ footer {
 #hero {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: center !important;  /* ¡Clave! Centrado vertical exacto en el frame */
+  justify-content: left !important;  /* ¡Clave! Centrado vertical exacto en el frame */
   align-items: flex-start !important;  /* Empuja todo el bloque hacia la izquierda */
   text-align: left !important;         /* Alineación del texto a la izquierda */
   min-height: calc(100vh - 80px) !important; /* Ocupa el alto completo de la pantalla */
   width: 100% !important;
-  padding-left: 10% !important;        /* Margen elegante para que no pegue contra el borde de la pantalla */
+  padding-left: 5% !important;        /* Margen elegante para que no pegue contra el borde de la pantalla */
   padding-right: 5% !important;
 }
 
