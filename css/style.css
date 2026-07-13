@@ -371,7 +371,7 @@ section {
 /* HERO */
 .section-hero {
   background: #050E18;
-  text-align: left;
+  text-align: center;
   justify-content: center;
   padding: 2rem 2rem 2rem 2rem; 
   overflow: hidden;
@@ -428,7 +428,7 @@ section {
   background: radial-gradient(circle at center, rgba(5,14,24,0.1) 0%, var(--color-bg-deep) 100%);
 }
 
-.hero-content { position: flex-start; z-index: 3; max-width: 1000px; }
+.hero-content { position: relative; z-index: 3; max-width: 1000px; }
 
 .hero-eyebrow {
   display: flex;
@@ -484,12 +484,12 @@ section {
 @media (min-width: 769px) {
   .section-hero {
     height: 100vh;
-    padding: 0 2rem;
+    padding: 0 10%;
     justify-content: flex-start;
     text-align: left;
   }
   .hero-content {
-    max-width: 100%;
+    max-width: 80%;
     text-align: left;
   }
   .hero-eyebrow { justify-content: flex-start; }
@@ -3677,7 +3677,7 @@ html {
     min-height: 200vh; /* Controla la duración del scroll. Más alto = scroll más lento y suave */
     background-color: #050E18;
     overflow: visible !important;
-    padding: 0 2rem !important; /* Eliminamos paddings viejos para control total */
+    padding: 0 !important; /* Eliminamos paddings viejos para control total */
 }
 
 /* El contenedor visual ahora se comporta absoluto por defecto */
