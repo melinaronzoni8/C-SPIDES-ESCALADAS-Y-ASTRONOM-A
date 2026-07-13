@@ -398,7 +398,7 @@ section {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.75;
+  opacity: 0.60;
   overflow: hidden;
 }
 
@@ -2989,10 +2989,7 @@ html {
   position: relative;
   width: 100vw; 
   left: 0;
-  min-height: 825px; 
-  background: linear-gradient(to bottom, rgba(5, 14, 24, 0) 0%, rgba(11, 33, 55, 0.25) 50%, rgba(5, 14, 24, 0) 100%);
-  border-top: 1px solid rgba(124, 165, 193, 0.08);
-  border-bottom: 1px solid rgba(124, 165, 193, 0.08);
+  min-height: 300px; 
   overflow: visible;
   backdrop-filter: blur(4px);
 }
@@ -3061,8 +3058,9 @@ html {
   opacity: 0.95;
   filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: scale(1);
+  transform: scale(1.5);
 }
+
 
 .interactive-node:hover .interactive-png {
   opacity: 1;
@@ -3916,4 +3914,47 @@ html {
         width: 110px;                 /* Reduce un poco su tamaño para que no tape los textos en pantallas chicas */
         transform: translateX(-50%); /* Lo mantiene perfectamente centrado sobre el eje de la línea */
     }
+}
+/* ==========================================================================
+   UNIÓN DE SECCIONES: DEGRADADO SUAVE ENTRE HERO Y GRAN EXPERIENCIA
+   ========================================================================== */
+#hero {
+    position: relative; /* Asegura que el degradado se posicione respecto al Hero */
+}
+
+#hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Lo fija exactamente abajo de todo en la sección Hero */
+    left: 0;
+    width: 100%;
+    height: 200px; /* Controla la extensión del difuminado (más alto = más suave) */
+    
+    /* Va desde transparente en el cuerpo del Hero, hacia el color oscuro profundo (#050E18) al ras del suelo */
+    background: linear-gradient(to bottom, transparent 0%, #050E18 100%);
+    
+    z-index: 10; /* Se superpone a las imágenes o fondos del Hero para tapar el corte */
+    pointer-events: none; /* Evita que bloquee clics o interacciones en el Hero */
+}
+/* ==========================================================================
+   UNIÓN DE SECCIONES: DEGRADADO SUAVE ENTRE GRAN EXPERIENCIA Y MAS EXPERIENCIA
+   ========================================================================== */
+#granexperiencia {
+    position: relative; /* Asegura que el degradado se posicione respecto a esta sección */
+}
+
+#granexperiencia::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Lo fija exactamente arriba de todo, en el inicio de la sección */
+    left: 0;
+    width: 100%;
+    height: 200px; /* Controla la extensión del difuminado hacia abajo (más alto = más suave) */
+    
+    /* Crea un degradado que va desde el color oscuro de la web (#050E18) 
+       hacia transparente para que el contenido de granexperiencia aparezca limpio */
+    background: linear-gradient(to bottom, #050E18 0%, transparent 100%);
+    
+    z-index: 10; /* Se superpone para suavizar el paso de una sección a la otra */
+    pointer-events: none; /* Evita cualquier interferencia con los clics del usuario */
 }
