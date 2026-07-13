@@ -2799,6 +2799,10 @@ html {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+     padding-top: 0px;
+     padding-right: 2rem;
+     padding-bottom: 0px;
+     padding-left: 0rem;
   text-align: left !important;
 }
 
@@ -4393,8 +4397,7 @@ html {
    ========================================================================== */
 
 /* Alineación maestra para todos los títulos de sección */
-.nosotros-title, 
-.cursos-title, 
+ 
 .contact-title, 
 .certificacion-title, 
 .equipo-title {
