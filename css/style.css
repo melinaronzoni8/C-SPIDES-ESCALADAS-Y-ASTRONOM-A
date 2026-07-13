@@ -3959,123 +3959,270 @@ html {
     pointer-events: none; /* Evita cualquier interferencia con los clics del usuario */
 }
 /* ==========================================================================
-   EFECTO FLIP CARD 3D PARA REQUISITOS CONSTELACIÓN
+   REDISEÑO ITINERARIO: FILAS VERTICALES INTEGRADAS (ANCHO COMPLETO)
+   ========================================================================== */
+.itinerary-custom-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%; /* Asegura que tome todo el ancho disponible de la sección */
+    margin-top: 3rem;
+}
+
+.itinerary-custom-item {
+    width: 100%;
+    background: rgba(11, 33, 55, 0.2); /* Integración fluida con tu fondo oscuro */
+    border-bottom: 2px solid rgba(124, 165, 193, 0.2); /* Línea inferior estilo Cúspides */
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.itinerary-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.itinerary-meta {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.itinerary-number {
+    font-family: var(--font-display) !important;
+    font-size: 1.3rem;
+    color: var(--color-highlight);
+    letter-spacing: 1px;
+    min-width: 80px;
+}
+
+.itinerary-item-title {
+    font-family: var(--font-body) !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+}
+
+/* Ícono indicador del colapso */
+.itinerary-icon {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    transition: transform 0.4s ease, color 0.3s ease;
+}
+
+/* Cuerpo colapsado por defecto */
+.itinerary-item-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.itinerary-item-body p {
+    font-family: var(--font-body) !important;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    padding: 1.2rem 0 0 7.5rem; /* Alinea perfectamente el texto debajo del título saltando el número */
+}
+
+/* --- ESTADOS ACTIVOS / INTERACTIVOS --- */
+.itinerary-custom-item:hover {
+    background: rgba(24, 63, 111, 0.15);
+    border-bottom-color: var(--color-primary);
+}
+
+/* Cuando la tarjeta está expandida (.active) */
+.itinerary-custom-item.active {
+    background: rgba(24, 63, 111, 0.25);
+    border-bottom-color: var(--color-highlight); /* Resalta con tu naranja oficial */
+}
+
+.itinerary-custom-item.active .itinerary-item-title {
+    color: var(--color-highlight);
+}
+
+.itinerary-custom-item.active .itinerary-icon {
+    transform: rotate(180deg);
+    color: var(--color-highlight);
+}
+
+.itinerary-custom-item.active .itinerary-item-body {
+    max-height: 150px; /* Espacio suficiente para el párrafo sin saltos */
+    opacity: 1;
+}
+
+/* Adaptación Mobile */
+@media (max-width: 768px) {
+    .itinerary-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+    
+    .itinerary-item-body p {
+        padding-left: 0; /* En móviles aprovecha el 100% de la pantalla horizontal */
+        font-size: 0.95rem;
+    }
+}
+/* ==========================================================================
+   ICONO DE DESTELLO BRILLANTE BLANCO EN EL ITINERARIO
+   ========================================================================== */
+
+/* Añade el destello brillante antes del número/noche en el timeline */
+.timeline-item-stack .t-number::before {
+  content: "✦" !important;
+  color: #ffffff !important; /* Blanco absoluto */
+  font-family: serif !important;
+  font-size: 1.1rem !important;
+  display: inline-block !important;
+  margin-right: 0.5rem !important; /* Separación perfecta con el texto */
+  
+  /* Efecto de resplandor blanco de alta intensidad */
+  filter: drop-shadow(0 0 3px #ffffff) 
+          drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) !important;
+          
+  /* Animación sutil de titileo (opcional, combina con la estética cósmica de la web) */
+  animation: titileoDestello 3s ease-in-out infinite alternate !important;
+}
+
+/* Alineación interna del badge del itinerario para que el icono y el texto fluyan perfecto */
+.timeline-item-stack .t-number {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Keyframes para el efecto de brillo cósmico parpadeante */
+@keyframes titileoDestello {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 2px #ffffff);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  }
+}
+/* ==========================================================================
+   ESTILOS ULTRA-AISLADOS PARA REQUISITOS (FLIP 3D + ILUMINACIÓN PERMANENTE)
    ========================================================================== */
 
 .section-requisitos-constellation {
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #0c253f 0%, var(--color-bg-deep) 100%) !important;
+    background: transparent!important;
     padding: 6rem 0;
 }
 
-.nebula-glow {
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(124,165,193,0.08) 0%, transparent 70%);
-    filter: blur(50px);
-    pointer-events: none;
-    animation: pulsarNebulosa 8s ease-in-out infinite alternate;
-}
-
-/* Base de la rejilla con perspectiva */
-.constellation-grid {
+.section-requisitos-constellation .constellation-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
-    perspective: 1500px; /* Brinda el entorno tridimensional */
+    perspective: 1500px; /* Crea el entorno 3D obligatorio */
 }
 
-/* Contenedor principal rígido que reserva el espacio */
-.constellation-card {
+/* Contenedor base estático */
+.section-requisitos-constellation .req-card-container {
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
-    height: 350px; /* Alto fijo ideal para el giro */
+    padding: 0 !important;
+    height: 350px;
     cursor: pointer;
 }
 
-/* El elemento que va a rotar físicamente */
-.card-flipper {
+/* El frotador intermedio que gira */
+.section-requisitos-constellation .req-card-flipper {
     position: relative;
     width: 100%;
     height: 100%;
     transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.32, 1.2);
-    transform-style: preserve-3d;
+    transform-style: preserve-3d; /* Clave para que las caras no se aplasten */
 }
 
-/* Movimiento de rotación al pasar el cursor */
-.constellation-card:hover .card-flipper {
+/* Al pasar el mouse, rota el flipper */
+.section-requisitos-constellation .req-card-container:hover .req-card-flipper {
     transform: rotateY(180deg);
 }
 
-/* Reglas comunes para ambas caras (Frente y Dorso) */
-.card-front, .card-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    backdrop-filter: blur(12px);
-    backface-visibility: hidden; /* Oculta la cara que queda al revés */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+/* Reglas estructurales de las dos caras internas */
+.section-requisitos-constellation .req-card-front,
+.section-requisitos-constellation .req-card-back {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(12px) !important;
+    backface-visibility: hidden !important; /* Esconde la cara oculta */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2.5rem 2rem !important;
+    text-align: center !important;
 }
 
-/* --- CARA FRONTAL --- */
-.card-front {
-    background: rgba(11, 33, 55, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+/* CARA FRONTAL: Estilo e iluminación leve fija */
+.section-requisitos-constellation .req-card-front {
+    background: rgba(11, 33, 55, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
     gap: 1.5rem;
+    /* Resplandor suave perimetral permanente blanco/azul */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(255, 255, 255, 0.08), 
+                0 0 30px rgba(24, 63, 111, 0.2) !important;
 }
 
-.card-front h3 {
-    font-family: var(--font-display);
-    color: #ffffff;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    margin: 0;
+.section-requisitos-constellation .req-card-front h3 {
+    font-family: var(--font-display) !important;
+    color: #ffffff !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 1px !important;
+    margin: 0 !important;
 }
 
-/* --- CARA TRASERA --- */
-.card-back {
-    background: rgba(24, 63, 111, 0.5); /* Un tono azul acentuado más sólido para leer mejor */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transform: rotateY(180deg); /* Arranca dada vuelta por defecto */
+/* CARA TRASERA: Estilo dado vuelta */
+.section-requisitos-constellation .req-card-back {
+    background: rgba(24, 63, 111, 0.7) !important;
+    border: 1px solid rgba(255, 132, 31, 0.35) !important; /* Borde naranja sutil */
+    transform: rotateY(180deg) !important; /* Invertida inicialmente */
     gap: 1rem;
+    /* Resplandor permanente en el dorso */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(255, 132, 31, 0.1),
+                0 0 30px rgba(24, 63, 111, 0.3) !important;
 }
 
-.card-back h3 {
-    font-family: var(--font-display);
-    color: var(--color-highlight); /* Título naranja resaltado en el dorso */
-    font-size: 1.2rem;
-    margin: 0;
+.section-requisitos-constellation .req-card-back h3 {
+    font-family: var(--font-display) !important;
+    color: var(--color-highlight) !important;
+    font-size: 1.2rem !important;
+    margin: 0 !important;
 }
 
-.card-back p {
-    font-family: var(--font-body);
-    color: var(--color-text-light);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    margin: 0;
+.section-requisitos-constellation .req-card-back p {
+    font-family: var(--font-body) !important;
+    color: var(--color-text-light) !important;
+    line-height: 1.6 !important;
+    font-size: 0.95rem !important;
+    margin: 0 !important;
 }
 
-/* --- DETALLES DE LAS CONSTELACIONES (SVG) --- */
-.constellation-icon-wrapper {
+/* --- ELEMENTOS DEL GRÁFICO DE CONSTELACIÓN (SVG) --- */
+.section-requisitos-constellation .constellation-icon-wrapper {
     width: 80px;
     height: 80px;
 }
 
-.svg-constellation {
+.section-requisitos-constellation .svg-constellation {
     width: 100%;
     height: 100%;
     stroke: #ffffff;
@@ -4086,49 +4233,45 @@ html {
     filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
 }
 
-.constellation-line.main-path {
+.section-requisitos-constellation .constellation-line.main-path {
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
-    animation: trazarLinea 3.5s ease-out forwards;
+    animation: trazarLineaReq 3.5s ease-out forwards;
 }
 
-.constellation-line-grid {
+.section-requisitos-constellation .constellation-line-grid {
     opacity: 0.2;
     stroke-width: 0.75;
     stroke-dasharray: 3,4;
 }
 
-.constellation-star {
+.section-requisitos-constellation .constellation-star {
     fill: #ffffff;
-    animation: brillarEstrella 2s infinite alternate;
+    animation: brillarEstrellaReq 2s infinite alternate;
 }
 
-.constellation-star.s2 { animation-delay: 0.3s; animation-duration: 2.4s; }
-.constellation-star.s3 { animation-delay: 0.6s; animation-duration: 1.8s; }
-.constellation-star.s4 { animation-delay: 0.9s; animation-duration: 2.8s; }
-.constellation-star.s5 { animation-delay: 1.2s; animation-duration: 2.1s; }
-.constellation-star.s6 { animation-delay: 1.5s; animation-duration: 2.5s; }
+/* Estrellas desfasadas */
+.section-requisitos-constellation .constellation-star.s2 { animation-delay: 0.3s; animation-duration: 2.4s; }
+.section-requisitos-constellation .constellation-star.s3 { animation-delay: 0.6s; animation-duration: 1.8s; }
+.section-requisitos-constellation .constellation-star.s4 { animation-delay: 0.9s; animation-duration: 2.8s; }
+.section-requisitos-constellation .constellation-star.s5 { animation-delay: 1.2s; animation-duration: 2.1s; }
+.section-requisitos-constellation .constellation-star.s6 { animation-delay: 1.5s; animation-duration: 2.5s; }
 
-/* Cambios estéticos durante el giro */
-.constellation-card:hover .constellation-star {
+/* Cambios estéticos durante el hover de la tarjeta */
+.section-requisitos-constellation .req-card-container:hover .constellation-star {
     fill: var(--color-highlight) !important;
 }
-.constellation-card:hover .constellation-line.main-path {
+.section-requisitos-constellation .req-card-container:hover .constellation-line.main-path {
     stroke: var(--color-highlight) !important;
     filter: drop-shadow(0 0 8px var(--color-highlight)) !important;
 }
 
-/* --- KEYFRAMES --- */
-@keyframes trazarLinea {
+/* --- ANIMACIONES LOCALES --- */
+@keyframes trazarLineaReq {
     to { stroke-dashoffset: 0; }
 }
 
-@keyframes brillarEstrella {
+@keyframes brillarEstrellaReq {
     0% { transform: scale(0.8); opacity: 0.5; filter: drop-shadow(0 0 2px rgba(255,255,255,0.5)); }
     100% { transform: scale(1.3); opacity: 1; filter: drop-shadow(0 0 6px #ffffff); }
-}
-
-@keyframes pulsarNebulosa {
-    0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-    100% { transform: translate(30px, -20px) scale(1.15); opacity: 1; }
 }
