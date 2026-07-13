@@ -2609,7 +2609,7 @@ html {
 .excursiones-inner,
 .program-inner,
 .contact-inner {
-  position: relative;
+  position: center;
   z-index: 2;
 }
 
@@ -2959,8 +2959,7 @@ html {
 
 .prestamos-inner {
   width: 100%;
-  max-width: 1200px; 
-  margin: 0 auto;    
+  max-width: 1200px;    
   padding: 0 2rem;   
   text-align: left !important;
   box-sizing: border-box;
@@ -3130,56 +3129,6 @@ html {
   left: 85%;
 }
 
-/* RESPONSIVE */
-@media (max-width: 850px) {
-  .montana-interactive-container {
-    width: 100%;
-    min-height: auto;
-    background: transparent;
-    border: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1rem 2rem;
-  }
-  .montana-svg-wrapper { display: none; }
-  
-  .interactive-node {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100%;
-    background: rgba(24, 63, 111, 0.15);
-    border: 1px solid rgba(124, 165, 193, 0.12);
-    border-radius: 4px;
-    padding: 1.25rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .node-pulse { position: relative; width: 12px; height: 12px; margin-right: 15px; flex-shrink: 0; }
-  .node-element-wrapper { display: flex; align-items: center; width: 100%; }
-  
-  /* Optimizadas las dimensiones en mobile para los PNGs más grandes */
-  .interactive-png { 
-    position: relative !important; 
-    top: auto !important; 
-    left: auto !important; 
-    width: 80px;                 /* Ajustado de 60px a 80px */
-    height: 80px;                /* Ajustado de 60px a 80px */
-    margin-right: 15px; 
-    opacity: 1; 
-    transform: none !important; 
-  }
-  
-  .interactive-tooltip { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  .interactive-tooltip::after { display: none; }
-}
-/* ==========================================================================
-   AJUSTE DE ANCHO DE TEXTO (30%) PARA ESCRITORIO
-   Afecta a: Nosotros y Editorial (Excluye: Hero, Cursos y Acompañantes)
-   ========================================================================== */
 @media (min-width: 769px) {
 
   /* 1. SECCIÓN NOSOTROS: El texto está a la derecha (ocupa 0.4) y la imagen a la izquierda (ocupa 0.6) */
@@ -4274,4 +4223,172 @@ html {
 @keyframes brillarEstrellaReq {
     0% { transform: scale(0.8); opacity: 0.5; filter: drop-shadow(0 0 2px rgba(255,255,255,0.5)); }
     100% { transform: scale(1.3); opacity: 1; filter: drop-shadow(0 0 6px #ffffff); }
+}
+/* ==========================================================================
+   HERO MÓVIL: PANTALLA COMPLETA, TÍTULO VISIBLE Y DATOS EN 2X4
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  #introduccion.section-hero {
+    height: 100vh !important;
+    min-height: -webkit-fill-available;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    /* Reducimos márgenes laterales para ganar espacio horizontal para los cuadrados */
+    padding: 4.5rem 1rem 1rem 1rem !important; 
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* Área del Mensaje Principal */
+  #introduccion.section-hero .hero-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0 0.25rem !important;
+  }
+
+  /* Asegura la legibilidad completa del título */
+  #introduccion.section-hero h1 {
+    font-size: 1.65rem !important;    /* Tamaño optimizado para que no corte palabras largas */
+    line-height: 1.25 !important;
+    margin-bottom: 0.4rem !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;   /* Fuerza el salto de línea natural */
+  }
+
+  #introduccion.section-hero p {
+    font-size: 0.85rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* GRILLA DE DATOS: 2 columnas horizontales x 4 filas */
+  .hero-data-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Exactamente 2 a lo horizontal */
+    gap: 0.4rem !important;                            /* Espaciado sutil y proporcional */
+    width: 100% !important;
+    margin-top: 30px !important;
+    /* Limita la altura máxima de la grilla para proteger el espacio del título */
+    max-height:90vh !important; 
+    overflow: hidden !important;
+  }
+
+  /* ITEMS CUADRADOS PERFECTOS (2 columnas) */
+  .data-item {
+    aspect-ratio: 1 / 1 !important;    /* Geometría cuadrada obligatoria */
+    padding: 0.6rem !important;        /* Margen interno equilibrado */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important; /* Alineación estricta a la izquierda */
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  /* Ajustes de micro-tipografía interna */
+  .data-value {
+    font-size: 1.2rem !important;      /* Mayor presencia al tener más espacio horizontal */
+    line-height: 1.1 !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .data-label {
+    font-size: 0.7rem !important;      /* Texto descriptivo proporcional */
+    line-height: 1.2 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;   /* Soporta hasta 3 líneas de texto descriptivo */
+    line-clamp: 3 !important;           /* Propiedad estándar para compatibilidad */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+/* ==========================================================================
+   DISEÑO RESPONSIVE CORREGIDO: SECCIÓN PRESTAMOS (SÓLO STYLE.CSS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  
+  /* 1. Forzamos al contenedor global a expandirse verticalmente y dar aire abajo */
+  #prestamos.section-prestamos {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 4rem 1rem 0rem 1rem !important; /* Espacio extra abajo para que respire el botón */
+    display: block !important;
+  }
+
+  /* 2. El contenedor interactivo se convierte en una columna con márgenes amplios */
+  #prestamos .montana-interactive-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4.5rem !important; /* Separación drástica entre cada bloque de equipo */
+    height: auto !important;
+    min-height: 0 !important;
+    position: relative !important;
+    margin-top: 3rem !important; /* Separación con el texto de introducción superior */
+    padding: 0 !important;
+  }
+
+  /* 3. RESET ABSOLUTO: Obligamos a cada nodo a ser un contenedor de bloque regular */
+  #prestamos .interactive-node {
+    position: relative !important;
+    top: auto !important;  /* Apaga el style="top: %" del HTML */
+    left: auto !important; /* Apaga el style="left: %" del HTML */
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 0 2rem 0 !important; /* Margen de seguridad inferior */
+  }
+
+  /* 4. Forzamos al wrapper interno a unificar la imagen y el texto en un solo bloque compacto */
+  #prestamos .node-element-wrapper {
+    display: flex !important;
+    flex-direction: column !important; /* Imagen arriba, Texto abajo */
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important; /* Evita que los hijos floten independientemente */
+  }
+
+  /* 5. Estabilizador de la imagen de la constelación */
+  #prestamos .interactive-png {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 400px !important; /* Escalado controlado para celulares */
+    height: auto !important;
+    margin: 0 auto 6rem auto !important; /* Centra la imagen y añade padding inferior con el texto */
+    transform: none !important;
+  }
+
+  /* 6. CONVERTIR TOOLTIP EN CAJA FIJA: Cancelamos el posicionamiento absoluto que la hacía flotar */
+  #prestamos .interactive-tooltip {
+    position: relative !important; /* Pasa de absolute a relative para que se quede pegado abajo de su imagen */
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 1 !important;         /* Visible siempre */
+    visibility: visible !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 92% !important;     /* Le da un pequeño margen a los lados para que no toque los bordes del cel */
+    margin: 0 auto !important;     /* Centra la tarjeta de texto */
+    background: rgba(15, 32, 67, 0.75) !important; /* Fondo nítido para que no se trasluzca lo de atrás */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 1.5rem !important;    /* Padding interno del texto */
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Ocultamos elementos de PC que ensucian el responsive */
+  #prestamos .node-pulse {
+    display: none !important;
+  }
 }
