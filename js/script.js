@@ -408,29 +408,20 @@ function openWhatsApp() {
 // MOTOR DEL ACORDEÓN: DETERMINACIÓN DE ALTURA TOTAL REAL (EVITA RECORTES)
 // ==========================================================================
 function initAccordionTimeline() {
-  const items = document.querySelectorAll('.timeline-item-stack');
+  const items = document.querySelectorAll('.itinerary-custom-item');
   if (items.length === 0) return;
-  
+
   items.forEach(item => {
-    const header = item.querySelector('.stack-header');
-    const content = item.querySelector('.stack-content');
-    
-    if (!header || !content) return;
-    
-    header.addEventListener('click', () => {
-      const isOpen = item.classList.contains('active');
+    item.addEventListener('click', () => {
+      // Si el elemento clickeado ya está activo, no hacemos nada o lo cerramos
+      const isActive = item.classList.contains('active');
       
-      items.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        const otherContent = otherItem.querySelector('.stack-content');
-        if (otherContent) {
-          otherContent.style.maxHeight = null;
-        }
-      });
+      // Removemos la clase active de todas las tarjetas para colapsarlas
+      items.forEach(i => i.classList.remove('active'));
       
-      if (!isOpen) {
+      // Si no estaba activo, lo expandimos
+      if (!isActive) {
         item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + "px";
       }
     });
   });

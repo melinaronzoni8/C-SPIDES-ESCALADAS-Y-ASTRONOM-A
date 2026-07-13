@@ -217,21 +217,33 @@
     </div>
   </section>
   <!-- SECCIÓN 2: REQUISITOS (Adaptado a tus tarjetas 3D .excursiones-grid) -->
-  <section id="requisitos" class="section-editorial">
+  <section id="requisitos" class="section-editorial section-requisitos-constellation">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
+    
+    <div class="nebula-glow"></div>
+
     <div class="excursiones-inner">
       <span class="section-tag tag-light">FILTRO DE SEGURIDAD</span>
       <h2 class="excursiones-title">Requisitos Obligatorios de Admisión</h2>
       
-      <!-- Estructura nativa compatible con el efecto Flip de tus tarjetas -->
-      <div class="excursiones-grid">
+      <div class="excursiones-grid constellation-grid">
         
-        <!-- Tarjeta 1 -->
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
-              <i class="fas fa-shield-halved" style="font-size: 3rem; color: var(--color-primary);"></i>
-              <h4 style="font-family: var(--font-display);">Fase 1 y 2</h4>
+        <div class="excursion-card constellation-card">
+          <div class="card-flipper">
+            <div class="card-front">
+              <div class="constellation-icon-wrapper">
+                <svg viewBox="0 0 100 100" class="svg-constellation">
+                  <path d="M50,10 L85,25 L85,60 L50,90 L15,60 L15,25 Z" class="constellation-line main-path"></path>
+                  <path d="M50,10 L50,90 M15,25 L85,25 M15,60 L85,60" class="constellation-line-grid"></path>
+                  <circle cx="50" cy="10" r="3" class="constellation-star s1"></circle>
+                  <circle cx="85" cy="25" r="3" class="constellation-star s2"></circle>
+                  <circle cx="85" cy="60" r="3" class="constellation-star s3"></circle>
+                  <circle cx="50" cy="90" r="3" class="constellation-star s4"></circle>
+                  <circle cx="15" cy="60" r="3" class="constellation-star s5"></circle>
+                  <circle cx="15" cy="25" r="3" class="constellation-star s6"></circle>
+                </svg>
+              </div>
+              <h3>Fases Completadas</h3>
             </div>
             <div class="card-back">
               <h3>Fases Completadas</h3>
@@ -240,29 +252,49 @@
           </div>
         </div>
 
-        <!-- Tarjeta 2 -->
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
-              <i class="fas fa-heart-pulse" style="font-size: 3rem; color: var(--color-primary);"></i>
-              <h4 style="font-family: var(--font-display);">Autonomía</h4>
+        <div class="excursion-card constellation-card">
+          <div class="card-flipper">
+            <div class="card-front">
+              <div class="constellation-icon-wrapper">
+                <svg viewBox="0 0 100 100" class="svg-constellation">
+                  <path d="M50,85 L20,50 C10,35 25,15 42,28 L50,38 L58,28 C75,15 90,35 80,50 Z" class="constellation-line main-path"></path>
+                  <path d="M50,38 L50,85 M20,50 L80,50" class="constellation-line-grid"></path>
+                  <circle cx="50" cy="85" r="3" class="constellation-star s1"></circle>
+                  <circle cx="20" cy="50" r="3" class="constellation-star s2"></circle>
+                  <circle cx="42" cy="28" r="3" class="constellation-star s3"></circle>
+                  <circle cx="50" cy="38" r="3" class="constellation-star s4"></circle>
+                  <circle cx="58" cy="28" r="3" class="constellation-star s5"></circle>
+                  <circle cx="80" cy="50" r="3" class="constellation-star s6"></circle>
+                </svg>
+              </div>
+              <h3>Autonomía</h3>
             </div>
             <div class="card-back">
-              <h3>Autorrescate</h3>
+              <h3>Autonomía</h3>
               <p>Dominio absoluto de nudos de bloqueo (Prusik, Machard), polipastos simples y maniobras de descenso a oscuras.</p>
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 3 -->
-        <div class="excursion-card">
-          <div class="card-flip-inner">
-            <div class="card-front" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
-              <i class="fas fa-ruler-vertical" style="font-size: 3rem; color: var(--color-primary);"></i>
-              <h4 style="font-family: var(--font-display);">Nivel Técnico</h4>
+        <div class="excursion-card constellation-card">
+          <div class="card-flipper">
+            <div class="card-front">
+              <div class="constellation-icon-wrapper">
+                <svg viewBox="0 0 100 100" class="svg-constellation">
+                  <path d="M15,80 L50,20 L85,80 Z M35,80 L50,45 L65,80" class="constellation-line main-path"></path>
+                  <path d="M50,20 L50,45" class="constellation-line-grid"></path>
+                  <circle cx="50" cy="20" r="3" class="constellation-star s1"></circle>
+                  <circle cx="15" cy="80" r="3" class="constellation-star s2"></circle>
+                  <circle cx="85" cy="80" r="3" class="constellation-star s3"></circle>
+                  <circle cx="50" cy="45" r="3" class="constellation-star s4"></circle>
+                  <circle cx="35" cy="80" r="3" class="constellation-star s5"></circle>
+                  <circle cx="65" cy="80" r="3" class="constellation-star s6"></circle>
+                </svg>
+              </div>
+              <h3>Nivel Técnico</h3>
             </div>
             <div class="card-back">
-              <h3>Escalada Sólida</h3>
+              <h3>Nivel Técnico</h3>
               <p>Capacidad demostrable de puntear vías de grado 6b (escala francesa) o contar con solidez en boulder de grado V4.</p>
             </div>
           </div>
@@ -271,42 +303,58 @@
       </div>
     </div>
   </section>
-
-  <!-- SECCIÓN 3: ITINERARIO CRONOLÓGICO (Estructura .timeline-stack nativa de tus cursos) -->
-  <section id="itinerario" class="section-program">
+  <!-- SECCIÓN 3: itinerario (Usa tu contenedor destacado .program-pack) -->
+<section id="itinerario" class="section-program">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
-    <div class="program-inner">
+    <div class="excursiones-inner">
       <span class="section-tag tag-light">PLAN DE OPERACIONES</span>
       <h2 class="program-title">Cronograma Técnico de la Misión</h2>
       
-      <div class="timeline-stack">
+      <div class="itinerary-custom-list">
         
-        <!-- Bloque Día 1 -->
-        <div class="timeline-item-stack phase-01 active">
-          <div class="stack-header">
-            <span class="t-number">DÍA 01</span>
-            <h3 class="t-title">Aproximación y Emplazamiento Vertical</h3>
+        <div class="itinerary-custom-item active">
+          <div class="itinerary-item-header">
+            <div class="itinerary-meta">
+              <span class="itinerary-number">Noche 01</span>
+              <h3 class="itinerary-item-title">Aproximación y Emplazamiento Vertical</h3>
+            </div>
+            <i class="fa-solid fa-chevron-down itinerary-icon"></i>
           </div>
-          <div class="stack-content" style="opacity: 1; visibility: visible; max-height: none;">
-            <p class="t-desc">Ascenso al vivac de altura portando equipo técnico completo. Evaluación meteorológica in situ y montaje del campamento base flotante (portaledges) antes del crepúsculo astronómico.</p>
+          <div class="itinerary-item-body">
+            <p>Ascenso al vivac de altura portando equipo técnico completo. Evaluación meteorológica in situ y montaje del campamento base flotante (portaledges) antes del crepúsculo astronómico.</p>
           </div>
         </div>
 
-        <!-- Bloque Día 2 -->
-        <div class="timeline-item-stack phase-02 active">
-          <div class="stack-header">
-            <span class="t-number">DÍA 02</span>
-            <h3 class="t-title">Ataque a las Agujas y Rastreo Estelar</h3>
+        <div class="itinerary-custom-item">
+          <div class="itinerary-item-header">
+            <div class="itinerary-meta">
+              <span class="itinerary-number">Noche 02</span>
+              <h3 class="itinerary-item-title">Ataque a las Agujas y Rastreo Estelar</h3>
+            </div>
+            <i class="fa-solid fa-chevron-down itinerary-icon"></i>
           </div>
-          <div class="stack-content" style="opacity: 1; visibility: visible; max-height: none;">
-            <p class="t-desc">Escalada en cordada durante la ventana de máxima oscuridad (01:00 AM a 04:30 AM). Fijación de estaciones fotográficas suspendidas en repisas de granito para capturas de cielo profundo.</p>
+          <div class="itinerary-item-body">
+            <p>Escalada en cordada durante la ventana de máxima oscuridad (01:00 AM a 04:30 AM). Fijación de estaciones fotográficas suspendidas en repisas de granito para capturas de cielo profundo.</p>
+          </div>
+        </div>
+
+        <div class="itinerary-custom-item">
+          <div class="itinerary-item-header">
+            <div class="itinerary-meta">
+              <span class="itinerary-number">Noche 03</span>
+              <h3 class="itinerary-item-title">Fotografía de Cielo Profundo y Descenso</h3>
+            </div>
+            <i class="fa-solid fa-chevron-down itinerary-icon"></i>
+          </div>
+          <div class="itinerary-item-body">
+            <p>Procesamiento de imágenes crudas en el vivac y maniobras complejas de autorrescate y rápel nocturno asistido bajo condiciones extremas antes del amanecer.</p>
           </div>
         </div>
 
       </div>
     </div>
   </section>
-
+ 
   <!-- SECCIÓN 4: LOGÍSTICA (Usa tu contenedor destacado .program-pack) -->
   <section id="logistica" class="section-program">
     <canvas class="star-canvas" aria-hidden="true"></canvas>
